@@ -7,10 +7,26 @@
 	  <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="main.js"></script>  
   </head>
-  <body onload="init();" id="stage" class="theme">
-    <h1>Welcome to Wikipedia</h1>
-	<div id="content">
-	We should call the webservice and display the content here!	 	
-	</div>
+
+  <body onload="init();">
+
+	<div id="stage">
+
+		<div id="featureBar">
+			<a href="javascript:history.back();">Back</a>
+			<a href="javascript:history.forward();">Forward</a>
+			<a href="#">Bookmark</a>
+			<a href="#">History</a>
+			<a href="#">Geo</a>						
+		</div>
+		
+		<div id="content">
+			<iframe id="main" frameborder="0" marginheight="0" marginwidth="0">
+			</iframe>
+		</div> 	
+				
+	</div>	
+	
   </body>
+
 </html>
