@@ -4,8 +4,11 @@
     <meta name="viewport" content="width=320; user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Wikipedia</title>
-	  <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
-	  <script type="text/javascript" charset="utf-8" src="main.js"></script>  
+	  <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/dom.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="js/bookmarks.js"></script> 	   
   </head>
 
   <body onload="init();">
@@ -15,7 +18,7 @@
 		<div id="featureBar">
 			<a href="javascript:history.back();">Back</a>
 			<a href="javascript:history.forward();">Forward</a>
-			<a href="#">Bookmark</a>
+			<a href="javascript:addBookmark();">Bookmark</a>			
 			<a href="#">History</a>
 			<a href="#">Geo</a>						
 		</div>
