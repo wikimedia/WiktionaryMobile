@@ -3,40 +3,100 @@ function resetBookmarks()
 	var bookmarksDB = new Lawnchair(function() { this.nuke() });
 }
 
-function addBookmark()
+function addBookmarkPrompt()
 {
+	//resetBookmarks();
 
-	resetBookmarks();
+	var titleToBookmark = document.getElementById("main").contentDocument.title;
+	var urlToBookmark = document.getElementById("main").contentWindow.location.href;
 
-	var bookmarksDB = new Lawnchair(function() {
-		this.save({key:"http://www.google.com"}, getBookmark);
-	});
-}
-
-function getBookmark()
-{
-	var bookmarksDB = new Lawnchair(function() {
-		this.get("http://www.google.com", myCallback);
-	});
-}
-
-function myCallback(r)
-{
-	alert(r.key);
-	console.log(r.key);
+	var answer = confirm("Add " + titleToBookmark + " to bookmarks?")
 	
-	getLength();
+	if (answer){
+		
+		var bookmarksDB = new Lawnchair(function() {
+			this.get(titleToBookmark, function(r) {	
+			
+				if (r == null)
+				{
+					addBookmark(titleToBookmark, urlToBookmark);
+				}
+				else
+				{
+					alert(titleToBookmark + " already exists in bookmarks.");
+				}
+				
+			});
+		});	
+	}
 }
 
-function getLength()
+function addBookmark(title, url)
 {
 	var bookmarksDB = new Lawnchair(function() {
-		this.keys(getLen);
+		this.save({key: title, value: url});
 	});
 }
 
-function getLen(r)
+
+function getBookmarks()
 {
-	alert(r.length);
-	console.log(r.length);
+
+	document.getElementById("bookmarks").innerHTML = "<ul>";
+
+	var bookmarksDB = new Lawnchair(function() {
+		this.each(function(record, index) {
+			listBookmarks(record, index);
+		});
+	});
+		
+	document.getElementById("bookmarks").innerHTML += "</ul>";
+	document.getElementById("bookmarks").innerHTML += "<a href='javascript:hideBookmarks();'>Close</a>";
+	
+	document.getElementById("bookmarks").style.display = "block";
 }
+
+function hideBookmarks()
+{
+	document.getElementById("bookmarks").style.display = "none";
+}
+
+function listBookmarks(record, index)
+{
+	var markup = "<li>";
+	markup += "<a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a>";
+	markup += "&nbsp;&nbsp;";
+	markup += "<a href=\"javascript:onListItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
+	markup += "</li>";
+	
+	document.getElementById("bookmarks").innerHTML += markup;	
+}
+
+function onListItemClicked(url)
+{
+	document.getElementById("main").src = url;
+	hideBookmarks();
+}
+
+function deleteBookmarkPrompt(bookmarkKey)
+{
+
+	var answer = confirm("Remove " + bookmarkKey + " from bookmarks?")
+	
+	if (answer){
+		deleteBookmark(bookmarkKey);
+	}
+	
+}
+
+function deleteBookmark(bookmarkToDelete)
+{
+	var bookmarksDB = new Lawnchair(function() {
+		this.remove(bookmarkToDelete, function() {
+			alert(bookmarkToDelete + " has been removed.");
+			hideBookmarks();
+		});
+	});
+}
+
+
