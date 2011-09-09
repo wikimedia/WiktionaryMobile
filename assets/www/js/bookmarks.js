@@ -3,6 +3,26 @@ function resetBookmarks()
 	var bookmarksDB = new Lawnchair(function() { this.nuke() });
 }
 
+function isBookmarksMaxLimit()
+{
+	var MAX_LIMIT = 50;
+
+	var bookmarksDB = new Lawnchair(function() {
+		this.keys(function(records) {
+			if (records.length > MAX_LIMIT)
+			{
+				// we've reached the max limit
+				alert("You've reached the maximum number of bookmarks.");
+			}
+			else
+			{
+				// haven't reached the max limit
+				addBookmarkPrompt();
+			}
+		});
+	});
+}
+
 function addBookmarkPrompt()
 {
 	//resetBookmarks();
@@ -12,8 +32,8 @@ function addBookmarkPrompt()
 
 	var answer = confirm("Add " + titleToBookmark + " to bookmarks?")
 	
-	if (answer){
-		
+	if (answer)
+	{		
 		var bookmarksDB = new Lawnchair(function() {
 			this.get(titleToBookmark, function(r) {	
 			
@@ -41,7 +61,6 @@ function addBookmark(title, url)
 
 function getBookmarks()
 {
-
 	document.getElementById("bookmarks").innerHTML = "<ul>";
 
 	var bookmarksDB = new Lawnchair(function() {
@@ -53,6 +72,11 @@ function getBookmarks()
 	document.getElementById("bookmarks").innerHTML += "</ul>";
 	document.getElementById("bookmarks").innerHTML += "<a href='javascript:hideBookmarks();'>Close</a>";
 	
+	showBookmarks();
+}
+
+function showBookmarks()
+{
 	document.getElementById("bookmarks").style.display = "block";
 }
 

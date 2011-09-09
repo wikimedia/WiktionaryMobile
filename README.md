@@ -1,6 +1,6 @@
 PROJECT SETUP (using Eclipse)
 
-In the Project Properties -> Java Build Path under Libraries be sure to include the phonegap-1.0.0.jar.
+In the Project Properties -> Java Build Path under Libraries be sure to include the phonegap-1.0.0.jar. Project should target Android 2.2.
 
 ANT CONFIGURATION
 
