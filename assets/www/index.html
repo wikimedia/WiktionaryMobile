@@ -8,7 +8,13 @@
 	  <script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/dom.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
-	  <script type="text/javascript" charset="utf-8" src="js/bookmarks.js"></script> 	   
+	  <script type="text/javascript" charset="utf-8" src="js/bookmarks.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="js/history.js"></script> 
+	  
+	  <style type="text/css">
+	  		body {margin:0px;}
+	  </style>
+	  	   
   </head>
 
   <body onload="init();">
@@ -19,7 +25,7 @@
 			<a href="javascript:history.back();">Back</a>
 			<a href="javascript:history.forward();">Forward</a>
 			<a href="javascript:isBookmarksMaxLimit();">Bookmark</a>			
-			<a href="#">History</a>
+			<a href="javascript:getHistory();">History</a>
 			<a href="#">Geo</a>
 			<a href="javascript:getBookmarks();">List</a>						
 		</div>
@@ -31,7 +37,7 @@
 		</div>
 		
 		<div id="content">
-			<iframe id="main" frameborder="0" marginheight="0" marginwidth="0">
+			<iframe id="main" frameborder="0" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" hspace="0" vspace="0">
 			</iframe>
 		</div> 	
 				
