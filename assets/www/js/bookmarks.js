@@ -76,6 +76,7 @@ function getBookmarks()
 
 function showBookmarks()
 {
+	hideHistory();
 	document.getElementById("bookmarks").style.display = "block";
 }
 

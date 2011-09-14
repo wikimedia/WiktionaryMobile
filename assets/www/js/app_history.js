@@ -71,6 +71,7 @@ function purgeHistory()
 
 function showHistory()
 {
+	hideBookmarks();
 	document.getElementById("history").style.display = "block";
 }
 
