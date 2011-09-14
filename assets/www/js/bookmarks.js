@@ -16,7 +16,6 @@ function isBookmarksMaxLimit()
 			}
 			else
 			{
-				// haven't reached the max limit
 				addBookmarkPrompt();
 			}
 		});
@@ -90,13 +89,13 @@ function listBookmarks(record, index)
 	var markup = "<li>";
 	markup += "<a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a>";
 	markup += "&nbsp;&nbsp;";
-	markup += "<a href=\"javascript:onListItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
+	markup += "<a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
 	markup += "</li>";
 	
 	document.getElementById("bookmarks").innerHTML += markup;	
 }
 
-function onListItemClicked(url)
+function onBookmarkItemClicked(url)
 {
 	document.getElementById("main").src = url;
 	hideBookmarks();
