@@ -14,7 +14,7 @@ function isHistoryMaxLimit(title, url)
 {
 	var MAX_LIMIT = 50;
 
-	var historyDB = new Lawnchair(function() {
+	var historyDB = new Lawnchair({name:"historyDB"},function() {
 		this.keys(function(records) {
 			if (records.length > MAX_LIMIT)
 			{
@@ -23,7 +23,7 @@ function isHistoryMaxLimit(title, url)
 			}
 			else
 			{
-				var historyDB = new Lawnchair(function() {
+				var historyDB = new Lawnchair({name:"historyDB"}, function() {
 					this.save({key: title, value: url});
 				});
 			}
@@ -34,17 +34,15 @@ function isHistoryMaxLimit(title, url)
 function getHistory()
 {
 	document.getElementById("history").innerHTML = "<a href='javascript:purgeHistory();'>Clear History</a>";
-	document.getElementById("history").innerHTML += "<ul>";
+	document.getElementById("history").innerHTML += "&nbsp;&nbsp;";
+	document.getElementById("history").innerHTML += "<a href='javascript:hideHistory();'>Close History</a>";
 
-	var historyDB = new Lawnchair(function() {
+	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.each(function(record, index) {
 			listHistory(record, index);
 		});
 	});
-			
-	document.getElementById("history").innerHTML += "</ul>";
-	document.getElementById("history").innerHTML += "<a href='javascript:hideHistory();'>Close</a>";
-	
+
 	showHistory();
 }
 
@@ -65,7 +63,7 @@ function onHistoryItemClicked(url)
 
 function purgeHistory()
 {
-	var historyDB = new Lawnchair(function() { this.nuke() });
+	var historyDB = new Lawnchair({name:"historyDB"}, function() { this.nuke() });
 	hideHistory();
 }
 

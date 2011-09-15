@@ -1,22 +1,25 @@
 function resetBookmarks()
 {
-	var bookmarksDB = new Lawnchair(function() { this.nuke() });
+	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() { this.nuke() });
 }
 
 function isBookmarksMaxLimit()
 {
 	var MAX_LIMIT = 50;
 
-	var bookmarksDB = new Lawnchair(function() {
+	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.keys(function(records) {
-			if (records.length > MAX_LIMIT)
+			if (records != null)
 			{
-				// we've reached the max limit
-				alert("You've reached the maximum number of bookmarks.");
-			}
-			else
-			{
-				addBookmarkPrompt();
+				if (records.length > MAX_LIMIT)
+				{
+					// we've reached the max limit
+					alert("You've reached the maximum number of bookmarks.");
+				}
+				else
+				{
+					addBookmarkPrompt();
+				}
 			}
 		});
 	});
@@ -33,7 +36,7 @@ function addBookmarkPrompt()
 	
 	if (answer)
 	{		
-		var bookmarksDB = new Lawnchair(function() {
+		var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 			this.get(titleToBookmark, function(r) {	
 			
 				if (r == null)
@@ -52,7 +55,7 @@ function addBookmarkPrompt()
 
 function addBookmark(title, url)
 {
-	var bookmarksDB = new Lawnchair(function() {
+	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.save({key: title, value: url});
 	});
 }
@@ -60,16 +63,13 @@ function addBookmark(title, url)
 
 function getBookmarks()
 {
-	document.getElementById("bookmarks").innerHTML = "<ul>";
+	document.getElementById("bookmarks").innerHTML = "<a href='javascript:hideBookmarks();'>Close Bookmarks</a>";	
 
-	var bookmarksDB = new Lawnchair(function() {
-		this.each(function(record, index) {
+	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+		this.each(function(record, index) {	
 			listBookmarks(record, index);
 		});
 	});
-		
-	document.getElementById("bookmarks").innerHTML += "</ul>";
-	document.getElementById("bookmarks").innerHTML += "<a href='javascript:hideBookmarks();'>Close</a>";
 	
 	showBookmarks();
 }
@@ -94,6 +94,8 @@ function listBookmarks(record, index)
 	markup += "</li>";
 	
 	document.getElementById("bookmarks").innerHTML += markup;	
+	
+	//return markup;
 }
 
 function onBookmarkItemClicked(url)
@@ -104,18 +106,16 @@ function onBookmarkItemClicked(url)
 
 function deleteBookmarkPrompt(bookmarkKey)
 {
-
 	var answer = confirm("Remove " + bookmarkKey + " from bookmarks?")
 	
 	if (answer){
 		deleteBookmark(bookmarkKey);
 	}
-	
 }
 
 function deleteBookmark(bookmarkToDelete)
 {
-	var bookmarksDB = new Lawnchair(function() {
+	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.remove(bookmarkToDelete, function() {
 			alert(bookmarkToDelete + " has been removed.");
 			hideBookmarks();
