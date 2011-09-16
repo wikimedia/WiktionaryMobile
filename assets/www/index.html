@@ -16,6 +16,7 @@
 	  <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="js/bookmarks.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="js/app_history.js"></script> 
+	  <script type="text/javascript" charset="utf-8" src="js/search.js"></script> 
 	  <script type="text/javascript" charset="utf-8" src="js/geo.js"></script> 
 	  
 	  <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
@@ -38,7 +39,8 @@
 			<a href="javascript:isBookmarksMaxLimit();">Bookmark</a>			
 			<a href="javascript:getHistory();">History</a>
 			<a href="javascript:getCurrentPosition();">Geo</a>
-			<a href="javascript:getBookmarks();">List</a>						
+			<a href="javascript:getBookmarks();">List</a>
+			<a href="javascript:toggleSearchBar();">Search</a>						
 		</div>
 		
 		<div id="bookmarks" style="display:none;">
@@ -47,13 +49,18 @@
 		<div id="history" style="display:none;">
 		</div>
 		
-	
+		<div id="searchbar" style="display:none;">
+			<form action="javascript:search();">
+				<input type="text" id="searchParam"></input>
+				<input type="submit" value="Search"></input>
+			</form>
+			<div id="searchresults">
+			</div>
+		</div>
 		
 		<div id="content">
-
 			<iframe id="main" frameborder="0" onload="javascript:addToHistory();">
 			</iframe>
-			
 		</div> 	
 				
 	</div>	

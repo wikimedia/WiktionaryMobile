@@ -14,17 +14,15 @@ function getCurrentPosition()
 function onGetPositionSuccess(position)
 {
 	console.log("onGetPositionSuccess");
-	alert("onGetPositionSuccess");
-/*
+
 	var markup = "latitude: " + position.coords.latitude + "\n";
-	markup += "longitude: " + position.coords.longitdue + "\n";
+	markup += "longitude: " + position.coords.longitude + "\n";
 	markup += "altitude: " + position.coords.altitude + "\n";
 	markup += "accuracy: " + position.coords.accuracy + "\n";
 	markup += "heading: " + position.coords.heading + "\n";
 	markup += "speed: " + position.coords.speed + "\n";
 	
 	alert(markup);
-	*/
 }
 
 function onGetPositionError(error)
