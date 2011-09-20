@@ -5,7 +5,7 @@ GETTING STARTED:
 
 ENVIRONMENT SETUP
 
-Follow the instructions found on the <a href="http://www.phonegap.com/start" target="_blank">PhoneGap.com Getting Started Page</a> to get all the necessary software for contributing to this project.
+Follow Steps 1 & 2 from the instructions found on the <a href="http://www.phonegap.com/start" target="_blank">PhoneGap.com Getting Started Page</a> to get all the necessary software for contributing to this project.
 
 PROJECT SETUP (using Eclipse)
 
