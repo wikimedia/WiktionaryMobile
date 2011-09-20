@@ -8,7 +8,10 @@ TODO:
 
 function getCurrentPosition()
 {
-	navigator.geolocation.getCurrentPosition(onGetPositionSuccess, onGetPositionError);
+	if (hasNetworkConnection())
+		navigator.geolocation.getCurrentPosition(onGetPositionSuccess, onGetPositionError);
+	else
+		noConnectionMsg();
 }
 
 function onGetPositionSuccess(position)

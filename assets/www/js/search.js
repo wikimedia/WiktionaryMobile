@@ -1,42 +1,40 @@
-function toggleSearchBar()
-{
-	var display = document.getElementById("searchbar").style.display;
-	
-	if (display == "block")
-		document.getElementById("searchbar").style.display = "none";
-	else
-		document.getElementById("searchbar").style.display = "block";
-}
-
-
 function search()
 {
+	if (hasNetworkConnection())
+	{
+		var searchParam = document.getElementById("searchParam").value;
+		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
+		requestUrl += "search=" + searchParam + "&";
 
-	var searchParam = document.getElementById("searchParam").value;
-	var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
-	requestUrl += "search=" + searchParam + "&";
+		var xmlhttp;
 
-	var xmlhttp;
-
-	if (window.XMLHttpRequest)
-  	{// code for IE7+, Firefox, Chrome, Opera, Safari
-  		xmlhttp=new XMLHttpRequest();
-  	}
-	else
-  	{// code for IE6, IE5
-  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  	}
+		if (window.XMLHttpRequest)
+  		{// code for IE7+, Firefox, Chrome, Opera, Safari
+  			xmlhttp=new XMLHttpRequest();
+  		}
+		else
+  		{// code for IE6, IE5
+  			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  		}
 	
-	xmlhttp.onreadystatechange=function()
-  	{
-  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    	{
-    		displayResults(xmlhttp.responseText);
-    	}
-  	}
+		xmlhttp.onreadystatechange=function()
+  		{
+  			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    		{
+    			displayResults(xmlhttp.responseText);
+    		}
+  		}
 
-	xmlhttp.open("GET", requestUrl, true);
-	xmlhttp.send();	
+		xmlhttp.setRequestHeader("User-Agent", "WikipediaMobile");
+		xmlhttp.open("GET", requestUrl, true);
+		xmlhttp.send();	
+	}
+	else
+	{
+		noConnectionMsg();
+		//toggleDiv('searchbar');
+		hideOverlayDivs();
+	}
 }
 
 function displayResults(results)
@@ -66,11 +64,21 @@ function displayResults(results)
 	}
 	
 	document.getElementById("searchresults").innerHTML=formattedResults;
+	document.getElementById("searchresults").style.display = "block";
 }
 
 function goToResult(article)
 {
-	var url = "http://en.wikipedia.org/wiki/" + article;
-	toggleSearchBar();
-	document.getElementById("main").src = url;
+	if (hasNetworkConnection())
+	{
+		var url = "http://en.wikipedia.org/wiki/" + article;
+		document.getElementById("main").src = url;
+	}
+	else
+	{
+		noConnectionMsg();
+	}
+	
+	//toggleDiv('searchbar');
+	hideOverlayDivs();
 }

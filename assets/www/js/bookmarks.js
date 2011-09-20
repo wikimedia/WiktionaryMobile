@@ -76,8 +76,9 @@ function getBookmarks()
 
 function showBookmarks()
 {
-	hideHistory();
-	document.getElementById("bookmarks").style.display = "block";
+	hideOverlayDivs();
+	//document.getElementById("bookmarks").style.display = "block";
+	toggleDiv("bookmarks");
 }
 
 function hideBookmarks()
@@ -94,14 +95,16 @@ function listBookmarks(record, index)
 	markup += "</li>";
 	
 	document.getElementById("bookmarks").innerHTML += markup;	
-	
-	//return markup;
 }
 
 function onBookmarkItemClicked(url)
 {
-	document.getElementById("main").src = url;
-	hideBookmarks();
+	if (hasNetworkConnection())
+		document.getElementById("main").src = url;
+	else
+		noConnectionMsg();
+		
+	hideOverlayDivs();
 }
 
 function deleteBookmarkPrompt(bookmarkKey)
@@ -118,7 +121,7 @@ function deleteBookmark(bookmarkToDelete)
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.remove(bookmarkToDelete, function() {
 			alert(bookmarkToDelete + " has been removed.");
-			hideBookmarks();
+			hideOverlayDivs();
 		});
 	});
 }

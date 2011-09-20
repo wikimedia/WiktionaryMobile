@@ -57,23 +57,22 @@ function listHistory(record, index)
 
 function onHistoryItemClicked(url)
 {
-	document.getElementById("main").src = url;
-	hideHistory();
+	if (hasNetworkConnection())
+		document.getElementById("main").src = url;
+	else
+		noConnectionMsg();
+
+	hideOverlayDivs();
 }
 
 function purgeHistory()
 {
 	var historyDB = new Lawnchair({name:"historyDB"}, function() { this.nuke() });
-	hideHistory();
+	hideOverlayDivs();
 }
 
 function showHistory()
 {
-	hideBookmarks();
-	document.getElementById("history").style.display = "block";
-}
-
-function hideHistory()
-{
-	document.getElementById("history").style.display = "none";
+	hideOverlayDivs();
+	toggleDiv("history");
 }
