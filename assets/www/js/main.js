@@ -1,14 +1,14 @@
 function init() 
 {
-    // the next line makes it impossible to see Contacts on the HTC Evo since it
-    // doesn't have a scroll button
-    // document.addEventListener("touchmove", preventBehavior, false);  
     document.addEventListener("deviceready", onDeviceReady, true);
 }
 
 function onDeviceReady()
 {
-	loadContent();
+	//hideOverlayDivs();
+	//var currentDoc = document.location.href;
+	//if (currentDoc.indexOf("index.html") > 0)
+		loadContent();
 }
 
 function loadContent() 
@@ -38,6 +38,20 @@ function hideOverlayDivs()
 	document.getElementById("bookmarks").style.display = "none";
 	document.getElementById("history").style.display = "none";
 	document.getElementById("searchbar").style.display = "none";
+	
+	document.getElementById("bookmarks").disabled = true;
+	document.getElementById("history").disabled = true;
+	document.getElementById("searchbar").disabled = true;
+}
+
+function showContent()
+{
+	document.getElementById("content").style.display = "block";
+}
+
+function hideContent()
+{
+	document.getElementById("content").style.display = "none";
 }
 
 function noConnectionMsg()

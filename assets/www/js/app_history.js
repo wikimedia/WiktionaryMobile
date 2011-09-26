@@ -33,10 +33,17 @@ function isHistoryMaxLimit(title, url)
 
 function getHistory()
 {
-	document.getElementById("history").innerHTML = "<a href='javascript:purgeHistory();'>Clear History</a>";
-	document.getElementById("history").innerHTML += "&nbsp;&nbsp;";
-	document.getElementById("history").innerHTML += "<a href='javascript:hideHistory();'>Close History</a>";
-
+	/*
+	var markup = "<br><br>";
+	markup += "<a href='javascript:purgeHistory();'>Clear History</a>";
+	markup += "&nbsp;&nbsp;<a href='javascript:hideHistory();'>Close History</a>";
+	markup += "<br><br>";
+	
+	document.getElementById("history").innerHTML = markup;
+	*/
+	
+	document.getElementById("historyList").innerHTML = "";
+	
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.each(function(record, index) {
 			listHistory(record, index);
@@ -48,11 +55,11 @@ function getHistory()
 
 function listHistory(record, index)
 {
-	var markup = "<li>";
+	var markup = "<br>";
 	markup += "<a href=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
-	markup += "</li>";
+	markup += "<br>";
 	
-	document.getElementById("history").innerHTML += markup;	
+	document.getElementById("historyList").innerHTML += markup;	
 }
 
 function onHistoryItemClicked(url)
@@ -63,16 +70,26 @@ function onHistoryItemClicked(url)
 		noConnectionMsg();
 
 	hideOverlayDivs();
+	showContent();
 }
 
 function purgeHistory()
 {
 	var historyDB = new Lawnchair({name:"historyDB"}, function() { this.nuke() });
 	hideOverlayDivs();
+	showContent();
+}
+
+function hideHistory()
+{
+	hideOverlayDivs();
+	showContent();
 }
 
 function showHistory()
 {
 	hideOverlayDivs();
 	toggleDiv("history");
+	document.getElementById("history").disabled = false;
+	hideContent();
 }

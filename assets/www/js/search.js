@@ -5,6 +5,7 @@ function search()
 		var searchParam = document.getElementById("searchParam").value;
 		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
 		requestUrl += "search=" + searchParam + "&";
+		requestUrl += "format=json";
 
 		var xmlhttp;
 
@@ -25,7 +26,7 @@ function search()
     		}
   		}
 
-		xmlhttp.setRequestHeader("User-Agent", "WikipediaMobile");
+		//xmlhttp.setRequestHeader("User-Agent", "WikipediaMobile");
 		xmlhttp.open("GET", requestUrl, true);
 		xmlhttp.send();	
 	}
@@ -81,4 +82,10 @@ function goToResult(article)
 	
 	//toggleDiv('searchbar');
 	hideOverlayDivs();
+}
+
+toggleSearch()
+{
+	toggleDiv('searchbar');
+	document.getElementById("searchbar").disabled = document.getElementById("history").disabled ? false : true;
 }

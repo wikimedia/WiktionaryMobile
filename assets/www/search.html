@@ -17,16 +17,68 @@
 	  <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="plugin/menu/index.js"></script>
 	  
-	  <link rel=stylesheet href=app.css />  
-	  	  	   
+	  <style type="text/css">
+	  		body {margin:0px;}
+	  		iframe {margin:0px;}
+	  		div {margin:0px;}
+	  		
+	  		#featureBar
+	  		{
+	  			//position:fixed;top:0px;left:0px;
+	  			background-color:white;
+	  			text-align:right;
+	  		}
+	  		
+	  		header 
+	  		{
+    			position:fixed;
+    			top:0;
+    			width:100%;
+    			height:100px;
+			}   
+
+.titlebar, li {
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+}
+
+.titlebar {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(100%,#131313)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #4c4c4c 0%,#131313 100%); /* Chrome10+,Safari5.1+ */
+}
+
+.titlebar > div:first-child {
+    -webkit-box-flex: 1;
+}
+
+.titlebar div {
+    padding:10px;
+    color:#fff;
+}
+
+.titlebar div {
+    border-left:1px solid #666;
+    border-right:1px solid #000;
+}
+
+.titlebar div:last-child {
+    border-right:none;
+}
+
+.titlebar div:first-child {
+    border-left:none;
+}  
+	  		
+	  </style>
+	  	   
   </head>
 
   <body onload="init();">
 		
 	<header>
 	<div class="titlebar">
-		<div onclick="javascript:getCurrentPosition();">Geo</div>
-		<div onclick="javascript:toggleDiv('searchbar');">Search</div>
+		<div>Geo</div>
+		<div>Search</div>
 		
 	<!--
 		<a href="javascript:window.history.back();">Back</a>
@@ -37,23 +89,7 @@
 	</div>
 	</header>
 
-		<div id="bookmarks" class="bookmarks" style="display:none;">
-			<br><br>
-			<div id="bookmarksList"></div>
-			<br><br>
-			<div onclick="javascript:hideBookmarks();">close</div>
-		</div>
-		
-		<div id="history" class="history" style="display:none;">
-			<br><br>
-			<div id="historyList"></div>
-			<br><br>
-			<div onclick='javascript:purgeHistory();'>Clear History</div>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<div onclick='javascript:hideHistory();'>Close</div>
-		</div>
-		
-		<div id="searchbar" class="searchbar" style="display:none;">
+		<div id="searchbar" class="features">
 			<form action="javascript:search();">
 				<input type="text" id="searchParam"></input>
 				<input type="submit" value="Search"></input>
@@ -61,11 +97,6 @@
 			<div id="searchresults">
 			</div>
 		</div>
-
-	<div id="content" class="content">
-		<iframe id="main" frameborder="0" onload="javascript:addToHistory();">
-		</iframe>
-	</div> 	
 
 	<menu type="context">
 		<command label="Add Bookmark" icon="image/house.png" disabled="false" action="isBookmarksMaxLimit();" />

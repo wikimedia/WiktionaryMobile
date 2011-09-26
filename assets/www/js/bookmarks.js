@@ -31,6 +31,10 @@ function addBookmarkPrompt()
 
 	var titleToBookmark = document.getElementById("main").contentDocument.title;
 	var urlToBookmark = document.getElementById("main").contentWindow.location.href;
+	var index = titleToBookmark.indexOf(" - Wikipedia, the free encyclopedia");
+
+	if (index > 0)
+		titleToBookmark = titleToBookmark.substring(0, index);
 
 	var answer = confirm("Add " + titleToBookmark + " to bookmarks?")
 	
@@ -63,7 +67,9 @@ function addBookmark(title, url)
 
 function getBookmarks()
 {
-	document.getElementById("bookmarks").innerHTML = "<a href='javascript:hideBookmarks();'>Close Bookmarks</a>";	
+	//document.getElementById("bookmarks").innerHTML = "<br><br><div onclick='javascript:hideBookmarks();'>Close Bookmarks</div><br><br>";	
+
+	document.getElementById("bookmarksList").innerHTML = "";
 
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.each(function(record, index) {	
@@ -77,24 +83,26 @@ function getBookmarks()
 function showBookmarks()
 {
 	hideOverlayDivs();
-	//document.getElementById("bookmarks").style.display = "block";
 	toggleDiv("bookmarks");
+	document.getElementById("bookmarks").disabled = false;
+	hideContent();
 }
 
 function hideBookmarks()
 {
-	document.getElementById("bookmarks").style.display = "none";
+	hideOverlayDivs();
+	showContent();
 }
 
 function listBookmarks(record, index)
 {
-	var markup = "<li>";
+	var markup = "<br>";
 	markup += "<a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a>";
 	markup += "&nbsp;&nbsp;";
 	markup += "<a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
-	markup += "</li>";
+	markup += "<br>";
 	
-	document.getElementById("bookmarks").innerHTML += markup;	
+	document.getElementById("bookmarksList").innerHTML += markup;	
 }
 
 function onBookmarkItemClicked(url)
@@ -105,6 +113,7 @@ function onBookmarkItemClicked(url)
 		noConnectionMsg();
 		
 	hideOverlayDivs();
+	showContent();
 }
 
 function deleteBookmarkPrompt(bookmarkKey)
@@ -122,6 +131,7 @@ function deleteBookmark(bookmarkToDelete)
 		this.remove(bookmarkToDelete, function() {
 			alert(bookmarkToDelete + " has been removed.");
 			hideOverlayDivs();
+			showContent();
 		});
 	});
 }
