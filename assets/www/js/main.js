@@ -11,6 +11,18 @@ function onDeviceReady()
 		loadContent();
 }
 
+function hideMobileLinks()
+{
+	document.getElementById("main").contentDocument.getElementById("searchbox").style.display = "none";
+	document.getElementById("main").contentDocument.getElementById("footmenu").style.display = "none";
+}
+
+function iframeOnLoaded()
+{
+	hideMobileLinks();
+	addToHistory();
+}
+
 function loadContent() 
 {
 	if (hasNetworkConnection())
