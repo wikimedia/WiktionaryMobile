@@ -25,23 +25,25 @@
 		
 	<header>
 	<div class="titlebar">
+	
+		<div id="searchbar">
+			<form action="javascript:search();">
+				<input type="text" id="searchParam"></input>
+				<input type="submit" value="Search" id="search"></input>
+			</form>
+		</div>
+	
+	<!--
 		<div onclick="javascript:getCurrentPosition();">Geo</div>
 		<div onclick="javascript:toggleDiv('searchbar');">Search</div>
-		
-	<!--
-		<a href="javascript:window.history.back();">Back</a>
-		<a href="javascript:getCurrentPosition();">Geo</a>
-		<a href="javascript:toggleDiv('searchbar');">Search</a>
-	-->
+	-->	
 										
 	</div>
 	</header>
 
 		<div id="bookmarks" class="bookmarks" style="display:none;">
-			<br><br>
 			<div id="bookmarksList"></div>
-			<br><br>
-			<div onclick="javascript:hideBookmarks();">close</div>
+			<div class="close" onclick="javascript:hideBookmarks();">close</div>
 		</div>
 		
 		<div id="history" class="history" style="display:none;">
@@ -53,13 +55,18 @@
 			<div onclick='javascript:hideHistory();'>Close</div>
 		</div>
 		
+		<!--
 		<div id="searchbar" class="searchbar" style="display:none;">
 			<form action="javascript:search();">
 				<input type="text" id="searchParam"></input>
 				<input type="submit" value="Search"></input>
 			</form>
-			<div id="searchresults">
+			<div id="searchresults" style="display:none;">
 			</div>
+		</div>
+		-->
+		
+		<div id="searchresults" style="display:none;">
 		</div>
 
 	<div id="content" class="content">

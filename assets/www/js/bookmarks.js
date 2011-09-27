@@ -34,8 +34,10 @@ function addBookmarkPrompt()
 	var index = titleToBookmark.indexOf(" - Wikipedia, the free encyclopedia");
 
 	if (index > 0)
+	{
 		titleToBookmark = titleToBookmark.substring(0, index);
-
+	}
+	
 	var answer = confirm("Add " + titleToBookmark + " to bookmarks?")
 	
 	if (answer)
@@ -84,7 +86,6 @@ function showBookmarks()
 {
 	hideOverlayDivs();
 	toggleDiv("bookmarks");
-	document.getElementById("bookmarks").disabled = false;
 	hideContent();
 }
 
@@ -96,11 +97,12 @@ function hideBookmarks()
 
 function listBookmarks(record, index)
 {
-	var markup = "<br>";
-	markup += "<a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a>";
+	var markup = "<div class='listItemContainer'>";
+	markup += "<span class='iconBookmark'>icon</span>";
+	markup += "<span class='listItem'><a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a></span>";
 	markup += "&nbsp;&nbsp;";
-	markup += "<a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
-	markup += "<br>";
+	markup += "<span class='deleteBookmark'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a></span>";
+	markup += "</div>";
 	
 	document.getElementById("bookmarksList").innerHTML += markup;	
 }

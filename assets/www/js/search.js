@@ -33,7 +33,6 @@ function search()
 	else
 	{
 		noConnectionMsg();
-		//toggleDiv('searchbar');
 		hideOverlayDivs();
 	}
 }
@@ -49,14 +48,12 @@ function displayResults(results)
 		var searchParam = results[0];
 		var searchResults = results[1];
 	
-		//alert(searchResults.length);
-	
-		formattedResults += "Searched for: " + searchParam + "<br/><br/>";
+		formattedResults += "<br><br><br><br>Searched for: " + searchParam + "<br><br>";
 		
 		for (var i=0;i<searchResults.length;i++)
 		{
 			var article = searchResults[i];
-			formattedResults += "<a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a><br/>";
+			formattedResults += "<a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a><br>";
 		}
 	}
 	else
@@ -64,8 +61,11 @@ function displayResults(results)
 		formattedResults += "nothingness...";
 	}
 	
+	formattedResults += "<br><br><div onclick='javascript:hideSearchResults();'>close</div>";
+	
 	document.getElementById("searchresults").innerHTML=formattedResults;
 	document.getElementById("searchresults").style.display = "block";
+	hideContent();
 }
 
 function goToResult(article)
@@ -79,13 +79,14 @@ function goToResult(article)
 	{
 		noConnectionMsg();
 	}
-	
-	//toggleDiv('searchbar');
+
 	hideOverlayDivs();
+	showContent();
 }
 
-toggleSearch()
+function hideSearchResults()
 {
-	toggleDiv('searchbar');
-	document.getElementById("searchbar").disabled = document.getElementById("history").disabled ? false : true;
+	hideOverlayDivs();
+	showContent();
 }
+

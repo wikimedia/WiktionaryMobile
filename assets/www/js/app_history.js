@@ -2,6 +2,12 @@ function addToHistory()
 {
 	var title = document.getElementById("main").contentDocument.title;
 	var url = document.getElementById("main").contentWindow.location.href;
+	var index = title.indexOf(" - Wikipedia, the free encyclopedia");
+
+	if (index > 0)
+	{
+		title = title.substring(0, index);
+	}
 	
 	if (url != "about:blank")
 	{
@@ -90,6 +96,5 @@ function showHistory()
 {
 	hideOverlayDivs();
 	toggleDiv("history");
-	document.getElementById("history").disabled = false;
 	hideContent();
 }

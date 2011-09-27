@@ -49,11 +49,8 @@ function hideOverlayDivs()
 {
 	document.getElementById("bookmarks").style.display = "none";
 	document.getElementById("history").style.display = "none";
-	document.getElementById("searchbar").style.display = "none";
-	
-	document.getElementById("bookmarks").disabled = true;
-	document.getElementById("history").disabled = true;
-	document.getElementById("searchbar").disabled = true;
+	//document.getElementById("searchbar").style.display = "none";
+	document.getElementById("searchresults").style.display = "none";
 }
 
 function showContent()
