@@ -1,4 +1,4 @@
-function resetBookmarks()
+function clearBookmarks()
 {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() { this.nuke() });
 }
@@ -27,8 +27,6 @@ function isBookmarksMaxLimit()
 
 function addBookmarkPrompt()
 {
-	//resetBookmarks();
-
 	var titleToBookmark = document.getElementById("main").contentDocument.title;
 	var urlToBookmark = document.getElementById("main").contentWindow.location.href;
 	var index = titleToBookmark.indexOf(" - Wikipedia, the free encyclopedia");
@@ -100,7 +98,6 @@ function listBookmarks(record, index)
 	var markup = "<div class='listItemContainer'>";
 	markup += "<span class='iconBookmark'>icon</span>";
 	markup += "<span class='listItem'><a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a></span>";
-	markup += "&nbsp;&nbsp;";
 	markup += "<span class='deleteBookmark'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a></span>";
 	markup += "</div>";
 	

@@ -61,9 +61,10 @@ function getHistory()
 
 function listHistory(record, index)
 {
-	var markup = "<br>";
-	markup += "<a href=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
-	markup += "<br>";
+	var markup = "<div class='listItemContainer'>";
+	markup += "<span class='iconBookmark'>icon</span>";
+	markup += "<span class='listItem'><a href=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">" + record.key + "</a></span>";
+	markup += "</div>";
 	
 	document.getElementById("historyList").innerHTML += markup;	
 }
