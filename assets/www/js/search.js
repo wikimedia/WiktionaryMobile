@@ -68,8 +68,9 @@ function displayResults(results)
 	
 	document.getElementById("resultList").innerHTML=formattedResults;
 	document.getElementById("searchresults").style.display = "block";
+
+	hideOverlayDivs();
 	
-	//hideContent();
 	document.getElementById("content").style.display = "none";
 }
 
@@ -77,7 +78,7 @@ function goToResult(article)
 {
 	if (hasNetworkConnection())
 	{
-		var url = "http://en.wikipedia.org/wiki/" + article;
+		var url = "http://en.wikipedia.org/wiki/" + article;	
 		document.getElementById("main").src = url;
 	}
 	else
