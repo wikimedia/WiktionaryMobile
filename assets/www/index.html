@@ -23,51 +23,50 @@
 
   <body onload="init();">
 		
-	<header>
-	<div class="titlebar">
-	
-		<div id="searchbar">
+	<header id="mainHeader">
+		<div class="titlebar">
+		<div style="white-space:nowrap">
 			<form action="javascript:search();">
 				<input type="text" id="searchParam"></input>
 				<input type="submit" value="Search" id="search"></input>
 			</form>
 		</div>
-	
-	<!--
-		<div onclick="javascript:getCurrentPosition();">Geo</div>
-		<div onclick="javascript:toggleDiv('searchbar');">Search</div>
-	-->	
+		<div>Close</div>	
+			<!--
+			<div onclick="javascript:getCurrentPosition();">Geo</div>
+			<div onclick="javascript:toggleDiv('searchbar');">Search</div>
+			-->	
 										
-	</div>
+		</div>
 	</header>
 
-		<div id="bookmarks" class="bookmarks" style="display:none;">
-			<div id="bookmarksList"></div>
-			<div class="close" onclick="javascript:hideBookmarks();">close</div>
-		</div>
-		
-		<div id="history" class="history" style="display:none;">
-			<div id="historyList"></div>
-
-			<br>
-			<div onclick='javascript:purgeHistory();'>Clear History</div>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<div onclick='javascript:hideHistory();'>Close</div>
-		</div>
-		
-		<!--
-		<div id="searchbar" class="searchbar" style="display:none;">
-			<form action="javascript:search();">
-				<input type="text" id="searchParam"></input>
-				<input type="submit" value="Search"></input>
-			</form>
-			<div id="searchresults" style="display:none;">
+	<div id="bookmarks" class="bookmarks" style="display:none;">
+		<header>
+			<div class="titlebar">
+				<div>Bookmarks</div>
+				<div onclick="javascript:hideBookmarks();">Close</div>
 			</div>
-		</div>
-		-->
+		</header>
+		<div id="bookmarksList"></div>
+	</div>
 		
-		<div id="searchresults" style="display:none;">
-		</div>
+
+	<div id="history" class="history" style="display:none;">
+		<header>
+			<div class="titlebar">
+				<div>History</div>
+				<div onclick="javascript:hideHistory();">Close</div>
+			</div>
+		</header>
+		<div id="historyList"></div>
+		<br>
+		<br>
+		<div onclick='javascript:purgeHistory();'>Clear History</div>
+	</div>
+				
+	<div id="searchresults" style="display:none;">
+		<div id="resultList"></div>
+	</div>
 
 	<div id="content" class="content">
 		<iframe id="main" frameborder="0" onload="javascript:iframeOnLoaded();">

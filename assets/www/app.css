@@ -15,29 +15,32 @@ header
 	height:100px;
 	z-index:1;
 }   
-			
-.searchbar
+
+.bookmarks, .history
 {
 	background-color:white;
 	width:100%;
 	height:100%;
 }
 
-.bookmarks, .history
+#bookmarksList, #historyList
 {
-	background-color:white;
+	position:relative;
+	top:25px;
+}
+
+#searchresults, #content
+{
 	position:absolute;
-	top: 50px;
-	width:100%;
-	height:100%;
+	top:50px;
 }
 
 .listItemContainer
 {
 	whitespace: no-wrap;
 	border-bottom:1px solid #666;
-	padding-top:5px;
-	padding-bottom:5px;
+	padding-top:10px;
+	padding-bottom:10px;
 	width:100%;
 }
 
@@ -48,7 +51,7 @@ header
 	padding-left: 5px;
 }
 
-.iconBookmark
+.iconBookmark, .iconSearchResult
 {
 	position:abolute;
 	padding-left: 5px;
@@ -94,6 +97,7 @@ header
 {
     border-left:1px solid #666;
     border-right:1px solid #000;
+    color:white;
 }
 
 .titlebar div:last-child 

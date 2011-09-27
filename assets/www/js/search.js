@@ -48,12 +48,15 @@ function displayResults(results)
 		var searchParam = results[0];
 		var searchResults = results[1];
 	
-		formattedResults += "<br><br><br><br>Searched for: " + searchParam + "<br><br>";
+		//formattedResults += "<br><br><br><br>Searched for: " + searchParam + "<br><br>";
 		
 		for (var i=0;i<searchResults.length;i++)
 		{
 			var article = searchResults[i];
-			formattedResults += "<a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a><br>";
+			formattedResults += "<div class='listItemContainer'>";
+			formattedResults += "<span class='iconSearchResult'>icon</span>";
+			formattedResults += "<span class='listItem'><a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a></span>";
+			formattedResults += "</div>";
 		}
 	}
 	else
@@ -63,9 +66,11 @@ function displayResults(results)
 	
 	formattedResults += "<br><br><div onclick='javascript:hideSearchResults();'>close</div>";
 	
-	document.getElementById("searchresults").innerHTML=formattedResults;
+	document.getElementById("resultList").innerHTML=formattedResults;
 	document.getElementById("searchresults").style.display = "block";
-	hideContent();
+	
+	//hideContent();
+	document.getElementById("content").style.display = "none";
 }
 
 function goToResult(article)

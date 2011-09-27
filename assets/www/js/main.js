@@ -55,11 +55,13 @@ function hideOverlayDivs()
 
 function showContent()
 {
+	document.getElementById("mainHeader").style.display = "block";
 	document.getElementById("content").style.display = "block";
 }
 
 function hideContent()
 {
+	document.getElementById("mainHeader").style.display = "none";
 	document.getElementById("content").style.display = "none";
 }
 
