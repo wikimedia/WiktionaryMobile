@@ -67,10 +67,10 @@ function displayResults(results)
 	formattedResults += "<br><br><div onclick='javascript:hideSearchResults();'>close</div>";
 	
 	document.getElementById("resultList").innerHTML=formattedResults;
-	document.getElementById("searchresults").style.display = "block";
-
+	
 	hideOverlayDivs();
 	
+	document.getElementById("searchresults").style.display = "block";
 	document.getElementById("content").style.display = "none";
 }
 
