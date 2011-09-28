@@ -96,9 +96,11 @@ function hideBookmarks()
 function listBookmarks(record, index)
 {
 	var markup = "<div class='listItemContainer'>";
+	markup += "<div class='listItem'>";
 	markup += "<span class='iconBookmark'>icon</span>";
-	markup += "<span class='listItem'><a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a></span>";
+	markup += "<a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
 	markup += "<span class='deleteBookmark'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a></span>";
+	markup += "</div>";
 	markup += "</div>";
 	
 	document.getElementById("bookmarksList").innerHTML += markup;	

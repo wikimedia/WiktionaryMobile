@@ -8,6 +8,10 @@ function addToHistory()
 	{
 		title = title.substring(0, index);
 	}
+	else
+	{
+		title = "Wikipedia, the free encyclopedia";
+	}
 	
 	if (url != "about:blank")
 	{
@@ -38,16 +42,7 @@ function isHistoryMaxLimit(title, url)
 }
 
 function getHistory()
-{
-	/*
-	var markup = "<br><br>";
-	markup += "<a href='javascript:purgeHistory();'>Clear History</a>";
-	markup += "&nbsp;&nbsp;<a href='javascript:hideHistory();'>Close History</a>";
-	markup += "<br><br>";
-	
-	document.getElementById("history").innerHTML = markup;
-	*/
-	
+{	
 	document.getElementById("historyList").innerHTML = "";
 	
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
@@ -62,8 +57,10 @@ function getHistory()
 function listHistory(record, index)
 {
 	var markup = "<div class='listItemContainer'>";
-	markup += "<span class='iconBookmark'>icon</span>";
-	markup += "<span class='listItem'><a href=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">" + record.key + "</a></span>";
+	markup += "<div class='listItem'>";
+	markup += "<span class='iconHistory'>icon</span>";
+	markup += "<a href=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">" + record.key + "</a>"
+	markup += "</div>";
 	markup += "</div>";
 	
 	document.getElementById("historyList").innerHTML += markup;	

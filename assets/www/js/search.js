@@ -47,15 +47,15 @@ function displayResults(results)
 	
 		var searchParam = results[0];
 		var searchResults = results[1];
-	
-		//formattedResults += "<br><br><br><br>Searched for: " + searchParam + "<br><br>";
 		
 		for (var i=0;i<searchResults.length;i++)
 		{
 			var article = searchResults[i];
 			formattedResults += "<div class='listItemContainer'>";
+			formattedResults += "<div class='listItem'>";
 			formattedResults += "<span class='iconSearchResult'>icon</span>";
-			formattedResults += "<span class='listItem'><a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a></span>";
+			formattedResults += "<a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a>";
+			formattedResults += "</div>";
 			formattedResults += "</div>";
 		}
 	}
