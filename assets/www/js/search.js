@@ -2,6 +2,8 @@ function search()
 {
 	if (hasNetworkConnection())
 	{
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
+	
 		var searchParam = document.getElementById("searchParam").value;
 		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
 		requestUrl += "search=" + searchParam + "&";
@@ -70,22 +72,24 @@ function displayResults(results)
 	
 	document.getElementById("searchresults").style.display = "block";
 	document.getElementById("content").style.display = "none";
+	
+	hideProgressLoader();
 }
 
 function goToResult(article)
 {
 	if (hasNetworkConnection())
 	{
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
 		var url = "http://en.wikipedia.org/wiki/" + article;	
 		document.getElementById("main").src = url;
+		hideOverlayDivs();
+		showContent();
 	}
 	else
 	{
 		noConnectionMsg();
 	}
-
-	hideOverlayDivs();
-	showContent();
 }
 
 function hideSearchResults()

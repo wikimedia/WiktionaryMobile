@@ -109,12 +109,16 @@ function listBookmarks(record, index)
 function onBookmarkItemClicked(url)
 {
 	if (hasNetworkConnection())
+	{
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");	
 		document.getElementById("main").src = url;
+		hideOverlayDivs();
+		showContent();
+	}
 	else
+	{
 		noConnectionMsg();
-		
-	hideOverlayDivs();
-	showContent();
+	}
 }
 
 function deleteBookmarkPrompt(bookmarkKey)
