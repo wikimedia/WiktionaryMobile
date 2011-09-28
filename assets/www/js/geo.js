@@ -8,9 +8,14 @@ TODO:
 function getCurrentPosition()
 {
 	if (hasNetworkConnection())
+	{
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
 		navigator.geolocation.getCurrentPosition(onGetPositionSuccess, onGetPositionError);
+	}
 	else
+	{
 		noConnectionMsg();
+	}
 }
 
 function onGetPositionSuccess(position)
@@ -67,11 +72,12 @@ function getArticlesNearLocation(lat, lng)
 
 function displayArticlesNearLocation(results)
 {
+	hideProgressLoader();
 	alert(JSON.stringify(results));
 	console.log(JSON.stringify(results));
 }
 
-/*
+/*example code from iOS app
 
 (void)fetchWikiPagesAtLocation:(NSString *)location {
 	SBJSON *parser = [[SBJSON alloc] init];

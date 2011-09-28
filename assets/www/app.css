@@ -102,12 +102,19 @@ header
 
 #search
 {
-	color:white;
+	position:relative;
+	top:5px;
+	padding-left:5px;
 }
 
 #searchParam
 {
+	width:90%;
+}
 
+.titlebarIcon
+{
+	margin-top:5px;
 }
 
 .titlebar
@@ -126,17 +133,19 @@ header
 
 .titlebar div 
 {
+    /*
     border-left:1px solid #666;
     border-right:1px solid #000;
+    */
     color:white;
 }
-
+/*
 .titlebar div:last-child 
 {
     border-right:none;
 }
-
 .titlebar div:first-child 
 {
     border-left:none;
 }
+*/

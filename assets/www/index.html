@@ -13,6 +13,7 @@
 	  <script type="text/javascript" charset="utf-8" src="js/app_history.js"></script> 
 	  <script type="text/javascript" charset="utf-8" src="js/search.js"></script> 
 	  <script type="text/javascript" charset="utf-8" src="js/geo.js"></script> 
+	  <script type="text/javascript" charset="utf-8" src="js/settings.js"></script> 
 	  
 	  <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="plugin/menu/index.js"></script>
@@ -25,17 +26,13 @@
 		
 	<header id="mainHeader">
 		<div class="titlebar">
-		<div style="white-space:nowrap">
-			<form action="javascript:search();">
-				<input type="text" id="searchParam"></input>
-				<input type="submit" value="Search" id="search"></input>
-			</form>
-		</div>
-		<div>Close</div>	
-			<!--
-			<div onclick="javascript:getCurrentPosition();">Geo</div>
-			<div onclick="javascript:toggleDiv('searchbar');">Search</div>
-			-->										
+			<div style="display:inline-block;"><img src="image/w.png" class="titlebarIcon" /></div>
+			<div style="white-space:nowrap;margin-left:5px;">
+				<form action="javascript:search();">
+					<input type="text" id="searchParam" style="width:235px;"></input>
+					<input type="image" src="image/search.png" id="search" onsubmit="javascript:search();"></input>
+				</form>
+			</div>									
 		</div>
 	</header>
 
@@ -49,7 +46,6 @@
 		<div id="bookmarksList"></div>
 	</div>
 		
-
 	<div id="history" class="history" style="display:none;">
 		<header>
 			<div class="titlebar">
@@ -80,11 +76,10 @@
 	<menu type="context">
 		<command label="Add Bookmark" icon="image/optionAddBookmark.png" disabled="false" action="isBookmarksMaxLimit();" />
 		<command label="View Bookmark" icon="image/optionViewBookmarks.png" disabled="false" action="getBookmarks();" />
-		<command label="Forward" icon="image/optionForward.png" disabled="false" action="window.history.forward();" />
 		<command label="History" icon="image/optionViewHistory.png" disabled="false" action="getHistory();" />
-		<!--
-		<command label="test" icon="image/house.png" disabled="false" action="showProgressLoader();" />
-		-->
+		<command label="Forward" icon="image/optionForward.png" disabled="false" action="window.history.forward();" />
+		<command label="Near Me" icon="image/optionNearMe.png" disabled="false" action="getCurrentPosition();" />
+		<command label="Settings" icon="image/optionSettings.png" disabled="false" action="showSettings();" />
 	</menu>	
 	
   </body>
