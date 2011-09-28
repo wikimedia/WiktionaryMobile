@@ -11,6 +11,16 @@ function onDeviceReady()
 		loadContent();
 }
 
+function showProgressLoader(title, message)
+{
+	PhoneGap.exec(null, null, "IndeterminateProgress", "progressStart", [title, message]);
+}
+
+function hideProgressLoader()
+{
+	PhoneGap.exec(null, null, "IndeterminateProgress", "progressStop", []);
+}
+
 function hideMobileLinks()
 {
 	document.getElementById("main").contentDocument.getElementById("searchbox").style.display = "none";
@@ -21,12 +31,14 @@ function iframeOnLoaded()
 {
 	hideMobileLinks();
 	addToHistory();
+	hideProgressLoader();
 }
 
 function loadContent() 
 {
 	if (hasNetworkConnection())
 	{
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
 		document.getElementById("main").src = "http://en.m.wikipedia.org";
 	}
 	else
@@ -49,20 +61,19 @@ function hideOverlayDivs()
 {
 	document.getElementById("bookmarks").style.display = "none";
 	document.getElementById("history").style.display = "none";
-	document.getElementById("searchbar").style.display = "none";
-	
-	document.getElementById("bookmarks").disabled = true;
-	document.getElementById("history").disabled = true;
-	document.getElementById("searchbar").disabled = true;
+	//document.getElementById("searchbar").style.display = "none";
+	document.getElementById("searchresults").style.display = "none";
 }
 
 function showContent()
 {
+	document.getElementById("mainHeader").style.display = "block";
 	document.getElementById("content").style.display = "block";
 }
 
 function hideContent()
 {
+	document.getElementById("mainHeader").style.display = "none";
 	document.getElementById("content").style.display = "none";
 }
 

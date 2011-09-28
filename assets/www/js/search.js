@@ -2,6 +2,8 @@ function search()
 {
 	if (hasNetworkConnection())
 	{
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
+	
 		var searchParam = document.getElementById("searchParam").value;
 		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
 		requestUrl += "search=" + searchParam + "&";
@@ -33,7 +35,6 @@ function search()
 	else
 	{
 		noConnectionMsg();
-		//toggleDiv('searchbar');
 		hideOverlayDivs();
 	}
 }
@@ -48,15 +49,16 @@ function displayResults(results)
 	
 		var searchParam = results[0];
 		var searchResults = results[1];
-	
-		//alert(searchResults.length);
-	
-		formattedResults += "Searched for: " + searchParam + "<br/><br/>";
 		
 		for (var i=0;i<searchResults.length;i++)
 		{
 			var article = searchResults[i];
-			formattedResults += "<a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a><br/>";
+			formattedResults += "<div class='listItemContainer'>";
+			formattedResults += "<div class='listItem'>";
+			formattedResults += "<span class='iconSearchResult'><img src='image/iconListItem.png'/></span>";
+			formattedResults += "<a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a>";
+			formattedResults += "</div>";
+			formattedResults += "</div>";
 		}
 	}
 	else
@@ -64,28 +66,35 @@ function displayResults(results)
 		formattedResults += "nothingness...";
 	}
 	
-	document.getElementById("searchresults").innerHTML=formattedResults;
+	document.getElementById("resultList").innerHTML=formattedResults;
+	
+	hideOverlayDivs();
+	
 	document.getElementById("searchresults").style.display = "block";
+	document.getElementById("content").style.display = "none";
+	
+	hideProgressLoader();
 }
 
 function goToResult(article)
 {
 	if (hasNetworkConnection())
 	{
-		var url = "http://en.wikipedia.org/wiki/" + article;
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
+		var url = "http://en.wikipedia.org/wiki/" + article;	
 		document.getElementById("main").src = url;
+		hideOverlayDivs();
+		showContent();
 	}
 	else
 	{
 		noConnectionMsg();
 	}
-	
-	//toggleDiv('searchbar');
-	hideOverlayDivs();
 }
 
-toggleSearch()
+function hideSearchResults()
 {
-	toggleDiv('searchbar');
-	document.getElementById("searchbar").disabled = document.getElementById("history").disabled ? false : true;
+	hideOverlayDivs();
+	showContent();
 }
+

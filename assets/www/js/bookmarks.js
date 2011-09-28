@@ -1,4 +1,4 @@
-function resetBookmarks()
+function clearBookmarks()
 {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() { this.nuke() });
 }
@@ -27,15 +27,15 @@ function isBookmarksMaxLimit()
 
 function addBookmarkPrompt()
 {
-	//resetBookmarks();
-
 	var titleToBookmark = document.getElementById("main").contentDocument.title;
 	var urlToBookmark = document.getElementById("main").contentWindow.location.href;
 	var index = titleToBookmark.indexOf(" - Wikipedia, the free encyclopedia");
 
 	if (index > 0)
+	{
 		titleToBookmark = titleToBookmark.substring(0, index);
-
+	}
+	
 	var answer = confirm("Add " + titleToBookmark + " to bookmarks?")
 	
 	if (answer)
@@ -84,7 +84,6 @@ function showBookmarks()
 {
 	hideOverlayDivs();
 	toggleDiv("bookmarks");
-	document.getElementById("bookmarks").disabled = false;
 	hideContent();
 }
 
@@ -96,11 +95,13 @@ function hideBookmarks()
 
 function listBookmarks(record, index)
 {
-	var markup = "<br>";
-	markup += "<a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a>";
-	markup += "&nbsp;&nbsp;";
+	var markup = "<div class='listItemContainer'>";
+	markup += "<div class='listItem'>";
+	markup += "<span class='iconBookmark'><img src='image/iconBookmark.png'/></span>";
 	markup += "<a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
-	markup += "<br>";
+	markup += "<span class='deleteBookmark'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\"><img src='image/iconDelete.png'/></a></span>";
+	markup += "</div>";
+	markup += "</div>";
 	
 	document.getElementById("bookmarksList").innerHTML += markup;	
 }
@@ -108,12 +109,16 @@ function listBookmarks(record, index)
 function onBookmarkItemClicked(url)
 {
 	if (hasNetworkConnection())
+	{
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");	
 		document.getElementById("main").src = url;
+		hideOverlayDivs();
+		showContent();
+	}
 	else
+	{
 		noConnectionMsg();
-		
-	hideOverlayDivs();
-	showContent();
+	}
 }
 
 function deleteBookmarkPrompt(bookmarkKey)

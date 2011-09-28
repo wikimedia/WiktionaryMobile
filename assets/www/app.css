@@ -1,41 +1,122 @@
-body {margin:0;padding:0}
-iframe {margin:0;padding:0;}
-div {margin:0;padding:0}
+body 
+{
+	margin:0px;
+	padding:0px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-focus-ring-color:  rgba(0, 0, 0, 0);
+}
+
+/* //this doesn't seem to make any difference
+iframe 
+{
+	margin:0px;4
+	padding:0px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+*/
+img
+{
+	border:0px;
+}
+
+div 
+{
+	margin:0px;
+	padding:0px;
+}
 	  		
 header 
 {
 	position:fixed;
-	top:0;
+	top:0px;
+	left:0px;
 	width:100%;
-	height:100px;
+	/*height:100px;*/
+	z-index:1;
 }   
-			
-.searchbar
-{
-	position:fixed;
-	top:40px;
-	background-color:white;
-	width:100%;
-	height:100%;
-}
 
-.bookmarks
+.bookmarks, .history
 {
 	background-color:white;
 	width:100%;
 	height:100%;
 }
 
-.titlebar, li 
+#bookmarksList, #historyList
+{
+	position:relative;
+	top:25px;
+	width: 100%;
+}
+
+#searchresults, #content
+{
+	position:absolute;
+	top:50px;
+	width: 100%;
+}
+
+.listItemContainer
+{
+	whitespace: no-wrap;
+	border-bottom:1px solid #666;
+	width:100%;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.listItem
+{
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	margin-left:5px;
+	margin-right:5px;
+}
+.iconHistory, .iconSearchResult
+{
+	position:relative;
+	top:3px;
+	padding-right: 5px;
+}
+
+.iconBookmark
+{
+	position:relative;
+	top:5px;
+	padding-right: 5px;
+}
+
+.deleteBookmark
+{
+	position:absolute;
+	padding-top:5px;
+	right:5px;
+}
+
+.close
+{
+	padding:10px;
+}
+
+#search
+{
+	color:white;
+}
+
+#searchParam
+{
+
+}
+
+.titlebar
 {
     display: -webkit-box;
     -webkit-box-orient: horizontal;
-}
-
-.titlebar 
-{
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(100%,#131313)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #4c4c4c 0%,#131313 100%); /* Chrome10+,Safari5.1+ */
+    padding: 5px;
 }
 
 .titlebar > div:first-child 
@@ -45,14 +126,9 @@ header
 
 .titlebar div 
 {
-    padding:10px;
-    color:#fff;
-}
-
-.titlebar div 
-{
     border-left:1px solid #666;
     border-right:1px solid #000;
+    color:white;
 }
 
 .titlebar div:last-child 

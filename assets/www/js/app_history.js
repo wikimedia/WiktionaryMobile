@@ -2,6 +2,16 @@ function addToHistory()
 {
 	var title = document.getElementById("main").contentDocument.title;
 	var url = document.getElementById("main").contentWindow.location.href;
+	var index = title.indexOf(" - Wikipedia, the free encyclopedia");
+
+	if (index > 0)
+	{
+		title = title.substring(0, index);
+	}
+	else
+	{
+		title = "Wikipedia, the free encyclopedia";
+	}
 	
 	if (url != "about:blank")
 	{
@@ -32,16 +42,7 @@ function isHistoryMaxLimit(title, url)
 }
 
 function getHistory()
-{
-	/*
-	var markup = "<br><br>";
-	markup += "<a href='javascript:purgeHistory();'>Clear History</a>";
-	markup += "&nbsp;&nbsp;<a href='javascript:hideHistory();'>Close History</a>";
-	markup += "<br><br>";
-	
-	document.getElementById("history").innerHTML = markup;
-	*/
-	
+{	
 	document.getElementById("historyList").innerHTML = "";
 	
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
@@ -55,9 +56,12 @@ function getHistory()
 
 function listHistory(record, index)
 {
-	var markup = "<br>";
-	markup += "<a href=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
-	markup += "<br>";
+	var markup = "<div class='listItemContainer'>";
+	markup += "<div class='listItem'>";
+	markup += "<span class='iconHistory'><img src='image/iconListItem.png'/></span>";
+	markup += "<a href=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">" + record.key + "</a>"
+	markup += "</div>";
+	markup += "</div>";
 	
 	document.getElementById("historyList").innerHTML += markup;	
 }
@@ -65,12 +69,16 @@ function listHistory(record, index)
 function onHistoryItemClicked(url)
 {
 	if (hasNetworkConnection())
+	{
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
 		document.getElementById("main").src = url;
+		hideOverlayDivs();
+		showContent();
+	}
 	else
+	{
 		noConnectionMsg();
-
-	hideOverlayDivs();
-	showContent();
+	}
 }
 
 function purgeHistory()
@@ -90,6 +98,5 @@ function showHistory()
 {
 	hideOverlayDivs();
 	toggleDiv("history");
-	document.getElementById("history").disabled = false;
 	hideContent();
 }

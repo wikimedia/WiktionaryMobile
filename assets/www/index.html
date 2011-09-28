@@ -23,44 +23,52 @@
 
   <body onload="init();">
 		
-	<header>
-	<div class="titlebar">
-		<div onclick="javascript:getCurrentPosition();">Geo</div>
-		<div onclick="javascript:toggleDiv('searchbar');">Search</div>
-		
-	<!--
-		<a href="javascript:window.history.back();">Back</a>
-		<a href="javascript:getCurrentPosition();">Geo</a>
-		<a href="javascript:toggleDiv('searchbar');">Search</a>
-	-->
-										
-	</div>
-	</header>
-
-		<div id="bookmarks" class="bookmarks" style="display:none;">
-			<br><br>
-			<div id="bookmarksList"></div>
-			<br><br>
-			<div onclick="javascript:hideBookmarks();">close</div>
-		</div>
-		
-		<div id="history" class="history" style="display:none;">
-			<br><br>
-			<div id="historyList"></div>
-			<br><br>
-			<div onclick='javascript:purgeHistory();'>Clear History</div>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<div onclick='javascript:hideHistory();'>Close</div>
-		</div>
-		
-		<div id="searchbar" class="searchbar" style="display:none;">
+	<header id="mainHeader">
+		<div class="titlebar">
+		<div style="white-space:nowrap">
 			<form action="javascript:search();">
 				<input type="text" id="searchParam"></input>
-				<input type="submit" value="Search"></input>
+				<input type="submit" value="Search" id="search"></input>
 			</form>
-			<div id="searchresults">
-			</div>
 		</div>
+		<div>Close</div>	
+			<!--
+			<div onclick="javascript:getCurrentPosition();">Geo</div>
+			<div onclick="javascript:toggleDiv('searchbar');">Search</div>
+			-->										
+		</div>
+	</header>
+
+	<div id="bookmarks" class="bookmarks" style="display:none;">
+		<header>
+			<div class="titlebar">
+				<div>Bookmarks</div>
+				<div onclick="javascript:hideBookmarks();">Close</div>
+			</div>
+		</header>
+		<div id="bookmarksList"></div>
+	</div>
+		
+
+	<div id="history" class="history" style="display:none;">
+		<header>
+			<div class="titlebar">
+				<div>History</div>
+				<div onclick="javascript:hideHistory();">Close</div>
+			</div>
+		</header>
+		<div id="historyList"></div>
+		<br>
+		<div onclick='javascript:purgeHistory();'>Clear History</div>
+		<br>
+	</div>
+				
+	<div id="searchresults" style="display:none;">
+		<div id="resultList"></div>
+		<br>
+		<div onclick='javascript:hideSearchResults();'>close</div>
+		<br>
+	</div>
 
 	<div id="content" class="content">
 		<iframe id="main" frameborder="0" onload="javascript:iframeOnLoaded();">
@@ -68,10 +76,13 @@
 	</div> 	
 
 	<menu type="context">
-		<command label="Add Bookmark" icon="image/house.png" disabled="false" action="isBookmarksMaxLimit();" />
-		<command label="View Bookmark" icon="image/house.png" disabled="false" action="getBookmarks();" />
-		<command label="Forward" icon="image/house.png" disabled="false" action="window.history.forward();" />
-		<command label="History" icon="image/house.png" disabled="false" action="getHistory();" />
+		<command label="Add Bookmark" icon="image/optionAddBookmark.png" disabled="false" action="isBookmarksMaxLimit();" />
+		<command label="View Bookmark" icon="image/optionViewBookmarks.png" disabled="false" action="getBookmarks();" />
+		<command label="Forward" icon="image/optionForward.png" disabled="false" action="window.history.forward();" />
+		<command label="History" icon="image/optionViewHistory.png" disabled="false" action="getHistory();" />
+		<!--
+		<command label="test" icon="image/house.png" disabled="false" action="showProgressLoader();" />
+		-->
 	</menu>	
 	
   </body>
