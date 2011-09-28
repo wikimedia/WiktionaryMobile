@@ -9,12 +9,16 @@ body
 /* //this doesn't seem to make any difference
 iframe 
 {
-	margin:0px;
+	margin:0px;4
 	padding:0px;
 	overflow-x:hidden;
 	overflow-y:scroll;
 }
 */
+img
+{
+	border:0px;
+}
 
 div 
 {
@@ -70,16 +74,24 @@ header
 	margin-left:5px;
 	margin-right:5px;
 }
-
-.iconBookmark, .iconHistory, .iconSearchResult
+.iconHistory, .iconSearchResult
 {
-	position:abolute;
+	position:relative;
+	top:3px;
+	padding-right: 5px;
+}
+
+.iconBookmark
+{
+	position:relative;
+	top:5px;
 	padding-right: 5px;
 }
 
 .deleteBookmark
 {
 	position:absolute;
+	padding-top:5px;
 	right:5px;
 }
 

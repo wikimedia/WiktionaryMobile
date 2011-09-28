@@ -58,7 +58,7 @@ function listHistory(record, index)
 {
 	var markup = "<div class='listItemContainer'>";
 	markup += "<div class='listItem'>";
-	markup += "<span class='iconHistory'>icon</span>";
+	markup += "<span class='iconHistory'><img src='image/iconListItem.png'/></span>";
 	markup += "<a href=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">" + record.key + "</a>"
 	markup += "</div>";
 	markup += "</div>";

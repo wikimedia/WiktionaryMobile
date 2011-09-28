@@ -97,9 +97,9 @@ function listBookmarks(record, index)
 {
 	var markup = "<div class='listItemContainer'>";
 	markup += "<div class='listItem'>";
-	markup += "<span class='iconBookmark'>icon</span>";
+	markup += "<span class='iconBookmark'><img src='image/iconBookmark.png'/></span>";
 	markup += "<a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
-	markup += "<span class='deleteBookmark'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\">del</a></span>";
+	markup += "<span class='deleteBookmark'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\"><img src='image/iconDelete.png'/></a></span>";
 	markup += "</div>";
 	markup += "</div>";
 	
