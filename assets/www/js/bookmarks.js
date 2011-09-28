@@ -95,10 +95,10 @@ function hideBookmarks()
 
 function listBookmarks(record, index)
 {
-	var markup = "<div class='listItemContainer'>";
+	var markup = "<div class='listItemContainer' onclick=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">";
 	markup += "<div class='listItem'>";
 	markup += "<span class='iconBookmark'><img src='image/iconBookmark.png'/></span>";
-	markup += "<a href=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">" + record.key + "</a>";
+	markup += "<span>" + record.key + "</span>";
 	markup += "<span class='deleteBookmark'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\"><img src='image/iconDelete.png'/></a></span>";
 	markup += "</div>";
 	markup += "</div>";
@@ -106,7 +106,7 @@ function listBookmarks(record, index)
 	document.getElementById("bookmarksList").innerHTML += markup;	
 }
 
-function onBookmarkItemClicked(url)
+function onBookmarkItemClicked(url, index)
 {
 	if (hasNetworkConnection())
 	{

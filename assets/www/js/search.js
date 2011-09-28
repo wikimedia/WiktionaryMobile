@@ -53,10 +53,10 @@ function displayResults(results)
 		for (var i=0;i<searchResults.length;i++)
 		{
 			var article = searchResults[i];
-			formattedResults += "<div class='listItemContainer'>";
+			formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
 			formattedResults += "<div class='listItem'>";
 			formattedResults += "<span class='iconSearchResult'><img src='image/iconListItem.png'/></span>";
-			formattedResults += "<a href=\"javascript:goToResult(\'" + article + "\');\">" + article + "</a>";
+			formattedResults += "<span>" + article + "</span>";
 			formattedResults += "</div>";
 			formattedResults += "</div>";
 		}
