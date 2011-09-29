@@ -6,16 +6,7 @@ body
 	-webkit-focus-ring-color:  rgba(0, 0, 0, 0);
 }
 
-/* //this doesn't seem to make any difference
-iframe 
-{
-	margin:0px;
-	padding:0px;
-	overflow-x:hidden;
-	overflow-y:scroll;
-}
-*/
-
+/* this prevents the search input field from "jumping" on the first search */
 input:focus
 {
 	outline:none;	
@@ -52,14 +43,14 @@ header
 #bookmarksList, #historyList
 {
 	position:relative;
-	top:35px;
+	top:52px;
 	width: 100%;
 }
 
 #searchresults, #content
 {
 	position:absolute;
-	top:35px;
+	top:52px;
 	width: 100%;
 }
 
@@ -68,8 +59,8 @@ header
 	whitespace: no-wrap;
 	border-bottom:1px solid #666;
 	width:100%;
-	padding-top:10px;
-	padding-bottom:10px;
+	padding-top:12px;
+	padding-bottom:12px;
 }
 
 .listItem
@@ -101,21 +92,25 @@ header
 	right:5px;
 }
 
-.close
-{
-	padding:10px;
-}
-
 #search
 {
 	position:relative;
 	top:5px;
-	padding-left:5px;
+	padding-left:8px;
 }
 
 #searchParam
 {
 	width:90%;
+}
+
+#clearSearch
+{
+	position:fixed;
+	top:20px;
+	right:48px;
+	z-index:2;
+	display:none;
 }
 
 .titlebarIcon
@@ -130,11 +125,17 @@ header
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(100%,#131313)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #4c4c4c 0%,#131313 100%); /* Chrome10+,Safari5.1+ */
     padding: 5px;
+    height: 44px;
 }
 
 .titlebar > div:first-child 
 {
     -webkit-box-flex: 1;
+}
+
+.titlebarItem
+{
+	margin-top:12px;
 }
 
 .titlebar div 

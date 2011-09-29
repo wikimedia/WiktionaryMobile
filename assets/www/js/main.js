@@ -77,6 +77,26 @@ function hideContent()
 	document.getElementById("content").style.display = "none";
 }
 
+function checkLength()
+{
+	var searchTerm = document.getElementById("searchParam").value;
+	console.log(searchTerm + " :: " + searchTerm.length);
+	if (searchTerm.length > 0)
+	{
+		document.getElementById("clearSearch").style.display = "block";
+	}
+	else
+	{
+		document.getElementById("clearSearch").style.display = "none";
+	}
+}
+
+function clearSearch()
+{
+	document.getElementById("searchParam").value = "";
+	document.getElementById("clearSearch").style.display = "none";
+}
+
 function noConnectionMsg()
 {
 	alert("Please try again when you're connected to a network.");

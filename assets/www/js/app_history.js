@@ -51,6 +51,8 @@ function getHistory()
 		});
 	});
 
+
+
 	showHistory();
 }
 
@@ -83,7 +85,12 @@ function onHistoryItemClicked(url)
 
 function purgeHistory()
 {
-	var historyDB = new Lawnchair({name:"historyDB"}, function() { this.nuke() });
+	var answer = confirm("Remove all of your browsing history?")
+	
+	if (answer){
+		var historyDB = new Lawnchair({name:"historyDB"}, function() { this.nuke() });
+	}
+	
 	hideOverlayDivs();
 	showContent();
 }
@@ -95,7 +102,7 @@ function hideHistory()
 }
 
 function showHistory()
-{
+{	
 	hideOverlayDivs();
 	toggleDiv("history");
 	hideContent();

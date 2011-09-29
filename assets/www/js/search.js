@@ -47,24 +47,31 @@ function displayResults(results)
 	{
 		results = eval(results);
 	
-		var searchParam = results[0];
-		var searchResults = results[1];
-		
-		for (var i=0;i<searchResults.length;i++)
+		if (results.length > 0)
 		{
-			var article = searchResults[i];
-			formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
-			formattedResults += "<div class='listItem'>";
-			formattedResults += "<span class='iconSearchResult'><img src='image/iconListItem.png'/></span>";
-			formattedResults += "<span>" + article + "</span>";
-			formattedResults += "</div>";
-			formattedResults += "</div>";
+			var searchParam = results[0];
+			var searchResults = results[1];
+		
+			for (var i=0;i<searchResults.length;i++)
+			{
+				var article = searchResults[i];
+				formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
+				formattedResults += "<div class='listItem'>";
+				formattedResults += "<span class='iconSearchResult'><img src='image/iconListItem.png'/></span>";
+				formattedResults += "<span>" + article + "</span>";
+				formattedResults += "</div>";
+				formattedResults += "</div>";
+			}
 		}
 	}
 	else
 	{
 		formattedResults += "nothingness...";
 	}
+	
+	formattedResults += "<div class='listItemContainer' onclick='javascript:hideSearchResults();'>";
+	formattedResults += "<div class='listItem'>Close</div>";
+	formattedResults += "</div>";
 	
 	document.getElementById("resultList").innerHTML=formattedResults;
 	
