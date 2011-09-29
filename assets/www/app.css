@@ -9,12 +9,18 @@ body
 /* //this doesn't seem to make any difference
 iframe 
 {
-	margin:0px;4
+	margin:0px;
 	padding:0px;
 	overflow-x:hidden;
 	overflow-y:scroll;
 }
 */
+
+input:focus
+{
+	outline:none;	
+}
+
 img
 {
 	border:0px;
@@ -53,7 +59,7 @@ header
 #searchresults, #content
 {
 	position:absolute;
-	top:50px;
+	top:35px;
 	width: 100%;
 }
 
