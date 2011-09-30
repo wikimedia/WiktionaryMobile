@@ -1,6 +1,12 @@
 function init() 
 {
     document.addEventListener("deviceready", onDeviceReady, true);
+    document.addEventListener("backbutton", function() {
+      // insert code here
+    }, false);
+    document.addEventListener("searchbutton", function() {
+      search();
+    }, false);
 }
 
 function onDeviceReady()
