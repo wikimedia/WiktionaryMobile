@@ -96,11 +96,11 @@ function hideBookmarks()
 function listBookmarks(record, index)
 {
 	var markup = "<div class='listItemContainer'>";
-	markup += "<div class='listItem'>";
-	markup += "<span onclick=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">";
+	markup += "<div class='listItem' onclick=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">";
 	markup += "<span class='iconBookmark'><img src='image/iconBookmark.png'/></span>";
 	markup += "<span>" + record.key + "</span>";
-	markup += "</span>";
+	markup += "</div>";
+	markup += "<div>";
 	markup += "<span class='deleteBookmark'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\"><img src='image/iconDelete.png'/></a></span>";
 	markup += "</div>";
 	markup += "</div>";
@@ -132,7 +132,7 @@ function deleteBookmarkPrompt(bookmarkKey)
 	}
 }
 
-function deleteBookmark(bookmarkToDelete)
+function deleteBookmark(bookmarkToDelete, index)
 {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.remove(bookmarkToDelete, function() {

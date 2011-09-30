@@ -32,6 +32,17 @@ function iframeOnLoaded()
 	hideMobileLinks();
 	addToHistory();
 	hideProgressLoader();
+	
+	var docWidth = document.getElementById("main").contentDocument.width;
+	
+	if (docWidth < 330)
+	{
+		document.getElementById("main").horizontalscrolling = "no";
+	}
+	else
+	{
+		document.getElementById("main").horizontalscrolling = "yes";
+	}
 }
 
 function loadContent() 

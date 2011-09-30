@@ -56,6 +56,8 @@ header
 
 .listItemContainer
 {
+	display: -webkit-box;
+    -webkit-box-orient: horizontal;
 	whitespace: no-wrap;
 	border-bottom:1px solid #666;
 	width:100%;
@@ -88,7 +90,7 @@ header
 .deleteBookmark
 {
 	position:absolute;
-	padding-top:5px;
+	padding-top:3px;
 	right:5px;
 }
 
