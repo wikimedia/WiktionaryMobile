@@ -1,12 +1,8 @@
 function init() 
 {
     document.addEventListener("deviceready", onDeviceReady, true);
-    document.addEventListener("backbutton", function() {
-      // insert code here
-    }, false);
-    document.addEventListener("searchbutton", function() {
-      search();
-    }, false);
+    document.addEventListener("backbutton", onBackButton, false);
+    document.addEventListener("searchbutton", onSearchButton, false);
 }
 
 function onDeviceReady()
@@ -15,6 +11,30 @@ function onDeviceReady()
 	//var currentDoc = document.location.href;
 	//if (currentDoc.indexOf("index.html") > 0)
 		loadContent();
+}
+
+function onBackButton()
+{
+
+	if (document.getElementById("content").style.display == "block")
+	{
+		alert("content back");
+		navigator.device.resetBackButton();
+	}
+	
+	if (document.getElementById("bookmarks").style.display == "block" ||
+		document.getElementById("history").style.display == "block" ||
+		document.getElementById("searchresults").style.display == "block")
+	{
+		enableOptionsMenu();
+		window.hideOverlayDivs();
+		window.showContent();
+	}
+}
+
+function onSearchButton()
+{
+	alert("search pressed");
 }
 
 function showProgressLoader(title, message)
@@ -144,5 +164,33 @@ function hasNetworkConnection()
 	{
 		return true;
 	}
+}
+
+// disables menu options except for the label of the command passed in
+// TODO: adjust so that it can take multiple commands to leave enabled
+function disableOptionsMenu(enabledCommand)
+{
+	var commands = document.getElementsByTagName("command");
+
+	for (var i=0;i<commands.length;i++)
+	{
+		if (commands[i].getAttribute('label').toLowerCase() != enabledCommand)
+		{
+			commands[i].setAttribute('disabled', 'true');
+		}
+	}
 	
+	PGMenuElement.update();
+}
+
+function enableOptionsMenu()
+{
+	var commands = document.getElementsByTagName("command");
+
+	for (var i=0;i<commands.length;i++)
+	{
+		commands[i].setAttribute('disabled', 'false');
+	}
+	
+	PGMenuElement.update();
 }

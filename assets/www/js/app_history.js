@@ -97,12 +97,16 @@ function purgeHistory()
 
 function hideHistory()
 {
+	enableOptionsMenu();
+
 	hideOverlayDivs();
 	showContent();
 }
 
 function showHistory()
 {	
+	disableOptionsMenu('bookmarks');
+
 	hideOverlayDivs();
 	toggleDiv("history");
 	hideContent();

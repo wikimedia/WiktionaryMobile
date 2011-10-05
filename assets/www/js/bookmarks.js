@@ -67,8 +67,6 @@ function addBookmark(title, url)
 
 function getBookmarks()
 {
-	//document.getElementById("bookmarks").innerHTML = "<br><br><div onclick='javascript:hideBookmarks();'>Close Bookmarks</div><br><br>";	
-
 	document.getElementById("bookmarksList").innerHTML = "";
 
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
@@ -82,6 +80,8 @@ function getBookmarks()
 
 function showBookmarks()
 {
+	disableOptionsMenu('history');
+
 	hideOverlayDivs();
 	toggleDiv("bookmarks");
 	hideContent();
@@ -89,6 +89,8 @@ function showBookmarks()
 
 function hideBookmarks()
 {
+	enableOptionsMenu();
+
 	hideOverlayDivs();
 	showContent();
 }

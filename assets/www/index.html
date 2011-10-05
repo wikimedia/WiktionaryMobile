@@ -17,9 +17,7 @@
 	  
 	  <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="plugin/menu/index.js"></script>
-	  
-	  <script src="http://debug.phonegap.com/target/target-script-min.js#pepperkiwi"></script>
-	  
+	    
 	  <link rel=stylesheet href=app.css />  
 	  	  	   
   </head>
@@ -28,18 +26,18 @@
 		
 	<header id="mainHeader">
 		<div class="titlebar">
-			<div style="display:inline-block;margin-top:7px;"><img src="image/w.png" class="titlebarIcon" /></div>
-			<div style="white-space:nowrap;margin-left:5px;margin-top:7px;">
+			<div id="wHolder"><img src="image/w.png" class="titlebarIcon" /></div>
+			<div id="searchFormHolder">
 				<form action="javascript:search();">
-					<input type="text" id="searchParam" style="width:230px;" onkeydown="setTimeout('javascript:checkLength()', 50);"></input>
+					<input type="text" id="searchParam" onkeydown="setTimeout('javascript:checkLength()', 50);"></input>
 					<input type="image" src="image/search.png" id="search" onsubmit="javascript:search();"></input>
 				</form>
-				<div id="clearSearch" onclick="javascript:clearSearch();"><img src="image/clearSearch.png"/></div>
+				<div id="clearSearch" onclick="javascript:clearSearch();"><img src="image/clearSearch.png"/></div>	
 			</div>									
 		</div>
 	</header>
 
-	<div id="bookmarks" class="bookmarks" style="display:none;">
+	<div id="bookmarks">
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem">Bookmarks</div>
@@ -49,7 +47,7 @@
 		<div id="bookmarksList"></div>
 	</div>
 		
-	<div id="history" class="history" style="display:none;">
+	<div id="history">
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem">History</div>
@@ -64,11 +62,11 @@
 		
 	</div>
 				
-	<div id="searchresults" style="display:none;">
+	<div id="searchresults">
 		<div id="resultList"></div>
 	</div>
 
-	<div id="content" class="content">
+	<div id="content">
 		<iframe id="main" frameborder="0" onload="javascript:iframeOnLoaded();">
 		</iframe>
 	</div> 	
@@ -81,7 +79,7 @@
 		<command label="Nearby" icon="image/optionNearMe.png" disabled="false" action="getCurrentPosition();" />
 		<command label="Settings" icon="image/optionSettings.png" disabled="false" action="showSettings();" />
 	</menu>	
-	
+		
   </body>
 
 </html>
