@@ -59,8 +59,10 @@ header
 .content
 {
 	display: block;
+	/*
 	position:absolute;
 	top:52px;
+	*/
 	width: 100%;
 }
 

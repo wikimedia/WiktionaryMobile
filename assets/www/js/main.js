@@ -1,16 +1,14 @@
 function init() 
 {
     document.addEventListener("deviceready", onDeviceReady, true);
-    document.addEventListener("backbutton", onBackButton, false);
-    document.addEventListener("searchbutton", onSearchButton, false);
 }
 
 function onDeviceReady()
 {
-	//hideOverlayDivs();
-	//var currentDoc = document.location.href;
-	//if (currentDoc.indexOf("index.html") > 0)
-		loadContent();
+    document.addEventListener("backbutton", onBackButton, false);
+    document.addEventListener("searchbutton", onSearchButton, false);
+    
+	loadContent();
 }
 
 function onBackButton()
@@ -18,8 +16,8 @@ function onBackButton()
 
 	if (document.getElementById("content").style.display == "block")
 	{
-		alert("content back");
-		navigator.device.resetBackButton();
+		// TODO: doesn't seem to work - seems to throw repeating error in the log regarding null droiddb
+		navigator.app.overrideBackbutton(false); 
 	}
 	
 	if (document.getElementById("bookmarks").style.display == "block" ||
@@ -34,7 +32,8 @@ function onBackButton()
 
 function onSearchButton()
 {
-	alert("search pressed");
+	//hmmm...doesn't seem to set the cursor in the input field - maybe a browser bug???
+	document.getElementById("searchParam").focus();
 }
 
 function showProgressLoader(title, message)
@@ -49,26 +48,17 @@ function hideProgressLoader()
 
 function hideMobileLinks()
 {
-	document.getElementById("main").contentDocument.getElementById("searchbox").style.display = "none";
+	document.getElementById("main").contentDocument.getElementById("header").style.display = "none";
 	document.getElementById("main").contentDocument.getElementById("footmenu").style.display = "none";
 }
 
 function iframeOnLoaded()
 {
+	// scroll the page to the top after it loads
+	window.scroll(0,0);
 	hideMobileLinks();
 	addToHistory();
 	hideProgressLoader();
-	
-	var docWidth = document.getElementById("main").contentDocument.width;
-	
-	if (docWidth < 330)
-	{
-		document.getElementById("main").horizontalscrolling = "no";
-	}
-	else
-	{
-		document.getElementById("main").horizontalscrolling = "yes";
-	}
 }
 
 function loadContent() 
@@ -89,9 +79,13 @@ function toggleDiv(div)
 	var display = document.getElementById(div).style.display;
 	
 	if (display == "block")
+	{
 		document.getElementById(div).style.display = "none";
+	}
 	else
+	{
 		document.getElementById(div).style.display = "block";
+	}
 }
 
 function hideOverlayDivs()
@@ -117,7 +111,7 @@ function hideContent()
 function checkLength()
 {
 	var searchTerm = document.getElementById("searchParam").value;
-	console.log(searchTerm + " :: " + searchTerm.length);
+	
 	if (searchTerm.length > 0)
 	{
 		document.getElementById("clearSearch").style.display = "block";
