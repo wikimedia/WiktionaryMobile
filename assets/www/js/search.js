@@ -6,7 +6,7 @@ function search()
 	
 		var searchParam = document.getElementById("searchParam").value;
 		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
-		requestUrl += "search=" + searchParam + "&";
+		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
 		requestUrl += "format=json";
 
 		var xmlhttp;
