@@ -73,7 +73,8 @@ function loadContent()
 {
 	if (hasNetworkConnection())
 	{
-		showProgressLoader("Loading", "Retrieving content from Wikipedia");
+		showProgressLoader(mw.message('spinner-loading').plain(),
+		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		document.getElementById("main").src = "http://en.m.wikipedia.org";
 	}
 	else
