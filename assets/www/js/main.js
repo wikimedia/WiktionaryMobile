@@ -5,6 +5,11 @@ function init()
 
 function onDeviceReady()
 {
+	// some reason the android browser is not recognizing the style=block when set in the CSS
+	// it only seems to recognize the style when dynamically set here or when set inline...
+	// the style needs to be explicitly set for logic used in the backButton handler
+	document.getElementById("content").style.display = "block";
+
     document.addEventListener("backbutton", onBackButton, false);
     document.addEventListener("searchbutton", onSearchButton, false);
     
@@ -13,11 +18,12 @@ function onDeviceReady()
 
 function onBackButton()
 {
-
 	if (document.getElementById("content").style.display == "block")
 	{
-		// TODO: doesn't seem to work - seems to throw repeating error in the log regarding null droiddb
-		navigator.app.overrideBackbutton(false); 
+		// this exits the app - not quite what we want...
+		navigator.app.exitApp();
+		// this is a phonegap 1.1.0 thing...
+		//navigator.app.backHistory();
 	}
 	
 	if (document.getElementById("bookmarks").style.display == "block" ||
@@ -54,6 +60,8 @@ function hideMobileLinks()
 
 function iframeOnLoaded()
 {
+
+
 	// scroll the page to the top after it loads
 	window.scroll(0,0);
 	hideMobileLinks();
@@ -92,7 +100,6 @@ function hideOverlayDivs()
 {
 	document.getElementById("bookmarks").style.display = "none";
 	document.getElementById("history").style.display = "none";
-	//document.getElementById("searchbar").style.display = "none";
 	document.getElementById("searchresults").style.display = "none";
 }
 

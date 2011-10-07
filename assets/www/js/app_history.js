@@ -28,14 +28,26 @@ function isHistoryMaxLimit(title, url)
 		this.keys(function(records) {
 			if (records.length > MAX_LIMIT)
 			{
-				// TODO: we've reached the max limit; we should probably just do a FIFO here.
-				console.log("MAX_LIMIT");
+				historyFIFO();	
 			}
 			else
-			{
+			{			
 				var historyDB = new Lawnchair({name:"historyDB"}, function() {
 					this.save({key: title, value: url});
 				});
+			}
+		});
+	});
+}
+
+function historyFIFO()
+{
+	var historyDB = new Lawnchair({name:"historyDB"}, function() {
+		this.each(function(record, index) {
+			if (index == 0)
+			{
+				// remove the first item, then add the latest item
+				this.remove(record.key, window.addToHistory);
 			}
 		});
 	});
@@ -50,8 +62,6 @@ function getHistory()
 			listHistory(record, index);
 		});
 	});
-
-
 
 	showHistory();
 }

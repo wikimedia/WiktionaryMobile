@@ -56,14 +56,10 @@ header
 	display:none;
 }
 
-.content
+#content
 {
-	display: block;
-	/*
 	position:absolute;
 	top:52px;
-	*/
-	width: 100%;
 }
 
 .listItemContainer
