@@ -104,14 +104,17 @@ header
 
 #search
 {
-	position:relative;
-	top:5px;
-	padding-left:8px;
+	position: absolute;
+	top: 16px;
+	right: 8px;
 }
 
 #searchParam
 {
-	width:230px;
+	position: absolute;
+	top: 12px;
+	left: 45px;
+	right: 45px;
 }
 
 #clearSearch
@@ -125,7 +128,9 @@ header
 
 .titlebarIcon
 {
-	margin-top:5px;
+	position: absolute;
+	top: 16px;
+	left: 8px;
 }
 
 #wHolder
