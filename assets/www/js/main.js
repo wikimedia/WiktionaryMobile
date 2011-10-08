@@ -54,8 +54,9 @@ function hideProgressLoader()
 
 function hideMobileLinks()
 {
-	document.getElementById("main").contentDocument.getElementById("header").style.display = "none";
-	document.getElementById("main").contentDocument.getElementById("footmenu").style.display = "none";
+	var frameDoc = document.getElementById("main").contentDocument;
+	frameDoc.getElementById("header").style.display = "none";
+	frameDoc.getElementById("footmenu").style.display = "none";
 }
 
 function iframeOnLoaded()
