@@ -54,8 +54,21 @@ function hideProgressLoader()
 
 function hideMobileLinks()
 {
-	document.getElementById("main").contentDocument.getElementById("header").style.display = "none";
-	document.getElementById("main").contentDocument.getElementById("footmenu").style.display = "none";
+	var frameDoc = document.getElementById("main").contentDocument;
+	frameDoc.getElementById("header").style.display = "none";
+	frameDoc.getElementById("footmenu").style.display = "none";
+	$('a.external, a.extiw', frameDoc).click(function(event) {
+		var target = $(this).attr('href');
+
+		// Stop the link from opening in the iframe...
+		event.preventDefault();
+
+		// And open it in parent context for reals.
+		//
+		// This seems to successfully launch the native browser, and works
+		// both with the stock browser and Firefox as user's default browser
+		document.location = target;
+	});
 }
 
 function iframeOnLoaded()
