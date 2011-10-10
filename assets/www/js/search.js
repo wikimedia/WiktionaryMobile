@@ -63,7 +63,7 @@ function displayResults(results)
 			{
 				var article = searchResults[i];
 				
-				if (article.toLowerCase() == document.getElementById("searchParam").value.toLowerCase())
+				if (article.toLowerCase() == $('#searchParam').val().toLowerCase())
 				{
 					goToResult(article);
 					return;
