@@ -2,9 +2,16 @@ function search()
 {
 	if (hasNetworkConnection())
 	{
-		showProgressLoader("Loading", "Retrieving content from Wikipedia");
-	
 		var searchParam = document.getElementById("searchParam").value;
+	
+		if (searchParam == '')
+		{
+			hideOverlayDivs();
+			return;
+		}
+		
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
+		
 		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
 		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
 		requestUrl += "format=json";
@@ -55,6 +62,13 @@ function displayResults(results)
 			for (var i=0;i<searchResults.length;i++)
 			{
 				var article = searchResults[i];
+				
+				if (article.toLowerCase() == $('#searchParam').val().toLowerCase())
+				{
+					goToResult(article);
+					return;
+				}
+				
 				formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
 				formattedResults += "<div class='listItem'>";
 				formattedResults += "<span class='iconSearchResult'><img src='image/iconListItem.png'/></span>";
