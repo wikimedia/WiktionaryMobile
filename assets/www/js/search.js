@@ -4,7 +4,7 @@ function search()
 	{
 		var searchParam = document.getElementById("searchParam").value;
 	
-		if ( searchParam == '' )
+		if (searchParam == '')
 		{
 			hideOverlayDivs();
 			return;
