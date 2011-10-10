@@ -62,6 +62,13 @@ function displayResults(results)
 			for (var i=0;i<searchResults.length;i++)
 			{
 				var article = searchResults[i];
+				
+				if (article.toLowerCase() == document.getElementById("searchParam").value.toLowerCase())
+				{
+					goToResult(article);
+					return;
+				}
+				
 				formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
 				formattedResults += "<div class='listItem'>";
 				formattedResults += "<span class='iconSearchResult'><img src='image/iconListItem.png'/></span>";
