@@ -2,9 +2,16 @@ function search()
 {
 	if (hasNetworkConnection())
 	{
-		showProgressLoader("Loading", "Retrieving content from Wikipedia");
-	
 		var searchParam = document.getElementById("searchParam").value;
+	
+		if ( searchParam == '' )
+		{
+			hideOverlayDivs();
+			return;
+		}
+		
+		showProgressLoader("Loading", "Retrieving content from Wikipedia");
+		
 		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
 		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
 		requestUrl += "format=json";
