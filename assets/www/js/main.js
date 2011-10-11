@@ -40,6 +40,8 @@ function onSearchButton()
 {
 	//hmmm...doesn't seem to set the cursor in the input field - maybe a browser bug???
 	document.getElementById("searchParam").focus();
+	
+	plugins.SoftKeyBoard.show();
 }
 
 function showProgressLoader(title, message)
