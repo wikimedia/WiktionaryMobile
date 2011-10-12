@@ -12,14 +12,7 @@ import org.json.JSONException;
 import com.phonegap.api.Plugin;
 import com.phonegap.api.PhonegapActivity;
 import com.phonegap.api.PluginResult;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Vibrator;
 
 /**
  * This class provides access to notifications on the device.
