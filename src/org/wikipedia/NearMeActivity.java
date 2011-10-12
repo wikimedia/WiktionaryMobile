@@ -23,27 +23,21 @@ import com.google.android.maps.OverlayItem;
 public class NearMeActivity extends MapActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.test);
-		
+		setContentView(R.layout.nearme);
 		MapView mapView = (MapView)findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
 		
 		final List<Overlay> mapOverlays = mapView.getOverlays();
-		Drawable drawable = this.getResources().getDrawable(R.drawable.pin);
-		WikiItemizedOverlay itemizedoverlay = new WikiItemizedOverlay(drawable, this);
 		final double[] gps = getGPS();
 		Log.d("NearMeActivity", "Latitude: "+gps[0]+" longitude: "+gps[1]);
-		GeoPoint point = new GeoPoint(49281314,-123099768); 
-		OverlayItem overlayitem = new OverlayItem(point, "Heya!", "I am in racoon city eh!");
-//		
-		itemizedoverlay.addOverlay(overlayitem);
-		mapOverlays.add(itemizedoverlay);
+		//GeoPoint point = new GeoPoint(49281314,-123099768);
 		
 		final ImageButton button = (ImageButton) findViewById(R.id.searchButton);
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ArrayList<GeoName> geonames = RestJsonClient.getWikipediaNearbyLocations(49.281314d, -123.099768d);
+				//ArrayList<GeoName> geonames = RestJsonClient.getWikipediaNearbyLocations(49.281314d, -123.099768d);
+				ArrayList<GeoName> geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1]);
 				Iterator<GeoName> it = geonames.iterator();
 				while(it.hasNext()) {
 					mapOverlays.add(createItemizedOverlay(it.next()));
