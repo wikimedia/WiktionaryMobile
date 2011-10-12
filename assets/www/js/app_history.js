@@ -115,7 +115,7 @@ function hideHistory()
 
 function showHistory()
 {	
-	disableOptionsMenu('bookmarks');
+	disableOptionsMenu();
 
 	hideOverlayDivs();
 	toggleDiv("history");

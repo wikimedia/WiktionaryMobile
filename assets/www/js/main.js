@@ -22,7 +22,8 @@ function onBackButton()
 	{
 		// this exits the app - not quite what we want...
 		navigator.app.exitApp();
-		// this is a phonegap 1.1.0 thing...
+		// this is a phonegap 1.1.0 thing -> we need to update menu-plugin to be compatible with phonegap 1.1.0 
+		//									 before using this
 		//navigator.app.backHistory();
 	}
 	
@@ -39,7 +40,9 @@ function onBackButton()
 function onSearchButton()
 {
 	//hmmm...doesn't seem to set the cursor in the input field - maybe a browser bug???
-	document.getElementById("searchParam").focus();
+	$('#searchParam').focus();
+	
+	plugins.SoftKeyBoard.show();
 }
 
 function showProgressLoader(title, message)
@@ -73,8 +76,6 @@ function hideMobileLinks()
 
 function iframeOnLoaded()
 {
-
-
 	// scroll the page to the top after it loads
 	window.scroll(0,0);
 	hideMobileLinks();
@@ -181,21 +182,26 @@ function hasNetworkConnection()
 	}
 }
 
-// disables menu options except for the label of the command passed in
-// TODO: adjust so that it can take multiple commands to leave enabled
-function disableOptionsMenu(enabledCommand)
+function disableOptionsMenu()
+{	
+	disableCommand('forward');
+	disableCommand('add bookmark');
+	
+	PGMenuElement.update();
+}
+
+function disableCommand(commandToDisable)
 {
 	var commands = document.getElementsByTagName("command");
 
 	for (var i=0;i<commands.length;i++)
 	{
-		if (commands[i].getAttribute('label').toLowerCase() != enabledCommand)
+		if (commands[i].getAttribute('label').toLowerCase() == commandToDisable)
 		{
 			commands[i].setAttribute('disabled', 'true');
+			return;
 		}
 	}
-	
-	PGMenuElement.update();
 }
 
 function enableOptionsMenu()

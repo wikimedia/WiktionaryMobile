@@ -20,6 +20,7 @@
     <plugin name="com.phonegap.menu.toolbar.command" value="com.phonegap.menu.AppMenuItem" />
     <plugin name="com.phonegap.menu.context"         value="com.phonegap.menu.AppMenu" />
     <plugin name="com.phonegap.menu.context.command" value="com.phonegap.menu.AppMenuItem" />
-	<plugin name="IndeterminateProgress" value="com.phonegap.progress.IndeterminateProgress" />
-	<plugin name="NearMePlugin" value="org.wikipedia.NearMePlugin" />
+    <plugin name="IndeterminateProgress" value="com.phonegap.progress.IndeterminateProgress" />
+    <plugin name="NearMePlugin" value="org.wikipedia.NearMePlugin" />
+    <plugin name="SoftKeyBoard" value="com.phonegap.softkeyboard.SoftKeyBoard" />
 </plugins>

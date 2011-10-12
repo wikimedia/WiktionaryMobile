@@ -80,7 +80,7 @@ function getBookmarks()
 
 function showBookmarks()
 {
-	disableOptionsMenu('history');
+	disableOptionsMenu();
 
 	hideOverlayDivs();
 	toggleDiv("bookmarks");
