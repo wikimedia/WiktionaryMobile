@@ -58,8 +58,12 @@ header
 
 #content
 {
-	position:absolute;
+	position:relative;
 	top:52px;
+}
+
+iframe#main {
+	width:100%;
 }
 
 .listItemContainer
