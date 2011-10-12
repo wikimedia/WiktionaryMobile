@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<RelativeLayout android:id="@+id/searchBarLayout"
+		android:layout_width="match_parent" android:background="#323232"
+		android:layout_height="wrap_content">
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:id="@+id/searchLabel"
+			android:text="Near" android:layout_centerVertical="true"
+			android:layout_margin="4dp"></TextView>
+		<EditText android:layout_toRightOf="@id/searchLabel"
+			android:id="@+id/searchText" android:hint="Current location"
+			android:layout_height="wrap_content" android:layout_width="220dp" android:singleLine="true">
+			<requestFocus></requestFocus>
+		</EditText>
+		<ImageButton android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/searchText" android:id="@+id/searchButton"
+			android:layout_width="wrap_content" android:layout_centerVertical="true"
+			android:background="#323232" android:src="@drawable/search"
+			android:layout_margin="4dp"></ImageButton>
+		<View android:layout_height="2dp" android:layout_width="2dp"
+			android:background="#FF000000" />
+		<ImageView android:id="@+id/imageView1" android:src="@drawable/locate"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:layout_toRightOf="@+id/searchButton"
+			android:layout_centerVertical="true" android:layout_margin="4dp"></ImageView>
+	</RelativeLayout>
+	<com.google.android.maps.MapView
+		xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mapview"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:clickable="true" android:apiKey="0DClJS8bvNt-9mF6gSGxC6_ZoBs5gRv32gAJ_KQ" />
+</LinearLayout>

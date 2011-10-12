@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, WikipediaActivity!</string>
     <string name="app_name">Wikipedia</string>
+    <string name="search_hint">Current location</string>
 </resources>

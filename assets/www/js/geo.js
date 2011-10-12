@@ -7,15 +7,16 @@ TODO:
 */
 function getCurrentPosition()
 {
-	if (hasNetworkConnection())
-	{
-		showProgressLoader("Loading", "Retrieving content from Wikipedia");
-		navigator.geolocation.getCurrentPosition(onGetPositionSuccess, onGetPositionError);
-	}
-	else
-	{
-		noConnectionMsg();
-	}
+  PhoneGap.exec(null, null, "NearMePlugin", "startNearMeActivity", []);
+//	if (hasNetworkConnection())
+//	{
+//		showProgressLoader("Loading", "Retrieving content from Wikipedia");
+//		navigator.geolocation.getCurrentPosition(onGetPositionSuccess, onGetPositionError);
+//	}
+//	else
+//	{
+//		noConnectionMsg();
+//	}
 }
 
 function onGetPositionSuccess(position)
