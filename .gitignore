@@ -2,3 +2,7 @@ default.properties
 local.properties
 bin/*
 gen/*
+
+/.settings
+/bin
+/gen
