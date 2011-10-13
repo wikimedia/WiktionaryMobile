@@ -18,7 +18,8 @@ function onDeviceReady()
 
 function onBackButton()
 {
-	if (document.getElementById("content").style.display == "block")
+	//if (document.getElementById("content").style.display == "block")
+	if ($('#content').css('display') == "block")
 	{
 		// this exits the app - not quite what we want...
 		navigator.app.exitApp();
@@ -27,9 +28,14 @@ function onBackButton()
 		//navigator.app.backHistory();
 	}
 	
+	/*
 	if (document.getElementById("bookmarks").style.display == "block" ||
 		document.getElementById("history").style.display == "block" ||
 		document.getElementById("searchresults").style.display == "block")
+	*/	
+	if ($('#bookmarks').css('display') == "block" ||
+		$('#history').css('display') == "block" ||
+		$('#searchresults').css('display') == "block")
 	{
 		enableOptionsMenu();
 		window.hideOverlayDivs();
@@ -89,7 +95,7 @@ function loadContent()
 	{
 		showProgressLoader(mw.message('spinner-loading').plain(),
 		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
-		document.getElementById("main").src = "http://en.m.wikipedia.org";
+		$('#main').attr('src', 'http://en.m.wikipedia.org');
 	}
 	else
 	{
@@ -97,57 +103,43 @@ function loadContent()
 	}
 }
 
-function toggleDiv(div)
-{
-	var display = document.getElementById(div).style.display;
-	
-	if (display == "block")
-	{
-		document.getElementById(div).style.display = "none";
-	}
-	else
-	{
-		document.getElementById(div).style.display = "block";
-	}
-}
-
 function hideOverlayDivs()
 {
-	document.getElementById("bookmarks").style.display = "none";
-	document.getElementById("history").style.display = "none";
-	document.getElementById("searchresults").style.display = "none";
+	$('#bookmarks').hide('fast');
+	$('#history').hide('fast');
+	$('#searchresults').hide('fast');
 }
 
 function showContent()
 {
-	document.getElementById("mainHeader").style.display = "block";
-	document.getElementById("content").style.display = "block";
+	$('#mainHeader').show('fast');
+	$('#content').show('fast');
 }
 
 function hideContent()
-{
-	document.getElementById("mainHeader").style.display = "none";
-	document.getElementById("content").style.display = "none";
+{	
+	$('#mainHeader').hide('fast');
+	$('#content').hide('fast');
 }
 
 function checkLength()
 {
-	var searchTerm = document.getElementById("searchParam").value;
+	var searchTerm = $('#searchParam').val();
 	
 	if (searchTerm.length > 0)
 	{
-		document.getElementById("clearSearch").style.display = "block";
+		$('#clearSearch').show();
 	}
 	else
 	{
-		document.getElementById("clearSearch").style.display = "none";
+		$('#clearSearch').hide();
 	}
 }
 
 function clearSearch()
 {
-	document.getElementById("searchParam").value = "";
-	document.getElementById("clearSearch").style.display = "none";
+	$('#searchParam').val('');
+	$('#clearSearch').hide();
 }
 
 function noConnectionMsg()

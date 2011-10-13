@@ -67,7 +67,8 @@ function addBookmark(title, url)
 
 function getBookmarks()
 {
-	document.getElementById("bookmarksList").innerHTML = "";
+	//document.getElementById("bookmarksList").innerHTML = "";
+	$('#bookmarksList').html('');
 
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.each(function(record, index) {	
@@ -83,7 +84,7 @@ function showBookmarks()
 	disableOptionsMenu();
 
 	hideOverlayDivs();
-	toggleDiv("bookmarks");
+	$('#bookmarks').toggle('fast');
 	hideContent();
 }
 
@@ -115,7 +116,7 @@ function onBookmarkItemClicked(url, index)
 	if (hasNetworkConnection())
 	{
 		showProgressLoader("Loading", "Retrieving content from Wikipedia");	
-		document.getElementById("main").src = url;
+		$('#main').attr('src', url);
 		hideOverlayDivs();
 		showContent();
 	}

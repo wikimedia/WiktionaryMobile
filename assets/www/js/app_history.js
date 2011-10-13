@@ -83,7 +83,7 @@ function onHistoryItemClicked(url)
 	if (hasNetworkConnection())
 	{
 		showProgressLoader("Loading", "Retrieving content from Wikipedia");
-		document.getElementById("main").src = url;
+		$('#main').attr('src', url);
 		hideOverlayDivs();
 		showContent();
 	}
@@ -118,6 +118,6 @@ function showHistory()
 	disableOptionsMenu();
 
 	hideOverlayDivs();
-	toggleDiv("history");
+	$('#history').toggle('fast');
 	hideContent();
 }
