@@ -21,8 +21,9 @@ function onBackButton()
 	if ($('#content').css('display') == "block")
 	{
 		console.log("we want to go back in browser history");
-		navigator.app.backHistory();
-		//navigator.app.overrideBackbutton(false);  
+		// hmm...using the PG-Android history api or the default window.history.back() seems to exit the app!
+		// window.history.back();
+		navigator.app.backHistory(); 
 	}
 
 	if ($('#bookmarks').css('display') == "block" ||
