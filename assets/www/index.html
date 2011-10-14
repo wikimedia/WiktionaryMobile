@@ -42,7 +42,7 @@
 		
 	<header id="mainHeader">
 		<div class="titlebar">
-			<div id="wHolder"><img src="image/w.png" class="titlebarIcon" onClick="loadContent();"/></div>
+			<div id="wHolder"><div class="titlebarIcon" onClick="loadContent();"></div></div>
 			<div id="searchFormHolder">
 				<form action="javascript:search();">
 					<input type="text" id="searchParam" onkeydown="setTimeout('javascript:checkLength()', 50);"></input>
@@ -57,7 +57,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem">Bookmarks</div>
-				<div class="titlebarItem" onclick="javascript:hideBookmarks();"><img src="image/close.png"/></div>
+				<div class="titlebarItem closeButton" onclick="javascript:hideBookmarks();"></div>
 			</div>
 		</header>
 		<div id="bookmarksList"></div>
@@ -67,7 +67,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem">History</div>
-				<div class="titlebarItem" onclick="javascript:hideHistory();"><img src="image/close.png"/></div>
+				<div class="titlebarItem closeButton" onclick="javascript:hideHistory();"></div>
 			</div>
 		</header>
 		<div id="historyList"></div>
