@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent" android:id="@+id/searchBarLayout" android:background="#323232" android:layout_height="wrap_content" android:minHeight="64dp">
+        <TextView android:text="Near" android:layout_height="wrap_content" android:layout_margin="4dp" android:id="@+id/searchLabel" android:layout_width="wrap_content" android:layout_centerVertical="true"></TextView>
+        <View android:background="#FF000000" android:id="@+id/view1" android:layout_width="2dp" android:layout_height="2dp"></View>
+        <ImageView android:layout_margin="4dp" android:src="@drawable/locate" android:layout_alignParentRight="true" android:id="@+id/imageView1" android:layout_width="wrap_content" android:layout_centerVertical="true" android:layout_height="wrap_content" android:minHeight="48dp" android:minWidth="24dp" android:paddingLeft="10dp" android:paddingRight="10dp"></ImageView>
+        <EditText android:hint="Current location" android:layout_height="wrap_content" android:id="@+id/searchText" android:singleLine="true" android:layout_width="wrap_content" android:layout_centerVertical="true" android:layout_toRightOf="@+id/searchLabel" android:layout_toLeftOf="@+id/searchButton"></EditText>
+        <ImageButton android:minHeight="48dp" android:layout_margin="2dp" android:src="@drawable/search" android:layout_width="wrap_content" android:background="#323232" android:id="@+id/searchButton" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_toLeftOf="@+id/imageView1"></ImageButton>
+    </RelativeLayout>
+	<com.google.android.maps.MapView
+		xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/mapview"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:clickable="true" android:apiKey="0DClJS8bvNt-9mF6gSGxC6_ZoBs5gRv32gAJ_KQ" />
+</LinearLayout>
