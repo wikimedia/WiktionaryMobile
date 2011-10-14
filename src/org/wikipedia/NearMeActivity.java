@@ -6,13 +6,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -21,39 +23,69 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 public class NearMeActivity extends MapActivity {
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.nearme);
-		MapView mapView = (MapView)findViewById(R.id.mapview);
-		mapView.setBuiltInZoomControls(true);
-		
-		final List<Overlay> mapOverlays = mapView.getOverlays();
-		final double[] gps = getGPS();
-		Log.d("NearMeActivity", "Latitude: "+gps[0]+" longitude: "+gps[1]);
-		//GeoPoint point = new GeoPoint(49281314,-123099768);
-		
-		final ImageButton button = (ImageButton) findViewById(R.id.searchButton);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//ArrayList<GeoName> geonames = RestJsonClient.getWikipediaNearbyLocations(49.281314d, -123.099768d);
-				ArrayList<GeoName> geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1]);
+	
+	private MapView mapView;
+	private ProgressDialog progressDialog;
+	private List<Overlay> mapOverlays;
+	
+	private class UpdateGeonames extends AsyncTask<Double, Void, Integer>{
+		protected Integer doInBackground(Double... gps) {
+			ArrayList<GeoName> geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1]);
+			if(geonames != null) {
 				Iterator<GeoName> it = geonames.iterator();
 				while(it.hasNext()) {
 					mapOverlays.add(createItemizedOverlay(it.next()));
 				}
+				Log.d("NearMeActivity", "Size "+geonames.size()+"Size Overlays "+mapOverlays.size());
+				return geonames.size();
 			}
-		});
-//		Intent intent = getIntent();
-//		if(Intent.ACTION_SEARCH.equals(intent.getAction())) {
-//			String query = intent.getStringExtra(SearchManager.QUERY);
-//			doMySearch(query);
-//		}
+			return 0;
+		}
+		protected void onPostExecute(Integer result) {
+			mapView.getController().zoomIn();
+//			progressDialog.hide();
+		}
 	}
 	
-//	private void doMySearch(String query) {
-//		
-//	}
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.nearme);
+		
+		mapView = (MapView)findViewById(R.id.mapview);
+		mapView.setBuiltInZoomControls(true);
+		
+		mapView.getController().setZoom(13);
+		
+		mapOverlays = mapView.getOverlays();
+		
+//		progressDialog = new ProgressDialog(this);
+//		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//		progressDialog.setTitle("Loading");
+//		progressDialog.setCancelable(false);
+//        progressDialog.setIndeterminate(true);
+//		progressDialog.setMessage("Searching nearby locations...");
+//		progressDialog.show();
+		
+		final double[] gps = getGPS();
+		Log.d("NearMeActivity", "Latitude: "+gps[0]+" longitude: "+gps[1]);
+		
+		GeoPoint location = new GeoPoint((int)(gps[0] * Math.pow(10, 6)), 
+				  (int)(gps[1] * Math.pow(10, 6)));
+		
+		mapView.getController().setCenter(location);
+		
+		new UpdateGeonames().execute(gps[0], gps[1]);
+		
+		Intent intent = getIntent();
+		if(Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			String query = intent.getStringExtra(SearchManager.QUERY);
+			doMySearch(query);
+		}
+	}
+	
+	private void doMySearch(String query) {
+		
+	}
 	
 	protected boolean isRouteDisplayed() {
 		return false;

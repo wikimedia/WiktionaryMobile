@@ -2,11 +2,9 @@ package org.wikipedia;
 
 public class GeoName {
 	
-	public GeoName(int elevation,
-			String wikipediaUrl, String title, int rank, String summary,
+	public GeoName(String wikipediaUrl, String title, String summary,
 			double latitude, double longitude) {
 		super();
-		this.elevation = elevation;
 		this.wikipediaUrl = wikipediaUrl;
 		this.title = title;
 		this.summary = summary;
@@ -14,10 +12,8 @@ public class GeoName {
 		this.longitude = longitude;
 	}
 
-	private int elevation;
 	private String wikipediaUrl;
 	private String title;
-	private int rank;
 	private String summary;
 	private double latitude;
 	private double longitude;
@@ -43,14 +39,6 @@ public class GeoName {
 		this.longitude = longitude;
 	}
 
-	public int getElevation() {
-		return elevation;
-	}
-
-	public void setElevation(int elevation) {
-		this.elevation = elevation;
-	}
-
 	public String getWikipediaUrl() {
 		return wikipediaUrl;
 	}
@@ -65,14 +53,6 @@ public class GeoName {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public int getRank() {
-		return rank;
-	}
-
-	public void setRank(int rank) {
-		this.rank = rank;
 	}
 
 	public String getSummary() {
