@@ -165,8 +165,12 @@ iframe#main {
 .titlebarIcon
 {
 	position: absolute;
-	top: 16px;
-	left: 8px;
+	top: 12px;
+	left: 6px;
+	background: url(image/spr.png) -99px -45px no-repeat;
+	background-size: 160px 160px;
+	height: 32px;
+	width: 34px;
 }
 
 #wHolder
@@ -199,6 +203,22 @@ iframe#main {
 .titlebarItem
 {
 	margin-top:12px;
+}
+
+.closeButton {
+	background: url(image/spr.png) -88px 14px no-repeat;
+	background-size: 160px 160px;
+	height: 54px;
+	margin-top: 0px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 50px;
+	border-left: 1px solid #777;
+}
+
+.closeButton:active {
+	background-color: #666;
 }
 
 .titlebar div 
