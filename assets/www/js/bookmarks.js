@@ -5,6 +5,7 @@ function clearBookmarks()
 
 function isBookmarksMaxLimit()
 {
+	console.log("isBookmarksMaxLimit");
 	var MAX_LIMIT = 50;
 
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
@@ -84,7 +85,7 @@ function showBookmarks()
 	disableOptionsMenu();
 
 	hideOverlayDivs();
-	$('#bookmarks').toggle('fast');
+	$('#bookmarks').toggle();
 	hideContent();
 }
 
@@ -115,7 +116,8 @@ function onBookmarkItemClicked(url, index)
 {
 	if (hasNetworkConnection())
 	{
-		showProgressLoader("Loading", "Retrieving content from Wikipedia");	
+		showProgressLoader(mw.message('spinner-loading').plain(),
+		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		$('#main').attr('src', url);
 		hideOverlayDivs();
 		showContent();

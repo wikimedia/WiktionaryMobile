@@ -48,7 +48,8 @@ var PhoneGap = {
         timer: null
     },
     documentEventHandler: {},   // Collection of custom document event handlers
-    windowEventHandler: {}      // Collection of custom window event handlers
+    windowEventHandler: {},      // Collection of custom window event handlers
+    platform: "android"
 };
 
 /**

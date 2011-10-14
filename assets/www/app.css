@@ -58,6 +58,7 @@ header
 
 #content
 {
+	display:block;
 	position:relative;
 	top:52px;
 }
@@ -125,7 +126,7 @@ iframe#main {
 {
 	position:fixed;
 	top:20px;
-	right:48px;
+	right:53px;
 	z-index:2;
 	display:none;
 }

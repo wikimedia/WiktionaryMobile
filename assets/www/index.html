@@ -14,16 +14,25 @@
 	  <script type="text/javascript" charset="utf-8" src="messages/messages-en.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
 
+	  <script type="text/javascript" charset="utf-8" src="js/phonegap-1.1.0.js"></script>
+	  
+	  <!-- phonegap plugins -->
+	  
+	  <!--
+	  <script type="text/javascript" charset="utf-8" src="plugin/menu/menu.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="plugin/menu/menu.android.js"></script>
+	  -->
+	  
+	  <script type="text/javascript" charset="utf-8" src="plugin/menu/index.js"></script>
+	  <script type="text/javascript" charset="utf-8" src="plugin/softkeyboard/softkeyboard.js"></script>
+	  
+	  <!-- app logic -->
 	  <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="js/bookmarks.js"></script>
 	  <script type="text/javascript" charset="utf-8" src="js/app_history.js"></script> 
 	  <script type="text/javascript" charset="utf-8" src="js/search.js"></script> 
 	  <script type="text/javascript" charset="utf-8" src="js/geo.js"></script> 
 	  <script type="text/javascript" charset="utf-8" src="js/settings.js"></script> 
-	  
-	  <script type="text/javascript" charset="utf-8" src="js/phonegap-1.0.0.js"></script>
-	  <script type="text/javascript" charset="utf-8" src="plugin/menu/index.js"></script>
-	  <script type="text/javascript" charset="utf-8" src="plugin/softkeyboard/softkeyboard.js"></script>
 	    
 	  <link rel="stylesheet" href="app.css" />  
 	  	  	   
@@ -78,13 +87,13 @@
 		</iframe>
 	</div> 	
 
-	<menu type="context">
-		<command label="Add Bookmark" icon="image/optionAddBookmark.png" disabled="false" action="isBookmarksMaxLimit();" />
-		<command label="Bookmarks" icon="image/optionViewBookmarks.png" disabled="false" action="getBookmarks();" />
-		<command label="History" icon="image/optionViewHistory.png" disabled="false" action="getHistory();" />
-		<command label="Forward" icon="image/optionForward.png" disabled="false" action="window.history.forward();" />
-		<command label="Nearby" icon="image/optionNearMe.png" disabled="false" action="getCurrentPosition();" />
-		<command label="Settings" icon="image/optionSettings.png" disabled="false" action="showSettings();" />
+	<menu id="appMenu" type="context">
+		<command type="command" id="addBookmarkCmd" label="Add Bookmark" icon="image/optionAddBookmark.png" disabled="false" action="isBookmarksMaxLimit();" />
+		<command type="command" id="bookmarksCmd" label="Bookmarks" icon="image/optionViewBookmarks.png" disabled="false" action="getBookmarks();" />
+		<command type="command" id="historyCmd" label="History" icon="image/optionViewHistory.png" disabled="false" action="getHistory();" />
+		<command type="command" id="forwardCmd" label="Forward" icon="image/optionForward.png" disabled="false" action="window.history.forward();" />
+		<command type="command" id="nearbyCmd" label="Nearby" icon="image/optionNearMe.png" disabled="false" action="getCurrentPosition();" />
+		<command type="command" id="settingsCmd" label="Settings" icon="image/optionSettings.png" disabled="false" action="showSettings();" />	
 	</menu>	
 		
   </body>

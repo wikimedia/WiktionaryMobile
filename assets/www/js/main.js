@@ -11,32 +11,25 @@ function onDeviceReady()
 	document.getElementById("content").style.display = "block";
 
     document.addEventListener("backbutton", onBackButton, false);
-    document.addEventListener("searchbutton", onSearchButton, false);
+    document.addEventListener("searchbutton", onSearchButton, false); 
     
 	loadContent();
 }
 
 function onBackButton()
 {
-	//if (document.getElementById("content").style.display == "block")
 	if ($('#content').css('display') == "block")
 	{
-		// this exits the app - not quite what we want...
-		navigator.app.exitApp();
-		// this is a phonegap 1.1.0 thing -> we need to update menu-plugin to be compatible with phonegap 1.1.0 
-		//									 before using this
-		//navigator.app.backHistory();
+		console.log("we want to go back in browser history");
+		navigator.app.backHistory();
+		//navigator.app.overrideBackbutton(false);  
 	}
-	
-	/*
-	if (document.getElementById("bookmarks").style.display == "block" ||
-		document.getElementById("history").style.display == "block" ||
-		document.getElementById("searchresults").style.display == "block")
-	*/	
+
 	if ($('#bookmarks').css('display') == "block" ||
 		$('#history').css('display') == "block" ||
 		$('#searchresults').css('display') == "block")
 	{
+		console.log("overlays back");
 		enableOptionsMenu();
 		window.hideOverlayDivs();
 		window.showContent();
@@ -105,21 +98,21 @@ function loadContent()
 
 function hideOverlayDivs()
 {
-	$('#bookmarks').hide('fast');
-	$('#history').hide('fast');
-	$('#searchresults').hide('fast');
+	$('#bookmarks').hide();
+	$('#history').hide();
+	$('#searchresults').hide();
 }
 
 function showContent()
 {
-	$('#mainHeader').show('fast');
-	$('#content').show('fast');
+	$('#mainHeader').show();
+	$('#content').show();
 }
 
 function hideContent()
 {	
-	$('#mainHeader').hide('fast');
-	$('#content').hide('fast');
+	$('#mainHeader').hide();
+	$('#content').hide();
 }
 
 function checkLength()
@@ -176,10 +169,12 @@ function hasNetworkConnection()
 
 function disableOptionsMenu()
 {	
+/*
 	disableCommand('forward');
 	disableCommand('add bookmark');
 	
 	PGMenuElement.update();
+	*/
 }
 
 function disableCommand(commandToDisable)
@@ -198,6 +193,7 @@ function disableCommand(commandToDisable)
 
 function enableOptionsMenu()
 {
+/*
 	var commands = document.getElementsByTagName("command");
 
 	for (var i=0;i<commands.length;i++)
@@ -206,4 +202,5 @@ function enableOptionsMenu()
 	}
 	
 	PGMenuElement.update();
+	*/
 }
