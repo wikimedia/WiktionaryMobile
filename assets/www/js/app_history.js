@@ -70,8 +70,8 @@ function listHistory(record, index)
 {
 	var markup = "<div class='listItemContainer' onclick=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">";
 	markup += "<div class='listItem'>";
-	markup += "<span class='iconHistory'><img src='image/iconListItem.png'/></span>";
-	markup += "<span>" + record.key + "</span>"
+	markup += "<span class='iconHistory'></span>";
+	markup += "<span class='text'>" + record.key + "</span>"
 	markup += "</div>";
 	markup += "</div>";
 	
