@@ -43,7 +43,7 @@ public class NearMeActivity extends MapActivity {
 		}
 		protected void onPostExecute(Integer result) {
 			mapView.getController().zoomIn();
-//			progressDialog.hide();
+			progressDialog.hide();
 		}
 	}
 	
@@ -58,13 +58,13 @@ public class NearMeActivity extends MapActivity {
 		
 		mapOverlays = mapView.getOverlays();
 		
-//		progressDialog = new ProgressDialog(this);
-//		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//		progressDialog.setTitle("Loading");
-//		progressDialog.setCancelable(false);
-//        progressDialog.setIndeterminate(true);
-//		progressDialog.setMessage("Searching nearby locations...");
-//		progressDialog.show();
+		progressDialog = new ProgressDialog(this);
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		progressDialog.setTitle("Loading");
+		progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
+		progressDialog.setMessage("Searching nearby locations...");
+		progressDialog.show();
 		
 		final double[] gps = getGPS();
 		Log.d("NearMeActivity", "Latitude: "+gps[0]+" longitude: "+gps[1]);
