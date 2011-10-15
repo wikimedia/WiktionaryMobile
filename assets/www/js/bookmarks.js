@@ -75,8 +75,9 @@ function getBookmarks()
 		this.each(function(record, index) {	
 			listBookmarks(record, index);
 		});
+		
+		
 	});
-	
 	showBookmarks();
 }
 
@@ -87,6 +88,8 @@ function showBookmarks()
 	hideOverlayDivs();
 	$('#bookmarks').toggle();
 	hideContent();
+	
+	setActiveState();	
 }
 
 function hideBookmarks()
@@ -100,16 +103,14 @@ function hideBookmarks()
 function listBookmarks(record, index)
 {
 	var markup = "<div class='listItemContainer'>";
-	markup += "<div class='listItem' onclick=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">";
+	markup += "<a class='listItem' onclick=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">";
 	markup += "<span class='iconBookmark'></span>";
 	markup += "<span class='text deleteEnabled'>" + record.key + "</span>";
-	markup += "</div>";
-	markup += "<div>";
-	markup += "<span class='deleteBookmark deleteButton'><a href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\"></a></span>";
-	markup += "</div>";
+	markup += "</a>";
+	markup += "<a class='deleteBookmark deleteButton' href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\"></a>";
 	markup += "</div>";
 	
-	document.getElementById("bookmarksList").innerHTML += markup;	
+	$('#bookmarksList').append(markup);	
 }
 
 function onBookmarkItemClicked(url, index)

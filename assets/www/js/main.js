@@ -14,6 +14,7 @@ function onDeviceReady()
     document.addEventListener("searchbutton", onSearchButton, false); 
     
 	loadContent();
+	setActiveState();
 }
 
 function onBackButton()
@@ -210,4 +211,36 @@ function enableOptionsMenu()
 	
 	PGMenuElement.update();
 	*/
+}
+
+function setActiveState() {
+	var applicableClasses = [
+		'.deleteButton',
+		'.listItem',
+		'#search',
+		'.closeButton'
+	];
+	
+	for (var key in applicableClasses) {
+		applicableClasses[key] += ':not(.activeEnabled)';
+	}
+	console.log(applicableClasses);
+	function onTouchEnd() {
+		$('.active').removeClass('active');
+		$('body').unbind('touchend', onTouchEnd);
+		$('body').unbind('touchmove', onTouchEnd);
+	}
+	
+	function onTouchStart() {		
+		$(this).addClass('active');
+		$('body').bind('touchend', onTouchEnd);
+		$('body').bind('touchmove', onTouchEnd);
+	}
+	
+	setTimeout(function() {
+		$(applicableClasses.join(',')).each(function(i) {
+			$(this).bind('touchstart', onTouchStart);
+			$(this).addClass('activeEnabled');
+		});
+	}, 500);
 }
