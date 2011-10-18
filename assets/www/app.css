@@ -77,13 +77,19 @@ iframe#main {
 	position: relative;
 }
 
-.listItem
-{
+.listItem {
 	padding-top:12px;
 	padding-bottom:12px;
 	height: 22px;
 	line-height: 22px;
+	width: 100%;
+	display: block;
 }
+
+.listItem.active, .deleteButton.active {
+	background-color: #aff6ff;
+}
+
 .iconSearchResult
 {
 	position:relative;
@@ -147,7 +153,7 @@ iframe#main {
 		
 }
 
-#search:active {
+#search.active {
 	background: url(image/spr.png) -43px 5px no-repeat, 
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
 }
@@ -245,7 +251,7 @@ iframe#main {
 	border-left: 1px solid #777;
 }
 
-.closeButton:active {
+.closeButton.active {
 	background-color: #666;
 }
 

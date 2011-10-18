@@ -68,8 +68,8 @@ function getHistory()
 
 function listHistory(record, index)
 {
-	var markup = "<div class='listItemContainer' onclick=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">";
-	markup += "<div class='listItem'>";
+	var markup = "<div class='listItemContainer'>";
+	markup += "<div class='listItem' onclick=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">";
 	markup += "<span class='iconHistory'></span>";
 	markup += "<span class='text'>" + record.key + "</span>"
 	markup += "</div>";
@@ -121,4 +121,5 @@ function showHistory()
 	hideOverlayDivs();
 	$('#history').toggle();
 	hideContent();
+	setActiveState();
 }
