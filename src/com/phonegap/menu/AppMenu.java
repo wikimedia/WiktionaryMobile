@@ -124,9 +124,10 @@ public class AppMenu extends Plugin {
 		menuItems.add(info);
 		menuChanged = true;
 		
-		if (android.os.Build.VERSION.RELEASE.startsWith("3.")) {
-			buildHoneycombMenu(ctx.dMenu);
-		}
+		// remove until we have time to get the menu plugin fully compatible with tablets
+		//if (android.os.Build.VERSION.RELEASE.startsWith("3.")) {
+		//	buildHoneycombMenu(ctx.dMenu);
+		//}
 	}
 	
 	/**
