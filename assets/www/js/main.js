@@ -1,10 +1,10 @@
-function init() 
-{
+var currentHistoryIndex = 0;
+
+function init() {
     document.addEventListener("deviceready", onDeviceReady, true);
 }
 
-function onDeviceReady()
-{
+function onDeviceReady() {
 	// some reason the android browser is not recognizing the style=block when set in the CSS
 	// it only seems to recognize the style when dynamically set here or when set inline...
 	// the style needs to be explicitly set for logic used in the backButton handler
@@ -22,17 +22,12 @@ function onDeviceReady()
 
 function onBackButton()
 {
-	if ($('#content').css('display') == "block")
-	{
+	if ($('#content').css('display') == "block") {
 		window.history.go(-1);
 	}
 
-	if ($('#bookmarks').css('display') == "block" ||
-		$('#history').css('display') == "block" ||
-		$('#searchresults').css('display') == "block")
-	{
+	if ($('#bookmarks').css('display') == "block" || $('#history').css('display') == "block" || $('#searchresults').css('display') == "block") {
 		console.log("overlays back");
-		enableOptionsMenu();
 		window.hideOverlayDivs();
 		window.showContent();
 	}
@@ -76,6 +71,7 @@ function iframeOnLoaded() {
 	hideMobileLinks();
 	addToHistory();
 	hideProgressLoader();
+	
 }
 
 function loadContent() {
@@ -124,6 +120,10 @@ function noConnectionMsg() {
 	alert("Please try again when you're connected to a network.");
 }
 
+function goForward() {
+    window.history.go(1);
+}
+
 function hasNetworkConnection() {
     var networkState = navigator.network.connection.type;
 	
@@ -145,38 +145,6 @@ function hasNetworkConnection() {
 	}else{
 		return true;
 	}
-}
-
-function disableOptionsMenu() {	
-/*
-	disableCommand('forward');
-	disableCommand('add bookmark');
-	
-	PGMenuElement.update();
-	*/
-}
-
-function disableCommand(commandToDisable) {
-	var commands = document.getElementsByTagName("command");
-
-	for (var i=0;i<commands.length;i++) {
-		if (commands[i].getAttribute('label').toLowerCase() == commandToDisable) {
-			commands[i].setAttribute('disabled', 'true');
-			return;
-		}
-	}
-}
-
-function enableOptionsMenu() {
-/*
-	var commands = document.getElementsByTagName("command");
-
-	for (var i=0;i<commands.length;i++) {
-		commands[i].setAttribute('disabled', 'false');
-	}
-	
-	PGMenuElement.update();
-	*/
 }
 
 function setActiveState() {

@@ -1,5 +1,4 @@
 function showSettings() {
-    disableOptionsMenu();
     hideOverlayDivs();
     hideContent();
     $('#settings').show();
@@ -7,7 +6,6 @@ function showSettings() {
 }
 
 function hideSettings() {
-    enableOptionsMenu();
     hideOverlayDivs();
     showContent();
 }

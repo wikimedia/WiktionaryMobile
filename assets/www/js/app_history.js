@@ -89,13 +89,11 @@ function purgeHistory() {
 }
 
 function hideHistory() {
-	enableOptionsMenu();
 	hideOverlayDivs();
 	showContent();
 }
 
 function showHistory() {	
-	disableOptionsMenu();
 	hideOverlayDivs();
 	$('#history').toggle();
 	hideContent();

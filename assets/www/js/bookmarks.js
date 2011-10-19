@@ -65,8 +65,6 @@ function getBookmarks() {
 }
 
 function showBookmarks() {
-	disableOptionsMenu();
-
 	hideOverlayDivs();
 	$('#bookmarks').toggle();
 	hideContent();
@@ -75,7 +73,6 @@ function showBookmarks() {
 }
 
 function hideBookmarks() {
-	enableOptionsMenu();
 	hideOverlayDivs();
 	showContent();
 }
