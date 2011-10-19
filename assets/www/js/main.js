@@ -29,7 +29,6 @@ function onBackButton()
 	}
 
 	if ($('#bookmarks').css('display') == "block" || $('#history').css('display') == "block" || $('#searchresults').css('display') == "block") {
-		console.log("overlays back");
 		window.hideOverlayDivs();
 		window.showContent();
 	}

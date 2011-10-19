@@ -43,11 +43,12 @@ function historyFIFO() {
 }
 
 function getHistory() {	
-	document.getElementById("historyList").innerHTML = "";
-	
+
+    $('#historyList').html('');
+    
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.each(function(record, index) {
-			listHistory(record, index);
+			$('#historyList').append(listHistory(record, index));
 		});
 	});
 
@@ -62,7 +63,7 @@ function listHistory(record, index) {
 	markup += "</div>";
 	markup += "</div>";
 	
-	document.getElementById("historyList").innerHTML += markup;	
+	return markup;
 }
 
 function onHistoryItemClicked(url) {
@@ -93,7 +94,7 @@ function hideHistory() {
 	showContent();
 }
 
-function showHistory() {	
+function showHistory() {
 	hideOverlayDivs();
 	$('#history').toggle();
 	hideContent();

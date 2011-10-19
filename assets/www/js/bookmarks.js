@@ -53,14 +53,15 @@ function addBookmark(title, url) {
 
 
 function getBookmarks() {
-	//document.getElementById("bookmarksList").innerHTML = "";
+
 	$('#bookmarksList').html('');
 
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.each(function(record, index) {	
-			listBookmarks(record, index);
+			$('#bookmarksList').append(listBookmarks(record, index));
 		});
 	});
+
 	showBookmarks();
 }
 
@@ -86,7 +87,8 @@ function listBookmarks(record, index) {
 	markup += "<a class='deleteBookmark deleteButton' href=\"javascript:deleteBookmarkPrompt(\'" + record.key + "\');\"></a>";
 	markup += "</div>";
 	
-	$('#bookmarksList').append(markup);	
+	return markup;
+	//$('#bookmarksList').append(markup);	
 }
 
 function onBookmarkItemClicked(url, index) {
