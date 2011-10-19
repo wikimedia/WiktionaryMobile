@@ -47,8 +47,8 @@ function displayResults(results) {
 				
 				formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
 				formattedResults += "<div class='listItem'>";
-				formattedResults += "<span class='iconSearchResult'><img src='image/iconListItem.png'/></span>";
-				formattedResults += "<span>" + article + "</span>";
+				formattedResults += "<span class='iconSearchResult'></span>";
+				formattedResults += "<span class='text'>" + article + "</span>";
 				formattedResults += "</div>";
 				formattedResults += "</div>";
 			}
