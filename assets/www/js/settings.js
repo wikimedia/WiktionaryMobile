@@ -1,4 +1,13 @@
-function showSettings()
-{
-    alert("need to stub in settings interface");                                          
+function showSettings() {
+    disableOptionsMenu();
+    hideOverlayDivs();
+    hideContent();
+    $('#settings').show();
+    setActiveState();                                   
+}
+
+function hideSettings() {
+    enableOptionsMenu();
+    hideOverlayDivs();
+    showContent();
 }

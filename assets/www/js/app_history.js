@@ -1,37 +1,28 @@
-function addToHistory()
-{	
+function addToHistory() {	
 	var title = document.getElementById("main").contentDocument.title;
 	var url = document.getElementById("main").contentWindow.location.href;
 	var index = title.indexOf(" - Wikipedia, the free encyclopedia");
 
-	if (index > 0)
-	{
+	if (index > 0) {
 		title = title.substring(0, index);
-	}
-	else
-	{
+	}else{
 		title = "Wikipedia, the free encyclopedia";
 	}
 	
-	if (url != "about:blank")
-	{
+	if (url != "about:blank"){
 		// let's add stuff to the history!
 		isHistoryMaxLimit(title, url);
 	}
 }
 
-function isHistoryMaxLimit(title, url)
-{
+function isHistoryMaxLimit(title, url) {
 	var MAX_LIMIT = 50;
 
 	var historyDB = new Lawnchair({name:"historyDB"},function() {
 		this.keys(function(records) {
-			if (records.length > MAX_LIMIT)
-			{
+			if (records.length > MAX_LIMIT) {
 				historyFIFO();	
-			}
-			else
-			{			
+			}else{			
 				var historyDB = new Lawnchair({name:"historyDB"}, function() {
 					this.save({key: title, value: url});
 				});
@@ -40,12 +31,10 @@ function isHistoryMaxLimit(title, url)
 	});
 }
 
-function historyFIFO()
-{
+function historyFIFO() {
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.each(function(record, index) {
-			if (index == 0)
-			{
+			if (index == 0) {
 				// remove the first item, then add the latest item
 				this.remove(record.key, window.addToHistory);
 			}
@@ -53,8 +42,7 @@ function historyFIFO()
 	});
 }
 
-function getHistory()
-{	
+function getHistory() {	
 	document.getElementById("historyList").innerHTML = "";
 	
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
@@ -66,8 +54,7 @@ function getHistory()
 	showHistory();
 }
 
-function listHistory(record, index)
-{
+function listHistory(record, index) {
 	var markup = "<div class='listItemContainer'>";
 	markup += "<div class='listItem' onclick=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">";
 	markup += "<span class='iconHistory'></span>";
@@ -78,27 +65,22 @@ function listHistory(record, index)
 	document.getElementById("historyList").innerHTML += markup;	
 }
 
-function onHistoryItemClicked(url)
-{
-	if (hasNetworkConnection())
-	{
+function onHistoryItemClicked(url) {
+	if (hasNetworkConnection()) {
 		showProgressLoader(mw.message('spinner-loading').plain(),
 		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		$('#main').attr('src', url);
 		hideOverlayDivs();
 		showContent();
-	}
-	else
-	{
+	}else{
 		noConnectionMsg();
 	}
 }
 
-function purgeHistory()
-{
+function purgeHistory() {
 	var answer = confirm("Remove all of your browsing history?")
 	
-	if (answer){
+	if (answer) {
 		var historyDB = new Lawnchair({name:"historyDB"}, function() { this.nuke() });
 	}
 	
@@ -106,18 +88,14 @@ function purgeHistory()
 	showContent();
 }
 
-function hideHistory()
-{
+function hideHistory() {
 	enableOptionsMenu();
-
 	hideOverlayDivs();
 	showContent();
 }
 
-function showHistory()
-{	
+function showHistory() {	
 	disableOptionsMenu();
-
 	hideOverlayDivs();
 	$('#history').toggle();
 	hideContent();

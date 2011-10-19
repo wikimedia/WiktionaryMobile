@@ -13,6 +13,9 @@ function onDeviceReady()
     document.addEventListener("backbutton", onBackButton, false);
     document.addEventListener("searchbutton", onSearchButton, false); 
     
+    // this has to be set for the window.history API to work properly
+    PhoneGap.UsePolling = true;
+    
 	loadContent();
 	setActiveState();
 }
@@ -21,16 +24,7 @@ function onBackButton()
 {
 	if ($('#content').css('display') == "block")
 	{
-		console.log("we want to go back in browser history");
-		// hmm...using the PG-Android APIs for:
-		// -navigator.app.overrideBackbutton(false); --> goes to blank screen and then exits app if pressed again...
-		// -navigator.app.backHistory(); --> exits the app instead of going back in the browser history...
-		// using the default browser history API
-		// -window.history.back(); --> exits the app instead of going back in the browser history...
-		
-		// window.history.back();
-		navigator.app.backHistory(); 
-		//navigator.app.overrideBackbutton(false);
+		window.history.go(-1);
 	}
 
 	if ($('#bookmarks').css('display') == "block" ||
@@ -44,26 +38,21 @@ function onBackButton()
 	}
 }
 
-function onSearchButton()
-{
+function onSearchButton() {
 	//hmmm...doesn't seem to set the cursor in the input field - maybe a browser bug???
 	$('#searchParam').focus();
-	
 	plugins.SoftKeyBoard.show();
 }
 
-function showProgressLoader(title, message)
-{
+function showProgressLoader(title, message) {
 	PhoneGap.exec(null, null, "IndeterminateProgress", "progressStart", [title, message]);
 }
 
-function hideProgressLoader()
-{
+function hideProgressLoader() {
 	PhoneGap.exec(null, null, "IndeterminateProgress", "progressStop", []);
 }
 
-function hideMobileLinks()
-{
+function hideMobileLinks() {
 	var frameDoc = document.getElementById("main").contentDocument;
 	frameDoc.getElementById("header").style.display = "none";
 	frameDoc.getElementById("footmenu").style.display = "none";
@@ -81,8 +70,7 @@ function hideMobileLinks()
 	});
 }
 
-function iframeOnLoaded()
-{
+function iframeOnLoaded() {
 	// scroll the page to the top after it loads
 	window.scroll(0,0);
 	hideMobileLinks();
@@ -90,66 +78,53 @@ function iframeOnLoaded()
 	hideProgressLoader();
 }
 
-function loadContent() 
-{
-	if (hasNetworkConnection())
-	{
+function loadContent() {
+	if (hasNetworkConnection()) {
 		showProgressLoader(mw.message('spinner-loading').plain(),
 		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		$('#main').attr('src', 'http://en.m.wikipedia.org');
-	}
-	else
-	{
+	}else{
 		noConnectionMsg();
 	}
 }
 
-function hideOverlayDivs()
-{
+function hideOverlayDivs() {
 	$('#bookmarks').hide();
 	$('#history').hide();
 	$('#searchresults').hide();
+	$('#settings').hide();
 }
 
-function showContent()
-{
+function showContent() {
 	$('#mainHeader').show();
 	$('#content').show();
 }
 
-function hideContent()
-{	
+function hideContent() {	
 	$('#mainHeader').hide();
 	$('#content').hide();
 }
 
-function checkLength()
-{
+function checkLength() {
 	var searchTerm = $('#searchParam').val();
 	
-	if (searchTerm.length > 0)
-	{
+	if (searchTerm.length > 0) {
 		$('#clearSearch').show();
-	}
-	else
-	{
+	}else{
 		$('#clearSearch').hide();
 	}
 }
 
-function clearSearch()
-{
+function clearSearch() {
 	$('#searchParam').val('');
 	$('#clearSearch').hide();
 }
 
-function noConnectionMsg()
-{
+function noConnectionMsg() {
 	alert("Please try again when you're connected to a network.");
 }
 
-function hasNetworkConnection() 
-{
+function hasNetworkConnection() {
     var networkState = navigator.network.connection.type;
 	
 	/*
@@ -165,18 +140,14 @@ function hasNetworkConnection()
 	//alert('Connection type: ' + states[networkState]);
 	*/
 	
-	if (networkState == Connection.NONE)
-	{
+	if (networkState == Connection.NONE) {
 		return false;
-	}
-	else
-	{
+	}else{
 		return true;
 	}
 }
 
-function disableOptionsMenu()
-{	
+function disableOptionsMenu() {	
 /*
 	disableCommand('forward');
 	disableCommand('add bookmark');
@@ -185,27 +156,22 @@ function disableOptionsMenu()
 	*/
 }
 
-function disableCommand(commandToDisable)
-{
+function disableCommand(commandToDisable) {
 	var commands = document.getElementsByTagName("command");
 
-	for (var i=0;i<commands.length;i++)
-	{
-		if (commands[i].getAttribute('label').toLowerCase() == commandToDisable)
-		{
+	for (var i=0;i<commands.length;i++) {
+		if (commands[i].getAttribute('label').toLowerCase() == commandToDisable) {
 			commands[i].setAttribute('disabled', 'true');
 			return;
 		}
 	}
 }
 
-function enableOptionsMenu()
-{
+function enableOptionsMenu() {
 /*
 	var commands = document.getElementsByTagName("command");
 
-	for (var i=0;i<commands.length;i++)
-	{
+	for (var i=0;i<commands.length;i++) {
 		commands[i].setAttribute('disabled', 'false');
 	}
 	

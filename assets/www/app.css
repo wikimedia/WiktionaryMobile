@@ -33,7 +33,7 @@ header
 	z-index:1;
 }   
 
-#bookmarks, #history
+#bookmarks, #history, #settings
 {
 	background-color:white;
 	width:100%;
@@ -41,7 +41,7 @@ header
 	display:none;
 }
 
-#bookmarksList, #historyList
+#bookmarksList, #historyList, #settingsList
 {
 	position:relative;
 	top:52px;
@@ -90,14 +90,7 @@ iframe#main {
 	background-color: #aff6ff;
 }
 
-.iconSearchResult
-{
-	position:relative;
-	top:3px;
-	padding-right: 5px;
-}
-
-.iconBookmark, .iconHistory
+.iconBookmark, .iconHistory, .iconSearchResult
 {
 	background: url(image/spr.png) -49px -100px no-repeat;
 	background-size: 160px 160px;
@@ -110,6 +103,10 @@ iframe#main {
 
 .iconHistory {
 	background-position: -102px -100px;
+}
+
+.iconSearchResult {
+	background-position: -100px -100px;
 }
 
 .listItem .text {
@@ -149,14 +146,24 @@ iframe#main {
 	height: 37px;
 	width: 40px;
 	border: 1px solid #333;
-	-webkit-border-radius: 0px 5px 5px 0px;
-		
+	-webkit-border-radius: 0px 5px 5px 0px;	
 }
 
 #search.active {
 	background: url(image/spr.png) -43px 5px no-repeat, 
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
 }
+
+#search.inProgress {
+	background: url(image/spr.png) -130px -131px no-repeat, 
+		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
+}
+
+#search.inProgress.active {
+	background: url(image/spr.png) -130px -131px no-repeat, 
+		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
+}
+
 
 #searchParam
 {
