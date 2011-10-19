@@ -23,6 +23,8 @@ function onDeviceReady() {
 function onBackButton()
 {
 	if ($('#content').css('display') == "block") {
+	   // decrement by 2 since the onLoad of the content in the iframe always increments
+	   currentHistoryIndex -= 2;
 		window.history.go(-1);
 	}
 
@@ -69,9 +71,10 @@ function iframeOnLoaded() {
 	// scroll the page to the top after it loads
 	window.scroll(0,0);
 	hideMobileLinks();
+	currentHistoryIndex += 1;
+	toggleForward();
 	addToHistory();
 	hideProgressLoader();
-	
 }
 
 function loadContent() {
@@ -120,8 +123,39 @@ function noConnectionMsg() {
 	alert("Please try again when you're connected to a network.");
 }
 
+function toggleForward() {
+    if (currentHistoryIndex < window.history.length) {
+        enableCommand('forward');
+    }else{
+        disableCommand('forward'); 
+    }
+    PGMenuElement.update();
+}
+
 function goForward() {
     window.history.go(1);
+}
+
+function disableCommand(commandToDisable) {
+    var commands = document.getElementsByTagName("command");
+
+    for (var i=0;i<commands.length;i++) {
+        if (commands[i].getAttribute('label').toLowerCase() == commandToDisable) {
+            commands[i].setAttribute('disabled', 'true');
+            return;
+        }
+    }
+}
+
+function enableCommand(commandToEnable) {
+    var commands = document.getElementsByTagName("command");
+
+    for (var i=0;i<commands.length;i++) {
+        if (commands[i].getAttribute('label').toLowerCase() == commandToEnable) {
+            commands[i].setAttribute('disabled', 'false');
+            return;
+        }
+    }
 }
 
 function hasNetworkConnection() {
