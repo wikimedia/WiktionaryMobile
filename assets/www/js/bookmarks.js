@@ -94,8 +94,10 @@ function listBookmarks(record, index) {
 
 function onBookmarkItemClicked(url, index) {
 	if (hasNetworkConnection()) {
-		showProgressLoader(mw.message('spinner-loading').plain(),
-		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+    $('#search').val('');
+    $('#search').addClass('inProgress');
+//		showProgressLoader(mw.message('spinner-loading').plain(),
+//		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		$('#main').attr('src', url);
 		hideOverlayDivs();
 		showContent();

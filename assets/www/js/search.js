@@ -1,4 +1,12 @@
 function search() {
+  if($('#search').hasClass('inProgress')) {
+    var d = $('#main')[0].contentWindow.document;
+    d.open();
+    $("body", d).append('');
+    d.close();
+    $('#search').removeClass('inProgress');
+    return;
+  }
 	if (hasNetworkConnection()) {
 		var searchParam = $('#searchParam').val();
 	
@@ -7,8 +15,9 @@ function search() {
 			return;
 		}
 		
-		showProgressLoader(mw.message('spinner-loading').plain(),
-		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+    $('#search').addClass('inProgress');
+//		showProgressLoader(mw.message('spinner-loading').plain(),
+//		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		                   
 		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
 		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
@@ -73,8 +82,9 @@ function displayResults(results) {
 
 function goToResult(article) {
 	if (hasNetworkConnection()) {
-		showProgressLoader(mw.message('spinner-loading').plain(),
-						   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+    $('#search').addClass('inProgress');
+//		showProgressLoader(mw.message('spinner-loading').plain(),
+//						   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		var url = "http://en.wikipedia.org/wiki/" + article;	
 		$('#main').attr('src', url);
 		hideOverlayDivs();

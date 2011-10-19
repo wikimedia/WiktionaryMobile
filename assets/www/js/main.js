@@ -75,13 +75,15 @@ function iframeOnLoaded() {
 	window.scroll(0,0);
 	hideMobileLinks();
 	addToHistory();
-	hideProgressLoader();
+  $('#search').removeClass('inProgress');
+	//hideProgressLoader();
 }
 
 function loadContent() {
 	if (hasNetworkConnection()) {
-		showProgressLoader(mw.message('spinner-loading').plain(),
-		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+//		showProgressLoader(mw.message('spinner-loading').plain(),
+//		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+    $('#search').addClass('inProgress');
 		$('#main').attr('src', 'http://en.m.wikipedia.org');
 	}else{
 		noConnectionMsg();
