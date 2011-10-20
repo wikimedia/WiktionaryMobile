@@ -70,7 +70,7 @@ function onHistoryItemClicked(url) {
 	if (hasNetworkConnection()) {
 //		showProgressLoader(mw.message('spinner-loading').plain(),
 //		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
-    $('#search').val('');
+    $('#searchParam').val('');
     $('#search').addClass('inProgress');
 		$('#main').attr('src', url);
 		hideOverlayDivs();
