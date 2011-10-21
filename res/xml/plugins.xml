@@ -17,7 +17,6 @@
     <plugin name="FileTransfer" value="com.phonegap.FileTransfer"/>
     <plugin name="Capture" value="com.phonegap.Capture"/>
     <plugin name="SimpleMenu" value="com.phonegap.menu.AppMenu"/> 
-    <plugin name="IndeterminateProgress" value="com.phonegap.progress.IndeterminateProgress" />
     <plugin name="NearMePlugin" value="org.wikipedia.NearMePlugin" />
     <plugin name="SoftKeyBoard" value="com.phonegap.softkeyboard.SoftKeyBoard" />
 </plugins>
