@@ -38,7 +38,7 @@ function displayResults(results) {
 	var formattedResults = "";
 	
 	if (results != null) {
-		results = eval(results);
+		results = JSON.parse(results);
 	
 		if (results.length > 0) {
 			var searchParam = results[0];

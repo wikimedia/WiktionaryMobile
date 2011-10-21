@@ -1,5 +1,6 @@
 function getSettings() {
     getLanguages();
+    //showSettings();
 }
 
 function showSettings() {
@@ -15,43 +16,32 @@ function hideSettings() {
 }
 
 function getLanguages() {
-    showProgressLoader(mw.message('spinner-loading').plain(),
-        mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+    //showProgressLoader(mw.message('spinner-loading').plain(),
+    //    mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+      
+    //$('#settings').addClass('inProgress');  
+             
+    console.log("get languages");          
                            
-    var requestUrl = "http://en.wikipedia.org/w/api.php?action=sitematrix&";
-    requestUrl += "format=json";
+    var requestUrl = "http://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
 
-    $.ajax({
-        type:'Get',
-        url:requestUrl,
-        success:function(data) {
-            displayLanguages(data);
-        }
-    });
+    $.ajax({type:'Get', url:requestUrl, success:function(data) {displayLanguages(data);}});
+
 }
 
 function displayLanguages(results) {
+
     var numberOfSites = -1;
     var markup = '';
     
-    /*
-    markup += '<header>';
-    markup += '<div class=\'titlebar\'>';
-    markup += '<div class=\'titlebarItem\'>Settings</div>';
-    markup += '<div class=\'titlebarItem closeButton\' onclick=\'javascript:hideSettings();\'></div>';
-    markup += '</div>';
-    markup += '</header>';
-    */
-    
-    markup += '<form><select id=\'localeSelector\'>';
-    
     if (results != null) {
-        results = eval(results);
+
+        results = JSON.parse(results);
+        
+        markup += "<form><select id='localeSelector'>";
 
         if (results.sitematrix) {       
-            for (var site in results.sitematrix) {
-                numberOfSites++;
-            }
+            numberOfSites = parseInt(results.sitematrix.count);
 
             for (var i=0;i<numberOfSites;i++) {
                 var locale = results.sitematrix[i.toString()];
@@ -62,19 +52,20 @@ function displayLanguages(results) {
                 
                     for (var j=0;j<len;j++) {
                         if (locale.site[j].code == "wiki") {
-                            markup += '<option value=\'' + locale.site[j].url + '\'>'  + locale.name + '</option>';
+                            markup += "<option value='" + locale.site[j].url + "'>"  + locale.name + "</option>";
                             break;
                         }
                     } 
                 }             
             }
- 
-            markup+="</select></form>";
-            $('#settings').html(markup);
-
         }
+
+        markup += "</select></form>";
+        $('#settings').html(markup);
     }
     
     showSettings();
-    hideProgressLoader();
+    //hideProgressLoader();
+    //$('#settings').removeClass('inProgress');
 }
+
