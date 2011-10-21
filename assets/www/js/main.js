@@ -142,12 +142,15 @@ function noConnectionMsg() {
 }
 
 function toggleForward() {
-    if (currentHistoryIndex < window.history.length) {
-        enableCommand('forward');
-    }else{
-        disableCommand('forward'); 
+    var success = function() {
+      if (currentHistoryIndex < window.history.length) {
+          enableCommand('forward');
+      }else{
+          disableCommand('forward'); 
+      }
     }
-    PGMenuElement.update();
+    // PGMenuElement.update();
+    window.plugins.SimpleMenu.loadMenu($('#appMenu')[0], success, function(error) {console.log(error);});
 }
 
 function goForward() {
