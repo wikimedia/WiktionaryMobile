@@ -48,8 +48,17 @@ public class NearMeActivity extends MapActivity {
 		}
 	}
 	
-	public GeoName getGeoName(int index) {
-		return geonames.get(index);
+	public GeoName getGeoName(String title) {
+		Iterator<GeoName> it = geonames.iterator();
+		while(it.hasNext()) {
+			GeoName geoname = it.next();
+			Log.d("NearMeActivity", "GeoName title "+geoname.getTitle() + " OverLay title " + title);
+			if(geoname.getTitle().compareTo(title) == 0) {
+				return geoname;
+			}
+		}
+		
+		return null;
 	}
 	
 	public void onCreate(Bundle savedInstanceState) {
