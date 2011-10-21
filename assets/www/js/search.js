@@ -1,9 +1,6 @@
 function search() {
   if($('#search').hasClass('inProgress')) {
-    var d = $('#main')[0].contentWindow.document;
-    d.open();
-    $("body", d).append('');
-    d.close();
+    window.frames[0].stop();
     $('#search').removeClass('inProgress');
     return;
   }
