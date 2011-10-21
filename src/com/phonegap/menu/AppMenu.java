@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -108,11 +109,12 @@ public class AppMenu extends Plugin {
 		}
 		try
 		{
-			info.disabled = mObject.getBoolean("enabled");
+			info.disabled = mObject.getBoolean("disabled");
 		}
 		//Catch the case when "enabled" is not defined
 		catch(JSONException e)
 		{
+			Log.d("AppMenuPlugin", "DISABLED");
 			info.disabled = false;
 		}
 		return info;		
@@ -152,6 +154,10 @@ public class AppMenu extends Plugin {
     		{
     			MenuItem currentItem = menu.getItem(itemId);
     			currentItem.setIcon(item.icon);
+    		}
+    		if(item.disabled == true) {
+    			MenuItem currentItem = menu.getItem(itemId);
+    			currentItem.setEnabled(false);
     		}
     	}
     	menuChanged = false;    	
