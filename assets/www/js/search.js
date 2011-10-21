@@ -16,8 +16,6 @@ function search() {
 		}
 		
     $('#search').addClass('inProgress');
-//		showProgressLoader(mw.message('spinner-loading').plain(),
-//		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		                   
 		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
 		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
@@ -77,14 +75,11 @@ function displayResults(results) {
 	$('#searchresults').show();
 	$('#content').hide();
 	
-	hideProgressLoader();
 }
 
 function goToResult(article) {
 	if (hasNetworkConnection()) {
     $('#search').addClass('inProgress');
-//		showProgressLoader(mw.message('spinner-loading').plain(),
-//						   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
 		var url = "http://en.wikipedia.org/wiki/" + article;	
 		$('#main').attr('src', url);
 		hideOverlayDivs();
