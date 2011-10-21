@@ -20,15 +20,15 @@ function onDeviceReady() {
 	setActiveState();
 }
 
-function onBackButton()
-{
+function onBackButton() {
 	if ($('#content').css('display') == "block") {
 	   // decrement by 2 since the onLoad of the content in the iframe always increments
 	   currentHistoryIndex -= 2;
 		window.history.go(-1);
 	}
 
-	if ($('#bookmarks').css('display') == "block" || $('#history').css('display') == "block" || $('#searchresults').css('display') == "block") {
+	if ($('#bookmarks').css('display') == "block" || $('#history').css('display') == "block" || 
+	    $('#searchresults').css('display') == "block" || $('#settings').css('display') == "block") {
 		window.hideOverlayDivs();
 		window.showContent();
 	}

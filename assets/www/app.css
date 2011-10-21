@@ -41,7 +41,7 @@ header
 	display:none;
 }
 
-#bookmarksList, #historyList, #settingsList
+#bookmarksList, #historyList /*, #settingsList*/
 {
 	position:relative;
 	top:52px;
@@ -122,8 +122,7 @@ iframe#main {
 	right: 58px;
 }
 
-.deleteButton
-{
+.deleteButton {
 	position:absolute;
 	background: url(image/spr.png) 9px -95px no-repeat;
 	background-size: 160px 160px;
@@ -164,9 +163,7 @@ iframe#main {
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
 }
 
-
-#searchParam
-{
+#searchParam {
 	position: absolute;
 	height: 29px;
 	left: 45px;
@@ -187,8 +184,7 @@ iframe#main {
 	border: 3px solid #f86600;
 }
 
-#clearSearch
-{
+#clearSearch {
 	position:fixed;
 	top:14px;
 	right:47px;
@@ -200,8 +196,7 @@ iframe#main {
 	width: 30px;
 }
 
-.titlebarIcon
-{
+.titlebarIcon {
 	position: absolute;
 	top: 12px;
 	left: 6px;
@@ -211,21 +206,18 @@ iframe#main {
 	width: 34px;
 }
 
-#wHolder
-{
+#wHolder {
 	display:inline-block;
 	margin-top:7px;"
 }
 
-#searchFormHolder
-{
+#searchFormHolder {
 	white-space:nowrap;
 	margin-left:5px;
 	margin-top:7px;"
 }
 
-.titlebar
-{
+.titlebar {
     display: -webkit-box;
     -webkit-box-orient: horizontal;
     background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
@@ -233,16 +225,14 @@ iframe#main {
     height: 42px;
 }
 
-.titlebar > div:first-child 
-{
+.titlebar > div:first-child {
     -webkit-box-flex: 1;
 	text-shadow: #222 1px 1px 1px;
 	font-size: 18px;
 	margin-left: 6px;
 }
 
-.titlebarItem
-{
+.titlebarItem {
 	margin-top:12px;
 }
 
@@ -262,8 +252,7 @@ iframe#main {
 	background-color: #666;
 }
 
-.titlebar div 
-{
+.titlebar div {
     /*
     border-left:1px solid #666;
     border-right:1px solid #000;
@@ -271,12 +260,10 @@ iframe#main {
     color:white;
 }
 /*
-.titlebar div:last-child 
-{
+.titlebar div:last-child {
     border-right:none;
 }
-.titlebar div:first-child 
-{
+.titlebar div:first-child {
     border-left:none;
 }
 */
