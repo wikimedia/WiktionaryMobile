@@ -30,7 +30,7 @@ public class NearMePlugin extends Plugin {
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		if(requestCode == GET_GEONAME_URL) {
+		if(requestCode == GET_GEONAME_URL && intent != null) {
 			if(resultCode == RESULT_OK) {
 				Log.d("NearMePlugin", intent.getExtras().getString("wikipediaUrl"));
 				this.success(new PluginResult(PluginResult.Status.OK, intent.getExtras().getString("wikipediaUrl")), callbackId);
