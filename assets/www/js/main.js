@@ -54,6 +54,7 @@ function hideMobileLinks() {
   // Internal links
   $('a[href^="/wiki/"]', frameDoc).click(function(e) {
     $('#search').addClass('inProgress');
+    currentHistoryIndex += 1;
   });
 
   // External links
@@ -71,15 +72,15 @@ function hideMobileLinks() {
   });
 }
 
-function iframeOnLoaded() {
-  // scroll the page to the top after it loads
-  window.scroll(0,0);
-  hideMobileLinks();
-  currentHistoryIndex += 1;
-  toggleForward();
-  addToHistory();
-  $('#search').removeClass('inProgress');
-  console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+history.length);
+function iframeOnLoaded(iframe) {
+  if(iframe.src) {
+    window.scroll(0,0);
+    hideMobileLinks();
+    toggleForward();
+    addToHistory();
+    $('#search').removeClass('inProgress');
+    console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+history.length);
+  }
 }
 
 function loadContent() 
@@ -89,6 +90,7 @@ function loadContent()
             success: function(data) {
               if(data) {
                 $('#main').attr('src', 'http://en.m.wikipedia.org');
+                currentHistoryIndex += 1;
               } else {
                 noConnectionMsg();
                 navigator.app.exitApp();
