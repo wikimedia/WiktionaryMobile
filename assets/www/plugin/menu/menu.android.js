@@ -12,7 +12,7 @@ var SimpleMenu = function()
     {
       var firstMenu = menus[0];
       menuPlugin.loadMenu(menus[0], function() {
-        console.log('this executed');
+        console.log('Menu loaded');
       },
       function()
       {

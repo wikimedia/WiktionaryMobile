@@ -68,8 +68,10 @@ function listHistory(record, index) {
 
 function onHistoryItemClicked(url) {
 	if (hasNetworkConnection()) {
-		showProgressLoader(mw.message('spinner-loading').plain(),
-		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+//		showProgressLoader(mw.message('spinner-loading').plain(),
+//		                   mw.message('spinner-retrieving', mw.message('sitename').plain()).plain());
+    $('#searchParam').val('');
+    $('#search').addClass('inProgress');
 		$('#main').attr('src', url);
 		hideOverlayDivs();
 		showContent();

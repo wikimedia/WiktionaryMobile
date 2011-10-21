@@ -1,5 +1,7 @@
 package com.phonegap.menu;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -7,176 +9,185 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.phonegap.api.Plugin;
 import com.phonegap.api.PluginResult;
 
+class MenuInfo
+{
+	public String label = "";
+	public Drawable icon;
+	public String callback;
+	public boolean disabled;
+}
+
 public class AppMenu extends Plugin {
-	public static AppMenu singleton;
-	private ArrayList <MenuInfo> menuItems;
-	private boolean menuChanged;
-	
-	/**
-	 * PhoneGap Exec
-	 *
-	 * Handle a incoming call from JavaScript.
-	 */
+
+	private Menu appMenu;
+	private ArrayList <MenuInfo> items;
+	private boolean menuChanged = false;
+		
 	@Override
 	public PluginResult execute(String action, JSONArray args, String callbackId) {
-		if(action.equals("create")) {
-			this.createMenu(args);
+		// TODO Auto-generated method stub
+		if(action.equals("create"))
+		{
+			return this.createMenu(args);
 		}
-		else if (action.equals("delete")) {
+		if(action.equals("update"))
+		{
+			return this.updateMenu(args);
+		}
+		else if(action.equals("refresh"))
+		{
+			return this.refresh(args);
+		}
+		else
+		{
 			return new PluginResult(PluginResult.Status.INVALID_ACTION);
 		}
-		else if (action.equals("label")) {
-			return new PluginResult(PluginResult.Status.INVALID_ACTION);
-		}
-		else {
-			return new PluginResult(PluginResult.Status.INVALID_ACTION);
-		}
+	}
+	
+	private PluginResult refresh(JSONArray args) {
+		// TODO Auto-generated method stub
+		this.menuChanged = true;
+		return new PluginResult(PluginResult.Status.OK);
+	}
+
+	private PluginResult createMenu(JSONArray args)	
+	{
+		PluginResult goodResult = updateMenu(args);
+		if(android.os.Build.VERSION.RELEASE.startsWith("3."))
+    	{
+    		appMenu = ctx.dMenu;
+    		buildHoneycombMenu(appMenu);
+    	}
+		//We should do something here if Honeycomb fails!
+		return goodResult;
+	}
+	
+	private PluginResult updateMenu(JSONArray args)
+	{
+		//Toss out all the items, and create a new list
+		items = new ArrayList<MenuInfo>();
 		
-		PluginResult r = new PluginResult(PluginResult.Status.OK);
-		return r;
+		try {
+			String menu = args.getString(0);
+			JSONArray menuArr = new JSONArray(menu);
+			for(int i = 0; i < menuArr.length(); ++i)
+			{
+				JSONObject mObject = menuArr.getJSONObject(i);
+				MenuInfo info = parseInfo(mObject);
+				items.add(info);
+			}
+			return new PluginResult(PluginResult.Status.OK);
+		} catch (JSONException e) {
+			//e.printStackTrace();			
+			return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
+		} 
 	}
 	
-	/**
-	 * Plugin onDestroy
-	 *
-	 * Detach static singleton when application is destroyed.
-	 */
-	@Override
-	public void onDestroy() {
-		AppMenu.singleton = null;
+	private MenuInfo parseInfo(JSONObject mObject) throws JSONException
+	{
+		MenuInfo info = new MenuInfo();
+		info.label = mObject.getString("label");
+		info.callback = mObject.getString("action");
+		if(mObject.has("icon"))
+		{
+			String tmp_uri = mObject.getString("icon");
+			//I don't expect this to work at all	
+			try {
+				info.icon = getIcon(tmp_uri);
+			} catch (IOException e) {
+				//DO NOTHING, we just don't have a file here!
+			}
+		}
+		try
+		{
+			info.disabled = mObject.getBoolean("disabled");
+		}
+		//Catch the case when "enabled" is not defined
+		catch(JSONException e)
+		{
+			Log.d("AppMenuPlugin", "DISABLED");
+			info.disabled = false;
+		}
+		return info;		
 	}
 	
-	/**
-	 * Menu Changed Check
-	 *
-	 * DroidGap checks if the menu must be re-rendered
-	 */
-	@Override
-	public boolean isMenuChanged() {
+	private Drawable getIcon(String tmp_uri) throws IOException {
+		AssetManager mgr = this.ctx.getAssets();
+		String fileName = "www/" + tmp_uri;
+		InputStream image = mgr.open(fileName);
+		Drawable icon = Drawable.createFromStream(image, tmp_uri);
+		return icon;
+	}
+	
+	public boolean isMenuChanged()
+	{
 		return menuChanged;
 	}
 	
-	/**
-	 * Render the menu.
-	 *
-	 * This is called when the menu is first created
-	 * and when the menu needs to be updated. Unfortunately,
-	 * DroidGap clears the menu before calling this function,
-	 * so the menu must be rendered from scratch.
-	 */
-	@Override
-	public boolean buildMenu(Menu menu) {
-		ListIterator<MenuInfo> iter = menuItems.listIterator();
-		
-		while (iter.hasNext()) {
-			MenuInfo item = iter.next();
-						
-			menu.add(Menu.NONE, item.getId(), Menu.NONE, item.getLabel());
-			item.setMenuItem(menu.getItem(menu.size() - 1));
-			item.updateAll();
-		}
-		
-		menuChanged = false;
-		
-		return true;
-	}
-	
-	/**
-	 * Menu Item Selected
-	 *
-	 * Called when a given menu item has been selected.
-	 */
-	public boolean onMenuItemSelected(MenuItem item) {
-		webView.loadUrl("javascript:window.PGMenuElement.actions['" + item.getItemId() + "']();");
-		return true;
-	}
-	
-	/**
-	 * Create the Android Menu.
-	 */
-	private void createMenu(JSONArray args) {
-		if (AppMenu.singleton == null) {
-			AppMenu.singleton = this;
-		}
-		
-		if (menuItems == null) {
-			menuItems = new ArrayList<MenuInfo>();
-		}
-	}
-	
-	/**
-	 * Add Item to Menu
-	 *
-	 * Inserts a menu item into the menu. It does not alter
-	 * the menu item.
-	 */
-	public void addMenuItem(MenuInfo info) {
-		if (menuItems == null) {
-			menuItems = new ArrayList<MenuInfo>();
-		}
-		
-		menuItems.add(info);
-		menuChanged = true;
-		
-		// remove until we have time to get the menu plugin fully compatible with tablets
-		//if (android.os.Build.VERSION.RELEASE.startsWith("3.")) {
-		//	buildHoneycombMenu(ctx.dMenu);
-		//}
-	}
-	
-	/**
-	 * Remove Item from Menu
-	 *
-	 * Removes a referenced item from the menu.
-	 */
-	public void removeMenuItem(MenuInfo menuItem) {
-		int index = menuItems.indexOf(menuItem);
-		menuItems.remove(index);
-		menuChanged = true;
-	}
-	
-	/**
-	 * Get Menu Item
-	 *
-	 * Retrieves a menu item based on the ID.
-	 */
-	public MenuInfo getMenuItem(int id) {
-		MenuInfo menuItem = null;
-		ListIterator<MenuInfo> iter = menuItems.listIterator();
-		
-		while (iter.hasNext()) {
-			MenuInfo tmpMenuItem = iter.next();
-			
-			if (tmpMenuItem.getId() == id) {
-				menuItem = tmpMenuItem;
-				break;
-			}
-		}
-		
-		return menuItem;
-	}
-	
-	/**
-	 * Honeycomb Menu Support
-	 */
-	public boolean buildHoneycombMenu(final Menu menu) {
-		final AppMenu that = this;
-		
-		ctx.runOnUiThread(new Runnable() {
+    /**
+     * Call to build the menu
+     * 
+     * @param menu
+     * @return
+     */
+    public boolean buildMenu(Menu menu)
+    {
+    	appMenu = menu;
+    	if(appMenu.size() > 0)
+    		appMenu.clear();
+    	ListIterator<MenuInfo> iter = items.listIterator();    	
+    	while(iter.hasNext())
+    	{
+    		int itemId = iter.nextIndex();
+    		MenuInfo item = iter.next();
+    		appMenu.add(Menu.NONE, itemId, Menu.NONE, item.label);
+    		if(item.icon != null)
+    		{
+    			MenuItem currentItem = menu.getItem(itemId);
+    			currentItem.setIcon(item.icon);
+    		}
+    		if(item.disabled == true) {
+    			MenuItem currentItem = menu.getItem(itemId);
+    			currentItem.setEnabled(false);
+    		}
+    	}
+    	menuChanged = false;    	
+    	return true;
+    }
+    
+    public boolean buildHoneycombMenu(final Menu menu)
+    {
+    	final AppMenu that = this;
+    	ctx.runOnUiThread(new Runnable()
+    	{
 			public void run() {
 				menu.clear();
 				that.buildMenu(menu);
 			}
-		});
-		
-		menuChanged = false;
-		
-		return true;
-	}
+    	});
+    	return true;
+    }
+    
+    /**
+     * Call your receive when menuItem is selected.
+     * 
+     * @param item
+     * @return
+     */
+    public boolean onMenuItemSelected(MenuItem item)
+    {    
+    	//This is where everything tends to fall down, we should instead something else
+    	webView.loadUrl("javascript:window.plugins.SimpleMenu.fireCallback(" + item.getItemId() + ")");
+    	return true;
+    }
+
 }

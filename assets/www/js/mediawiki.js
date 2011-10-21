@@ -3,6 +3,10 @@
  * Stripped down to just Map, Message, log, message, msg
  */
 
+$.makeArray = function(args) {
+  return Array.prototype.slice.call(args, 0);
+}
+
 // Attach to window and globally alias
 window.mw = window.mediaWiki = new ( function( $ ) {
 
@@ -76,7 +80,8 @@ window.mw = window.mediaWiki = new ( function( $ ) {
 		 * @return bool This returns true on success, false on failure.
 		 */
 		set: function( selection, value ) {
-			if ( $.isPlainObject( selection ) ) {
+      // XXX 10/14/2011 MODIFIED to fit zepto
+			if ( $.isObject( selection ) ) {
 				for ( var s in selection ) {
 					this.values[s] = selection[s];
 				}
@@ -289,4 +294,4 @@ window.mw = window.mediaWiki = new ( function( $ ) {
 		return mw.message.apply( mw.message, arguments ).toString();
 	};
 
-} )( jQuery );
+} )( Zepto );
