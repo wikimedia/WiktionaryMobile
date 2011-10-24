@@ -18,5 +18,6 @@
     <plugin name="Capture" value="com.phonegap.Capture"/>
     <plugin name="SimpleMenu" value="com.phonegap.menu.AppMenu"/> 
     <plugin name="NearMePlugin" value="org.wikipedia.NearMePlugin" />
+    <plugin name="SelectTextPlugin" value="org.wikipedia.SelectTextPlugin" />
     <plugin name="SoftKeyBoard" value="com.phonegap.softkeyboard.SoftKeyBoard" />
 </plugins>

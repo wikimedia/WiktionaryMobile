@@ -180,6 +180,10 @@ function goForward() {
     window.history.go(1);
 }
 
+function selectText() {
+    PhoneGap.exec(null, null, 'SelectTextPlugin', 'selectText', []);
+}
+
 function hasNetworkConnection() 
 {
     return navigator.network.connection.type == Connection.NONE ? false : true;
