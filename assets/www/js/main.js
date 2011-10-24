@@ -98,7 +98,7 @@ function loadContent() {
                 (config.value.url) ? currentLocale.url = config.value.url : currentLocale.url = defaultLocale.url;
                 (config.value.languageCode) ? currentLocale.languageCode = config.value.languageCode : currentLocale.languageCode = defaultLocale.languageCode;
             }else{
-                currentLocale.url = defaultLocale.languageCode;
+                currentLocale.url = defaultLocale.url;
                 currentLocale.languageCode = defaultLocale.languageCode;
             }
             
