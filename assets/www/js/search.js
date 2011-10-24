@@ -1,9 +1,6 @@
 function search() {
   if($('#search').hasClass('inProgress')) {
-    var d = $('#main')[0].contentWindow.document;
-    d.open();
-    $("body", d).append('');
-    d.close();
+    window.frames[0].stop();
     $('#search').removeClass('inProgress');
     return;
   }
@@ -93,4 +90,14 @@ function goToResult(article) {
 function hideSearchResults() {
 	hideOverlayDivs();
 	showContent();
+}
+
+function showSpinner() {
+	$('.titlebar .spinner').css({display:'block'});
+	$('#clearSearch').css({height:0});
+}
+
+function hideSpinner() {
+	$('.titlebar .spinner').css({display:'none'});	
+	$('#clearSearch').css({height:30});
 }

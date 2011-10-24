@@ -186,7 +186,7 @@ iframe#main {
 
 #clearSearch {
 	position:fixed;
-	top:14px;
+	top:12px;
 	right:47px;
 	z-index:2;
 	display:none;
@@ -194,6 +194,17 @@ iframe#main {
 	background-size: 160px 160px;
 	height: 30px;
 	width: 30px;
+}
+
+.spinner {
+	background: url(image/spinner.gif) no-repeat;
+	width:24px;
+	height: 24px;
+	position: absolute;
+	top: 15px;
+	right: 52px;
+	z-index: 3;
+	display: none;
 }
 
 .titlebarIcon {
