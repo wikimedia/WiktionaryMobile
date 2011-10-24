@@ -1,10 +1,15 @@
 var currentHistoryIndex = 0;
+var currentLocale = new Object();
+// set some defaults for the currentLocale
+currentLocale.languageCode = "en";
+currentLocale.url = "http://en.m.wikipedia.org";
 
 function init() {
     document.addEventListener("deviceready", onDeviceReady, true);
 }
 
 function onDeviceReady() {
+
   // some reason the android browser is not recognizing the style=block when set in the CSS
   // it only seems to recognize the style when dynamically set here or when set inline...
   // the style needs to be explicitly set for logic used in the backButton handler
@@ -21,23 +26,23 @@ function onDeviceReady() {
 }
 
 function onBackButton() {
-  console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+history.length);
+    console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+history.length);
 
-  if ($('#content').css('display') == "block") {
-    currentHistoryIndex -= 1;
-    $('#search').addClass('inProgress');
-    window.history.go(-1);
-    if(currentHistoryIndex <= 0) {
-      console.log("no more history to browse exiting...");
-      navigator.app.exitApp();
+    if ($('#content').css('display') == "block") {
+        currentHistoryIndex -= 1;
+        $('#search').addClass('inProgress');
+        window.history.go(-1);
+        if(currentHistoryIndex <= 0) {
+            console.log("no more history to browse exiting...");
+            navigator.app.exitApp();
+        }
     }
-  }
 
     if ($('#bookmarks').css('display') == "block" || $('#history').css('display') == "block" || 
         $('#searchresults').css('display') == "block" || $('#settings').css('display') == "block") {
-    window.hideOverlayDivs();
-    window.showContent();
-  }
+        window.hideOverlayDivs();
+        window.showContent();
+    }
 }
 
 function onSearchButton() {
@@ -83,13 +88,32 @@ function iframeOnLoaded(iframe) {
   }
 }
 
-function loadContent() 
-{
+function loadContent() {
+    // retrieve locale settings from LocalStorage - if it doesn't exist use the defaults!
+    var settingsDB = new Lawnchair({name:"settingsDB"}, function() {
+        this.get("locale", function(config) {
+        
+            if (config) {
+                (config.value.url) ? currentLocale.url = config.value.url : currentLocale.url = "http://en.m.wikipedia.org";
+                (config.value.languageCode) ? currentLocale.languageCode = config.value.languageCode : currentLocale.languageCode = "en";
+            }else{
+                currentLocale.url = "http://en.m.wikipedia.org";
+                currentLocale.languageCode = "en";
+            }
+            
+            window.loadWikiContent();
+        });
+    });
+}
+
+function loadWikiContent() {
+
     $('#search').addClass('inProgress');
-    $.ajax({url: "http://en.m.wikipedia.org",
+    $.ajax({url: currentLocale.url,
             success: function(data) {
               if(data) {
-                $('#main').attr('src', 'http://en.m.wikipedia.org');
+                //$('#main').attr('src', 'http://en.m.wikipedia.org');
+                $('#main').attr('src', currentLocale.url);
                 currentHistoryIndex += 1;
               } else {
                 noConnectionMsg();

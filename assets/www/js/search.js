@@ -17,7 +17,8 @@ function search() {
 		
     $('#search').addClass('inProgress');
 		                   
-		var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
+		//var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
+		var requestUrl = currentLocale.url + "/w/api.php?action=opensearch&";
 		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
 		requestUrl += "format=json";
 
