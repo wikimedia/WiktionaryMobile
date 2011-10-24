@@ -76,8 +76,8 @@ function displayResults(results) {
 
 function goToResult(article) {
 	if (hasNetworkConnection()) {
-    $('#search').addClass('inProgress');
-		var url = "http://en.wikipedia.org/wiki/" + article;	
+        $('#search').addClass('inProgress');
+		var url = currentLocale.url + "/wiki/" + article;	
 		$('#main').attr('src', url);
 		hideOverlayDivs();
 		showContent();
