@@ -90,3 +90,13 @@ function hideSearchResults() {
 	hideOverlayDivs();
 	showContent();
 }
+
+function showSpinner() {
+	$('.titlebar .spinner').css({display:'block'});
+	$('#clearSearch').css({height:0});
+}
+
+function hideSpinner() {
+	$('.titlebar .spinner').css({display:'none'});	
+	$('#clearSearch').css({height:30});
+}
