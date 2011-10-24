@@ -1,9 +1,9 @@
 function search() {
-  if($('#search').hasClass('inProgress')) {
-    window.frames[0].stop();
-    $('#search').removeClass('inProgress');
-    return;
-  }
+    if($('#search').hasClass('inProgress')) {
+        window.frames[0].stop();
+        $('#search').removeClass('inProgress');
+        return;
+    }
 	if (hasNetworkConnection()) {
 		var searchParam = $('#searchParam').val();
 	
@@ -12,9 +12,8 @@ function search() {
 			return;
 		}
 		
-    $('#search').addClass('inProgress');
-		                   
-		//var requestUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&";
+        $('#search').addClass('inProgress');
+
 		var requestUrl = currentLocale.url + "/w/api.php?action=opensearch&";
 		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
 		requestUrl += "format=json";
