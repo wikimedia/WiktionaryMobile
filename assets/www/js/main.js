@@ -1,8 +1,9 @@
 var currentHistoryIndex = 0;
 var currentLocale = new Object();
-// set some defaults for the currentLocale
-currentLocale.languageCode = "en";
-currentLocale.url = "http://en.m.wikipedia.org";
+var defaultLocale = new Object();
+// default locale info
+defaultLocale.languageCode = navigator.language.toLowerCase();
+defaultLocale.url = "http://" + defaultLocale.languageCode + ".m.wikipedia.org";
 
 function init() {
     document.addEventListener("deviceready", onDeviceReady, true);
@@ -94,11 +95,11 @@ function loadContent() {
         this.get("locale", function(config) {
         
             if (config) {
-                (config.value.url) ? currentLocale.url = config.value.url : currentLocale.url = "http://en.m.wikipedia.org";
-                (config.value.languageCode) ? currentLocale.languageCode = config.value.languageCode : currentLocale.languageCode = "en";
+                (config.value.url) ? currentLocale.url = config.value.url : currentLocale.url = defaultLocale.url;
+                (config.value.languageCode) ? currentLocale.languageCode = config.value.languageCode : currentLocale.languageCode = defaultLocale.languageCode;
             }else{
-                currentLocale.url = "http://en.m.wikipedia.org";
-                currentLocale.languageCode = "en";
+                currentLocale.url = defaultLocale.languageCode;
+                currentLocale.languageCode = defaultLocale.languageCode;
             }
             
             window.loadWikiContent();

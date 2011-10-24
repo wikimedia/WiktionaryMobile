@@ -36,7 +36,7 @@ function displayLanguages(results) {
 
     var numberOfSites = -1;
     var markup = '';
-    markup += "<form><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex]);'>";
+    markup += "<form><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
     
     if (results != null) {
         results = JSON.parse(results);
@@ -48,7 +48,7 @@ function displayLanguages(results) {
                     var len = parseInt(JSON.stringify(locale.site.length));
                     for (var j=0;j<len;j++) {
                         if (locale.site[j].code == "wiki") {
-                            markup += "<option value='" + locale.code + "|" + locale.site[j].url + "'>"  + locale.name + "</option>";
+                            markup += "<option value='" + locale.code + "'>"  + locale.name + "</option>";
                             break;
                         }
                     } 
@@ -65,19 +65,13 @@ function displayLanguages(results) {
     //$('#settings').removeClass('inProgress');
 }
 
-function onLocaleChanged(selectedItem) {
-    alert(selectedItem.value);
+function onLocaleChanged(selectedValue) {
     
-    var locale = selectedItem.value.split("|");
-    
-    if (locale.length > 0) {
-        currentLocale.languageCode = locale[0];
-        currentLocale.url = locale[1];
-        
-        // save / update currentLocale in LocalStorage
-        var settingsDB = new Lawnchair({name:"settingsDB"}, function() {
-            this.save({key: "locale", value: currentLocale});
-        });
-    }
-    
+    currentLocale.languageCode = selectedValue;
+    currentLocale.url = "http://" + selectedValue + ".m.wikipedia.org";
+      
+    // save / update currentLocale in LocalStorage
+    var settingsDB = new Lawnchair({name:"settingsDB"}, function() {
+        this.save({key: "locale", value: currentLocale});
+    });
 }
