@@ -20,4 +20,5 @@
     <plugin name="NearMePlugin" value="org.wikipedia.NearMePlugin" />
     <plugin name="SelectTextPlugin" value="org.wikipedia.SelectTextPlugin" />
     <plugin name="SoftKeyBoard" value="com.phonegap.softkeyboard.SoftKeyBoard" />
+    <plugin name="ToastPlugin" value="com.chariotsolutions.toast.plugin.ToastPlugin" />
 </plugins>

@@ -197,6 +197,13 @@ function selectText() {
     PhoneGap.exec(null, null, 'SelectTextPlugin', 'selectText', []);
 }
 
+function lightweightNotification(text) {
+	// Using PhoneGap-Toast plugin for Android's lightweight "Toast" style notifications.
+	// https://github.com/m00sey/PhoneGap-Toast
+	// http://developer.android.com/guide/topics/ui/notifiers/toasts.html
+	window.plugins.ToastPlugin.show_short(text);
+}
+
 function hasNetworkConnection() 
 {
     return navigator.network.connection.type == Connection.NONE ? false : true;
