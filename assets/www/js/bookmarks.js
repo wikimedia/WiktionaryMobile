@@ -11,7 +11,8 @@ function isBookmarksMaxLimit() {
 			if (records != null) {
 				if (records.length > MAX_LIMIT) {
 					// we've reached the max limit
-					alert("You've reached the maximum number of bookmarks.");
+					// @todo this is probably not great, remove this :)
+					alert(mw.message("bookmarks-max-warning").plain());
 				}else{
 					addBookmarkPrompt();
 				}
@@ -23,26 +24,25 @@ function isBookmarksMaxLimit() {
 function addBookmarkPrompt() {
 	var titleToBookmark = document.getElementById("main").contentDocument.title;
 	var urlToBookmark = document.getElementById("main").contentWindow.location.href;
-	var index = titleToBookmark.indexOf(" - Wikipedia, the free encyclopedia");
+	var index = titleToBookmark.indexOf(" - Wikipedia, the free encyclopedia"); // @fixme -- horribly wrong!
 
 	if (index > 0) {
 		titleToBookmark = titleToBookmark.substring(0, index);
 	}
 	
-	var answer = confirm("Add " + titleToBookmark + " to bookmarks?")
-	
-	if (answer) {		
-		var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
-			this.get(titleToBookmark, function(r) {	
-			
-				if (r == null) {
-					addBookmark(titleToBookmark, urlToBookmark);
-				}else{
-					alert(titleToBookmark + " already exists in bookmarks.");
-				}
-			});
-		});	
-	}
+	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+		this.get(titleToBookmark, function(r) {	
+		
+			if (r == null) {
+				addBookmark(titleToBookmark, urlToBookmark);
+				lightweightNotification(mw.message('bookmark-added', titleToBookmark).plain());
+			} else {
+				// @fixme this shouldn't happen; we should check first and
+				// instead have an option to remove the page from bookmarks!
+				alert(mw.message('bookmark-exists', titleToBookmark).plain());
+			}
+		});
+	});	
 }
 
 function addBookmark(title, url) {
@@ -105,7 +105,7 @@ function onBookmarkItemClicked(url, index) {
 }
 
 function deleteBookmarkPrompt(bookmarkKey) {
-	var answer = confirm("Remove " + bookmarkKey + " from bookmarks?")
+	var answer = confirm(mw.message('bookmark-remove-prompt', bookmarkKey).plain());
 	
 	if (answer) {
 		deleteBookmark(bookmarkKey);
@@ -115,7 +115,7 @@ function deleteBookmarkPrompt(bookmarkKey) {
 function deleteBookmark(bookmarkToDelete, index) {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.remove(bookmarkToDelete, function() {
-			alert(bookmarkToDelete + " has been removed.");
+			lightweightNotification(mw.message('bookmark-removed', bookmarkToDelete).plain());
 			hideOverlayDivs();
 			showContent();
 		});
