@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 
 import com.phonegap.api.Plugin;
 import com.phonegap.api.PluginResult;
+import com.phonegap.api.PluginResult.Status;
 
 public class SelectTextPlugin extends Plugin {
 
@@ -14,10 +15,18 @@ public class SelectTextPlugin extends Plugin {
 	public PluginResult execute(String action, JSONArray params,
 			String callbackId) {
 		Log.d("SelectTextPlugin", action);
+		PluginResult result = null;
 		if (action.compareTo("selectText") == 0) {
 			selectText();
+			result = new PluginResult(Status.NO_RESULT);
+			return result;
 		}
-		return null;
+		return result;
+	}
+	
+	@Override
+	public boolean isSynch(String action) {
+		return true;
 	}
 
 	public void selectText() {
