@@ -21,4 +21,5 @@
     <plugin name="SelectTextPlugin" value="org.wikipedia.SelectTextPlugin" />
     <plugin name="SoftKeyBoard" value="com.phonegap.softkeyboard.SoftKeyBoard" />
     <plugin name="ToastPlugin" value="com.chariotsolutions.toast.plugin.ToastPlugin" />
+    <plugin name="Share" value="com.schaul.plugins.share.Share"/>
 </plugins>
