@@ -11,6 +11,7 @@ function isBookmarksMaxLimit() {
 			if (records != null) {
 				if (records.length > MAX_LIMIT) {
 					// we've reached the max limit
+					// @todo this is probably not great, remove this :)
 					alert("You've reached the maximum number of bookmarks.");
 				}else{
 					addBookmarkPrompt();
@@ -29,20 +30,19 @@ function addBookmarkPrompt() {
 		titleToBookmark = titleToBookmark.substring(0, index);
 	}
 	
-	var answer = confirm("Add " + titleToBookmark + " to bookmarks?")
-	
-	if (answer) {		
-		var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
-			this.get(titleToBookmark, function(r) {	
-			
-				if (r == null) {
-					addBookmark(titleToBookmark, urlToBookmark);
-				}else{
-					alert(titleToBookmark + " already exists in bookmarks.");
-				}
-			});
-		});	
-	}
+	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+		this.get(titleToBookmark, function(r) {	
+		
+			if (r == null) {
+				addBookmark(titleToBookmark, urlToBookmark);
+				lightweightNotification(titleToBookmark + " added to bookmarks.");
+			} else {
+				// @fixme this shouldn't happen; we should check first and
+				// instead have an option to remove the page from bookmarks!
+				alert(titleToBookmark + " already exists in bookmarks.");
+			}
+		});
+	});	
 }
 
 function addBookmark(title, url) {
