@@ -2,7 +2,7 @@ var currentHistoryIndex = 0;
 var currentLocale = new Object();
 var defaultLocale = new Object();
 // default locale info
-defaultLocale.languageCode = navigator.language.toLowerCase();
+defaultLocale.languageCode = removeCountryCode(navigator.language.toLowerCase());
 defaultLocale.url = "http://" + defaultLocale.languageCode + ".m.wikipedia.org";
 
 function init() {
@@ -17,13 +17,26 @@ function onDeviceReady() {
     $('#content').css('display', 'block');
 
     document.addEventListener("backbutton", onBackButton, false);
-    document.addEventListener("searchbutton", onSearchButton, false); 
+    document.addEventListener("searchbutton", onSearchButton, false);
   
     // this has to be set for the window.history API to work properly
     PhoneGap.UsePolling = true;
     
     loadContent();
     setActiveState();
+}
+
+function removeCountryCode(localeCode) {
+    
+    if (localeCode.indexOf("-") >= 0) {
+        return localeCode.substr(0, localeCode.indexOf("-"));
+    }
+    
+    if (localeCode.indexOf("_") >= 0) {
+        return localeCode.substr(0, localeCode.indexOf("_"));
+    }
+    
+    return localeCode;
 }
 
 function onBackButton() {
