@@ -93,7 +93,8 @@ function listBookmarks(record, index) {
 
 function onBookmarkItemClicked(url, index) {
 	if (hasNetworkConnection()) {
-        $('#searchParam').val('');
+        $('#searchParam').val('');        
+        showSpinner();  
         $('#search').addClass('inProgress');
 		$('#main').attr('src', url);
 		hideOverlayDivs();

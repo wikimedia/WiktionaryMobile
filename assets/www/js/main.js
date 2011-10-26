@@ -97,7 +97,8 @@ function iframeOnLoaded(iframe) {
         hideMobileLinks();
         toggleForward();
         addToHistory();
-        $('#search').removeClass('inProgress');
+        $('#search').removeClass('inProgress');        
+        hideSpinner();  
         console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+history.length);
     }
 }
@@ -121,7 +122,7 @@ function loadContent() {
 }
 
 function loadWikiContent() {
-
+    showSpinner();
     $('#search').addClass('inProgress');
     $.ajax({url: currentLocale.url,
             success: function(data) {

@@ -12,6 +12,7 @@ function search() {
 			return;
 		}
 		
+		showSpinner();
         $('#search').addClass('inProgress');
 
 		var requestUrl = currentLocale.url + "/w/api.php?action=opensearch&";
@@ -66,7 +67,8 @@ function displayResults(results) {
 	formattedResults += "</div>";
 	
 	$('#resultList').html(formattedResults);
-		
+
+    hideSpinner();
 	hideOverlayDivs();
 
 	$('#searchresults').show();
@@ -76,6 +78,7 @@ function displayResults(results) {
 
 function goToResult(article) {
 	if (hasNetworkConnection()) {
+	    showSpinner();
         $('#search').addClass('inProgress');
 		var url = currentLocale.url + "/wiki/" + article;	
 		$('#main').attr('src', url);
