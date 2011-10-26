@@ -20,6 +20,7 @@ PhoneGap.addConstructor(function() {
 	 * Phonegap version < 1.0
 	 * use the following line
 	 */
-	// PhoneGap.addPlugin('share', new Share());
+	PhoneGap.addPlugin('share', new Share());
+
 	PluginManager.addService("Share","com.schaul.plugins.share.Share");
 });
