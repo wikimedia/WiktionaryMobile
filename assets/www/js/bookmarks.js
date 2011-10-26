@@ -114,7 +114,7 @@ function deleteBookmarkPrompt(bookmarkKey) {
 function deleteBookmark(bookmarkToDelete, index) {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.remove(bookmarkToDelete, function() {
-			alert(mw.message('bookmark-removed', bookmarkToDelete).plain());
+			lightweightNotification(mw.message('bookmark-removed', bookmarkToDelete).plain());
 			hideOverlayDivs();
 			showContent();
 		});
