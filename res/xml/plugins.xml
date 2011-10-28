@@ -22,4 +22,5 @@
     <plugin name="SoftKeyBoard" value="com.phonegap.softkeyboard.SoftKeyBoard" />
     <plugin name="ToastPlugin" value="com.chariotsolutions.toast.plugin.ToastPlugin" />
     <plugin name="Share" value="com.schaul.plugins.share.Share"/>
+    <plugin name="URLCache" value="com.phonegap.urlcache.URLCache"/>
 </plugins>
