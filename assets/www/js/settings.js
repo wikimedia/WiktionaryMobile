@@ -1,5 +1,11 @@
 function getSettings() {
+   $('#settings').html('');
     getLanguages();
+
+    markup = '<p><b>Application Version:</b> ' + '' +'<br /><br />' + // Need to work out how to get version from manifest
+        '<b>Android Version:</b> ' + device.version + '<br />' +
+        '<b>Phonegap Version:</b> ' + device.phonegap + '<br /></p>';
+	$('#settings').append(markup);
 }
 
 function showSettings() {
@@ -36,7 +42,7 @@ function displayLanguages(results) {
 
     var numberOfSites = -1;
     var markup = '';
-    markup += "<form><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
+    markup += "<form><p><b>Language:</b> </p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
     
     if (results != null) {
         results = JSON.parse(results);
@@ -58,7 +64,7 @@ function displayLanguages(results) {
     }
     
     markup += "</select></form>";  
-    $('#settings').html(markup);
+    $('#settings').prepend(markup);
     
     showSettings();
     //hideProgressLoader();
