@@ -1,5 +1,16 @@
 function getSettings() {
+   $('#settings').html('');
     getLanguages();
+    PhoneGap.exec(
+        function(result){
+            markup = '<p><b>Application Version:</b> ' + result.version + '<br />' +
+                '<b>Android Version:</b> ' + device.version + '<br />' +
+                '<b>Phonegap Version:</b> ' + device.phonegap + '<br /></p>';
+	        $('#settings').append(markup);
+        },
+        function(error){ $('#settings').append(error); },
+        'ApplicationVersion', 'getVersion', []
+    );
 }
 
 function showSettings() {
@@ -36,7 +47,7 @@ function displayLanguages(results) {
 
     var numberOfSites = -1;
     var markup = '';
-    markup += "<form><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
+    markup += "<form><p><b>Language:</b> </p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
     
     if (results != null) {
         results = JSON.parse(results);
@@ -62,8 +73,9 @@ function displayLanguages(results) {
     }
     
     markup += "</select></form>";  
+
     $('#settingsList').html(markup);
-    
+
     showSettings();
     //hideProgressLoader();
     //$('#settings').removeClass('inProgress');
