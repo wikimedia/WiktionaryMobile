@@ -34,8 +34,8 @@ A. You will need to add the PhoneGap library to your project, by following these
 
 1. Download <a href="https://github.com/phonegap/phonegap" target="_blank">PhoneGap</a>
 2. Unzip the PhoneGap files.  
-3. Copy Android/phonegap-1.0.0.jar into the libs folder of your project.
-4. To add the phonegap-1.0.0.jar into your project, right click your Eclipse project and select Properties. 
+3. Copy Android/phonegap-1.1.0.jar into the libs folder of your project.
+4. To add the phonegap-1.1.0.jar into your project, right click your Eclipse project and select Properties. 
 5. Select Java Build Path, click on the Libraries tab and then click the Add JARs button.
-6. Browse to libs/phonegap-1.0.0.jar and choose to add it.
+6. Browse to libs/phonegap-1.1.0.jar and choose to add it.
 
