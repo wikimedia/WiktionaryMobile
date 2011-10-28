@@ -125,22 +125,33 @@ function loadContent() {
 function loadWikiContent() {
     showSpinner();
     $('#search').addClass('inProgress');
-    $.ajax({url: currentLocale.url,
-            success: function(data) {
-              if(data) {
-                //$('#main').attr('src', 'http://en.m.wikipedia.org');
-                $('#main').attr('src', currentLocale.url);
-                currentHistoryIndex += 1;
-              } else {
-                noConnectionMsg();
-                navigator.app.exitApp();
-              }
-            },
-            error: function(xhr) {
-              noConnectionMsg();
-            },
-            timeout: 3000
-         });
+   
+    // restore browsing to last visited page
+    var historyDB = new Lawnchair({name:"historyDB"}, function() {
+      this.all(function(history){
+        if(history.length==0){
+          $.ajax({url: currentLocale.url,
+                  success: function(data) {
+                    if(data) {
+                      //$('#main').attr('src', 'http://en.m.wikipedia.org');
+                      $('#main').attr('src', currentLocale.url);
+                      currentHistoryIndex += 1;
+                    } else {
+                      noConnectionMsg();
+                      navigator.app.exitApp();
+                    }
+                  },
+                  error: function(xhr) {
+                    noConnectionMsg();
+                  },
+                  timeout: 3000
+         });        
+        }else{
+          $('#main').attr('src', history[history.length-1].value);
+        }
+      });
+    });
+
 }
 
 function hideOverlayDivs() {
