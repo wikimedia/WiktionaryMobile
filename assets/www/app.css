@@ -41,7 +41,7 @@ header
 	display:none;
 }
 
-#bookmarksList, #historyList /*, #settingsList*/
+#bookmarksList, #historyList
 {
 	position:relative;
 	top:52px;
