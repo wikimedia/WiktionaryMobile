@@ -1,11 +1,16 @@
 function getSettings() {
    $('#settings').html('');
     getLanguages();
-
-    markup = '<p><b>Application Version:</b> ' + '' +'<br /><br />' + // Need to work out how to get version from manifest
-        '<b>Android Version:</b> ' + device.version + '<br />' +
-        '<b>Phonegap Version:</b> ' + device.phonegap + '<br /></p>';
-	$('#settings').append(markup);
+    PhoneGap.exec(
+        function(result){
+            markup = '<p><b>Application Version:</b> ' + result.version + '<br />' +
+                '<b>Android Version:</b> ' + device.version + '<br />' +
+                '<b>Phonegap Version:</b> ' + device.phonegap + '<br /></p>';
+	        $('#settings').append(markup);
+        },
+        function(error){ $('#settings').append(error); },
+        'ApplicationVersion', 'getVersion', []
+    );
 }
 
 function showSettings() {
