@@ -48,7 +48,11 @@ function displayLanguages(results) {
                     var len = parseInt(JSON.stringify(locale.site.length));
                     for (var j=0;j<len;j++) {
                         if (locale.site[j].code == "wiki") {
-                            markup += "<option value='" + locale.code + "'>"  + locale.name + "</option>";
+                            if (locale.code == currentLocale.languageCode) {
+                                markup += "<option value='" + locale.code + "' selected='selected'>"  + locale.name + "</option>";
+                            } else {
+                                markup += "<option value='" + locale.code + "'>"  + locale.name + "</option>";
+                            }
                             break;
                         }
                     } 
@@ -58,7 +62,7 @@ function displayLanguages(results) {
     }
     
     markup += "</select></form>";  
-    $('#settings').html(markup);
+    $('#settingsList').html(markup);
     
     showSettings();
     //hideProgressLoader();
