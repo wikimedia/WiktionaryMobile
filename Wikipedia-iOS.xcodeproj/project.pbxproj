@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D481B960145DFE5D00D9F872 /* www in Resources */ = {isa = PBXBuildFile; fileRef = D481B95F145DFE5D00D9F872 /* www */; };
 		D4BE95FF145DFD2D0025EC00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BE95FE145DFD2D0025EC00 /* Foundation.framework */; };
 		D4BE9601145DFD2D0025EC00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BE9600145DFD2D0025EC00 /* UIKit.framework */; };
 		D4BE9603145DFD2D0025EC00 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BE9602145DFD2D0025EC00 /* CoreGraphics.framework */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D481B95F145DFE5D00D9F872 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = assets/www; sourceTree = "<group>"; };
 		D4BE95FA145DFD2D0025EC00 /* Wikipedia-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wikipedia-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4BE95FE145DFD2D0025EC00 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4BE9600145DFD2D0025EC00 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -104,6 +106,7 @@
 		D4BE95EC145DFD2D0025EC00 = {
 			isa = PBXGroup;
 			children = (
+				D481B95F145DFE5D00D9F872 /* www */,
 				D4BE9618145DFD2D0025EC00 /* Wikipedia-iOS */,
 				D4BE95FD145DFD2D0025EC00 /* Frameworks */,
 				D4BE95FB145DFD2D0025EC00 /* Products */,
@@ -291,6 +294,7 @@
 				D4BE9637145DFD2D0025EC00 /* Default@2x.png in Resources */,
 				D4BE9639145DFD2D0025EC00 /* Capture.bundle in Resources */,
 				D4BE963B145DFD2D0025EC00 /* PhoneGap.plist in Resources */,
+				D481B960145DFE5D00D9F872 /* www in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +481,7 @@
 				D4BE9646145DFD2D0025EC00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
