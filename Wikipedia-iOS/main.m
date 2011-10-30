@@ -3,7 +3,7 @@
 //  Wikipedia-iOS
 //
 //  Created by Brion Vibber on 10/30/11.
-//  Copyright StatusNet 2011. All rights reserved.
+//  Copyright nobody -- this is stub template code!
 //
 
 #import <UIKit/UIKit.h>

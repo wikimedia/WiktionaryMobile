@@ -259,7 +259,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
-				ORGANIZATIONNAME = StatusNet;
+				ORGANIZATIONNAME = "Wikimedia Foundation";
 			};
 			buildConfigurationList = D4BE95F1145DFD2D0025EC00 /* Build configuration list for PBXProject "Wikipedia-iOS" */;
 			compatibilityVersion = "Xcode 3.2";
