@@ -21,7 +21,10 @@
 	<key>AllowInlineMediaPlayback</key>
 	<false/>
 	<key>ExternalHosts</key>
-	<array/>
+	<array>
+		<string>*.wikipedia.org</string>
+		<string>*.wikimedia.org</string>
+	</array>
 	<key>Plugins</key>
 	<dict>
 		<key>com.phonegap.accelerometer</key>
