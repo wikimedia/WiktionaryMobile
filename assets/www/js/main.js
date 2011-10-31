@@ -5,6 +5,9 @@ var defaultLocale = new Object();
 defaultLocale.languageCode = removeCountryCode(navigator.language.toLowerCase());
 defaultLocale.url = "http://" + defaultLocale.languageCode + ".m.wikipedia.org";
 
+currentLocale.languageCode = defaultLocale.languageCode;
+currentLocale.url = defaultLocale.url;
+
 function init() {
     document.addEventListener("deviceready", onDeviceReady, true);
 }
@@ -83,9 +86,6 @@ function loadContent() {
             if (config) {
                 (config.value.url) ? currentLocale.url = config.value.url : currentLocale.url = defaultLocale.url;
                 (config.value.languageCode) ? currentLocale.languageCode = config.value.languageCode : currentLocale.languageCode = defaultLocale.languageCode;
-            }else{
-                currentLocale.url = defaultLocale.url;
-                currentLocale.languageCode = defaultLocale.languageCode;
             }
             
             window.loadWikiContent();
