@@ -20,5 +20,5 @@ PhoneGap.addConstructor(function() {
   PhoneGap.addPlugin('ToastPlugin', new ToastPlugin());
 
   // Register the native class of plugin with PhoneGap
-  navigator.app.addService("ToastPlugin", "com.chariotsolutions.toast.plugin.ToastPlugin"); 
+  // navigator.app.addService("ToastPlugin", "com.chariotsolutions.toast.plugin.ToastPlugin"); 
 });

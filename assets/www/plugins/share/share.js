@@ -22,5 +22,5 @@ PhoneGap.addConstructor(function() {
 	 */
 	PhoneGap.addPlugin('share', new Share());
 
-	PluginManager.addService("Share","com.schaul.plugins.share.Share");
+	// PluginManager.addService("Share","com.schaul.plugins.share.Share");
 });

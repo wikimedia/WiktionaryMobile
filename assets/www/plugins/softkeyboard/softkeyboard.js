@@ -20,5 +20,5 @@ SoftKeyBoard.prototype.hide = function(win, fail) {
 
 PhoneGap.addConstructor(function() {
     PhoneGap.addPlugin('SoftKeyBoard', new SoftKeyBoard());
-    PluginManager.addService("SoftKeyBoard","com.phonegap.softkeyboard.SoftKeyBoard");
+    // PluginManager.addService("SoftKeyBoard","com.phonegap.softkeyboard.SoftKeyBoard");
 });
