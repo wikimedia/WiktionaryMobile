@@ -1,5 +1,4 @@
-default.properties
-local.properties
+*.properties
 bin/*
 gen/*
 
