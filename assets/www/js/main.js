@@ -125,11 +125,17 @@ function loadWikiContent() {
 
 }
 
+function hideOverlays() {
+    hideOverlayDivs();
+    showContent();
+}
+
 function hideOverlayDivs() {
     $('#bookmarks').hide();
     $('#history').hide();
     $('#searchresults').hide();
     $('#settings').hide();
+    $('#about').hide();
 }
 
 function showContent() {
@@ -232,4 +238,18 @@ function setActiveState() {
             $(this).addClass('activeEnabled');
         });
     }, 500);
+}
+
+function homePage() {
+    showSpinner();
+    var homeUrl = "http://" + currentLocale.languageCode + ".m.wikipedia.org";
+    $('#main').attr('src', homeUrl); 
+    currentHistoryIndex += 1;
+}
+
+function aboutPage() {
+    showSpinner();
+    var aboutUrl = "http://" + currentLocale.languageCode + ".wikipedia.org/w/index.php?title=Wikipedia:About&useformat=mobile";
+    $('#main').attr('src', aboutUrl); 
+    currentHistoryIndex += 1;
 }
