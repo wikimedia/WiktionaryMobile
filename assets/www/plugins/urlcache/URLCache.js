@@ -94,14 +94,8 @@ else if ( navigator.userAgent.match(/Android/i) ) {
     Cache.prototype.getCachedPathForURI = function(uri, success, fail) {
 
        return PhoneGap.exec(
-            function(args) {
-                var response = JSON.parse(args);
-                success(uri, response.file);
-            },
-            function(args) {
-                args = (typeof args !== 'string') ? JSON.stringify(args) : args;
-                fail(uri, args);
-            },
+            success,
+            fail,
             'URLCache',
             'getCachedPathForURI',
             [uri]
@@ -109,5 +103,5 @@ else if ( navigator.userAgent.match(/Android/i) ) {
     };
 
     PhoneGap.addPlugin('urlCache', new Cache());
-	PluginManager.addService("URLCache","com.nitobi.rnao.plugins.URLCache");
+//	PluginManager.addService("URLCache","com.nitobi.rnao.plugins.URLCache");
 }

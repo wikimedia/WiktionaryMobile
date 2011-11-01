@@ -5,120 +5,130 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
-import android.webkit.WebView;
+import android.util.Log;
+
 import com.phonegap.api.Plugin;
 import com.phonegap.api.PluginResult;
 
 public final class URLCache extends Plugin {
 
-	@Override
-	public void setView(WebView arg0) {
-		// Auto-generated method stub
-	}
-	
+	public static String TAG = "URLCache";
+
 	@Override
 	public PluginResult execute(String action, JSONArray args, String callbackId) {
 
 		PluginResult.Status status = PluginResult.Status.OK;
-		String result = "";
+		JSONObject result = new JSONObject();
 
 		String uri = null;
 		String fileName = "";
-		
+
 		try {
 			uri = args.getString(0);
 			fileName = md5(uri);
-		} catch (JSONException e1) {
-			status = PluginResult.Status.JSON_EXCEPTION;
-			result = "{ message: 'JSONException', status: "+status.ordinal()+" }";
-		}
-
-		if (uri != null && action.equals("getCachedPathForURI") && args.length() >=1)
-		{
-			// First check if the file exists already
-			String fileDir = ctx.getFilesDir().getAbsolutePath();
-			String filePath = fileDir + "/" + fileName;
 			
-			File f = new File(filePath);
-			if (f.exists()) {
-				result = "{\"file\":\""+filePath+"\",\"status\":\"0\"}";
-			} else {
+			//result.put("url", fileName);
 
-				URL u;
-				InputStream is = null;
-				DataInputStream dis;
-				FileOutputStream out = null;
-				byte[] buffer = new byte[1024];
-				int length = -1;
-				
-				try {
-					u = new URL(uri);
-					is = u.openStream();         // throws an IOException
-					dis = new DataInputStream(new BufferedInputStream(is));
-					out = ctx.openFileOutput(fileName, Context.MODE_PRIVATE);
-					while ((length = dis.read(buffer)) != -1) {
-						out.write(buffer, 0, length);
-					}
-					out.flush();
-					result = "{\"file\":\""+filePath+"\",\"status\":\"0\"}";
-				} catch (MalformedURLException e) {
-					status = PluginResult.Status.MALFORMED_URL_EXCEPTION;
-					result = "{ message: 'MalformedURLException', status: "+status.ordinal()+" }";
-				} catch (IOException e) {
-					status = PluginResult.Status.IO_EXCEPTION;
-					result = "{ message: 'IOException', status: "+status.ordinal()+" }";
-				} finally {
+			if (uri != null && action.equals("getCachedPathForURI")
+					&& args.length() >= 1) {
+				// First check if the file exists already
+				String fileDir = ctx.getFilesDir().getAbsolutePath();
+				String filePath = fileDir + "/" + fileName;
+
+				Log.d(TAG, "URI: " + uri + " filePath: " + filePath);
+
+				File f = new File(filePath);
+				if (f.exists()) {
+					Log.d(TAG, "EXISTS ! " + filePath);
+					result.put("file", filePath);
+					result.put("status", 0);
+				} else {
+					Log.d(TAG, "Fetching from server " + uri);
+					URL u;
+					DataInputStream dis = null;
+					FileOutputStream out = null;
+					byte[] buffer = new byte[1024];
+					int length = -1;
+
 					try {
-						is.close();
-						out.close();
+						u = new URL(uri);
+						URLConnection urlConnection = u.openConnection();
+						urlConnection.setRequestProperty("Application_Version", "Wikipedia Mobile/1.0.0");
+						dis = new DataInputStream(new BufferedInputStream(urlConnection.getInputStream()));
+						out = ctx.openFileOutput(fileName, Context.MODE_PRIVATE);
+						while ((length = dis.read(buffer)) != -1) {
+							out.write(buffer, 0, length);
+						}
+						out.flush();
+						result.put("file", filePath);
+						result.put("status", 0);
+					} catch (MalformedURLException e) {
+						status = PluginResult.Status.MALFORMED_URL_EXCEPTION;
+						result.put("message", "MalformedURLException");
+						result.put("status", status.ordinal());
 					} catch (IOException e) {
 						status = PluginResult.Status.IO_EXCEPTION;
-						result = "{ message: 'IOException', status: "+status.ordinal()+" }";
+						result.put("message", "IOException");
+						result.put("status", status.ordinal());
+					} finally {
+						try {
+							dis.close();
+							out.close();
+						} catch (IOException e) {
+							status = PluginResult.Status.IO_EXCEPTION;
+							result.put("message", "IOException");
+							result.put("status", status.ordinal());
+						}
 					}
 				}
+			} else {
+				status = PluginResult.Status.INVALID_ACTION;
+				result.put("message", "InvalidAction");
+				result.put("status", status.ordinal());
 			}
-		} else {
-			status = PluginResult.Status.INVALID_ACTION;
-			result = "{ message: 'InvalidAction', status: "+status.ordinal()+" }";
+		} catch (JSONException e1) {
+			status = PluginResult.Status.JSON_EXCEPTION;
+			try {
+				result.put("message", "JSONException");
+				result.put("status", status.ordinal());
+			} catch(JSONException e2) {
+				// very bad if this happens
+				e2.printStackTrace();
+			}
 		}
-		
-		if (status==PluginResult.Status.OK) {
-			this.success(new PluginResult(status, result), callbackId);
-		}
-		else {
-			this.error(new PluginResult(status, result), callbackId);
-		}
-		
+		Log.d(TAG, result.toString());
 		return new PluginResult(status, result);
-		
-	}
-	
-	public String md5(String s) {  
-	    try {  
-	        // Create MD5 Hash  
-	        MessageDigest digest = java.security.MessageDigest.getInstance("MD5");  
-	        digest.update(s.getBytes());  
-	        byte messageDigest[] = digest.digest();  
 
-	        // Create Hex String  
-	        StringBuffer hexString = new StringBuffer();  
-	        for (int i=0; i<messageDigest.length; i++)  
-	            hexString.append(Integer.toHexString(0xFF & messageDigest[i]));  
-	        return hexString.toString();  
-	          
-	    } catch (NoSuchAlgorithmException e) {  
-	        e.printStackTrace();  
-	    }  
-	    return "";  
+	}
+
+	public String md5(String s) {
+		try {
+			// Create MD5 Hash
+			MessageDigest digest = java.security.MessageDigest
+					.getInstance("MD5");
+			digest.update(s.getBytes());
+			byte messageDigest[] = digest.digest();
+
+			// Create Hex String
+			StringBuffer hexString = new StringBuffer();
+			for (int i = 0; i < messageDigest.length; i++)
+				hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+			return hexString.toString();
+
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }
