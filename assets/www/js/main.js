@@ -41,8 +41,8 @@ function removeCountryCode(localeCode) {
 
 function hideMobileLinks() {
     var frameDoc = $("#main")[0].contentDocument;
-//    $('#header', frameDoc).css('display', 'none');
-//    $('#footmenu', frameDoc).css('display', 'none');
+    $('#header', frameDoc).css('display', 'none');
+    $('#footmenu', frameDoc).css('display', 'none');
 
     // Internal links
     $('a[href^="/wiki/"]', frameDoc).click(function(e) {
@@ -101,9 +101,9 @@ function loadWikiContent() {
     // restore browsing to last visited page
     var historyDB = new Lawnchair({name:"historyDB"}, function() {
       this.all(function(history){
-        if(history.length==0){
+        if(history.length==0 || window.history.length > 1) {
             app.setRootPage(currentLocale.url);
-        }else{
+        } else {
             app.setRootPage(history[history.length-1].value);
         }
       });
