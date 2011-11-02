@@ -155,7 +155,7 @@ function checkLength() {
     if (searchTerm.length > 0) {
         $('#clearSearch').show();
         console.log(searchTerm);
-        search();
+        search(true);
     }else{
         $('#clearSearch').hide();
         hideOverlays();
