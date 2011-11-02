@@ -16,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.phonegap.api.Plugin;
 import com.phonegap.api.PluginResult;
@@ -32,29 +31,26 @@ public final class URLCache extends Plugin {
 		JSONObject result = new JSONObject();
 
 		String uri = null;
-		String fileName = "";
 
 		try {
 			uri = args.getString(0);
-			fileName = md5(uri);
-			
-			//result.put("url", fileName);
 
 			if (uri != null && action.equals("getCachedPathForURI")
 					&& args.length() >= 1) {
 				// First check if the file exists already
+				String fileName = md5(uri);
 				String fileDir = ctx.getFilesDir().getAbsolutePath();
 				String filePath = fileDir + "/" + fileName;
 
-				Log.d(TAG, "URI: " + uri + " filePath: " + filePath);
+				//Log.d(TAG, "URI: " + uri + " filePath: " + filePath);
 
 				File f = new File(filePath);
 				if (f.exists()) {
-					Log.d(TAG, "EXISTS ! " + filePath);
+					//Log.d(TAG, "EXISTS ! " + filePath);
 					result.put("file", filePath);
 					result.put("status", 0);
 				} else {
-					Log.d(TAG, "Fetching from server " + uri);
+					//Log.d(TAG, "Fetching from server " + uri);
 					URL u;
 					DataInputStream dis = null;
 					FileOutputStream out = null;
@@ -107,7 +103,7 @@ public final class URLCache extends Plugin {
 				e2.printStackTrace();
 			}
 		}
-		Log.d(TAG, result.toString());
+		//Log.d(TAG, result.toString());
 		return new PluginResult(status, result);
 
 	}
