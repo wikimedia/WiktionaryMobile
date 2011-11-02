@@ -18,7 +18,7 @@ function onDeviceReady() {
     // it only seems to recognize the style when dynamically set here or when set inline...
     // the style needs to be explicitly set for logic used in the backButton handler
     $('#content').css('display', 'block');
-  
+
     // this has to be set for the window.history API to work properly
     PhoneGap.UsePolling = true;
     
@@ -105,6 +105,7 @@ function loadWikiContent() {
                   success: function(data) {
                     if(data) {
                       //$('#main').attr('src', 'http://en.m.wikipedia.org');
+                      console.log(currentLocale.url);
                       $('#main').attr('src', currentLocale.url);
                       currentHistoryIndex += 1;
                     } else {
@@ -153,8 +154,11 @@ function checkLength() {
   
     if (searchTerm.length > 0) {
         $('#clearSearch').show();
+        console.log(searchTerm);
+        search();
     }else{
         $('#clearSearch').hide();
+        hideOverlays();
     }
 }
 

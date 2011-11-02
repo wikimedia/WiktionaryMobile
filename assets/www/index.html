@@ -36,7 +36,7 @@
       <div id="wHolder"><div class="titlebarIcon" onClick="homePage();"></div></div>
       <div id="searchFormHolder">
         <form action="javascript:search();">
-          <input type="text" id="searchParam" onkeydown="setTimeout('javascript:checkLength()', 50);"></input>
+          <input type="text" id="searchParam" onkeypress="setTimeout('javascript:checkLength()', 10);"></input>
           <input type="submit" id="search" value=""></input>
         </form>
         <div id="clearSearch" onclick="javascript:clearSearch();"></div>
