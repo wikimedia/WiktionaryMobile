@@ -89,11 +89,6 @@ function goToResult(article) {
 	}
 }
 
-function hideSearchResults() {
-	hideOverlayDivs();
-	showContent();
-}
-
 function showSpinner() {
 	$('.titlebar .spinner').css({display:'block'});
 	$('#clearSearch').css({height:0});

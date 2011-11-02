@@ -90,11 +90,6 @@ function purgeHistory() {
 	showContent();
 }
 
-function hideHistory() {
-	hideOverlayDivs();
-	showContent();
-}
-
 function showHistory() {
 	hideOverlayDivs();
 	$('#history').toggle();

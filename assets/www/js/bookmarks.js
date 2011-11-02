@@ -73,11 +73,6 @@ function showBookmarks() {
 	setActiveState();	
 }
 
-function hideBookmarks() {
-	hideOverlayDivs();
-	showContent();
-}
-
 function listBookmarks(record, index) {
 	var markup = "<div class='listItemContainer'>";
 	markup += "<a class='listItem' onclick=\"javascript:onBookmarkItemClicked(\'" + record.value + "\');\">";

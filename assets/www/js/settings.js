@@ -20,11 +20,6 @@ function showSettings() {
     setActiveState();                                   
 }
 
-function hideSettings() {
-    hideOverlayDivs();
-    showContent();
-}
-
 function getLanguages() {
   
     //$('#settings').addClass('inProgress');  

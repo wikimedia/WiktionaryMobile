@@ -48,7 +48,7 @@
     
   <header id="mainHeader">
     <div class="titlebar">
-      <div id="wHolder"><div class="titlebarIcon" onClick="loadContent();"></div></div>
+      <div id="wHolder"><div class="titlebarIcon" onClick="homePage();"></div></div>
       <div id="searchFormHolder">
         <form action="javascript:search();">
           <input type="text" id="searchParam" onkeydown="setTimeout('javascript:checkLength()', 50);"></input>
@@ -64,7 +64,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem">Bookmarks</div>
-				<div class="titlebarItem closeButton" onclick="javascript:hideBookmarks();"></div>
+				<div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
 			</div>
 		</header>
 		<div id="bookmarksList"></div>
@@ -74,7 +74,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem">History</div>
-				<div class="titlebarItem closeButton" onclick="javascript:hideHistory();"></div>
+				<div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
 			</div>
 		</header>
 		<div id="historyList"></div>
@@ -92,12 +92,12 @@
         <div>
             <div class="titlebar">
                 <div class="titlebarItem">Settings</div>
-                <div class="titlebarItem closeButton" onclick="javascript:hideSettings();"></div>
+                <div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
             </div>
         </div>  
         <div id="settingsList"></div>
 	</div>
-
+    
   <div id="content">
     <iframe id="main" frameborder="0" onload="javascript:iframeOnLoaded(this);">
     </iframe>
@@ -112,6 +112,7 @@
 		<command type="command" id="settingsCmd" label="Settings" icon="image/optionSettings.png" disabled="false" action="getSettings();" />	
 		<command type="command" id="selectTextCmd" label="Select text" disabled="false" action="selectText();" />	
 		<command type="command" id="sharePageCmd" label="Share page" disabled="false" action="sharePage();" />
+		<command type="command" id="aboutCmd" label="About" disabled="false" action="aboutPage();" />
 	</menu>	
 		
   </body>
