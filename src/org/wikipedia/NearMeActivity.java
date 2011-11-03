@@ -1,12 +1,11 @@
 package org.wikipedia;
 
-//import android.app.SearchManager;
-//import android.content.Intent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
@@ -73,7 +72,11 @@ public class NearMeActivity extends MapActivity {
 		
 		mapOverlays = mapView.getOverlays();
 		
-		searchNearBy();
+		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
+		
+		if(preferences.getBoolean("doSearchNearBy", true)) {
+			searchNearBy();
+		}
 		
 		Button redo = (Button)findViewById(R.id.redo);
 		final MapView mapv = mapView;
@@ -85,6 +88,15 @@ public class NearMeActivity extends MapActivity {
 				searchNearLocation(p);
 			}
 		});
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putBoolean("doSearchNearBy", false);
+		editor.commit();
 	}
 	
 	private  void showDialog() {
@@ -129,7 +141,7 @@ public class NearMeActivity extends MapActivity {
 		GeoPoint point = new GeoPoint((int)(geoname.getLatitude() * Math.pow(10, 6)), 
 									  (int)(geoname.getLongitude() * Math.pow(10, 6))); 
 		OverlayItem overlayitem = new OverlayItem(point, geoname.getTitle(), geoname.getSummary());
-//		
+		
 		itemizedoverlay.addOverlay(overlayitem);
 		return itemizedoverlay;
 	}
