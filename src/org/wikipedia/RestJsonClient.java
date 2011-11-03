@@ -13,7 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
+//import android.util.Log;
 
 public class RestJsonClient {
 
@@ -26,12 +26,12 @@ public class RestJsonClient {
 			requestUrl += "lat=" + latitude + "&";
 			requestUrl += "lng=" + longitude + "&";
 			requestUrl += "username=wikimedia";
-			Log.d("RestJsonClient", requestUrl);
+			//Log.d("RestJsonClient", requestUrl);
 			URL url = new URL(requestUrl);
 			urlConnection = (HttpURLConnection) url.openConnection();
 			String jsonStr = convertStreamToString(urlConnection
 					.getInputStream());
-			Log.d("RestJsonClient", jsonStr);
+			//Log.d("RestJsonClient", jsonStr);
 
 			// getting data and if we don't we just get out of here!
 			JSONArray geonames = null;

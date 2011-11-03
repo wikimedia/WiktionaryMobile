@@ -26,9 +26,9 @@ Application.prototype.setRootPage = function(url) {
         });
     };
     var gotPath = function(cachedPage) {
-//        $('#main').one('load', function() {
-//            replaceRes();
-//        });
+        $('#main').one('load', function() {
+            replaceRes();
+        });
         $('#main').attr('src', cachedPage.file);
         currentHistoryIndex += 1;
     }

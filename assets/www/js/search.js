@@ -57,17 +57,25 @@ function displayResults(results) {
 				formattedResults += "</div>";
 				formattedResults += "</div>";
 			}
+		}else{
+		    formattedResults += "<div class='listItemContainer'>";
+            formattedResults += "<div class='listItem'>";
+            formattedResults += "<span class='iconSearchResult'></span>";
+            formattedResults += "<span class='text'>No results found</span>";
+            formattedResults += "</div>";
+            formattedResults += "</div>";
 		}
 	}else{
-		formattedResults += "nothingness...";
+        // no result from the server...
 	}
 	
-	formattedResults += "<div class='listItemContainer' onclick='javascript:hideSearchResults();'>";
+	formattedResults += "<div class='listItemContainer' onclick='javascript:hideOverlays();'>";
 	formattedResults += "<div class='listItem'>Close</div>";
 	formattedResults += "</div>";
 	
 	$('#resultList').html(formattedResults);
 
+    $('#search').removeClass('inProgress');
     hideSpinner();
 	hideOverlayDivs();
 
