@@ -3,9 +3,10 @@ function getSettings() {
     getLanguages();
     PhoneGap.exec(
         function(result){
-            markup = '<p><b>Application Version:</b> ' + result.version + '<br />' +
-                '<b>Android Version:</b> ' + device.version + '<br />' +
-                '<b>Phonegap Version:</b> ' + device.phonegap + '<br /></p>';
+            markup = '<div class="item"><label>Application Version:</label><p>' + result.version + '</p></div>' +
+                '<div class="item"><label>Android Version:</label><p>' + device.version + '</p></div>' +
+                '<div class="item"><label>Phonegap Version:</label><p>' + device.phonegap + '</p></div>' +
+				'<div class="item"><label>Checkbox Example</label><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec purus augue.</p><input type="checkbox"/></div>';
 	        $('#settingsList').append(markup);
         },
         function(error){ $('#settingsList').append(error); },
@@ -42,7 +43,7 @@ function displayLanguages(results) {
 
     var numberOfSites = -1;
     var markup = '';
-    markup += "<form><p><b>Language:</b> </p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
+    markup += "<form class='item'><label>Language:</label><p>Set the language you would like to read Wikipedia in</p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
     
     if (results != null) {
         results = JSON.parse(results);
