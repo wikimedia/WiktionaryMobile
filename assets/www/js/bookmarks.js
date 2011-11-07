@@ -83,7 +83,6 @@ function listBookmarks(record, index) {
 	markup += "</div>";
 	
 	return markup;
-	//$('#bookmarksList').append(markup);	
 }
 
 function onBookmarkItemClicked(url, index) {
@@ -92,8 +91,7 @@ function onBookmarkItemClicked(url, index) {
         showSpinner();  
         $('#search').addClass('inProgress');
 		$('#main').attr('src', url);
-		hideOverlayDivs();
-		showContent();
+		hideOverlays();
 	}else{
 		noConnectionMsg();
 	}
@@ -111,8 +109,7 @@ function deleteBookmark(bookmarkToDelete, index) {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.remove(bookmarkToDelete, function() {
 			lightweightNotification(mw.message('bookmark-removed', bookmarkToDelete).plain());
-			hideOverlayDivs();
-			showContent();
+			hideOverlays();
 		});
 	});
 }

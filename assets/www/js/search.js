@@ -8,7 +8,7 @@ function search(isSuggestion) {
 		var searchParam = $('#searchParam').val();
 	
 		if (searchParam == '') {
-			hideOverlayDivs();
+			hideOverlays();
 			return;
 		}
 		
@@ -38,7 +38,7 @@ function search(isSuggestion) {
 		}
 	}else{
 		noConnectionMsg();
-		hideOverlayDivs();
+		hideOverlays();
 	}
 }
 
@@ -87,7 +87,7 @@ function displayResults(results) {
 
     $('#search').removeClass('inProgress');
     hideSpinner();
-	hideOverlayDivs();
+	hideOverlays();
 
 	$('#searchresults').show();
 	$('#content').hide();
@@ -148,7 +148,6 @@ function goToResult(article) {
 		var url = currentLocale.url + "/wiki/" + article;	
 		$('#main').attr('src', url);
 		hideOverlays();
-		//showContent();
 	}else{
 		noConnectionMsg();
 	}
