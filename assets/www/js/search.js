@@ -43,6 +43,7 @@ function search(isSuggestion) {
 }
 
 function displayResults(results) {
+    setActiveState();
 	var formattedResults = "";
 	
 	if (results != null) {
@@ -95,6 +96,7 @@ function displayResults(results) {
 }
 
 function displaySuggestions(results) {
+    setActiveState();
     var formattedResults = "";
     
     if (results != null) {
