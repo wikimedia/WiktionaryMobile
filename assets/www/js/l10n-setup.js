@@ -24,7 +24,6 @@ function normalizeLanguageCode(lang) {
 function loadMessages(lang, callback) {
 	lang = normalizeLanguageCode(lang);
 	var url = 'messages/messages-' + lang + '.properties';
-	alert(url);
 	$.ajax({
 		url: url,
 		async: false,
@@ -43,18 +42,22 @@ function loadMessages(lang, callback) {
 			callback(true);
 		},
 		error: function(xhr, status, err) {
+			// We seem to get "success" on file not found, which feels wrong...
+			// We kinda expect to get 404 errors or similar?
 			alert('Error loading localization file for ' + lang + ': ' + status);
 			callback(false);
 		}
 	});
 }
 
+/**
+ * @fixme navigator.language is always 'en' on Android? https://code.google.com/p/android/issues/detail?id=4641
+ */
 function initLanguages() {
-	alert(navigator.language);
 	// Always load english as a fallback
 	var langs = ['en'],
 		lang = normalizeLanguageCode(navigator.language), // may be eg "en-us" or "zh-tw"
-		baseLang = lang.replace(/-*?$/, ''); // strip country code, eg "en" or "zh"
+		baseLang = lang.replace(/-.*?$/, ''); // strip country code, eg "en" or "zh"
 
 	if (baseLang != 'en') {
 		// Load the base language, eg 'en', 'fr', 'zh'
@@ -77,7 +80,6 @@ function initLanguages() {
 			$(document).trigger('mw-messages-ready');
 		}
 	};
-	console.log(langs);
 	step();
 }
 
