@@ -294,4 +294,111 @@ window.mw = window.mediaWiki = new ( function( $ ) {
 		return mw.message.apply( mw.message, arguments ).toString();
 	};
 
+	/** HTML construction helper functions */
+	this.html = new ( function () {
+		var escapeCallback = function( s ) {
+			switch ( s ) {
+				case "'":
+					return '&#039;';
+				case '"':
+					return '&quot;';
+				case '<':
+					return '&lt;';
+				case '>':
+					return '&gt;';
+				case '&':
+					return '&amp;';
+			}
+		};
+
+		/**
+		 * Escape a string for HTML. Converts special characters to HTML entities.
+		 * @param s The string to escape
+		 */
+		this.escape = function( s ) {
+			return s.replace( /['"<>&]/g, escapeCallback );
+		};
+
+		/**
+		 * Wrapper object for raw HTML passed to mw.html.element().
+		 */
+		this.Raw = function( value ) {
+			this.value = value;
+		};
+
+		/**
+		 * Wrapper object for CDATA element contents passed to mw.html.element()
+		 */
+		this.Cdata = function( value ) {
+			this.value = value;
+		};
+
+		/**
+		 * Create an HTML element string, with safe escaping.
+		 *
+		 * @param name The tag name.
+		 * @param attrs An object with members mapping element names to values
+		 * @param contents The contents of the element. May be either:
+		 *  - string: The string is escaped.
+		 *  - null or undefined: The short closing form is used, e.g. <br/>.
+		 *  - this.Raw: The value attribute is included without escaping.
+		 *  - this.Cdata: The value attribute is included, and an exception is
+		 *   thrown if it contains an illegal ETAGO delimiter.
+		 *   See http://www.w3.org/TR/1999/REC-html401-19991224/appendix/notes.html#h-B.3.2
+		 *
+		 * Example:
+		 *	var h = mw.html;
+		 *	return h.element( 'div', {},
+		 *		new h.Raw( h.element( 'img', {src: '<'} ) ) );
+		 * Returns <div><img src="&lt;"/></div>
+		 */
+		this.element = function( name, attrs, contents ) {
+			var v, s = '<' + name;
+			for ( var attrName in attrs ) {
+				v = attrs[attrName];
+				// Convert name=true, to name=name
+				if ( v === true ) {
+					v = attrName;
+				// Skip name=false
+				} else if ( v === false ) {
+					continue;
+				}
+				s += ' ' + attrName + '="' + this.escape( '' + v ) + '"';
+			}
+			if ( contents === undefined || contents === null ) {
+				// Self close tag
+				s += '/>';
+				return s;
+			}
+			// Regular open tag
+			s += '>';
+			switch ( typeof contents ) {
+				case 'string':
+					// Escaped
+					s += this.escape( contents );
+					break;
+				case 'number':
+				case 'boolean':
+					// Convert to string
+					s += '' + contents;
+					break;
+				default:
+					if ( contents instanceof this.Raw ) {
+						// Raw HTML inclusion
+						s += contents.value;
+					} else if ( contents instanceof this.Cdata ) {
+						// CDATA
+						if ( /<\/[a-zA-z]/.test( contents.value ) ) {
+							throw new Error( 'mw.html.element: Illegal end tag found in CDATA' );
+						}
+						s += contents.value;
+					} else {
+						throw new Error( 'mw.html.element: Invalid type of contents' );
+					}
+			}
+			s += '</' + name + '>';
+			return s;
+		};
+	} )();
+
 } )( Zepto );
