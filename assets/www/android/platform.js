@@ -78,6 +78,15 @@ function toggleForward() {
     $('#forwardCmd').attr('disabled', 'true');
 
     console.log('Forward command disabled '+$('#forwardCmd').attr('disabled')); 
+
+	$('#appMenu command').each(function() {
+		var $command = $(this),
+			id = $command.attr('id'),
+			msg = 'menu-' + id.replace(/Cmd$/, ''),
+			label = mw.message(msg).plain();
+		$command.attr('label', label);
+	});
+
     window.plugins.SimpleMenu.loadMenu($('#appMenu')[0], 
                                        function(success) {console.log(success);},
                                        function(error) {console.log(error);});
@@ -88,4 +97,3 @@ function hasNetworkConnection()
 {
     return navigator.network.connection.type == Connection.NONE ? false : true;
 }
-
