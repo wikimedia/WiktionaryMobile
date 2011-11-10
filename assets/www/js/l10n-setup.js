@@ -10,8 +10,8 @@ function normalizeLanguageCode(lang) {
 	if (typeof lang !== "string") {
 		throw new Error("Invalid type for language name");
 	}
-	if (!lang.match(/^[a-z0-9]+(-[a-z0-9]+)*$/)) {
-		throw new Error("Invalid language name format");
+	if (!lang.match(/^[a-z0-9]+(-[a-z0-9]+)*$/i)) {
+		throw new Error("Invalid language name format: " + lang);
 	}
 	return lang.toLowerCase();
 }
@@ -24,6 +24,7 @@ function normalizeLanguageCode(lang) {
 function loadMessages(lang, callback) {
 	lang = normalizeLanguageCode(lang);
 	var url = 'messages/messages-' + lang + '.properties';
+	alert(url);
 	$.ajax({
 		url: url,
 		async: false,
@@ -33,21 +34,51 @@ function loadMessages(lang, callback) {
 				var messages = propertiesFileReader.parse(data);
 			} catch (e) {
 				alert('Error parsing localization file for ' + lang + ': ' + e);
-				callback(null);
+				callback(false);
+				return;
 			}
 			$.each(messages, function(key, val) {
 				mw.messages.set(key, val);
 			});
+			callback(true);
 		},
 		error: function(xhr, status, err) {
 			alert('Error loading localization file for ' + lang + ': ' + status);
-			callback(null);
+			callback(false);
 		}
 	});
 }
 
-loadMessages('en', function() {
-	$(document).trigger('mw-messages-ready');
-});
+function initLanguages() {
+	alert(navigator.language);
+	// Always load english as a fallback
+	var langs = ['en'],
+		lang = normalizeLanguageCode(navigator.language), // may be eg "en-us" or "zh-tw"
+		baseLang = lang.replace(/-*?$/, ''); // strip country code, eg "en" or "zh"
 
-//@todo check window.navigator.language & load necessary files
+	if (baseLang != 'en') {
+		// Load the base language, eg 'en', 'fr', 'zh'
+		langs.push(baseLang);
+	}
+	if (lang != baseLang) {
+		// Load the variant language, eg 'en-us', 'fr-ca', 'zh-cn'
+		langs.push(lang);
+	}
+
+	var i = 0;
+	var step = function() {
+		if (i < langs.length) {
+			var sub = langs[i];
+			i++;
+			loadMessages(sub, function(ok) {
+				step();
+			});
+		} else {
+			$(document).trigger('mw-messages-ready');
+		}
+	};
+	console.log(langs);
+	step();
+}
+
+initLanguages();
