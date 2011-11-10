@@ -50,13 +50,25 @@ function loadMessages(lang, callback) {
 	});
 }
 
-/**
- * @fixme navigator.language is always 'en' on Android? https://code.google.com/p/android/issues/detail?id=4641
- */
+function navigatorLang() {
+	var lang = navigator.language;
+	if (lang == 'en') {
+		/**
+		 * @fixme navigator.language is always 'en' on Android? https://code.google.com/p/android/issues/detail?id=4641
+		 * Workaround grabbing from userAgent: http://comments.gmane.org/gmane.comp.handhelds.phonegap/7908
+		 */
+		var matches = navigator.userAgent.match(/; Android [^;]+; ([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*);/);
+		if (matches) {
+			lang = matches[1];
+		}
+	}
+	return lang;
+}
+
 function initLanguages() {
 	// Always load english as a fallback
 	var langs = ['en'],
-		lang = normalizeLanguageCode(navigator.language), // may be eg "en-us" or "zh-tw"
+		lang = normalizeLanguageCode(navigatorLang()), // may be eg "en-us" or "zh-tw"
 		baseLang = lang.replace(/-.*?$/, ''); // strip country code, eg "en" or "zh"
 
 	if (baseLang != 'en') {
