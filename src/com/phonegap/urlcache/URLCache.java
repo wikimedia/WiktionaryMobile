@@ -60,7 +60,7 @@ public final class URLCache extends Plugin {
 					try {
 						u = new URL(uri);
 						URLConnection urlConnection = u.openConnection();
-						urlConnection.setRequestProperty("Application_Version", "Wikipedia Mobile/1.0.0");
+						urlConnection.setRequestProperty("Application_Version", "Wikipedia Mobile (Android)/1.0.0");
 						dis = new DataInputStream(new BufferedInputStream(urlConnection.getInputStream()));
 						out = ctx.openFileOutput(fileName, Context.MODE_PRIVATE);
 						while ((length = dis.read(buffer)) != -1) {
