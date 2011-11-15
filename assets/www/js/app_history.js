@@ -72,8 +72,7 @@ function onHistoryItemClicked(url) {
         showSpinner();  
         $('#search').addClass('inProgress');
 		$('#main').attr('src', url);
-		hideOverlayDivs();
-		showContent();
+		hideOverlays();
 	}else{
 		noConnectionMsg();
 	}
@@ -86,8 +85,7 @@ function purgeHistory() {
 		var historyDB = new Lawnchair({name:"historyDB"}, function() { this.nuke() });
 	}
 	
-	hideOverlayDivs();
-	showContent();
+	hideOverlays();
 }
 
 function showHistory() {
