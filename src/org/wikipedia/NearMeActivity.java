@@ -85,6 +85,7 @@ public class NearMeActivity extends MapActivity {
 			public void onClick(View v) {
 				GeoPoint p = mapv.getMapCenter();
 				Log.d("NearMeActivity", "Map Center Latitude "+( p.getLatitudeE6() /Math.pow(10, 6)) +" Longitude "+ (p.getLongitudeE6() / Math.pow(10, 6)));
+				mapv.getOverlays().clear();
 				searchNearLocation(p);
 			}
 		});

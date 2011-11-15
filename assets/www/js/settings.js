@@ -3,11 +3,11 @@ function getSettings() {
     getLanguages();
     PhoneGap.exec(
         function(result){
-            markup = '<div class="item"><label>Application Version:</label><p>' + result.version + '</p></div>' +
-                '<div class="item"><label>Android Version:</label><p>' + device.version + '</p></div>' +
-                '<div class="item"><label>Phonegap Version:</label><p>' + device.phonegap + '</p></div>' +
-				'<div class="item"><label>Checkbox Example</label><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec purus augue.</p><input type="checkbox"/></div>';
-	        $('#settingsList').append(markup);
+            markup = '<div class="item"><label><msg key="settings-app-version-label"></msg></label><p>' + result.version + '</p></div>' +
+                '<div class="item"><label><msg key="settings-android-version-label"></msg></label><p>' + device.version + '</p></div>' +
+                '<div class="item"><label><msg key="settings-phonegap-version-label"></msg></label><p>' + device.phonegap + '</p></div>' +
+				'<div class="item"><label><msg key="settings-checkbox-example-label"></msg></label><p><msg key="settings-checkbox-example-desc"></msg></p><input type="checkbox"/></div>';
+	        $('#settingsList').append(markup).localize();
         },
         function(error){ $('#settingsList').append(error); },
         'ApplicationVersion', 'getVersion', []
@@ -17,7 +17,7 @@ function getSettings() {
 function showSettings() {
     hideOverlayDivs();
     hideContent();
-    $('#settings').show();
+    $('#settings').localize().show();
     setActiveState();                                   
 }
 
@@ -43,7 +43,7 @@ function displayLanguages(results) {
 
     var numberOfSites = -1;
     var markup = '';
-    markup += "<form class='item'><label>Language:</label><p>Set the language you would like to read Wikipedia in</p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
+    markup += "<form class='item'><label><msg key='settings-language-label'></msg></label><p><msg key='settings-language-desc'></msg></p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
     
     if (results != null) {
         results = JSON.parse(results);
@@ -70,7 +70,7 @@ function displayLanguages(results) {
     
     markup += "</select></form>";  
 
-    $('#settingsList').append(markup);
+    $('#settingsList').append(markup).localize();
 
     showSettings();
     //hideProgressLoader();

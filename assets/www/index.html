@@ -10,8 +10,9 @@
 
     <script type="text/javascript" charset="utf-8" src="js/zepto.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="messages/messages-en.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/propertiesFileReader.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="js/phonegap-1.1.0.js"></script>
@@ -92,7 +93,7 @@
 	    
         <div>
             <div class="titlebar">
-                <div class="titlebarItem">Settings</div>
+                <div class="titlebarItem"><msg key="settings-title">Settings</msg></div>
                 <div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
             </div>
         </div>  
@@ -106,15 +107,15 @@
   </div>  
 
 	<menu id="appMenu" type="context">
-		<command type="command" id="addBookmarkCmd" label="Add Bookmark" icon="image/optionAddBookmark.png" disabled="false" action="isBookmarksMaxLimit();" />
-		<command type="command" id="bookmarksCmd" label="Bookmarks" icon="image/optionViewBookmarks.png" disabled="false" action="getBookmarks();" />
-		<command type="command" id="historyCmd" label="History" icon="image/optionViewHistory.png" disabled="false" action="getHistory();" />
-		<command type="command" id="forwardCmd" label="Forward" icon="image/optionForward.png" disabled="true" action="goForward();" />
-		<command type="command" id="nearbyCmd" label="Nearby" icon="image/optionNearMe.png" disabled="false" action="getCurrentPosition();" />
-		<command type="command" id="settingsCmd" label="Settings" icon="image/optionSettings.png" disabled="false" action="getSettings();" />	
-		<command type="command" id="selectTextCmd" label="Select text" disabled="false" action="selectText();" />	
-		<command type="command" id="sharePageCmd" label="Share page" disabled="false" action="sharePage();" />
-		<command type="command" id="aboutCmd" label="About" disabled="false" action="aboutPage();" />
+		<command type="command" id="addBookmarkCmd" icon="image/optionAddBookmark.png" disabled="false" action="isBookmarksMaxLimit();" />
+		<command type="command" id="bookmarksCmd" icon="image/optionViewBookmarks.png" disabled="false" action="getBookmarks();" />
+		<command type="command" id="historyCmd" icon="image/optionViewHistory.png" disabled="false" action="getHistory();" />
+		<command type="command" id="forwardCmd" icon="image/optionForward.png" disabled="true" action="goForward();" />
+		<command type="command" id="nearbyCmd" icon="image/optionNearMe.png" disabled="false" action="getCurrentPosition();" />
+		<command type="command" id="settingsCmd" icon="image/optionSettings.png" disabled="false" action="getSettings();" />	
+		<command type="command" id="selectTextCmd" disabled="false" action="selectText();" />
+		<command type="command" id="sharePageCmd" disabled="false" action="sharePage();" />
+		<command type="command" id="aboutCmd" disabled="false" action="aboutPage();" />
 	</menu>	
 		
   </body>
