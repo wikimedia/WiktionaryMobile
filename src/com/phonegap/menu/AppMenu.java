@@ -10,6 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;
@@ -127,7 +130,11 @@ public class AppMenu extends Plugin {
     AssetManager mgr = this.ctx.getAssets();
     String fileName = "www/" + tmp_uri;
     InputStream image = mgr.open(fileName);
-    Drawable icon = Drawable.createFromStream(image, tmp_uri);
+    // density breakages: http://stackoverflow.com/questions/7361976/how-to-create-a-drawable-from-a-stream-without-resizing-it
+    //Drawable icon = Drawable.createFromStream(image, tmp_uri);
+    Bitmap b = BitmapFactory.decodeStream(image);
+    b.setDensity(Bitmap.DENSITY_NONE);
+    Drawable icon = new BitmapDrawable(b);
     return icon;
   }
   
