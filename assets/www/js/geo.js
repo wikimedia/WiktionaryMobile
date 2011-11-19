@@ -24,4 +24,5 @@ function geoNameSuccess(wikipediaUrl) {
 
 function geoNameFailure(error) {
   console.log(error);
+  alert('Google Maps service is not available on this device.');
 }

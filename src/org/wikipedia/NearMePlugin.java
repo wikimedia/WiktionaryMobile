@@ -19,10 +19,14 @@ public class NearMePlugin extends Plugin {
 		PluginResult result = null;
 		this.callbackId = callbackId;
 		if(action.compareTo("startNearMeActivity") == 0) {
-			Intent intent = new Intent(ctx, NearMeActivity.class);
-			ctx.startActivityForResult((Plugin) this, intent, GET_GEONAME_URL);
-            result = new PluginResult(PluginResult.Status.NO_RESULT);
-            result.setKeepCallback(true);
+			try {
+				Intent intent = new Intent(ctx, Class.forName("org.wikipedia.NearMeActivity"));
+				ctx.startActivityForResult((Plugin) this, intent, GET_GEONAME_URL);
+	            result = new PluginResult(PluginResult.Status.NO_RESULT);
+	            result.setKeepCallback(true);
+			} catch (ClassNotFoundException e) {
+	            result = new PluginResult(PluginResult.Status.CLASS_NOT_FOUND_EXCEPTION);
+			}
 		}
 		return result;
 	}
