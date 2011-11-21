@@ -72,7 +72,7 @@ public class AppMenu extends Plugin {
 			   case 320 :
 			   {
 				   //Extra HIGH
-				   _densityFolder = "hdpi";
+				   _densityFolder = "xhdpi";
 				   break;
 			   }
 			   
