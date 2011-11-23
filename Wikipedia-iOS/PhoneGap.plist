@@ -52,5 +52,7 @@
 		<key>com.phonegap.splashscreen</key>
 		<string>PGSplashScreen</string>
 	</dict>
+	<key>OpenAllWhitelistURLsInWebView</key>
+	<true/>
 </dict>
 </plist>
