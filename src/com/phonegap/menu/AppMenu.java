@@ -10,11 +10,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.phonegap.DroidGap;
 import com.phonegap.api.Plugin;
 import com.phonegap.api.PluginResult;
 
@@ -31,6 +37,53 @@ public class AppMenu extends Plugin {
   private Menu appMenu;
   private ArrayList <MenuInfo> items;
   private boolean menuChanged = false;
+  private String _densityFolder = "mdpi";
+    
+  public void getScreenDensity(){
+     try{
+		   final DroidGap droidGap = (DroidGap)this.ctx;
+		   DisplayMetrics metrics = new DisplayMetrics();
+		   droidGap.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		   
+		   int _densityDPI = metrics.densityDpi;
+		   
+		   switch(_densityDPI)
+		   {
+			   case 160 :
+			   {
+				   //MEDIUM/DEFAULT
+				   _densityFolder = "mdpi";
+				   break;
+			   }
+			   
+			   case 240 :
+			   {
+				   //HIGH
+				   _densityFolder = "hdpi";
+				   break;
+			   }
+			   
+			   case 120 : 
+			   {
+				   //LOW
+				   _densityFolder = "ldpi";
+				   break;
+			   }
+			   
+			   case 320 :
+			   {
+				   //Extra HIGH
+				   _densityFolder = "xhdpi";
+				   break;
+			   }
+			   
+		   }
+	       
+	   }catch(Exception e){
+		   Log.e("Error in GetScreenDensity", e.getMessage());
+	   }
+	   
+   }
     
   @Override
   public PluginResult execute(String action, JSONArray args, String callbackId) {
@@ -76,6 +129,8 @@ public class AppMenu extends Plugin {
   
   private PluginResult updateMenu(JSONArray args)
   {
+    this.getScreenDensity();
+    
     //Toss out all the items, and create a new list
     items = new ArrayList<MenuInfo>();
     
@@ -125,9 +180,13 @@ public class AppMenu extends Plugin {
   
   private Drawable getIcon(String tmp_uri) throws IOException {
     AssetManager mgr = this.ctx.getAssets();
-    String fileName = "www/" + tmp_uri;
+    String fileName = "www/img/" + _densityFolder + "/" + tmp_uri;
     InputStream image = mgr.open(fileName);
-    Drawable icon = Drawable.createFromStream(image, tmp_uri);
+    // density breakages: http://stackoverflow.com/questions/7361976/how-to-create-a-drawable-from-a-stream-without-resizing-it
+    //Drawable icon = Drawable.createFromStream(image, tmp_uri);
+    Bitmap b = BitmapFactory.decodeStream(image);
+    b.setDensity(Bitmap.DENSITY_NONE);
+    Drawable icon = new BitmapDrawable(b);
     return icon;
   }
   
