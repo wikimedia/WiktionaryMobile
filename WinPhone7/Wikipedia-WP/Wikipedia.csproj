@@ -87,6 +87,9 @@
     <Content Include="..\..\assets\www\image\spr.png">
       <Link>www\image\spr.png</Link>
     </Content>
+    <Content Include="..\..\assets\www\js\jquery-1.7.1.min.js">
+      <Link>www\js\jquery-1.7.1.min.js</Link>
+    </Content>
     <Content Include="..\..\assets\www\messages\messages-en.properties">
       <Link>www\messages\messages-en.properties</Link>
     </Content>
@@ -132,15 +135,18 @@
     <Content Include="..\..\assets\www\js\lawnchair\adapters\ie-userdata.js">
       <Link>www\js\lawnchair\adapters\ie-userdata.js</Link>
     </Content>
-
+    <Content Include="..\..\assets\www\winphone\platform.js">
+      <Link>www\winphone\platform.js</Link>
+    </Content>
     <Content Include="GapLib\WP7GapClassLib.dll" />
     <Content Include="GapSourceDictionary.xml" />
     <Content Include="ManifestProcessor.js" />
     <Content Include="www\index.html">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="www\master.css" />
-    <Content Include="www\phonegap-1.2.0.js" />
+    <Content Include="..\..\assets\www\winphone\phonegap-1.2.0.js">
+      <Link>www\winphone\phonegap-1.2.0.js</Link>
+    </Content>
     <None Include="Properties\AppManifest.xml">
       <SubType>Designer</SubType>
     </None>
