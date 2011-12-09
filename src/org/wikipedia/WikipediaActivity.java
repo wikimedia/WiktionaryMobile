@@ -2,6 +2,7 @@ package org.wikipedia;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.webkit.WebSettings;
 //import android.util.Log;
 //import android.webkit.WebView;
 
@@ -35,5 +36,6 @@ public class WikipediaActivity extends DroidGap {
         super.loadUrl("file:///android_asset/www/index.html");
 //        this.webViewClient = new WikipediaWebViewClient(this);
         this.appView.setWebViewClient(this.webViewClient);
+        this.appView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
     }
 }
