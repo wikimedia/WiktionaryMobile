@@ -86,15 +86,15 @@ function listBookmarks(record, index) {
 }
 
 function onBookmarkItemClicked(url, index) {
-	if (hasNetworkConnection()) {
+	//if (hasNetworkConnection()) {
         $('#searchParam').val('');        
         showSpinner();  
         $('#search').addClass('inProgress');
 		$('#main').attr('src', url);
 		hideOverlays();
-	}else{
-		noConnectionMsg();
-	}
+	//}else{
+	//	noConnectionMsg();
+	//}
 }
 
 function deleteBookmarkPrompt(bookmarkKey) {

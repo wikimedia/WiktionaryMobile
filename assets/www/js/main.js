@@ -102,9 +102,11 @@ function loadWikiContent() {
     var historyDB = new Lawnchair({name:"historyDB"}, function() {
       this.all(function(history){
         if(history.length==0 || window.history.length > 1) {
-            app.setRootPage(currentLocale.url);
+            //app.setRootPage(currentLocale.url);
+        	$('#main').attr('src', currentLocale.url);
         } else {
-            app.setRootPage(history[history.length-1].value);
+            //app.setRootPage(history[history.length-1].value);
+        	$('#main').attr('src', history[history.length-1].value);
         }
       });
     });
