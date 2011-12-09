@@ -13,7 +13,16 @@ function normalizeLanguageCode(lang) {
 	if (!lang.match(/^[a-z0-9]+(-[a-z0-9]+)*$/i)) {
 		throw new Error("Invalid language name format: " + lang);
 	}
-	return lang.toLowerCase();
+	lang = lang.toLowerCase();
+	var map = {
+		'zh-cn': 'zh-hans',
+		'zh-tw': 'zh-hant'
+	};
+	if (lang in map) {
+		return map[lang];
+	} else {
+		return lang;
+	}
 }
 
 /**
