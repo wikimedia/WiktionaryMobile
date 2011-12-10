@@ -48,6 +48,9 @@ function addBookmarkPrompt() {
 function addBookmark(title, url) {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.save({key: title, value: url});
+
+		// Cache the URL...
+		app.setRootPage(url);
 	});
 }
 
@@ -86,15 +89,12 @@ function listBookmarks(record, index) {
 }
 
 function onBookmarkItemClicked(url, index) {
-	//if (hasNetworkConnection()) {
-        $('#searchParam').val('');        
-        showSpinner();  
-        $('#search').addClass('inProgress');
-		$('#main').attr('src', url);
-		hideOverlays();
-	//}else{
-	//	noConnectionMsg();
-	//}
+	// Load cached page!
+    $('#searchParam').val('');        
+    showSpinner();  
+    $('#search').addClass('inProgress');
+	app.setRootPage(url);
+	hideOverlays();
 }
 
 function deleteBookmarkPrompt(bookmarkKey) {

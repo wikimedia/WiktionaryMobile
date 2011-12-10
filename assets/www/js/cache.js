@@ -37,8 +37,8 @@ Application.prototype.setRootPage = function(url) {
 //        noConnectionMsg();
 //        navigator.app.exitApp();
     }
-    //window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
-    $('#main').attr('src', url);
+    window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
+    //$('#main').attr('src', url);
     currentHistoryIndex += 1;
     
 }
