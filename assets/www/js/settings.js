@@ -5,8 +5,7 @@ function getSettings() {
         function(result){
             markup = '<div class="item"><label><msg key="settings-app-version-label"></msg></label><p>' + result.version + '</p></div>' +
                 '<div class="item"><label><msg key="settings-android-version-label"></msg></label><p>' + device.version + '</p></div>' +
-                '<div class="item"><label><msg key="settings-phonegap-version-label"></msg></label><p>' + device.phonegap + '</p></div>' +
-				'<div class="item"><label><msg key="settings-checkbox-example-label"></msg></label><p><msg key="settings-checkbox-example-desc"></msg></p><input type="checkbox"/></div>';
+                '<div class="item"><label><msg key="settings-phonegap-version-label"></msg></label><p>' + device.phonegap + '</p></div>';
 	        $('#settingsList').append(markup).localize();
         },
         function(error){ $('#settingsList').append(error); },
