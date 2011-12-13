@@ -19,30 +19,20 @@ function search(isSuggestion) {
 		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
 		requestUrl += "format=json";
         
-        if (!isSuggestion) {
-		  $.ajax({
-			  type:'Get',
-			  url:requestUrl,
-			  success:function(data) {
-			     displayResults(data);
-		      }
-		  });
-		}else{
-          $.ajax({
-              type:'Get',
-              url:requestUrl,
-              success:function(data) {
-                 displaySuggestions(data);
-              }
-          });		
-		}
+		$.ajax({
+			type:'Get',
+			url:requestUrl,
+			success:function(data) {
+				displayResults(data, isSuggestion);
+			}
+		});
 	}else{
 		noConnectionMsg();
 		hideOverlays();
 	}
 }
 
-function displayResults(results) {
+function displayResults(results, isSuggestion) {
     setActiveState();
 	var formattedResults = "";
 	
@@ -55,12 +45,13 @@ function displayResults(results) {
 		
 			for (var i=0;i<searchResults.length;i++) {
 				var article = searchResults[i];
-				
-				if (article.toLowerCase() == $('#searchParam').val().toLowerCase()) {
-					goToResult(article);
-					return;
+
+				if(!isSuggestion) {
+					if (article.toLowerCase() == $('#searchParam').val().toLowerCase()) {
+						goToResult(article);
+						return;
+					}
 				}
-				
 				formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
 				formattedResults += "<div class='listItem'>";
 				formattedResults += "<span class='iconSearchResult'></span>";
@@ -86,6 +77,19 @@ function displayResults(results) {
 	
 	$('#resultList').html(formattedResults);
 
+    // Replace icon of bookmarks in search suggestions
+    var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+        $("#resultList .listItemContainer").each(function() {
+            var container = this;
+            var text = $(container).find(".text").text();
+            bookmarksDB.exists(text, function(exists) {
+                if(exists) {
+                    $(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconBookmark");
+                }
+            });
+        });
+    });
+
     $('#search').removeClass('inProgress');
     hideSpinner();
 	hideOverlays();
@@ -93,54 +97,6 @@ function displayResults(results) {
 	$('#searchresults').show();
 	$('#content').hide();
 	
-}
-
-function displaySuggestions(results) {
-    setActiveState();
-    var formattedResults = "";
-    
-    if (results != null) {
-        results = JSON.parse(results);
-    
-        if (results.length > 0) {
-            var searchParam = results[0];
-            var searchResults = results[1];
-        
-            for (var i=0;i<searchResults.length;i++) {
-                var article = searchResults[i];
-                
-                formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
-                formattedResults += "<div class='listItem'>";
-                formattedResults += "<span class='iconSearchResult'></span>";
-                formattedResults += "<span class='text'>" + article + "</span>";
-                formattedResults += "</div>";
-                formattedResults += "</div>";
-            }
-        }else{
-            formattedResults += "<div class='listItemContainer'>";
-            formattedResults += "<div class='listItem'>";
-            formattedResults += "<span class='iconSearchResult'></span>";
-            formattedResults += "<span class='text'>No results found</span>";
-            formattedResults += "</div>";
-            formattedResults += "</div>";
-        }
-    }else{
-        // no result from the server...
-    }
-    
-    formattedResults += "<div class='listItemContainer' onclick='javascript:hideOverlays();'>";
-    formattedResults += "<div class='listItem'>Close</div>";
-    formattedResults += "</div>";
-    
-    $('#resultList').html(formattedResults);
-
-    $('#search').removeClass('inProgress');
-    hideSpinner();
-    hideOverlays();
-
-    $('#searchresults').show();
-    $('#content').hide();
-    
 }
 
 function goToResult(article) {
