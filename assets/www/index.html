@@ -37,6 +37,7 @@
     <script type="text/javascript" charset="utf-8" src="js/search.js"></script> 
     <script type="text/javascript" charset="utf-8" src="js/geo.js"></script> 
     <script type="text/javascript" charset="utf-8" src="js/settings.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="js/langlinks.js"></script>
 
     <!-- platform-specific setup and overrides -->
     <script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
@@ -99,6 +100,16 @@
         </div>  
         <div id="settingsList">
         </div>
+	</div>
+
+	<div id="langlinks">
+		<header>
+			<div class="titlebar">
+				<div class="titlebarItem">Other languages</div>
+				<div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
+			</div>
+		</header>
+		<div id="langList"></div>
 	</div>
     
   <div id="content">

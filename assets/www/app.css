@@ -33,7 +33,7 @@ header
 	z-index:1;
 }   
 
-#bookmarks, #history, #settings, #searchresults
+#bookmarks, #history, #settings, #searchresults, #langlinks
 {
 	background-color:white;
 	width:100%;
@@ -41,7 +41,7 @@ header
 	display:none;
 }
 
-#bookmarksList, #historyList, #resultList
+#bookmarksList, #historyList, #resultList, #langList
 {
 	position:relative;
 	top:52px;

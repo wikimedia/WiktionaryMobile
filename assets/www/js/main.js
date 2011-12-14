@@ -124,6 +124,7 @@ function hideOverlayDivs() {
     $('#searchresults').hide();
     $('#settings').hide();
     $('#about').hide();
+    $('#langlinks').hide();
 }
 
 function showContent() {
