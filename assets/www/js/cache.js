@@ -3,7 +3,7 @@ function Application() {}
 Application.prototype.setRootPage = function(url) {
 	// Hide the iframe until the stylesheets are loaded,
 	// to avoid flash of unstyled text.
-	$('#main').hide();
+//	$('#main').hide();
 	var replaceRes = function() {
 
 		var frameDoc = $("#main")[0].contentDocument;
@@ -22,7 +22,9 @@ Application.prototype.setRootPage = function(url) {
 					}, 0);
 				}
 			}
-			window.plugins.urlCache.getCachedPathForURI(this.href.replace('file:', 'http:'), gotLinkPath, gotError);
+			var target = this.href.replace('file:', 'http:');
+			console.log('getting cached link: ' + target);
+			window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 		});
 
 		// Scripts need to be replaced as well, for section show/hide.
@@ -40,6 +42,7 @@ Application.prototype.setRootPage = function(url) {
 					// Replace it with a new one!
 					em.replaceWith($('<script>').attr('src', scriptPath.file));
 				}
+				console.log('getting cached link: ' + src);
 				window.plugins.urlCache.getCachedPathForURI(src, gotScriptPath, gotError);
 			}
 		});
@@ -59,7 +62,9 @@ Application.prototype.setRootPage = function(url) {
 			var gotLinkPath = function(linkPath) {
 				em.attr('src', linkPath.file);
 			}
-			window.plugins.urlCache.getCachedPathForURI(this.src.replace('file:', 'http:'), gotLinkPath, gotError);
+			var target = this.src.replace('file:', 'http:');
+			console.log('getting cached link: ' + target);
+			window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 		});
 	};
 	var gotPath = function(cachedPage) {
@@ -69,10 +74,11 @@ Application.prototype.setRootPage = function(url) {
 		$('#main').attr('src', cachedPage.file);
 	}
 	var gotError = function(error) {
-		console.log(error);
+		console.log('Error: ' + error);
 		// noConnectionMsg();
 		// navigator.app.exitApp();
 	}
+	console.log('getting cached page: ' + url);
 	window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
 	
 }
