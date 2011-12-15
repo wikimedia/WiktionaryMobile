@@ -15,14 +15,16 @@ function search(isSuggestion) {
 		showSpinner();
 		$('#search').addClass('inProgress');
 
-		var requestUrl = currentLocale.url + "/w/api.php?action=opensearch&";
-		requestUrl += "search=" + encodeURIComponent(searchParam) + "&";
-		requestUrl += "format=json";
-
+		var requestUrl = currentLocale.url + "/w/api.php";
 		$.ajax({
-			type:'Get',
-			url:requestUrl,
-			success:function(data) {
+			type: 'GET',
+			url: requestUrl,
+			data: {
+				action: 'opensearch',
+				search: searchParam,
+				format: 'json'
+			},
+			success: function(data) {
 				displayResults(data, isSuggestion);
 			}
 		});
