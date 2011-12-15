@@ -66,7 +66,6 @@ Application.prototype.setRootPage = function(url) {
 			replaceRes();
 		});
 		$('#main').attr('src', cachedPage.file);
-		currentHistoryIndex += 1;
 	}
 	var gotError = function(error) {
 		console.log(error);
@@ -74,8 +73,6 @@ Application.prototype.setRootPage = function(url) {
 		// navigator.app.exitApp();
 	}
 	window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
-	//$('#main').attr('src', url);
-	currentHistoryIndex += 1;
 	
 }
 
