@@ -161,12 +161,18 @@ function noConnectionMsg() {
 	alert("Please try again when you're connected to a network.");
 }
 
-function navigateToPage(url, historyMode) {
+function navigateToPage(url, options) {
+	var options = $.extend({cache: false, updateHistory: true}, options || {});
 	$('#searchParam').val('');
 	$('#search').addClass('inProgress');
 	showSpinner();
-	app.setRootPage(url);
-	if (historyMode !== 'nohistory') {
+	
+	if (options.cache) {
+		app.setRootPage(url);
+	} else {
+		$('#main').attr('src', url);
+	}
+	if (options.updateHistory) {
 		currentHistoryIndex += 1;
 		pageHistory[currentHistoryIndex] = url;
 	}
@@ -193,7 +199,9 @@ function goBack() {
 			navigator.app.exitApp();
 		} else {
 			console.log('going back to item ' + currentHistoryIndex + ': ' + pageHistory[currentHistoryIndex]);
-			navigateToPage(pageHistory[currentHistoryIndex], "nohistory");
+			navigateToPage(pageHistory[currentHistoryIndex], {
+				updateHistory: false
+			});
 		}
 	} else {
 		// We're showing one of the overlays; cancel out of it.
@@ -206,7 +214,9 @@ function goForward() {
 	$('#search').addClass('inProgress');
 	//window.history.go(1);
 	if (currentHistoryIndex < pageHistory.length) {
-		navigateToPage(pageHistory[++currentHistoryIndex], "nohistory")
+		navigateToPage(pageHistory[++currentHistoryIndex], {
+			updateHistory: false
+		});
 	}
 }
 

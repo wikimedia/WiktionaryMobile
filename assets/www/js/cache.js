@@ -5,6 +5,7 @@ Application.prototype.setRootPage = function(url) {
 	// to avoid flash of unstyled text.
 	$('#main').hide();
 	var replaceRes = function() {
+
 		var frameDoc = $("#main")[0].contentDocument;
 		// links rel
 		var linkCount = 0;
@@ -51,7 +52,7 @@ Application.prototype.setRootPage = function(url) {
 		$('a[href^="/"]', frameDoc).each(function() {
 			$(this).attr('href', currentLocale.url + this.href.replace('file://', '') );
 		});
-
+		
 		// images
 		$('img', frameDoc).each(function() {
 			var em = $(this);

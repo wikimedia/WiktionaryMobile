@@ -49,6 +49,12 @@ function addBookmark(title, url) {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.save({key: title, value: url});
 	});
+
+	// Make sure we've cached this page
+	navigateToPage(url, {
+		cache: true,
+		updateHistory: false
+	});
 }
 
 
@@ -86,7 +92,9 @@ function listBookmarks(record, index) {
 }
 
 function onBookmarkItemClicked(url, index) {
-	navigateToPage(url);
+	navigateToPage(url, {
+		cache: true
+	});
 	hideOverlays();
 }
 
