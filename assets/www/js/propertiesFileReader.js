@@ -60,7 +60,7 @@ propertiesFileReader = window.propertiesFileReader = {
 		}
 		return data;
 	},
-	
+
 	unescape: function(str) {
 		// @fixme add \u escapes -- won't be used in our files though
 		str = str.replace(/\\n/g, "\n");

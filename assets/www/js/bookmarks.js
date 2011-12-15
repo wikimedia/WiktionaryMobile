@@ -90,16 +90,16 @@ function listBookmarks(record, index) {
 
 function onBookmarkItemClicked(url, index) {
 	// Load cached page!
-    $('#searchParam').val('');        
-    showSpinner();  
-    $('#search').addClass('inProgress');
+	$('#searchParam').val('');        
+	showSpinner();  
+	$('#search').addClass('inProgress');
 	app.setRootPage(url);
 	hideOverlays();
 }
 
 function deleteBookmarkPrompt(bookmarkKey) {
 	var answer = confirm(mw.message('bookmark-remove-prompt', bookmarkKey).plain());
-	
+
 	if (answer) {
 		deleteBookmark(bookmarkKey);
 	}

@@ -80,7 +80,7 @@ window.mw = window.mediaWiki = new ( function( $ ) {
 		 * @return bool This returns true on success, false on failure.
 		 */
 		set: function( selection, value ) {
-      // XXX 10/14/2011 MODIFIED to fit zepto
+			// XXX 10/14/2011 MODIFIED to fit zepto
 			if ( $.isObject( selection ) ) {
 				for ( var s in selection ) {
 					this.values[s] = selection[s];

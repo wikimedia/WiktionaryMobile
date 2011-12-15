@@ -1,67 +1,67 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <meta name="viewport" content="width=100%; user-scalable=no" />
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Wikipedia</title>
-   
-    <script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>    
-    <script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/webkit-sqlite.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="js/zepto.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
+<head>
+	<meta name="viewport" content="width=100%; user-scalable=no" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Wikipedia</title>
 
-    <script type="text/javascript" charset="utf-8" src="js/propertiesFileReader.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/webkit-sqlite.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="js/phonegap-1.1.0.js"></script>
-    
-    <!-- phonegap plugins -->
-    
-    <script type="text/javascript" charset="utf-8" src="plugins/menu/menu.android.js"></script>
-    
-    <script type="text/javascript" charset="utf-8" src="plugins/softkeyboard/softkeyboard.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/zepto.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="plugins/toast/phonegap-toast.js"></script>
-    
-    <script type="text/javascript" charset="utf-8" src="plugins/share/share.js"></script>
-    
-    <script type="text/javascript" charset="utf-8" src="plugins/urlcache/URLCache.js"></script>
-    
-    <!-- app logic -->
-    <script type="text/javascript" charset="utf-8" src="js/cache.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/bookmarks.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/app_history.js"></script> 
-    <script type="text/javascript" charset="utf-8" src="js/search.js"></script> 
-    <script type="text/javascript" charset="utf-8" src="js/geo.js"></script> 
-    <script type="text/javascript" charset="utf-8" src="js/settings.js"></script> 
-    <script type="text/javascript" charset="utf-8" src="js/langlinks.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/propertiesFileReader.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
 
-    <!-- platform-specific setup and overrides -->
-    <script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/phonegap-1.1.0.js"></script>
 
-    <link rel="stylesheet" href="app.css" />  
-             
-  </head>
+	<!-- phonegap plugins -->
 
-  <body onload="init();">
+	<script type="text/javascript" charset="utf-8" src="plugins/menu/menu.android.js"></script>
+	
+	<script type="text/javascript" charset="utf-8" src="plugins/softkeyboard/softkeyboard.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="plugins/toast/phonegap-toast.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="plugins/share/share.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="plugins/urlcache/URLCache.js"></script>
+
+	<!-- app logic -->
+	<script type="text/javascript" charset="utf-8" src="js/cache.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/bookmarks.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/app_history.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/search.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/geo.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/settings.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/langlinks.js"></script>
+
+	<!-- platform-specific setup and overrides -->
+	<script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
+
+	<link rel="stylesheet" href="app.css" />  
+
+</head>
+
+<body onload="init();">
  
-  <header id="mainHeader">
-    <div class="titlebar" id="titlebar">
-      <div id="wHolder"><div class="titlebarIcon" onClick="homePage();"></div></div>
-      <div id="searchFormHolder">
-        <form action="javascript:search(false);">
-          <input type="text" id="searchParam" onkeypress="setTimeout('javascript:checkLength()', 5);"></input>
-          <input type="submit" id="search" value=""></input>
-        </form>
-        <div id="clearSearch" onclick="javascript:clearSearch();"></div>
-		<div class="spinner"></div>
-      </div>                  
-    </div>
-  </header>
-  
+	<header id="mainHeader">
+		<div class="titlebar" id="titlebar">
+			<div id="wHolder"><div class="titlebarIcon" onClick="homePage();"></div></div>
+			<div id="searchFormHolder">
+			<form action="javascript:search(false);">
+				<input type="text" id="searchParam" onkeypress="setTimeout('javascript:checkLength()', 5);"></input>
+				<input type="submit" id="search" value=""></input>
+			</form>
+			<div id="clearSearch" onclick="javascript:clearSearch();"></div>
+			<div class="spinner"></div>
+			</div>                  
+		</div>
+	</header>
 
 	<div id="bookmarks">
 		<header>
@@ -83,23 +83,23 @@
 		<div id="historyList"></div>
 		<!--
 		<div onclick="javascript:purgeHistory();">purge</div>
-		-->		
+		-->
 	</div>
-				
+
 	<div id="searchresults">
 		<div id="resultList"></div>
 	</div>
-	
+
 	<div id="settings">
-	    
-        <div>
-            <div class="titlebar">
-                <div class="titlebarItem"><msg key="settings-title">Settings</msg></div>
-                <div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
-            </div>
-        </div>  
-        <div id="settingsList">
-        </div>
+		
+		<div>
+			<div class="titlebar">
+				<div class="titlebarItem"><msg key="settings-title">Settings</msg></div>
+				<div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
+			</div>
+		</div>  
+		<div id="settingsList">
+		</div>
 	</div>
 
 	<div id="langlinks">
@@ -111,11 +111,11 @@
 		</header>
 		<div id="langList"></div>
 	</div>
-    
-  <div id="content">
-    <iframe id="main" frameborder="0" onload="javascript:iframeOnLoaded(this);">
-    </iframe>
-  </div>  
+
+	<div id="content">
+		<iframe id="main" frameborder="0" onload="javascript:iframeOnLoaded(this);">
+		</iframe>
+	</div>  
 
 	<menu id="appMenu" type="context">
 		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="false" action="selectLanguage();" />
@@ -128,8 +128,8 @@
 		<command type="command" id="selectTextCmd" disabled="false" action="selectText();" />
 		<command type="command" id="sharePageCmd" disabled="false" action="sharePage();" />
 		<command type="command" id="aboutCmd" disabled="false" action="aboutPage();" />
-	</menu>	
-		
-  </body>
+	</menu>
+
+</body>
 
 </html>

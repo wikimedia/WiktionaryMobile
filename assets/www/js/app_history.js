@@ -44,8 +44,8 @@ function historyFIFO() {
 
 function getHistory() {	
 
-    $('#historyList').html('');
-    
+	$('#historyList').html('');
+
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.each(function(record, index) {
 			$('#historyList').append(listHistory(record, index));
@@ -68,9 +68,9 @@ function listHistory(record, index) {
 
 function onHistoryItemClicked(url) {
 	//if (hasNetworkConnection()) {
-        $('#searchParam').val('');            
-        showSpinner();  
-        $('#search').addClass('inProgress');
+		$('#searchParam').val('');            
+		showSpinner();  
+		$('#search').addClass('inProgress');
 		$('#main').attr('src', url);
 		hideOverlays();
 	//}else{
@@ -80,11 +80,11 @@ function onHistoryItemClicked(url) {
 
 function purgeHistory() {
 	var answer = confirm("Remove all of your browsing history?")
-	
+
 	if (answer) {
 		var historyDB = new Lawnchair({name:"historyDB"}, function() { this.nuke() });
 	}
-	
+
 	hideOverlays();
 }
 
