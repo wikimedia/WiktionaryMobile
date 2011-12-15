@@ -45,29 +45,29 @@ function hideMobileLinks() {
 	var frameDoc = $("#main")[0].contentDocument;
 	$('#header', frameDoc).css('display', 'none');
 	$('#footmenu', frameDoc).css('display', 'none');
+	
+	frameDoc.addEventListener('click', function(event) {
+		var target = event.target,
+			url = target.href,
+			relative = $(target).attr('href');
+		if (relative.substr(0, 6) == '/wiki/') {
+			// Stop the link from opening in the iframe directly...
+			event.preventDefault();
 
-	// Internal links
-	$('a[href^="/wiki/"]', frameDoc).click(function(event) {
-		// Stop the link from opening in the iframe directly...
-		event.preventDefault();
+			// ...and load it through our intermediate cache layer.
+			navigateToPage(url);
+		} else {
+			// Stop the link from opening in the iframe...
+			event.preventDefault();
 
-		// ...and load it through our intermediate cache layer.
-		navigateToPage(this.href);
-	});
-
-	// External links
-	$('a.external, a.extiw', frameDoc).click(function(event) {
-		var target = $(this).attr('href');
-
-		// Stop the link from opening in the iframe...
-		event.preventDefault();
-
-		// And open it in parent context for reals.
-		//
-		// This seems to successfully launch the native browser, and works
-		// both with the stock browser and Firefox as user's default browser
-		document.location = target;
-	});
+			// And open it in parent context for reals.
+			//
+			// This seems to successfully launch the native browser, and works
+			// both with the stock browser and Firefox as user's default browser
+			document.location = url;
+		}
+		//alert('CLICK ' + target.href);
+	}, true);
 }
 
 function iframeOnLoaded(iframe) {
@@ -170,7 +170,8 @@ function navigateToPage(url, options) {
 	if (options.cache) {
 		app.setRootPage(url);
 	} else {
-		$('#main').attr('src', url);
+		//$('#main').attr('src', url);
+		app.hideAndLoad(url);
 	}
 	if (options.updateHistory) {
 		currentHistoryIndex += 1;
