@@ -8,6 +8,8 @@ defaultLocale.url = "http://" + defaultLocale.languageCode + ".m.wikipedia.org";
 currentLocale.languageCode = defaultLocale.languageCode;
 currentLocale.url = defaultLocale.url;
 
+var pageHistory = [];
+
 function init() {
 	document.addEventListener("deviceready", onDeviceReady, true);
 }
@@ -76,7 +78,7 @@ function iframeOnLoaded(iframe) {
 		addToHistory();
 		$('#search').removeClass('inProgress');        
 		hideSpinner();  
-		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+history.length);
+		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
 }
 
@@ -159,23 +161,25 @@ function noConnectionMsg() {
 	alert("Please try again when you're connected to a network.");
 }
 
-function navigateToPage(url) {
+function navigateToPage(url, historyMode) {
 	$('#searchParam').val('');
 	$('#search').addClass('inProgress');
 	showSpinner();
 	app.setRootPage(url);
-	currentHistoryIndex += 1;
-	history[currentHistoryIndex] = url;
+	if (historyMode !== 'nohistory') {
+		currentHistoryIndex += 1;
+		pageHistory[currentHistoryIndex] = url;
+	}
 }
 
 function toggleForward() {
-	currentHistoryIndex < window.history.length ?
+	currentHistoryIndex < pageHistory.length ?
 	$('#forwardCmd').attr('disabled', 'false') :
 	$('#forwardCmd').attr('disabled', 'true');
 }
 
 function goBack() {
-	console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+history.length);
+	console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 
 	if ($('#content').css('display') == "block") {
 		// We're showing the main view
@@ -188,7 +192,8 @@ function goBack() {
 			console.log("no more history to browse exiting...");
 			navigator.app.exitApp();
 		} else {
-			navigateToPage()
+			console.log('going back to item ' + currentHistoryIndex + ': ' + pageHistory[currentHistoryIndex]);
+			navigateToPage(pageHistory[currentHistoryIndex], "nohistory");
 		}
 	} else {
 		// We're showing one of the overlays; cancel out of it.
@@ -199,7 +204,10 @@ function goBack() {
 
 function goForward() {
 	$('#search').addClass('inProgress');
-	window.history.go(1);
+	//window.history.go(1);
+	if (currentHistoryIndex < pageHistory.length) {
+		navigateToPage(pageHistory[++currentHistoryIndex], "nohistory")
+	}
 }
 
 function lightweightNotification(text) {
