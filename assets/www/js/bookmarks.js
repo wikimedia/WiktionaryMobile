@@ -48,10 +48,6 @@ function addBookmarkPrompt() {
 function addBookmark(title, url) {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.save({key: title, value: url});
-
-		// Cache the URL...
-		showSpinner();
-		app.setRootPage(url);
 	});
 }
 
@@ -90,11 +86,7 @@ function listBookmarks(record, index) {
 }
 
 function onBookmarkItemClicked(url, index) {
-	// Load cached page!
-	$('#searchParam').val('');        
-	showSpinner();  
-	$('#search').addClass('inProgress');
-	app.setRootPage(url);
+	navigateToPage(url);
 	hideOverlays();
 }
 

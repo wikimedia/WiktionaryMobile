@@ -45,10 +45,12 @@ function hideMobileLinks() {
 	$('#footmenu', frameDoc).css('display', 'none');
 
 	// Internal links
-	$('a[href^="/wiki/"]', frameDoc).click(function(e) {
-		showSpinner();
-		$('#search').addClass('inProgress');
-		currentHistoryIndex += 1;
+	$('a[href^="/wiki/"]', frameDoc).click(function(event) {
+		// Stop the link from opening in the iframe directly...
+		event.preventDefault();
+
+		// ...and load it through our intermediate cache layer.
+		navigateToPage(this.href);
 	});
 
 	// External links
@@ -102,11 +104,9 @@ function loadWikiContent() {
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.all(function(history){
 			if(history.length==0 || window.history.length > 1) {
-				//app.setRootPage(currentLocale.url);
-				$('#main').attr('src', currentLocale.url);
+				navigateToPage(currentLocale.url);
 			} else {
-				//app.setRootPage(history[history.length-1].value);
-				$('#main').attr('src', history[history.length-1].value);
+				navigateToPage(history[history.length-1].value);
 			}
 		});
 	});
@@ -159,6 +159,15 @@ function noConnectionMsg() {
 	alert("Please try again when you're connected to a network.");
 }
 
+function navigateToPage(url) {
+	$('#searchParam').val('');
+	$('#search').addClass('inProgress');
+	showSpinner();
+	app.setRootPage(url);
+	currentHistoryIndex += 1;
+	history[currentHistoryIndex] = url;
+}
+
 function toggleForward() {
 	currentHistoryIndex < window.history.length ?
 	$('#forwardCmd').attr('disabled', 'false') :
@@ -172,10 +181,14 @@ function goBack() {
 		// We're showing the main view
 		currentHistoryIndex -= 1;
 		$('#search').addClass('inProgress');
-		window.history.go(-1);
+		// Jumping through history is unsafe with the current urlCache system
+		// sometimes we get loaded without the fixups, and everything esplodes.
+		//window.history.go(-1);
 		if(currentHistoryIndex <= 0) {
 			console.log("no more history to browse exiting...");
 			navigator.app.exitApp();
+		} else {
+			navigateToPage()
 		}
 	} else {
 		// We're showing one of the overlays; cancel out of it.
@@ -232,15 +245,11 @@ function setActiveState() {
 }
 
 function homePage() {
-	showSpinner();
 	var homeUrl = "http://" + currentLocale.languageCode + ".m.wikipedia.org";
-	$('#main').attr('src', homeUrl); 
-	currentHistoryIndex += 1;
+	navigateToPage(homeUrl);
 }
 
 function aboutPage() {
-	showSpinner();
 	var aboutUrl = "http://" + currentLocale.languageCode + ".wikipedia.org/w/index.php?title=Wikipedia:About&useformat=mobile";
-	$('#main').attr('src', aboutUrl); 
-	currentHistoryIndex += 1;
+	navigateToPage(aboutUrl);
 }

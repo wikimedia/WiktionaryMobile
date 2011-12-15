@@ -103,10 +103,8 @@ function displayResults(results, isSuggestion) {
 
 function goToResult(article) {
 	if (hasNetworkConnection()) {
-		showSpinner();
-		$('#search').addClass('inProgress');
 		var url = currentLocale.url + "/wiki/" + article;	
-		$('#main').attr('src', url);
+		navigateToPage(url);
 		hideOverlays();
 	} else {
 		noConnectionMsg();

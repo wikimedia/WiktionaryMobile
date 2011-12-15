@@ -50,10 +50,7 @@ function langLinkSelector(languages) {
 			.end()
 		.find('a')
 			.click(function() {
-				showSpinner();
-				$('#search').addClass('inProgress');
-				$('#main').attr('src', lang.url);
-				currentHistoryIndex += 1;
+				navigateToPage(lang.url);
 				hideOverlays();
 			})
 			.end()
