@@ -43,7 +43,12 @@ Application.prototype.setRootPage = function(url) {
 			}
 		});
 		
-		$('a[href^="/wiki/"]', frameDoc).each(function() {
+		// Protocol-relative links: rewrite to http:
+		$('a[href^="//"]', frameDoc).each(function() {
+			$(this).attr('href', this.href.replace('file://', 'http://') );
+		});
+		// Site-relative links: rewrite to http: and local site
+		$('a[href^="/"]', frameDoc).each(function() {
 			$(this).attr('href', currentLocale.url + this.href.replace('file://', '') );
 		});
 
