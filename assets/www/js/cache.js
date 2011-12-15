@@ -79,7 +79,6 @@ Application.prototype.setRootPage = function(url) {
 
 Application.prototype.hideAndLoad = function(url) {
 	var app = this;
-	console.log('hideAndLoad loading ' + url);
 	$.ajax({
 		url: url,
 		dataType: 'text',
@@ -87,13 +86,11 @@ Application.prototype.hideAndLoad = function(url) {
 			"Application_Version": "Wikipedia Mobile (Android)/1.0.0"
 		},
 		success: function(data) {
-			console.log('hideAndLoad got data');
 			html = app.rewriteHtmlLightweight(data, url);
 			$('#main')
 				.attr('src', 'about:blank')
 				.one('load', function() {
 					var doc = $('#main')[0].contentDocument;
-					console.log('writing data into frame');
 					doc.writeln(html);
 					hideMobileLinks();
 				});

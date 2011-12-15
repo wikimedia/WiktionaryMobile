@@ -47,26 +47,24 @@ function hideMobileLinks() {
 	$('#footmenu', frameDoc).css('display', 'none');
 	
 	frameDoc.addEventListener('click', function(event) {
-		var target = event.target,
-			url = target.href,
-			relative = $(target).attr('href');
-		if (relative.substr(0, 6) == '/wiki/') {
+		var target = event.target;
+		if (target.tagName == "A") {
+			var href = $(target).attr('href'), // not expanded
+				url = target.href;             // expanded
 			// Stop the link from opening in the iframe directly...
 			event.preventDefault();
 
-			// ...and load it through our intermediate cache layer.
-			navigateToPage(url);
-		} else {
-			// Stop the link from opening in the iframe...
-			event.preventDefault();
-
-			// And open it in parent context for reals.
-			//
-			// This seems to successfully launch the native browser, and works
-			// both with the stock browser and Firefox as user's default browser
-			document.location = url;
+			if (href.substr(0, 6) == '/wiki/') {
+				// ...and load it through our intermediate cache layer.
+				navigateToPage(url);
+			} else {
+				// ...and open it in parent context for reals.
+				//
+				// This seems to successfully launch the native browser, and works
+				// both with the stock browser and Firefox as user's default browser
+				document.location = url;
+			}
 		}
-		//alert('CLICK ' + target.href);
 	}, true);
 }
 
