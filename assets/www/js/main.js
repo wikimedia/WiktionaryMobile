@@ -169,6 +169,7 @@ function goBack() {
     console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+history.length);
 
     if ($('#content').css('display') == "block") {
+    	// We're showing the main view
         currentHistoryIndex -= 1;
         $('#search').addClass('inProgress');
         window.history.go(-1);
@@ -176,10 +177,8 @@ function goBack() {
             console.log("no more history to browse exiting...");
             navigator.app.exitApp();
         }
-    }
-
-    if ($('#bookmarks').css('display') == "block" || $('#history').css('display') == "block" || 
-        $('#searchresults').css('display') == "block" || $('#settings').css('display') == "block") {
+    } else {
+    	// We're showing one of the overlays; cancel out of it.
         window.hideOverlayDivs();
         window.showContent();
     }
