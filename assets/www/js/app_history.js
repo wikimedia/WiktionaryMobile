@@ -15,6 +15,9 @@ function addToHistory() {
 	}
 }
 
+/**
+ * @fixme has side effects of adding things into history, not obvious from the name
+ */
 function isHistoryMaxLimit(title, url) {
 	var MAX_LIMIT = 50;
 
