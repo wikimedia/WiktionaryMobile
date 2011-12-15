@@ -50,6 +50,7 @@ function addBookmark(title, url) {
 		this.save({key: title, value: url});
 
 		// Cache the URL...
+		showSpinner();
 		app.setRootPage(url);
 	});
 }
