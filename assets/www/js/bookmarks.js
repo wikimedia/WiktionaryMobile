@@ -23,7 +23,7 @@ function isBookmarksMaxLimit() {
 
 function addBookmarkPrompt() {
 	var titleToBookmark = document.getElementById("main").contentDocument.title;
-	var urlToBookmark = document.getElementById("main").contentWindow.location.href;
+	var urlToBookmark = pageHistory[currentHistoryIndex];
 	var index = titleToBookmark.indexOf(" - Wikipedia, the free encyclopedia"); // @fixme -- horribly wrong!
 
 	if (index > 0) {
