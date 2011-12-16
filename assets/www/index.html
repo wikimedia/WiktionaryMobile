@@ -33,7 +33,7 @@
 	<!-- app logic -->
 	<script type="text/javascript" charset="utf-8" src="js/cache.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/bookmarks.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/savedpages.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/app_history.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/search.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/geo.js"></script>
@@ -63,14 +63,14 @@
 		</div>
 	</header>
 
-	<div id="bookmarks">
+	<div id="savedPages">
 		<header>
 			<div class="titlebar">
-				<div class="titlebarItem">Bookmarks</div>
+				<div class="titlebarItem"><msg key="saved-pages-title">Saved Pages</msg></div>
 				<div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
 			</div>
 		</header>
-		<div id="bookmarksList"></div>
+		<div id="savedPagesList"></div>
 	</div>
 		
 	<div id="history">
@@ -119,8 +119,8 @@
 
 	<menu id="appMenu" type="context">
 		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="false" action="selectLanguage();" />
-		<command type="command" id="addBookmarkCmd" icon="optionAddBookmark.png" disabled="false" action="isBookmarksMaxLimit();" />
-		<command type="command" id="bookmarksCmd" icon="optionViewBookmarks.png" disabled="false" action="getBookmarks();" />
+		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="savePage();" />
+		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="showSavedPages();" />
 		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="getHistory();" />
 		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="goForward();" />
 		<command type="command" id="nearbyCmd" icon="optionNearMe.png" disabled="false" action="getCurrentPosition();" />

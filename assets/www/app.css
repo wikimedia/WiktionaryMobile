@@ -33,7 +33,7 @@ header
 	z-index:1;
 }   
 
-#bookmarks, #history, #settings, #searchresults, #langlinks
+#savedPages, #history, #settings, #searchresults, #langlinks
 {
 	background-color:white;
 	width:100%;
@@ -41,7 +41,7 @@ header
 	display:none;
 }
 
-#bookmarksList, #historyList, #resultList, #langList
+#savedPagesList, #historyList, #resultList, #langList
 {
 	position:relative;
 	top:52px;
@@ -92,7 +92,7 @@ iframe#main {
 	background-color: #aff6ff;
 }
 
-.iconBookmark, .iconHistory, .iconSearchResult
+.iconSavedPage, .iconHistory, .iconSearchResult
 {
 	background: url(image/spr.png) -49px -100px no-repeat;
 	background-size: 160px 240px;
