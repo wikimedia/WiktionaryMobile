@@ -116,7 +116,7 @@ Application.prototype.hideAndLoad = function(url) {
  */
 Application.prototype.rewriteHtmlLightweight = function(html, url) {
 	var base = '<base href="' + url.replace(/&/g, '&amp;') + '">',
-		style = '<style type="text/css">#header,#footer{display:none}</style>';
+		style = '<style type="text/css">#header,#footmenu{display:none}</style>';
 	var html = html.replace(/(<head[^>]*>)/i, '$1' + base + style);
 	return html;
 }
