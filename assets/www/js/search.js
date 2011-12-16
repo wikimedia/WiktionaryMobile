@@ -103,7 +103,7 @@ function displayResults(results, isSuggestion) {
 
 function goToResult(article) {
 	if (hasNetworkConnection()) {
-		var url = currentLocale.url + "/wiki/" + article;	
+		var url = currentLocale.url + "/wiki/" + encodeURIComponent(article.replace(/ /g, '_'));	
 		navigateToPage(url);
 		hideOverlays();
 	} else {

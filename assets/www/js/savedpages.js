@@ -31,7 +31,11 @@ function savePagePrompt() {
 				bookmarksDB.save({key: title, value: url});
 
 				// Cache the URL...
-				app.setRootPage(url);
+				console.log('saving page: ' + url);
+				navigateToPage(url, {
+					cache: true,
+					updateHistory: false
+				});
 				lightweightNotification(mw.message('page-saved', title).plain());
 			} else {
 				// @fixme this shouldn't happen; we should check first and
