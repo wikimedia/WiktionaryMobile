@@ -49,12 +49,11 @@ function hideMobileLinks() {
 	frameDoc.addEventListener('click', function(event) {
 		var target = event.target;
 		if (target.tagName == "A") {
-			var href = $(target).attr('href'), // not expanded
-				url = target.href;             // expanded
+			var url = target.href; // expanded from relative links for us
 			// Stop the link from opening in the iframe directly...
 			event.preventDefault();
 
-			if (href.substr(0, 6) == '/wiki/') {
+			if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
 				// ...and load it through our intermediate cache layer.
 				navigateToPage(url);
 			} else {
