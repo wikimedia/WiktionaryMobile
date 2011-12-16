@@ -22,7 +22,7 @@ function savePage() {
 
 function savePagePrompt() {
 	var title = document.getElementById("main").contentDocument.title;
-	var url = document.getElementById("main").contentWindow.location.href;
+	var url = pageHistory[currentHistoryIndex];
 	var index = title.indexOf(" - Wikipedia, the free encyclopedia"); // @fixme -- horribly wrong!
 
 	if (index > 0) {
