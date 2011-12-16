@@ -273,3 +273,18 @@ function aboutPage() {
 	var aboutUrl = "http://" + currentLocale.languageCode + ".wikipedia.org/w/index.php?title=Wikipedia:About&useformat=mobile";
 	navigateToPage(aboutUrl);
 }
+
+function currentPageUrl() {
+	return pageHistory[currentHistoryIndex];
+}
+
+function currentPageTitle() {
+	// Sometimes we want this before stuff's initialized...
+	//var frameDoc = $('#main')[0].contentDocument;
+	//return $('h1', frameDoc).text();
+	var url = currentPageUrl(),
+		page = url.replace(/^https?:\/\/[^\/]+\/wiki\//, ''),
+		unescaped = decodeURIComponent(page),
+		title = unescaped.replace(/_/g, ' ');
+	return title;
+}

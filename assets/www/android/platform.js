@@ -59,9 +59,8 @@ function selectText() {
 function sharePage() {
 	// @fixme consolidate these with addBookmarkPrompt etc
 	// @fixme if we don't have a page loaded, this menu item should be disabled...
-	var frame = document.getElementById("main"),
-		title = frame.contentDocument.title.replace(/ - .*?$/, ' - ' + mw.message('sitename').plain()),
-		url = frame.contentWindow.location.href;
+	var title = currentPageTitle(),
+		url = currentPageUrl();
 	window.plugins.share.show(
 		{
 			subject: title,

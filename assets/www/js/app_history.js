@@ -1,14 +1,7 @@
 function addToHistory() {	
-	var title = document.getElementById("main").contentDocument.title;
-	var url = pageHistory[currentHistoryIndex];
-	var index = title.indexOf(" - Wikipedia, the free encyclopedia");
+	var title = currentPageTitle();
+	var url = currentPageUrl();
 
-	if (index > 0) {
-		title = title.substring(0, index);
-	}else{
-		title = "Wikipedia, the free encyclopedia";
-	}
-	
 	if (url != "about:blank") {
 		// let's add stuff to the history!
 		isHistoryMaxLimit(title, url);

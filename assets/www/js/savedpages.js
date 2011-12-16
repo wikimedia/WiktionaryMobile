@@ -21,13 +21,8 @@ function savePage() {
 }
 
 function savePagePrompt() {
-	var title = document.getElementById("main").contentDocument.title;
-	var url = pageHistory[currentHistoryIndex];
-	var index = title.indexOf(" - Wikipedia, the free encyclopedia"); // @fixme -- horribly wrong!
-
-	if (index > 0) {
-		title = title.substring(0, index);
-	}
+	var title = currentPageTitle();
+	var url = currentPageUrl();
 	
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.get(title, function(r) {	
