@@ -52,7 +52,7 @@ function showSavedPages() {
 
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		this.each(function(record, index) {	
-			$('#savedPagesList').append(formatSavedPageEntry(record));
+			$('#savedPagesList').prepend(formatSavedPageEntry(record));
 		});
 	});
 

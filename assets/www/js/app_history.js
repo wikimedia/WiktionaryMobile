@@ -51,7 +51,7 @@ function getHistory() {
 
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.each(function(record, index) {
-			$('#historyList').append(listHistory(record, index));
+			$('#historyList').prepend(listHistory(record, index));
 		});
 	});
 
