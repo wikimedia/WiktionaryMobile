@@ -64,7 +64,7 @@ function showSavedPages() {
 }
 
 function formatSavedPageEntry(record) {
-	var markup = "<div class='listItemContainer'>";
+	var markup = "<div class='listItemContainer' data-page-title='" + record.key + "'>";
 	markup += "<a class='listItem' onclick=\"javascript:onSavedPageClicked(\'" + record.value + "\');\">";
 	markup += "<span class='iconSavedPage'></span>";
 	markup += "<span class='text deleteEnabled'>" + record.key + "</span>";
@@ -91,7 +91,7 @@ function deleteSavedPagePrompt(key) {
 		var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 			this.remove(key, function() {
 				lightweightNotification(mw.message('saved-page-removed', key).plain());
-				hideOverlays();
+				$(".listItemContainer[data-page-title='" + key + "']").hide();
 			});
 		});
 	}
