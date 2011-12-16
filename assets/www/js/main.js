@@ -118,7 +118,7 @@ function hideOverlays() {
 }
 
 function hideOverlayDivs() {
-	$('#bookmarks').hide();
+	$('#savedPages').hide();
 	$('#history').hide();
 	$('#searchresults').hide();
 	$('#settings').hide();

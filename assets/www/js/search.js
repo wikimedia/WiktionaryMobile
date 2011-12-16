@@ -79,14 +79,14 @@ function displayResults(results, isSuggestion) {
 
 	$('#resultList').html(formattedResults);
 
-	// Replace icon of bookmarks in search suggestions
+	// Replace icon of savd pages in search suggestions
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		$("#resultList .listItemContainer").each(function() {
 			var container = this;
 			var text = $(container).find(".text").text();
 			bookmarksDB.exists(text, function(exists) {
 				if(exists) {
-					$(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconBookmark");
+					$(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconSavedPage");
 				}
 			});
 		});
