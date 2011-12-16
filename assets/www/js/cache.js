@@ -91,6 +91,11 @@ Application.prototype.hideAndLoad = function(url) {
 			"Application_Version": "Wikipedia Mobile (Android)/1.0.0"
 		},
 		success: function(data) {
+			if (data === '') {
+				// this ain't right. shouldn't this call error?
+				app.loadErrorPage();
+				return;
+			}
 			html = app.rewriteHtmlLightweight(data, url);
 			$('#main')
 				.attr('src', 'about:blank')
@@ -99,6 +104,9 @@ Application.prototype.hideAndLoad = function(url) {
 					doc.writeln(html);
 					hideMobileLinks();
 				});
+		},
+		error: function() {
+			app.loadErrorPage();
 		}
 	})
 }
@@ -111,6 +119,14 @@ Application.prototype.rewriteHtmlLightweight = function(html, url) {
 		style = '<style type="text/css">#header,#footer{display:none}</style>';
 	var html = html.replace(/(<head[^>]*>)/i, '$1' + base + style);
 	return html;
+}
+
+Application.prototype.loadErrorPage = function() {
+	$('#main')
+		.attr('src', 'error.html')
+		.one('load', function() {
+			$('#error', $('#main')[0].contentDocument).localize();
+		});
 }
 
 var app = new Application();
