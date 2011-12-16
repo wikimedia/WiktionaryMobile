@@ -73,6 +73,8 @@ Application.prototype.setRootPage = function(url) {
 	}
 	var gotError = function(error) {
 		console.log('Error: ' + error);
+		$('#main').show(); // in case we left it hidden
+		hideSpinner();
 		// noConnectionMsg();
 		// navigator.app.exitApp();
 	}

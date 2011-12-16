@@ -89,11 +89,15 @@ function loadContent() {
 				(config.value.languageCode) ? currentLocale.languageCode = config.value.languageCode : currentLocale.languageCode = defaultLocale.languageCode;
 			}
 			
+			enableCaching();
 			window.loadWikiContent();
 		});
 	});
 }
 
+function enableCaching() {
+	// do nothing by default
+}
 
 function loadWikiContent() {
 	showSpinner();

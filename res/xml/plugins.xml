@@ -23,5 +23,6 @@
     <plugin name="ToastPlugin" value="com.chariotsolutions.toast.plugin.ToastPlugin" />
     <plugin name="Share" value="com.schaul.plugins.share.Share"/>
     <plugin name="URLCache" value="com.phonegap.urlcache.URLCache"/>
+    <plugin name="CacheModePlugin" value="org.wikipedia.CacheModePlugin" />
     <plugin name="ApplicationVersion" value="org.wikipedia.ApplicationVersion"/>
 </plugins>

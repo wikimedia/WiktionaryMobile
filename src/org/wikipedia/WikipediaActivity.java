@@ -37,11 +37,6 @@ public class WikipediaActivity extends DroidGap {
         super.loadUrl("file:///android_asset/www/index.html");
         this.webViewClient = new WikipediaWebViewClient(this);
         this.appView.setWebViewClient(this.webViewClient);
-
-        // We shouldn't kick this in until offline.
-        // Note that this mode seems to sometimes break initialization; our deviceready
-        // event never gets called on some app initializations, very weird!
-        //this.appView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
     }
     
     @Override

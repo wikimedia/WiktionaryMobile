@@ -104,3 +104,9 @@ function hasNetworkConnection()
 {
     return navigator.network.connection.type == Connection.NONE ? false : true;
 }
+
+//@Override
+function enableCaching() {
+	console.log('attempting to set cache mode');
+	window.plugins.CacheMode.setCacheMode('LOAD_CACHE_ELSE_NETWORK');
+}
