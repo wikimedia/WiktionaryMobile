@@ -79,7 +79,7 @@ function onSavedPageClicked(url) {
 	$('#searchParam').val('');        
 	showSpinner();  
 	$('#search').addClass('inProgress');
-	app.setRootPage(url);
+	navigateToPage(url, {cache: true});
 	hideOverlays();
 }
 
