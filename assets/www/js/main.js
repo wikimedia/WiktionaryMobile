@@ -178,6 +178,17 @@ function navigateToPage(url, options) {
 		currentHistoryIndex += 1;
 		pageHistory[currentHistoryIndex] = url;
 	}
+	console.log("navigating to " + url);
+	var bookmarksDB = new Lawnchair({name: "bookmarksDB"}, function() {
+		var title = currentPageTitle();
+		this.exists(title, function(exists) {
+			if(!exists) {
+				$("#savePageCmd").attr("disabled", "false");
+			} else {
+				$("#savePageCmd").attr("disabled", "true");
+			}
+		});
+	});
 }
 
 function toggleForward() {
