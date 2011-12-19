@@ -251,5 +251,28 @@ public class AppMenu extends Plugin {
       webView.loadUrl("javascript:window.plugins.SimpleMenu.fireCallback(" + item.getItemId() + ")");
       return true;
     }
+    
+	@Override
+	public void onMessage(String id, Object data) {
+	
+		if(id.equals("onPrepareOptionsMenu"))
+		{
+		    Menu menu = (Menu) data;
+		    menu.clear();
+		    buildMenu(menu);
+		}
+		else if(id.equals("onCreateOptionsMenu") && isMenuChanged())
+		{
+		    Menu menu = (Menu) data;
+		    buildMenu(menu);
+		}
+		else if(id.equals("onOptionsItemSelected"))
+	    {
+	        MenuItem item = (MenuItem) data;
+	        onMenuItemSelected(item);
+	    }
+	    
+	}
+	
 
 }
