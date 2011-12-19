@@ -24,6 +24,16 @@ function onDeviceReady() {
 	// this has to be set for the window.history API to work properly
 	PhoneGap.UsePolling = true;
 	
+	// touchstart responds much faster than click, which starts focus
+	// Ideally the focus/blur cycle should take care of the keyboard as well, but doesn't
+	$("#searchParam").bind('touchstart', function() {
+		$(this).focus().addClass('active');
+		window.plugins.SoftKeyBoard.show();
+	}).bind('blur', function() {
+		$(this).removeClass('active');
+		window.plugins.SoftKeyBoard.hide();
+	});
+
 	loadContent();
 	setActiveState();
 }
