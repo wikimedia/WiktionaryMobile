@@ -180,7 +180,7 @@ iframe#main {
 	z-index: 2;
 }
 
-#searchParam:focus {
+#searchParam:focus, #searchParam.active {
 	margin: 0;
 	border: 3px solid #f86600;
 }
