@@ -199,6 +199,9 @@ function navigateToPage(url, options) {
 			}
 		});
 	});
+	// Enable change language - might've been disabled in a prior error page
+	console.log('enabling language');
+	$('#languageCmd').attr('disabled', 'false');  
 }
 
 function toggleForward() {
