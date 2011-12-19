@@ -247,7 +247,8 @@ function setActiveState() {
 		'.deleteButton',
 		'.listItem',
 		'#search',
-		'.closeButton'
+		'.closeButton',
+		'.titlebarIcon'
 	];
   
 	for (var key in applicableClasses) {

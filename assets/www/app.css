@@ -171,7 +171,6 @@ iframe#main {
 	left: 45px;
 	right: 45px;
 	top: 6px;
-	-webkit-border-radius: 5px 0px 0px 5px;
 	border: none;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), color-stop(0.2, #fff), color-stop(0.8, #fff), to(#eee));
 	font-size: 18px;
@@ -211,12 +210,20 @@ iframe#main {
 
 .titlebarIcon {
 	position: absolute;
-	top: 12px;
-	left: 6px;
-	background: url(image/spr.png) -99px -45px no-repeat;
+	top: 8px;
+	left: 8px;
+	background: url(image/spr.png) -96px -42px no-repeat,
+		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
 	background-size: 160px 240px;
-	height: 32px;
-	width: 34px;
+	height: 35px;
+	width: 40px;
+	border: 1px solid #333;
+	-webkit-border-radius: 5px 0px 0px 5px;	
+}
+
+.titlebarIcon.active {
+	background: url(image/spr.png) -96px -42px no-repeat,
+		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666)) !important;
 }
 
 #wHolder {
