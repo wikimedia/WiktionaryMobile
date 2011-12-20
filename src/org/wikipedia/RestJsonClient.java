@@ -22,7 +22,7 @@ public class RestJsonClient {
 		HttpURLConnection urlConnection = null;
 		ArrayList<GeoName> geoList = new ArrayList<GeoName>();
 		try {
-			String requestUrl = "http://ws.geonames.org/findNearbyWikipediaJSON?formatted=true&";
+			String requestUrl = "http://ws.geonames.net/findNearbyWikipediaJSON?formatted=true&";
 			requestUrl += "lat=" + latitude + "&";
 			requestUrl += "lng=" + longitude + "&";
 			requestUrl += "username=wikimedia";
