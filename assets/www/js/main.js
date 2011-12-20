@@ -23,17 +23,31 @@ function onDeviceReady() {
 
 	// this has to be set for the window.history API to work properly
 	PhoneGap.UsePolling = true;
-	
+
+	// Fixes clicks on the header element 'going through' to elements under them
 	// touchstart responds much faster than click, which starts focus
 	// Ideally the focus/blur cycle should take care of the keyboard as well, but doesn't
 	$("#searchParam").bind('touchstart', function() {
 		$(this).focus().addClass('active');
 		window.plugins.SoftKeyBoard.show();
+		return false;
 	}).bind('blur', function() {
 		$(this).removeClass('active');
 		window.plugins.SoftKeyBoard.hide();
 	});
-
+	
+	$(".titlebarIcon").bind('touchstart', function() {
+		homePage();
+		return false;
+	});
+	$("#search").bind('touchstart', function() {
+		search(false);
+		return false;
+	});
+	$("#clearSearch").bind('touchstart', function() {
+		clearSearch();
+		return false;
+	});
 	loadContent();
 	setActiveState();
 }
@@ -199,6 +213,9 @@ function navigateToPage(url, options) {
 			}
 		});
 	});
+	// Enable change language - might've been disabled in a prior error page
+	console.log('enabling language');
+	$('#languageCmd').attr('disabled', 'false');  
 }
 
 function toggleForward() {

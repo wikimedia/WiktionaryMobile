@@ -127,6 +127,10 @@ Application.prototype.loadErrorPage = function() {
 		.one('load', function() {
 			$('#error', $('#main')[0].contentDocument).localize();
 		});
+		//Save page and Change Language don't make sense for error page
+		$('#savePageCmd').attr('disabled', 'true');
+		console.log('disabling language');
+		$('#languageCmd').attr('disabled', 'true');
 }
 
 var app = new Application();
