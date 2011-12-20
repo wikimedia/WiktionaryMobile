@@ -60,10 +60,9 @@ function langLinkSelector(languages) {
 
 function selectLanguage() {
 	langLinkSelector(getLangLinks());
-	$($('#langlinks .titlebarItem')[0]).text(mw.message('langlinks-title').plain());
 
 	hideOverlayDivs();
-	$('#langlinks').toggle();
+	$('#langlinks').localize().show();
 	hideContent();
 	
 	setActiveState();	
