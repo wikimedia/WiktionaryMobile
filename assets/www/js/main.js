@@ -8,6 +8,13 @@ defaultLocale.url = "http://" + defaultLocale.languageCode + ".m.wikipedia.org";
 currentLocale.languageCode = defaultLocale.languageCode;
 currentLocale.url = defaultLocale.url;
 
+// Font options configuration
+var fontOptions = {
+	'smaller': '75%',
+	'normal': '100%',
+	'larger': '125%'
+};
+
 var pageHistory = [];
 
 function init() {
@@ -64,12 +71,22 @@ function removeCountryCode(localeCode) {
 	
 	return localeCode;
 }
+function adjustFontSize() {
+	var frameDoc = $("#main")[0].contentDocument;
+	var head = $('head', frameDoc);
+	var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
+		this.get('fontSize', function(fontSize) {
+			var size = fontSize.value || "normal";
+			var styleTag = '<style type=\"text/css\">#content { font-size: ' + fontOptions[size] + ' !important;} </style>';
+			head.append(styleTag);
+		});
+	});
+
+}
 
 function hideMobileLinks() {
 	var frameDoc = $("#main")[0].contentDocument;
-	$('#header', frameDoc).css('display', 'none');
-	$('#footmenu', frameDoc).css('display', 'none');
-	
+	adjustFontSize();
 	frameDoc.addEventListener('click', function(event) {
 		var target = event.target;
 		if (target.tagName == "A") {
@@ -94,7 +111,6 @@ function hideMobileLinks() {
 function iframeOnLoaded(iframe) {
 	if(iframe.src) {
 		window.scroll(0,0);
-		hideMobileLinks();
 		toggleForward();
 		addToHistory();
 		$('#search').removeClass('inProgress');        
