@@ -40,7 +40,7 @@ function onDeviceReady() {
 		homePage();
 		return false;
 	});
-	$("#search").bind('touchstart', function() {
+	$("#searchForm").bind('submit', function() {
 		search(false);
 		return false;
 	});

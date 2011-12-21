@@ -15,6 +15,12 @@ function search(isSuggestion) {
 		showSpinner();
 		$('#search').addClass('inProgress');
 
+		if(!isSuggestion) {
+			var url = urlForTitle(searchParam);
+			goToResult(url);
+			return;
+		}
+
 		var requestUrl = currentLocale.url + "/w/api.php";
 		$.ajax({
 			type: 'GET',
@@ -53,12 +59,6 @@ function displayResults(results, isSuggestion) {
 				var article = searchResults[i];
 				var url = urlForTitle(article);
 
-				if(!isSuggestion) {
-					if (article.toLowerCase() == $('#searchParam').val().toLowerCase()) {
-						goToResult(url);
-						return;
-					}
-				}
 				formattedResults += "<div data-page-url=\'" + url + "\' class='listItemContainer' onclick=\"javascript:goToResult(\'" + url + "\');\">";
 				formattedResults += "<div class='listItem'>";
 				formattedResults += "<span class='iconSearchResult'></span>";

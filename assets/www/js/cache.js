@@ -93,7 +93,7 @@ Application.prototype.hideAndLoad = function(url) {
 		success: function(data) {
 			if (data === '') {
 				// this ain't right. shouldn't this call error?
-				app.loadErrorPage();
+				app.loadErrorPage('error.html');
 				return;
 			}
 			html = app.rewriteHtmlLightweight(data, url);
@@ -105,8 +105,12 @@ Application.prototype.hideAndLoad = function(url) {
 					hideMobileLinks();
 				});
 		},
-		error: function() {
-			app.loadErrorPage();
+		error: function(xhr) {
+			if(xhr.status == 404) {
+				app.loadErrorPage('404.html');
+			} else {
+				app.loadErrorPage('error.html');
+			}
 		}
 	})
 }
@@ -121,9 +125,9 @@ Application.prototype.rewriteHtmlLightweight = function(html, url) {
 	return html;
 }
 
-Application.prototype.loadErrorPage = function() {
+Application.prototype.loadErrorPage = function(page) {
 	$('#main')
-		.attr('src', 'error.html')
+		.attr('src', page)
 		.one('load', function() {
 			$('#error', $('#main')[0].contentDocument).localize();
 		});
