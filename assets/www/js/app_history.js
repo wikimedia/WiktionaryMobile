@@ -17,11 +17,14 @@ function isHistoryMaxLimit(title, url) {
 	var historyDB = new Lawnchair({name:"historyDB"},function() {
 		this.keys(function(records) {
 			if (records.length > MAX_LIMIT) {
-				historyFIFO();	
+				historyFIFO();
 			}else{			
-				var historyDB = new Lawnchair({name:"historyDB"}, function() {
-					this.save({key: Date.now(), title: title, value: url});
-				});
+				if (records[records.length - 1].value !== url) {
+					// Add if the last thing we saw wasn't the same URL
+					var historyDB = new Lawnchair({name:"historyDB"}, function() {
+						this.save({key: Date.now(), title: title, value: url});
+					});
+				}
 			}
 		});
 	});
