@@ -25,6 +25,7 @@ function getSettings() {
 				console.log('selected  ' + selected);
 				var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
 					this.save({key: 'fontSize', value: selected});
+					adjustFontSize();
 				});
 			});
 		},

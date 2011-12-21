@@ -71,14 +71,14 @@ function removeCountryCode(localeCode) {
 	
 	return localeCode;
 }
-function adjustFontSize(frameDoc) {
-    var content = frameDoc.getElementById('content');
-	console.log('content is ' + content);
+function adjustFontSize() {
+	var frameDoc = $("#main")[0].contentDocument;
+	var head = $('head', frameDoc);
 	var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
 		this.get('fontSize', function(fontSize) {
 			var size = fontSize.value || "normal";
-			content.style['font-size'] = fontOptions[size];
-			console.log('font is ' + content.style['font-size']);
+			var styleTag = '<style type=\"text/css\">#content { font-size: ' + fontOptions[size] + ' !important;} </style>';
+			head.append(styleTag);
 		});
 	});
 
@@ -86,7 +86,7 @@ function adjustFontSize(frameDoc) {
 
 function hideMobileLinks() {
 	var frameDoc = $("#main")[0].contentDocument;
-	adjustFontSize(frameDoc);
+	adjustFontSize();
 	frameDoc.addEventListener('click', function(event) {
 		var target = event.target;
 		if (target.tagName == "A") {
