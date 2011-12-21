@@ -20,7 +20,7 @@ function isHistoryMaxLimit(title, url) {
 				historyFIFO();	
 			}else{			
 				var historyDB = new Lawnchair({name:"historyDB"}, function() {
-					this.save({key: title, value: url});
+					this.save({key: Date.now(), title: title, value: url});
 				});
 			}
 		});
@@ -52,10 +52,11 @@ function getHistory() {
 }
 
 function listHistory(record, index) {
+	var title = record.title || record.key;
 	var markup = "<div class='listItemContainer'>";
 	markup += "<div class='listItem' onclick=\"javascript:onHistoryItemClicked(\'" + record.value + "\');\">";
 	markup += "<span class='iconHistory'></span>";
-	markup += "<span class='text'>" + record.key + "</span>"
+	markup += "<span class='text'>" + title + "</span>"
 	markup += "</div>";
 	markup += "</div>";
 	
