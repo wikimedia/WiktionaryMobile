@@ -12,7 +12,8 @@ function getSettings() {
 			$('#settingsList').append(markup).localize();
 			var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
 				this.get('fontSize', function(fontSize) {
-					var size = fontSize.value || "normal";
+					fontSize = fontSize || {value: 'normal'};
+					var size = fontSize.value;
 					console.log('fontSize is set to ' + size);
 					$("#fontSizeSelector").val(size);
 				});
