@@ -34,6 +34,10 @@ function search(isSuggestion) {
 	}
 }
 
+function urlForTitle(title) {
+    return currentLocale.url + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
+}
+
 function displayResults(results, isSuggestion) {
 	setActiveState();
 	var formattedResults = "";
@@ -47,14 +51,15 @@ function displayResults(results, isSuggestion) {
 
 			for (var i=0;i<searchResults.length;i++) {
 				var article = searchResults[i];
+				var url = urlForTitle(article);
 
 				if(!isSuggestion) {
 					if (article.toLowerCase() == $('#searchParam').val().toLowerCase()) {
-						goToResult(article);
+						goToResult(url);
 						return;
 					}
 				}
-				formattedResults += "<div class='listItemContainer' onclick=\"javascript:goToResult(\'" + article + "\');\">";
+				formattedResults += "<div data-page-url=\'" + url + "\' class='listItemContainer' onclick=\"javascript:goToResult(\'" + url + "\');\">";
 				formattedResults += "<div class='listItem'>";
 				formattedResults += "<span class='iconSearchResult'></span>";
 				formattedResults += "<span class='text'>" + article + "</span>";
@@ -83,8 +88,8 @@ function displayResults(results, isSuggestion) {
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
 		$("#resultList .listItemContainer").each(function() {
 			var container = this;
-			var text = $(container).find(".text").text();
-			bookmarksDB.exists(text, function(exists) {
+			var url = $(this).attr('data-page-url');
+			bookmarksDB.exists(url, function(exists) {
 				if(exists) {
 					$(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconSavedPage");
 				}
@@ -101,9 +106,8 @@ function displayResults(results, isSuggestion) {
 	
 }
 
-function goToResult(article) {
+function goToResult(url) {
 	if (hasNetworkConnection()) {
-		var url = currentLocale.url + "/wiki/" + encodeURIComponent(article.replace(/ /g, '_'));	
 		navigateToPage(url);
 		hideOverlays();
 	} else {

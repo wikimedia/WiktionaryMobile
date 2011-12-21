@@ -204,8 +204,7 @@ function navigateToPage(url, options) {
 	}
 	console.log("navigating to " + url);
 	var bookmarksDB = new Lawnchair({name: "bookmarksDB"}, function() {
-		var title = currentPageTitle();
-		this.exists(title, function(exists) {
+		this.exists(url, function(exists) {
 			if(!exists) {
 				$("#savePageCmd").attr("disabled", "false");
 			} else {

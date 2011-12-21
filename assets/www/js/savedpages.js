@@ -25,10 +25,10 @@ function savePagePrompt() {
 	var url = currentPageUrl();
 	
 	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
-		this.get(title, function(r) {	
+		this.get(url, function(r) {	
 		
 			if (r == null) {
-				bookmarksDB.save({key: title, value: url});
+				bookmarksDB.save({key: url, title: title});
 
 				// Cache the URL...
 				console.log('saving page: ' + url);
@@ -63,12 +63,12 @@ function showSavedPages() {
 }
 
 function formatSavedPageEntry(record) {
-	var markup = "<div class='listItemContainer' data-page-title='" + record.key + "'>";
-	markup += "<a class='listItem' onclick=\"javascript:onSavedPageClicked(\'" + record.value + "\');\">";
+	var markup = "<div class='listItemContainer' data-page-url='" + record.key + "'>";
+	markup += "<a class='listItem' onclick=\"javascript:onSavedPageClicked(\'" + record.key + "\');\">";
 	markup += "<span class='iconSavedPage'></span>";
-	markup += "<span class='text deleteEnabled'>" + record.key + "</span>";
+	markup += "<span class='text deleteEnabled'>" + record.title + "</span>";
 	markup += "</a>";
-	markup += "<a class='deleteSavedPage deleteButton' href=\"javascript:deleteSavedPagePrompt(\'" + record.key + "\');\"></a>";
+	markup += "<a class='deleteSavedPage deleteButton' href=\"javascript:deleteSavedPagePrompt(\'" + record.title + "\', \'" + record.key + "\');\"></a>";
 	markup += "</div>";
 	
 	return markup;
@@ -83,14 +83,14 @@ function onSavedPageClicked(url) {
 	hideOverlays();
 }
 
-function deleteSavedPagePrompt(key) {
-	var answer = confirm(mw.message('saved-page-remove-prompt', key).plain());
+function deleteSavedPagePrompt(title, url) {
+	var answer = confirm(mw.message('saved-page-remove-prompt', title).plain());
 
 	if (answer) {
 		var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
-			this.remove(key, function() {
+			this.remove(url, function() {
 				lightweightNotification(mw.message('saved-page-removed', key).plain());
-				$(".listItemContainer[data-page-title='" + key + "']").hide();
+				$(".listItemContainer[data-page-url=\'" + url + "\']").hide();
 			});
 		});
 	}
