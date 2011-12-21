@@ -8,16 +8,13 @@ function getSettings() {
 						'<option value="normal"><msg key="settings-font-size-normal">Normal</msg></option>' + 
 						'<option value="larger"><msg key="settings-font-size-larger">Larger</msg></option>' + 
 				'</select></div>' + 
-				'<div class="item"><label><msg key="settings-app-version-label"></msg></label><input type="range">' + result.version + '</p></div>' +
-				'<div class="item"><label><msg key="settings-app-version-label"></msg></label><p>' + result.version + '</p></div>' +
-				'<div class="item"><label><msg key="settings-android-version-label"></msg></label><p>' + device.version + '</p></div>' +
-				'<div class="item"><label><msg key="settings-phonegap-version-label"></msg></label><p>' + device.phonegap + '</p></div>';
+				'<div class="item"><label><msg key="settings-app-version-label"></msg></label><p>' + result.version + '</p></div>';
 			$('#settingsList').append(markup).localize();
 			var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
 				this.get('fontSize', function(fontSize) {
 					var size = fontSize.value || "normal";
 					console.log('fontSize is set to ' + size);
-                    $("#fontSizeSelector").val(size);
+					$("#fontSizeSelector").val(size);
 				});
 			});
 			$("#fontSizeSelector").change(function() {
