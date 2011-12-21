@@ -99,6 +99,12 @@ function hasNetworkConnection()
 
 //@Override
 function enableCaching() {
-	console.log('attempting to set cache mode');
-	window.plugins.CacheMode.setCacheMode('LOAD_CACHE_ELSE_NETWORK');
+	$(document).bind('offline', function() {
+		console.log('OFFLINE');
+		window.plugins.CacheMode.setCacheMode('LOAD_CACHE_ELSE_NETWORK');
+	});
+	$(document).bind('online', function() {
+		console.log('ONLINE');
+		window.plugins.CacheMode.setCacheMode('LOAD_DEFAULT');
+	});
 }

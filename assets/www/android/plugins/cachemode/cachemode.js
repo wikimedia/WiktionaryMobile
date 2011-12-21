@@ -3,8 +3,8 @@
  * Brion Vibber 2011
  */
 
-var CacheMode = function(mode, success, fail) {
-	this.setCacheMode = function() {
+var CacheMode = function() {
+	this.setCacheMode = function(mode, success, fail) {
 		return PhoneGap.exec(success, fail, 'CacheModePlugin', 'setCacheMode', [mode]);
 	}
 };
