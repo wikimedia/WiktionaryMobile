@@ -80,6 +80,7 @@ function removeCountryCode(localeCode) {
 function getFontSize(callback) {
 	var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
 		this.get('fontSize', function(fontSize) {
+			fontSize = fontSize || {value: 'normal'};
 			var size = fontSize.value || "normal";
 			callback(size);
 		});
