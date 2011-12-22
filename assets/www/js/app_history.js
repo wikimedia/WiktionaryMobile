@@ -1,4 +1,4 @@
-function addToHistory() {	
+function addToHistory() {
 	var title = currentPageTitle();
 	var url = currentPageUrl();
 

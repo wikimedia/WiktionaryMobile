@@ -97,13 +97,15 @@ Application.prototype.hideAndLoad = function(url) {
 				return;
 			}
 			html = app.rewriteHtmlLightweight(data, url);
-			$('#main')
-				.attr('src', 'about:blank')
-				.one('load', function() {
-					var doc = $('#main')[0].contentDocument;
-					doc.writeln(html);
-					hideMobileLinks();
-				});
+			getFontSize(function(size) {
+				$('#main')
+					.attr('src', 'about:blank')
+					.one('load', function() {
+						var doc = $('#main')[0].contentDocument;
+						doc.writeln(html);
+						hideMobileLinks(size);
+					});
+			});
 		},
 		error: function(xhr) {
 			if(xhr.status == 404) {

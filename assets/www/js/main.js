@@ -71,22 +71,31 @@ function removeCountryCode(localeCode) {
 	
 	return localeCode;
 }
-function adjustFontSize() {
-	var frameDoc = $("#main")[0].contentDocument;
-	var head = $('head', frameDoc);
+
+/**
+ * Get the font size preference (async)
+ *
+ * @param callback function(size)
+ */
+function getFontSize(callback) {
 	var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
 		this.get('fontSize', function(fontSize) {
 			var size = fontSize.value || "normal";
-			var styleTag = '<style type=\"text/css\">#content { font-size: ' + fontOptions[size] + ' !important;} </style>';
-			head.append(styleTag);
+			callback(size);
 		});
 	});
-
 }
 
-function hideMobileLinks() {
+function adjustFontSize(size) {
 	var frameDoc = $("#main")[0].contentDocument;
-	//adjustFontSize();
+	var head = $('head', frameDoc);
+	var styleTag = '<style type=\"text/css\">#content { font-size: ' + fontOptions[size] + ' !important;} </style>';
+	head.append(styleTag);
+}
+
+function hideMobileLinks(size) {
+	var frameDoc = $("#main")[0].contentDocument;
+	adjustFontSize(size);
 	frameDoc.addEventListener('click', function(event) {
 		var target = event.target;
 		if (target.tagName == "A") {
