@@ -19,7 +19,7 @@ function isHistoryMaxLimit(title, url) {
 			if (records.length > MAX_LIMIT) {
 				historyFIFO();
 			}else{			
-				if (records[records.length - 1].value !== url) {
+				if (records.length == 0 || records[records.length - 1].value !== url) {
 					// Add if the last thing we saw wasn't the same URL
 					var historyDB = new Lawnchair({name:"historyDB"}, function() {
 						this.save({key: Date.now(), title: title, value: url});
