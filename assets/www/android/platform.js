@@ -53,7 +53,7 @@ function sharePage() {
 	// @fixme consolidate these with addBookmarkPrompt etc
 	// @fixme if we don't have a page loaded, this menu item should be disabled...
 	var title = currentPageTitle(),
-		url = currentPageUrl();
+		url = currentPageUrl().replace(/\.m\.wikipedia/, '.wikipedia');
 	window.plugins.share.show(
 		{
 			subject: title,
