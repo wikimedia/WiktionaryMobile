@@ -86,7 +86,7 @@ function adjustFontSize() {
 
 function hideMobileLinks() {
 	var frameDoc = $("#main")[0].contentDocument;
-	adjustFontSize();
+	//adjustFontSize();
 	frameDoc.addEventListener('click', function(event) {
 		var target = event.target;
 		if (target.tagName == "A") {
