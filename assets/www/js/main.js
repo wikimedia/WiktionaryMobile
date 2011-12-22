@@ -90,7 +90,14 @@ function hideMobileLinks() {
 	frameDoc.addEventListener('click', function(event) {
 		var target = event.target;
 		if (target.tagName == "A") {
-			var url = target.href; // expanded from relative links for us
+			var url = target.href,             // expanded from relative links for us
+				href = $(target).attr('href'); // unexpanded, may be relative
+			
+			if (href.substr(0, 1) == '#') {
+				// A local hashlink; let it through.
+				return;
+			}
+
 			// Stop the link from opening in the iframe directly...
 			event.preventDefault();
 
