@@ -3,7 +3,7 @@ var currentLocale = new Object();
 var defaultLocale = new Object();
 // default locale info
 defaultLocale.languageCode = removeCountryCode(navigator.language.toLowerCase());
-defaultLocale.url = "http://" + defaultLocale.languageCode + ".m.wikipedia.org";
+defaultLocale.url = "https://" + defaultLocale.languageCode + ".m.wikipedia.org";
 
 currentLocale.languageCode = defaultLocale.languageCode;
 currentLocale.url = defaultLocale.url;

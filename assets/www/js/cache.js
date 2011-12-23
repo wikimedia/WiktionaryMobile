@@ -23,7 +23,7 @@ Application.prototype.setRootPage = function(url) {
 					}, 0);
 				}
 			}
-			var target = this.href.replace('file:', 'http:');
+			var target = this.href.replace('file:', 'https:');
 			window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 		});
 
@@ -33,7 +33,7 @@ Application.prototype.setRootPage = function(url) {
 				src = em.attr('src');
 			if (src) {
 				if (src.substr(0, 2) == '//') {
-					src = 'http:' + src;
+					src = 'https:' + src;
 				} else if (src.substr(0, 1) == '/') {
 					src = currentLocale.url + src;
 				}
@@ -48,7 +48,7 @@ Application.prototype.setRootPage = function(url) {
 		
 		// Protocol-relative links: rewrite to http:
 		$('a[href^="//"]', frameDoc).each(function() {
-			$(this).attr('href', this.href.replace('file://', 'http://') );
+			$(this).attr('href', this.href.replace('file://', 'https://') );
 		});
 		// Site-relative links: rewrite to http: and local site
 		$('a[href^="/"]', frameDoc).each(function() {
@@ -61,7 +61,7 @@ Application.prototype.setRootPage = function(url) {
 			var gotLinkPath = function(linkPath) {
 				em.attr('src', linkPath.file);
 			}
-			var target = this.src.replace('file:', 'http:');
+			var target = this.src.replace('file:', 'https:');
 			window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 		});
 	};
