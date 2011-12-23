@@ -61,7 +61,7 @@ function displayLanguages(results) {
 
 	var numberOfSites = -1;
 	var markup = '';
-	markup += "<form class='item'><label><msg key='settings-language-label'></msg></label><p><msg key='settings-language-desc'></msg></p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
+	markup += "<form class='item'><label><msg key='settings-language-label'></msg></label><p id='settings-language-desc'></p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
 
 	if (results != null) {
 		results = JSON.parse(results);
@@ -89,6 +89,7 @@ function displayLanguages(results) {
 	markup += "</select></form>";  
 
 	$('#settingsList').append(markup).localize();
+	$('#settings-language-desc').text(mw.msg('settings-language-desc', mw.msg('sitename')));
 
 	showSettings();
 	//hideProgressLoader();
