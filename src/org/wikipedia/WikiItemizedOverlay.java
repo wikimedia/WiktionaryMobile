@@ -2,7 +2,6 @@ package org.wikipedia;
 
 import java.util.ArrayList;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -53,14 +52,13 @@ public class WikiItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 //		// find geoname
 		final GeoName geoname = ma.getGeoName(mOverlays.get(index).getTitle());
 		if(geoname != null) {
-			final Dialog dialog = new Dialog(mContext);
+			final ClickableDialog dialog = new ClickableDialog(mContext);
 			dialog.setContentView(R.layout.geoname_dialog);
 			dialog.setTitle(geoname.getTitle());
 			TextView summary = (TextView) dialog.findViewById(R.id.summary);
 			summary.setText(geoname.getSummary());
-			
-			ImageView gotoicon = (ImageView) dialog.findViewById(R.id.gotoicon);
-			gotoicon.setOnClickListener(new OnClickListener() {
+
+			dialog.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					dialog.dismiss();
