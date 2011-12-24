@@ -1,35 +1,36 @@
 function getSettings() {
 	$('#settingsList').html('');
-	getLanguages();
-	PhoneGap.exec(
-		function(result){
-			markup = '<div class="item"><label><msg key="settings-font-size-label"></msg></label><p><msg key="settings-font-size-desc"></msg><select id="fontSizeSelector">' + 
-						'<option value="smaller"><msg key="settings-font-size-smaller">Smaller</msg></option>' + 
-						'<option value="normal"><msg key="settings-font-size-normal">Normal</msg></option>' + 
-						'<option value="larger"><msg key="settings-font-size-larger">Larger</msg></option>' + 
-				'</select></div>' + 
-				'<div class="item"><label><msg key="settings-app-version-label"></msg></label><p>' + result.version + '</p></div>';
-			$('#settingsList').append(markup).localize();
-			var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
-				this.get('fontSize', function(fontSize) {
-					fontSize = fontSize || {value: 'normal'};
-					var size = fontSize.value;
-					console.log('fontSize is set to ' + size);
-					$("#fontSizeSelector").val(size);
-				});
-			});
-			$("#fontSizeSelector").change(function() {
-				var selected = $(this).val();
-				console.log('selected  ' + selected);
+	getLanguages(function() {
+		PhoneGap.exec(
+			function(result){
+				markup = '<div class="item"><label><msg key="settings-font-size-label"></msg></label><p><msg key="settings-font-size-desc"></msg><select id="fontSizeSelector">' + 
+							'<option value="smaller"><msg key="settings-font-size-smaller">Smaller</msg></option>' + 
+							'<option value="normal"><msg key="settings-font-size-normal">Normal</msg></option>' + 
+							'<option value="larger"><msg key="settings-font-size-larger">Larger</msg></option>' + 
+						'</select></div>' + 
+						'<div class="item"><label><msg key="settings-app-version-label"></msg></label><p>' + result.version + '</p></div>';
+				$('#settingsList').append(markup).localize();
 				var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
-					this.save({key: 'fontSize', value: selected});
-					adjustFontSize(selected);
+					this.get('fontSize', function(fontSize) {
+						fontSize = fontSize || {value: 'normal'};
+						var size = fontSize.value;
+						console.log('fontSize is set to ' + size);
+						$("#fontSizeSelector").val(size);
+					});
 				});
-			});
-		},
-		function(error){ $('#settingsList').append(error); },
-		'ApplicationVersion', 'getVersion', []
-	); 
+				$("#fontSizeSelector").change(function() {
+					var selected = $(this).val();
+					console.log('selected  ' + selected);
+					var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
+						this.save({key: 'fontSize', value: selected});
+						adjustFontSize(selected);
+					});
+				});
+			},
+			function(error){ $('#settingsList').append(error); },
+			'ApplicationVersion', 'getVersion', []
+		); 
+	});
 }
 
 function showSettings() {
@@ -39,7 +40,7 @@ function showSettings() {
 	setActiveState();                                   
 }
 
-function getLanguages() {
+function getLanguages(callback) {
   
 	//$('#settings').addClass('inProgress');  
 
@@ -52,6 +53,8 @@ function getLanguages() {
 		url:requestUrl, 
 		success:function(data) {
 			displayLanguages(data);
+			callback();
+			showSettings();
 		}
 	});
 
@@ -91,7 +94,6 @@ function displayLanguages(results) {
 	$('#settingsList').append(markup).localize();
 	$('#settings-language-desc').text(mw.msg('settings-language-desc', mw.msg('sitename')));
 
-	showSettings();
 	//hideProgressLoader();
 	//$('#settings').removeClass('inProgress');
 }
