@@ -36,6 +36,7 @@ public class NearMeActivity extends MapActivity {
 	
 	private class UpdateGeonames extends AsyncTask<Double, Void, Integer>{
 		protected void onPreExecute() {
+			showDialog();
 			mapView.getOverlays().clear();
 		}
 		protected Integer doInBackground(Double... gps) {
@@ -67,6 +68,25 @@ public class NearMeActivity extends MapActivity {
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.nearme_menu, menu);
+	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.my_location:
+	        searchNearBy();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
 	}
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -102,31 +122,27 @@ public class NearMeActivity extends MapActivity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.nearme_menu, menu);
-	    return true;
+	public void onStart() {
+		super.onStart();
+		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
+		if(!preferences.getBoolean("doSearchNearBy", true)) {
+			SharedPreferences.Editor editor = preferences.edit();
+			editor.putBoolean("doSearchNearBy", true);
+			GeoPoint p = mapView.getMapCenter();
+			searchNearLocation(p);
+		}
+		myLocationOverlay.enableMyLocation();
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle item selection
-	    switch (item.getItemId()) {
-	    case R.id.my_location:
-	        searchNearBy();
-	        return true;
-	    default:
-	        return super.onOptionsItemSelected(item);
-	    }
-	}
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
+	protected void onStop() {
+		super.onStop();
 		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
 		SharedPreferences.Editor editor = preferences.edit();
 		editor.putBoolean("doSearchNearBy", false);
 		editor.commit();
+		
+		myLocationOverlay.disableMyLocation();
 	}
 	
 	private  void showDialog() {
@@ -150,7 +166,6 @@ public class NearMeActivity extends MapActivity {
 	}
 	
 	private void searchNearLocation(GeoPoint p) {
-		showDialog();
 		mapView.getController().setCenter(p);
 		double latitude = p.getLatitudeE6() / Math.pow(10, 6);
 		double longitude = p.getLongitudeE6() / Math.pow(10, 6);
