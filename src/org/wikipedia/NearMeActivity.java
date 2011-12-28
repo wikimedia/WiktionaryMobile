@@ -104,7 +104,7 @@ public class NearMeActivity extends MapActivity {
 	
 	@Override
 	public void onStart() {
-		super.onResume();
+		super.onStart();
 		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
 		if(!preferences.getBoolean("doSearchNearBy", true)) {
 			SharedPreferences.Editor editor = preferences.edit();
@@ -136,7 +136,7 @@ public class NearMeActivity extends MapActivity {
 	
 	@Override
 	protected void onStop() {
-		super.onPause();
+		super.onStop();
 		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
 		SharedPreferences.Editor editor = preferences.edit();
 		editor.putBoolean("doSearchNearBy", false);
