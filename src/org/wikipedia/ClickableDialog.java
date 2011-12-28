@@ -19,7 +19,9 @@ public class ClickableDialog extends Dialog {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		clickListener.onClick(null);
+		if(!super.onTouchEvent(event)) {
+			clickListener.onClick(null);
+		}
 		return true;
 	}
 }
