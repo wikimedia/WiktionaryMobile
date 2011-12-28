@@ -57,7 +57,8 @@ public class WikiItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 			dialog.setTitle(geoname.getTitle());
 			TextView summary = (TextView) dialog.findViewById(R.id.summary);
 			summary.setText(geoname.getSummary());
-
+			
+			dialog.setCanceledOnTouchOutside(true);
 			dialog.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
