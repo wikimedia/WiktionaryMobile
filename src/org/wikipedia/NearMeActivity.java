@@ -12,6 +12,9 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,6 +22,7 @@ import android.widget.Button;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
@@ -28,8 +32,12 @@ public class NearMeActivity extends MapActivity {
 	private ProgressDialog progressDialog;
 	private List<Overlay> mapOverlays;
 	private ArrayList<GeoName> geonames;
+	private MyLocationOverlay myLocationOverlay;
 	
 	private class UpdateGeonames extends AsyncTask<Double, Void, Integer>{
+		protected void onPreExecute() {
+			mapView.getOverlays().clear();
+		}
 		protected Integer doInBackground(Double... gps) {
 			geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1]);
 			if(geonames != null) {
@@ -43,7 +51,7 @@ public class NearMeActivity extends MapActivity {
 			return 0;
 		}
 		protected void onPostExecute(Integer result) {
-			mapView.getController().zoomIn();
+			mapView.getOverlays().add(myLocationOverlay);
 			progressDialog.dismiss();
 		}
 	}
@@ -72,6 +80,9 @@ public class NearMeActivity extends MapActivity {
 		
 		mapOverlays = mapView.getOverlays();
 		
+		myLocationOverlay = new MyLocationOverlay(this, mapView);
+		myLocationOverlay.enableMyLocation();
+		
 		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
 		
 		if(preferences.getBoolean("doSearchNearBy", true)) {
@@ -85,10 +96,28 @@ public class NearMeActivity extends MapActivity {
 			public void onClick(View v) {
 				GeoPoint p = mapv.getMapCenter();
 				Log.d("NearMeActivity", "Map Center Latitude "+( p.getLatitudeE6() /Math.pow(10, 6)) +" Longitude "+ (p.getLongitudeE6() / Math.pow(10, 6)));
-				mapv.getOverlays().clear();
 				searchNearLocation(p);
 			}
 		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.nearme_menu, menu);
+	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.my_location:
+	        searchNearBy();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
 	}
 	
 	@Override
@@ -111,16 +140,13 @@ public class NearMeActivity extends MapActivity {
 	}
 	
 	private void searchNearBy() {
-		showDialog();
 		final double[] gps = getGPS();
 		Log.d("NearMeActivity", "Latitude: "+gps[0]+" longitude: "+gps[1]);
-		
+
 		GeoPoint location = new GeoPoint((int)(gps[0] * Math.pow(10, 6)), 
 				  (int)(gps[1] * Math.pow(10, 6)));
 		
-		mapView.getController().setCenter(location);
-		
-		new UpdateGeonames().execute(gps[0], gps[1]);
+		searchNearLocation(location);
 	}
 	
 	private void searchNearLocation(GeoPoint p) {

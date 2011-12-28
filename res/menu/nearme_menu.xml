@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/my_location" android:visible="true" android:title="My location" android:enabled="true" android:icon="@android:drawable/ic_menu_mylocation"></item>
+</menu>
