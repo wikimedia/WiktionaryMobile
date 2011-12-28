@@ -70,6 +70,25 @@ public class NearMeActivity extends MapActivity {
 		return null;
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.nearme_menu, menu);
+	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.my_location:
+	        searchNearBy();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
+	}
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nearme);
@@ -113,25 +132,6 @@ public class NearMeActivity extends MapActivity {
 			searchNearLocation(p);
 		}
 		myLocationOverlay.enableMyLocation();
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.nearme_menu, menu);
-	    return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle item selection
-	    switch (item.getItemId()) {
-	    case R.id.my_location:
-	        searchNearBy();
-	        return true;
-	    default:
-	        return super.onOptionsItemSelected(item);
-	    }
 	}
 	
 	@Override
