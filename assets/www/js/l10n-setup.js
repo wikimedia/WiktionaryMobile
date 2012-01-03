@@ -16,9 +16,9 @@ function normalizeLanguageCode(lang) {
 	lang = lang.toLowerCase();
 	var map = {
 		'zh-cn': 'zh-hans',
-		'zh-tw': 'zh-hant'
+		'zh-tw': 'zh-hant',
 		'sr': 'sr-ec', // Serbian Cyrillic
-		'iw': 'he', // Hebrew, just in case they prefer this variant
+		'iw': 'he' // Hebrew, just in case Android prefers Java-style 'iw'
 	};
 	if (lang in map) {
 		return map[lang];
