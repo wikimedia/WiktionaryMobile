@@ -17,6 +17,7 @@ function normalizeLanguageCode(lang) {
 	var map = {
 		'zh-cn': 'zh-hans',
 		'zh-tw': 'zh-hant',
+		'sr-sr': 'sr-ec', // Serbian Cyrillic
 		'sr': 'sr-ec', // Serbian Cyrillic
 		'iw': 'he' // Hebrew, just in case Android prefers Java-style 'iw'
 	};
