@@ -17,6 +17,8 @@ function normalizeLanguageCode(lang) {
 	var map = {
 		'zh-cn': 'zh-hans',
 		'zh-tw': 'zh-hant'
+		'sr': 'sr-ec', // Serbian Cyrillic
+		'iw': 'he', // Hebrew, just in case they prefer this variant
 	};
 	if (lang in map) {
 		return map[lang];
