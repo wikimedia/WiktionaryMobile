@@ -31,7 +31,6 @@ public class NearMeActivity extends MapActivity {
 	private MapView mapView;
 	private ProgressDialog progressDialog;
 	private List<Overlay> mapOverlays;
-	private ArrayList<GeoName> geonames;
 	private MyLocationOverlay myLocationOverlay;
 	
 	private class UpdateGeonames extends AsyncTask<Double, Void, Integer>{
@@ -40,14 +39,15 @@ public class NearMeActivity extends MapActivity {
 			mapView.getOverlays().clear();
 		}
 		protected Integer doInBackground(Double... gps) {
-			geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1]);
-			if(geonames != null) {
-				Iterator<GeoName> it = geonames.iterator();
+			WikipediaApp app = (WikipediaApp)getApplicationContext();
+			app.geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1]);
+			if(app.geonames != null) {
+				Iterator<GeoName> it = app.geonames.iterator();
 				while(it.hasNext()) {
 					mapOverlays.add(createItemizedOverlay(it.next()));
 				}
-				Log.d("NearMeActivity", "Size "+geonames.size()+"Size Overlays "+mapOverlays.size());
-				return geonames.size();
+				Log.d("NearMeActivity", "Size "+ app.geonames.size()+ "Size Overlays "+mapOverlays.size());
+				return app.geonames.size();
 			}
 			return 0;
 		}
@@ -58,7 +58,8 @@ public class NearMeActivity extends MapActivity {
 	}
 	
 	public GeoName getGeoName(String title) {
-		Iterator<GeoName> it = geonames.iterator();
+		WikipediaApp app = (WikipediaApp)getApplicationContext();
+		Iterator<GeoName> it = app.geonames.iterator();
 		while(it.hasNext()) {
 			GeoName geoname = it.next();
 			Log.d("NearMeActivity", "GeoName title "+geoname.getTitle() + " OverLay title " + title);
@@ -89,9 +90,13 @@ public class NearMeActivity extends MapActivity {
 	    }
 	}
 	
+	
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nearme);
+		
+		WikipediaApp app = (WikipediaApp)getApplicationContext();
 		
 		mapView = (MapView)findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
@@ -102,12 +107,16 @@ public class NearMeActivity extends MapActivity {
 		
 		myLocationOverlay = new MyLocationOverlay(this, mapView);
 		myLocationOverlay.enableMyLocation();
-		
-		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
-		
-		if(preferences.getBoolean("doSearchNearBy", true)) {
+		if(app.geonames != null) {
+			Iterator<GeoName> it = app.geonames.iterator();
+			while(it.hasNext()) {
+				mapOverlays.add(createItemizedOverlay(it.next()));
+			}
+		} else {
 			searchNearBy();
 		}
+		
+		mapOverlays.add(myLocationOverlay);
 		
 		Button redo = (Button)findViewById(R.id.redo);
 		final MapView mapv = mapView;
@@ -119,30 +128,6 @@ public class NearMeActivity extends MapActivity {
 				searchNearLocation(p);
 			}
 		});
-	}
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
-		if(!preferences.getBoolean("doSearchNearBy", true)) {
-			SharedPreferences.Editor editor = preferences.edit();
-			editor.putBoolean("doSearchNearBy", true);
-			GeoPoint p = mapView.getMapCenter();
-			searchNearLocation(p);
-		}
-		myLocationOverlay.enableMyLocation();
-	}
-	
-	@Override
-	protected void onStop() {
-		super.onStop();
-		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
-		SharedPreferences.Editor editor = preferences.edit();
-		editor.putBoolean("doSearchNearBy", false);
-		editor.commit();
-		
-		myLocationOverlay.disableMyLocation();
 	}
 	
 	private  void showDialog() {
