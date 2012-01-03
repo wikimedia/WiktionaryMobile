@@ -42,9 +42,8 @@ public class NearMeActivity extends MapActivity {
 			WikipediaApp app = (WikipediaApp)getApplicationContext();
 			app.geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1]);
 			if(app.geonames != null) {
-				Iterator<GeoName> it = app.geonames.iterator();
-				while(it.hasNext()) {
-					mapOverlays.add(createItemizedOverlay(it.next()));
+				for(GeoName g: app.geonames) {
+					mapOverlays.add(createItemizedOverlay(g));
 				}
 				Log.d("NearMeActivity", "Size "+ app.geonames.size()+ "Size Overlays "+mapOverlays.size());
 				return app.geonames.size();
@@ -52,6 +51,7 @@ public class NearMeActivity extends MapActivity {
 			return 0;
 		}
 		protected void onPostExecute(Integer result) {
+			myLocationOverlay.enableMyLocation();
 			mapView.getOverlays().add(myLocationOverlay);
 			progressDialog.dismiss();
 		}
@@ -106,17 +106,17 @@ public class NearMeActivity extends MapActivity {
 		mapOverlays = mapView.getOverlays();
 		
 		myLocationOverlay = new MyLocationOverlay(this, mapView);
-		myLocationOverlay.enableMyLocation();
+		
 		if(app.geonames != null) {
-			Iterator<GeoName> it = app.geonames.iterator();
-			while(it.hasNext()) {
-				mapOverlays.add(createItemizedOverlay(it.next()));
+			myLocationOverlay.enableMyLocation();
+			for(GeoName g: app.geonames) {
+				mapOverlays.add(createItemizedOverlay(g));
 			}
+			mapOverlays.add(myLocationOverlay);
 		} else {
 			searchNearBy();
 		}
 		
-		mapOverlays.add(myLocationOverlay);
 		
 		Button redo = (Button)findViewById(R.id.redo);
 		final MapView mapv = mapView;
