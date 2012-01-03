@@ -53,6 +53,7 @@ public class NearMeActivity extends MapActivity {
 		protected void onPostExecute(Integer result) {
 			myLocationOverlay.enableMyLocation();
 			mapView.getOverlays().add(myLocationOverlay);
+			mapView.invalidate();
 			progressDialog.dismiss();
 		}
 	}
