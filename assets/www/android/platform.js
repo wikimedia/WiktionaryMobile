@@ -2,10 +2,29 @@
 
 // @todo migrate menu setup in here?
 
+// @Override
+// navigator.lang always returns 'en' on Android
+// use the Globalization plugin to request the proper value
+function navigatorLang(success) {
+	var lang = navigator.language;
+
+	var glob = new Globalization;
+	glob.getLocaleName(function(result) {
+		lang = result.value.toLowerCase().replace('_', '-');
+		//console.log('globalization gave: ' + lang);
+		success(lang);
+	}, function(err) {
+		//console.log('globalization error: ' + err);
+		success(null);
+	});
+}
+
+
 var origOnDeviceReady = onDeviceReady;
 onDeviceReady = function() {
     document.addEventListener("backbutton", onBackButton, false);
     document.addEventListener("searchbutton", onSearchButton, false);
+	initLanguages();
 
 	if (navigator.userAgent.match(/; Android [34]/)) {
     	// The iframe doesn't stretch to fit its native size on Android 3 or 4.

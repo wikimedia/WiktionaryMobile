@@ -25,4 +25,5 @@
     <plugin name="URLCache" value="com.phonegap.urlcache.URLCache"/>
     <plugin name="CacheModePlugin" value="org.wikipedia.CacheModePlugin" />
     <plugin name="ApplicationVersion" value="org.wikipedia.ApplicationVersion"/>
+    <plugin name="GlobalizationCommand" value="com.phonegap.plugins.globalization.GlobalizationCommand"/>
 </plugins>

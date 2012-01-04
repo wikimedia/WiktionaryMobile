@@ -28,7 +28,8 @@ if (platform == 'unknown') {
 			'softkeyboard/softkeyboard.js',
 			'toast/phonegap-toast.js',
 			'share/share.js',
-			'cachemode/cachemode.js'
+			'cachemode/cachemode.js',
+			'globalization/globalization.js'
 		]
 	};
 	if (platform in plugins) {
