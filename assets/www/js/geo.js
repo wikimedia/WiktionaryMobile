@@ -5,10 +5,10 @@ function getCurrentPosition() {
 function geoNameSuccess(wikipediaUrl) {
 	if(wikipediaUrl) {
 		$('#search').addClass('inProgress');
-		$.ajax({url: "http://en.m.wikipedia.org",
+		$.ajax({url: "https://en.m.wikipedia.org",
 			success: function(data) {
 				if(data) {
-					navigateToPage('http://'+wikipediaUrl)
+					navigateToPage('https://'+wikipediaUrl)
 				} else {
 					noConnectionMsg();
 					navigator.app.exitApp();

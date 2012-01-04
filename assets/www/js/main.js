@@ -336,12 +336,12 @@ function setActiveState() {
 }
 
 function homePage() {
-	var homeUrl = "http://" + currentLocale.languageCode + ".m.wikipedia.org";
+	var homeUrl = "https://" + currentLocale.languageCode + ".m.wikipedia.org";
 	navigateToPage(homeUrl);
 }
 
 function aboutPage() {
-	var aboutUrl = "http://" + currentLocale.languageCode + ".wikipedia.org/w/index.php?title=Wikipedia:About&useformat=mobile";
+	var aboutUrl = "https://" + currentLocale.languageCode + ".wikipedia.org/w/index.php?title=Wikipedia:About&useformat=mobile";
 	navigateToPage(aboutUrl);
 }
 
