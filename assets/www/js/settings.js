@@ -64,7 +64,7 @@ function displayLanguages(results) {
 
 	var numberOfSites = -1;
 	var markup = '';
-	markup += "<form class='item'><label><msg key='settings-language-label'></msg></label><p id='settings-language-desc'></p><select id='localeSelector' onchange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
+	markup += "<form class='item'><label><msg key='settings-language-label'></msg></label><p id='settings-language-desc'></p><select id='localeSelector' onChange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
 
 	if (results != null) {
 		results = JSON.parse(results);
@@ -106,5 +106,7 @@ function onLocaleChanged(selectedValue) {
 	// save / update currentLocale in LocalStorage
 	var settingsDB = new Lawnchair({name:"settingsDB"}, function() {
 		this.save({key: "locale", value: currentLocale});
+		homePage();
+		hideOverlays();
 	});
 }
