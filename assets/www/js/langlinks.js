@@ -27,7 +27,7 @@ function getLangLinks() {
  */
 function processLanguageUrl(url) {
 	if (url.substr(0, 2) == '//') {
-		url = 'http:' + url;
+		url = 'https:' + url;
 	}
 	return url;
 }

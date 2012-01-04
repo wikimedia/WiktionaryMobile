@@ -46,7 +46,7 @@ function getLanguages(callback) {
 
 	console.log("get languages");          
 
-	var requestUrl = "http://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
+	var requestUrl = "https://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
 
 	$.ajax({
 		type:'Get', 
@@ -101,7 +101,7 @@ function displayLanguages(results) {
 function onLocaleChanged(selectedValue) {
 
 	currentLocale.languageCode = selectedValue;
-	currentLocale.url = "http://" + selectedValue + ".m.wikipedia.org";
+	currentLocale.url = "https://" + selectedValue + ".m.wikipedia.org";
 
 	// save / update currentLocale in LocalStorage
 	var settingsDB = new Lawnchair({name:"settingsDB"}, function() {
