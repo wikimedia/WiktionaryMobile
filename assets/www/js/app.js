@@ -217,7 +217,7 @@ app = {
 	
 	initLinkHandlers: function() {
 		$('#main').delegate('a', 'click', function(event) {
-			var target = event.target,
+			var target = this,
 				url = target.href,             // expanded from relative links for us
 				href = $(target).attr('href'); // unexpanded, may be relative
 
