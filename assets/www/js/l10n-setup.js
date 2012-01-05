@@ -80,35 +80,31 @@ function navigatorLang(success) {
 
 function initLanguages() {
 	// Always load english as a fallback
-	navigatorLang(function(navLang) {
-		var langs = ['en'],
-		lang = normalizeLanguageCode(navLang), // may be eg "en-us" or "zh-tw"
+	var langs = ['en'],
+		lang = preferencesDB.get('locale'), // may be eg "en-us" or "zh-tw"
 		baseLang = lang.replace(/-.*?$/, ''); // strip country code, eg "en" or "zh"
 
-		if (baseLang != 'en') {
-			// Load the base language, eg 'en', 'fr', 'zh'
-			langs.push(baseLang);
-		}
-		if (lang != baseLang) {
-			// Load the variant language, eg 'en-us', 'fr-ca', 'zh-cn'
-			langs.push(lang);
-		}
-	
-		console.log('langs are: ' + langs.join(','));
-		var i = 0;
-		var step = function() {
-			if (i < langs.length) {
-				var sub = langs[i];
-				i++;
-				loadMessages(sub, function(ok) {
-					step();
-				});
-			} else {
-				$(document).trigger('mw-messages-ready');
-			}
-		};
-		step();
-	});
-}
+	if (baseLang != 'en') {
+		// Load the base language, eg 'en', 'fr', 'zh'
+		langs.push(baseLang);
+	}
+	if (lang != baseLang) {
+		// Load the variant language, eg 'en-us', 'fr-ca', 'zh-cn'
+		langs.push(lang);
+	}
 
-initLanguages();
+	console.log('langs are: ' + langs.join(','));
+	var i = 0;
+	var step = function() {
+		if (i < langs.length) {
+			var sub = langs[i];
+			i++;
+			loadMessages(sub, function(ok) {
+				step();
+			});
+		} else {
+			$(document).trigger('mw-messages-ready');
+		}
+	};
+	step();
+}

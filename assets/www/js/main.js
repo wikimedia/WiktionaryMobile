@@ -31,6 +31,10 @@ function onDeviceReady() {
 	// this has to be set for the window.history API to work properly
 	PhoneGap.UsePolling = true;
 
+	preferencesDB.initializeDefaults(function() { 
+		initLanguages();
+	});
+
 	// Fixes clicks on the header element 'going through' to elements under them
 	// touchstart responds much faster than click, which starts focus
 	// Ideally the focus/blur cycle should take care of the keyboard as well, but doesn't
@@ -70,21 +74,6 @@ function removeCountryCode(localeCode) {
 	}
 	
 	return localeCode;
-}
-
-/**
- * Get the font size preference (async)
- *
- * @param callback function(size)
- */
-function getFontSize(callback) {
-	var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
-		this.get('fontSize', function(fontSize) {
-			fontSize = fontSize || {value: 'normal'};
-			var size = fontSize.value || "normal";
-			callback(size);
-		});
-	});
 }
 
 function adjustFontSize(size) {
@@ -137,19 +126,8 @@ function iframeOnLoaded(iframe) {
 }
 
 function loadContent() {
-	// retrieve locale settings from LocalStorage - if it doesn't exist use the defaults!
-	var settingsDB = new Lawnchair({name:"settingsDB"}, function() {
-		this.get("locale", function(config) {
-
-			if (config) {
-				(config.value.url) ? currentLocale.url = config.value.url : currentLocale.url = defaultLocale.url;
-				(config.value.languageCode) ? currentLocale.languageCode = config.value.languageCode : currentLocale.languageCode = defaultLocale.languageCode;
-			}
-			
-			enableCaching();
-			window.loadWikiContent();
-		});
-	});
+	enableCaching();
+	window.loadWikiContent();
 }
 
 function enableCaching() {

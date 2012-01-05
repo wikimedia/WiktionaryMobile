@@ -97,14 +97,12 @@ Application.prototype.hideAndLoad = function(url) {
 				return;
 			}
 			html = app.rewriteHtmlLightweight(data, url);
-			getFontSize(function(size) {
-				$('#main')
-					.attr('src', 'about:blank')
-					.one('load', function() {
-						var doc = $('#main')[0].contentDocument;
-						doc.writeln(html);
-						hideMobileLinks(size);
-					});
+			$('#main')
+				.attr('src', 'about:blank')
+				.one('load', function() {
+					var doc = $('#main')[0].contentDocument;
+					doc.writeln(html);
+					hideMobileLinks(preferencesDB.get('fontSize'));
 			});
 		},
 		error: function(xhr) {
