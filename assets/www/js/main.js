@@ -26,34 +26,34 @@ function onDeviceReady() {
 	preferencesDB.initializeDefaults(function() { 
         app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
 		initLanguages();
-	});
 
-	// Fixes clicks on the header element 'going through' to elements under them
-	// touchstart responds much faster than click, which starts focus
-	// Ideally the focus/blur cycle should take care of the keyboard as well, but doesn't
-	$("#searchParam").bind('touchstart', function() {
-		$(this).focus().addClass('active');
-		window.plugins.SoftKeyBoard.show();
-		return false;
-	}).bind('blur', function() {
-		$(this).removeClass('active');
-		window.plugins.SoftKeyBoard.hide();
+        // Fixes clicks on the header element 'going through' to elements under them
+        // touchstart responds much faster than click, which starts focus
+        // Ideally the focus/blur cycle should take care of the keyboard as well, but doesn't
+        $("#searchParam").bind('touchstart', function() {
+            $(this).focus().addClass('active');
+            window.plugins.SoftKeyBoard.show();
+            return false;
+        }).bind('blur', function() {
+            $(this).removeClass('active');
+            window.plugins.SoftKeyBoard.hide();
+        });
+
+        $(".titlebarIcon").bind('touchstart', function() {
+            homePage();
+            return false;
+        });
+        $("#searchForm").bind('submit', function() {
+            search(false);
+            return false;
+        });
+        $("#clearSearch").bind('touchstart', function() {
+            clearSearch();
+            return false;
+        });
+        loadContent();
+        setActiveState();
 	});
-	
-	$(".titlebarIcon").bind('touchstart', function() {
-		homePage();
-		return false;
-	});
-	$("#searchForm").bind('submit', function() {
-		search(false);
-		return false;
-	});
-	$("#clearSearch").bind('touchstart', function() {
-		clearSearch();
-		return false;
-	});
-	loadContent();
-	setActiveState();
 }
 
 function removeCountryCode(localeCode) {

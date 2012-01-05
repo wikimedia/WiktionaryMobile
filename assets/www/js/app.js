@@ -1,4 +1,3 @@
-function Application() {}
 app = {
 	setRootPage: function(url) {
 		// Hide the iframe until the stylesheets are loaded,
@@ -82,7 +81,6 @@ app = {
 		
 	}, 
 	hideAndLoad: function(url) {
-		var app = this;
 		$.ajax({
 			url: url,
 			dataType: 'text',
@@ -120,7 +118,6 @@ app = {
 		var html = html.replace(/(<head[^>]*>)/i, '$1' + base + style);
 		return html;
 	},
-
 	loadErrorPage: function(page) {
 		$('#main')
 			.attr('src', page)
