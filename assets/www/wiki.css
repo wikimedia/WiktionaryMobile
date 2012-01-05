@@ -174,7 +174,7 @@ html {
 	font-size: 0.8em;
 }
 
-body {
+#main {
 	line-height: 1;
 	color: black;
 	background: white;
@@ -182,46 +182,46 @@ body {
 	-webkit-text-size-adjust: none;
 }
 
-p, li, dl, #featured_article {
+#main p, #main li, #main dl, #featured_article {
 	line-height: 1.65;
 }
 
-pre {
+#main pre {
 	white-space: pre-wrap;
 }
 
-h2 {
+#main h2 {
 	border-bottom: 1px solid #aaaaaa;
 	padding-top: 0.3em;
 }
 
-a {
+#main a {
 	text-decoration: none;
 	color: #002bb8;
 }
 
-a:visited {
+#main a:visited {
 	color: #5a3696;
 }
 
-a:active {
+#main a:active {
 	color: #faa700;
 }
 
-a:hover {
+#main a:hover {
 	text-decoration: underline;
 }
 
-a.new, a.new:visited, a.new:hover {
+#main a.new, a.new:visited, a.new:hover {
 	color: red;
 }
 
-a.back_to_top, a.back_to_top:visited {
+#main a.back_to_top, a.back_to_top:visited {
 	margin-top: 7px;
 	color: blue;
 }
 
-.links {
+#main .links {
 	float: left;
 	padding: 10px;
 }
@@ -234,20 +234,20 @@ a.back_to_top, a.back_to_top:visited {
 	font-size: 1.7em;
 }
 
-h2 {
+#main h2 {
 	font-size: 1.3em;
 }
 
-.section_anchors a {
+#main .section_anchors a {
 	display: block;
 }
 
-.section_anchor {
+#main .section_anchor {
 	height: 1px;
 	width: 1px;
 }
 
-.printonly, .geo-multi-punct, .geo-nondefault, .Z3988 {
+#main .printonly, .geo-multi-punct, .geo-nondefault, .Z3988 {
 	display: none;
 }
 
@@ -286,7 +286,7 @@ img.thumbborder {
 	display: none;
 }
 
-body {
+#main {
 	margin: 0;
 }
 
