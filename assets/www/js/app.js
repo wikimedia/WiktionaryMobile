@@ -134,6 +134,7 @@ app = {
 	},
 	
 	initLinkHandlers: function() {
+		app.adjustFontSize(preferencesDB.get('fontSize'));
 		$('#main').delegate('a', 'click', function(event) {
 			var target = this,
 				url = target.href,             // expanded from relative links for us
