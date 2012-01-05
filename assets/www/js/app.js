@@ -93,6 +93,7 @@ app = {
 					app.loadErrorPage('error.html');
 					return;
 				}
+				/*
 				html = app.rewriteHtmlLightweight(data, url);
 				$('#main')
 					.attr('src', 'about:blank')
@@ -101,6 +102,9 @@ app = {
 						doc.writeln(html);
 						app.hideMobileLinks(preferencesDB.get('fontSize'));
 				});
+				*/
+				app.importPage(data, url);
+				app.onPageLoaded();
 			},
 			error: function(xhr) {
 				if(xhr.status == 404) {
@@ -125,6 +129,7 @@ app = {
 				$('#error', $('#main')[0].contentDocument).localize();
 			});
 		//Save page and Change Language don't make sense for error page
+		app.langs = [];
 		$('#savePageCmd').attr('disabled', 'true');
 		console.log('disabling language');
 		$('#languageCmd').attr('disabled', 'true');
@@ -136,20 +141,7 @@ app = {
 	 * @return array of {name: string, url: string, selected: bool} objects
 	 */
 	getLangLinks: function() {
-		var langs = [],
-			win = $('#main')[0].contentWindow,
-			doc = win.document;
-
-		$('#languageselection option', doc).each(function(i, option) {
-			var $option = $(this);
-			langs.push({
-				name: $option.text(),
-				url: processLanguageUrl($option.val()),
-				selected: ($option.attr('selected') != null)
-			});
-		});
-		
-		return langs;
+		return app.langs;
 	},
 
 	adjustFontSize: function(size) {
@@ -188,5 +180,74 @@ app = {
 				}
 			}
 		}, true);
+	},
+	
+	/**
+	 * Import page components from HTML string and display them in #main
+	 *
+	 * @param string html
+	 * @param string url - base URL
+	 */
+	importPage: function(html, url) {
+		$('base').attr('href', url);
+		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
+
+		var selectors = ['#firstHeading', '#bodyContent', '#copyright'],
+			$target = $('#main'),
+			$div = $('<div>').html(trimmed);
+
+		$target.empty();
+		$.each(selectors, function(i, sel) {
+			$div.find(sel).remove().appendTo($target);
+		});
+
+		// Also import the language selections, we'll need them later.
+		var langs = [];
+		$div.find('#languageselection option').each(function(i, option) {
+			var $option = $(this);
+			langs.push({
+				name: $option.text(),
+				url: processLanguageUrl($option.val()),
+				selected: ($option.attr('selected') != null)
+			});
+		});
+
+		app.langs = langs;
+	},
+	
+	initLinkHandlers: function() {
+		$('#main').delegate('a', 'click', function(event) {
+			var target = event.target,
+				url = target.href,             // expanded from relative links for us
+				href = $(target).attr('href'); // unexpanded, may be relative
+			
+			if (href.substr(0, 1) == '#') {
+				// A local hashlink; let it through.
+				return;
+			}
+
+			// Stop the link from opening in the iframe directly...
+			event.preventDefault();
+
+			if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
+				// ...and load it through our intermediate cache layer.
+				navigateToPage(url);
+			} else {
+				// ...and open it in parent context for reals.
+				//
+				// This seems to successfully launch the native browser, and works
+				// both with the stock browser and Firefox as user's default browser
+				document.location = url;
+			}
+		});
+	},
+	
+	onPageLoaded: function() {
+		window.scroll(0,0);
+		toggleForward();
+		addToHistory();
+		$('#search').removeClass('inProgress');        
+		hideSpinner();  
+		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
 }

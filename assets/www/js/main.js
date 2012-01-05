@@ -51,6 +51,8 @@ function onDeviceReady() {
             clearSearch();
             return false;
         });
+
+        app.initLinkHandlers();
         loadContent();
         setActiveState();
 	});
@@ -70,17 +72,6 @@ function removeCountryCode(localeCode) {
 }
 
 
-
-function iframeOnLoaded(iframe) {
-	if(iframe.src) {
-		window.scroll(0,0);
-		toggleForward();
-		addToHistory();
-		$('#search').removeClass('inProgress');        
-		hideSpinner();  
-		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
-	}
-}
 
 function loadContent() {
 	enableCaching();

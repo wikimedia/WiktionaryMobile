@@ -4,6 +4,7 @@
 <head>
 	<meta name="viewport" content="width=100%; user-scalable=no" />
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<base><!-- used to process relative links in content -->
 	<title>Wikipedia</title>
 
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
@@ -114,8 +115,7 @@
 	</div>
 
 	<div id="content">
-		<iframe id="main" frameborder="0" onload="javascript:iframeOnLoaded(this);">
-		</iframe>
+		<div id="main"></div>
 	</div>  
 
 	<menu id="appMenu" type="context">
