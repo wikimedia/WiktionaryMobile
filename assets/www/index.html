@@ -4,6 +4,7 @@
 <head>
 	<meta name="viewport" content="width=100%; user-scalable=no" />
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<base><!-- used to process relative links in content -->
 	<title>Wikipedia</title>
 
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
@@ -12,24 +13,11 @@
 	<script type="text/javascript" charset="utf-8" src="js/zepto.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/iscroll.js"></script>
 
 	<script type="text/javascript" charset="utf-8" src="js/propertiesFileReader.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/preferences.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
-
-	<script type="text/javascript" charset="utf-8" src="js/phonegap-1.1.0.js"></script>
-
-	<!-- phonegap plugins -->
-
-	<script type="text/javascript" charset="utf-8" src="plugins/menu/menu.android.js"></script>
-	
-	<script type="text/javascript" charset="utf-8" src="plugins/softkeyboard/softkeyboard.js"></script>
-
-	<script type="text/javascript" charset="utf-8" src="plugins/toast/phonegap-toast.js"></script>
-
-	<script type="text/javascript" charset="utf-8" src="plugins/share/share.js"></script>
-
-	<script type="text/javascript" charset="utf-8" src="plugins/urlcache/URLCache.js"></script>
 
 	<!-- app logic -->
 	<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
@@ -40,11 +28,13 @@
 	<script type="text/javascript" charset="utf-8" src="js/geo.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/settings.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/langlinks.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/toggle.js"></script>
 
 	<!-- platform-specific setup and overrides -->
 	<script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
 
 	<link rel="stylesheet" href="app.css" />  
+	<link rel="stylesheet" href="wiki.css" />
 
 </head>
 
@@ -114,8 +104,7 @@
 	</div>
 
 	<div id="content">
-		<iframe id="main" frameborder="0" onload="javascript:iframeOnLoaded(this);">
-		</iframe>
+		<div id="main"></div>
 	</div>  
 
 	<menu id="appMenu" type="context">

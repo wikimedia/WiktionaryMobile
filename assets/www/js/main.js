@@ -27,18 +27,6 @@ function onDeviceReady() {
         app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
 		initLanguages();
 
-        // Fixes clicks on the header element 'going through' to elements under them
-        // touchstart responds much faster than click, which starts focus
-        // Ideally the focus/blur cycle should take care of the keyboard as well, but doesn't
-        $("#searchParam").bind('touchstart', function() {
-            $(this).focus().addClass('active');
-            window.plugins.SoftKeyBoard.show();
-            return false;
-        }).bind('blur', function() {
-            $(this).removeClass('active');
-            window.plugins.SoftKeyBoard.hide();
-        });
-
         $(".titlebarIcon").bind('touchstart', function() {
             homePage();
             return false;
@@ -51,6 +39,8 @@ function onDeviceReady() {
             clearSearch();
             return false;
         });
+
+        app.initLinkHandlers();
         loadContent();
         setActiveState();
 	});
@@ -69,54 +59,7 @@ function removeCountryCode(localeCode) {
 	return localeCode;
 }
 
-function adjustFontSize(size) {
-	var frameDoc = $("#main")[0].contentDocument;
-	var head = $('head', frameDoc);
-	var styleTag = '<style type=\"text/css\">#content { font-size: ' + fontOptions[size] + ' !important;} </style>';
-	head.append(styleTag);
-}
 
-function hideMobileLinks(size) {
-	var frameDoc = $("#main")[0].contentDocument;
-	adjustFontSize(size);
-	frameDoc.addEventListener('click', function(event) {
-		var target = event.target;
-		if (target.tagName == "A") {
-			var url = target.href,             // expanded from relative links for us
-				href = $(target).attr('href'); // unexpanded, may be relative
-			
-			if (href.substr(0, 1) == '#') {
-				// A local hashlink; let it through.
-				return;
-			}
-
-			// Stop the link from opening in the iframe directly...
-			event.preventDefault();
-
-			if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
-				// ...and load it through our intermediate cache layer.
-				navigateToPage(url);
-			} else {
-				// ...and open it in parent context for reals.
-				//
-				// This seems to successfully launch the native browser, and works
-				// both with the stock browser and Firefox as user's default browser
-				document.location = url;
-			}
-		}
-	}, true);
-}
-
-function iframeOnLoaded(iframe) {
-	if(iframe.src) {
-		window.scroll(0,0);
-		toggleForward();
-		addToHistory();
-		$('#search').removeClass('inProgress');        
-		hideSpinner();  
-		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
-	}
-}
 
 function loadContent() {
 	enableCaching();
@@ -199,7 +142,6 @@ function navigateToPage(url, options) {
 	if (options.cache) {
 		app.setRootPage(url);
 	} else {
-		//$('#main').attr('src', url);
 		app.hideAndLoad(url);
 	}
 	if (options.updateHistory) {
@@ -320,9 +262,6 @@ function currentPageUrl() {
 }
 
 function currentPageTitle() {
-	// Sometimes we want this before stuff's initialized...
-	//var frameDoc = $('#main')[0].contentDocument;
-	//return $('h1', frameDoc).text();
 	var url = currentPageUrl(),
 		page = url.replace(/^https?:\/\/[^\/]+\/wiki\//, ''),
 		unescaped = decodeURIComponent(page),
