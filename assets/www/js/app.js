@@ -220,14 +220,17 @@ app = {
 			var target = event.target,
 				url = target.href,             // expanded from relative links for us
 				href = $(target).attr('href'); // unexpanded, may be relative
-			
-			if (href.substr(0, 1) == '#') {
-				// A local hashlink; let it through.
-				return;
-			}
 
 			// Stop the link from opening in the iframe directly...
 			event.preventDefault();
+			
+			if (href.substr(0, 1) == '#') {
+				// A local hashlink; simulate?
+				var off = $(href).offset(),
+					y = off ? off.top : 52;
+				window.scrollTo(0, y - 52);
+				return;
+			}
 
 			if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
 				// ...and load it through our intermediate cache layer.
