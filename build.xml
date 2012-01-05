@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="WikipediaActivity" default="help">
 
-    <!-- Load system environment -->
-    <property environment="env" />
-
-    <!--
-         Eventually override version name according to Jenkins env
-         Else will use version.name from project.properties file
-    -->
-    <condition property="version.name" value="jenkins-${env.BUILD_ID}_#${env.BUILD_NUMBER}">
-        <and>
-            <isset property="env.BUILD_ID" />
-            <isset property="env.BUILD_NUMBER" />
-        </and>
-    </condition>
-
     <!-- The local.properties file is created and updated by the 'android' tool.
          It contains the path to the SDK. It should *NOT* be checked into
          Version Control Systems. -->
