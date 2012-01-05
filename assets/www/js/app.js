@@ -96,10 +96,8 @@ app = {
 	},
 
 	adjustFontSize: function(size) {
-		var frameDoc = $("#main")[0].contentDocument;
-		var head = $('head', frameDoc);
-		var styleTag = '<style type=\"text/css\">#content { font-size: ' + fontOptions[size] + ' !important;} </style>';
-		head.append(styleTag);
+		var frameDoc = $("#main");
+		$('#main').css('font-size', fontOptions[size]);
 	},
 	
 	/**
