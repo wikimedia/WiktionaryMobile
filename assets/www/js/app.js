@@ -192,7 +192,7 @@ app = {
 		$('base').attr('href', url);
 		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
 
-		var selectors = ['#firstHeading', '#bodyContent', '#copyright'],
+		var selectors = ['#content>*', '#copyright'],
 			$target = $('#main'),
 			$div = $('<div>').html(trimmed);
 
