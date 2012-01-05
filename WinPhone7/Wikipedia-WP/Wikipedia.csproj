@@ -99,8 +99,8 @@
     <Content Include="..\..\assets\www\js\bookmarks.js">
       <Link>www\js\bookmarks.js</Link>
     </Content>
-    <Content Include="..\..\assets\www\js\cache.js">
-      <Link>www\js\cache.js</Link>
+    <Content Include="..\..\assets\www\js\app.js">
+      <Link>www\js\app.js</Link>
     </Content>
     <Content Include="..\..\assets\www\js\geo.js">
       <Link>www\js\geo.js</Link>

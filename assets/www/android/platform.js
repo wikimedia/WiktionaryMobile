@@ -24,7 +24,6 @@ var origOnDeviceReady = onDeviceReady;
 onDeviceReady = function() {
     document.addEventListener("backbutton", onBackButton, false);
     document.addEventListener("searchbutton", onSearchButton, false);
-	initLanguages();
 
 	if (navigator.userAgent.match(/; Android [34]/)) {
     	// The iframe doesn't stretch to fit its native size on Android 3 or 4.

@@ -1,12 +1,4 @@
 var currentHistoryIndex = 0;
-var currentLocale = new Object();
-var defaultLocale = new Object();
-// default locale info
-defaultLocale.languageCode = removeCountryCode(navigator.language.toLowerCase());
-defaultLocale.url = "https://" + defaultLocale.languageCode + ".m.wikipedia.org";
-
-currentLocale.languageCode = defaultLocale.languageCode;
-currentLocale.url = defaultLocale.url;
 
 // Font options configuration
 var fontOptions = {
@@ -30,6 +22,11 @@ function onDeviceReady() {
 
 	// this has to be set for the window.history API to work properly
 	PhoneGap.UsePolling = true;
+
+	preferencesDB.initializeDefaults(function() { 
+        app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
+		initLanguages();
+	});
 
 	// Fixes clicks on the header element 'going through' to elements under them
 	// touchstart responds much faster than click, which starts focus
@@ -70,21 +67,6 @@ function removeCountryCode(localeCode) {
 	}
 	
 	return localeCode;
-}
-
-/**
- * Get the font size preference (async)
- *
- * @param callback function(size)
- */
-function getFontSize(callback) {
-	var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
-		this.get('fontSize', function(fontSize) {
-			fontSize = fontSize || {value: 'normal'};
-			var size = fontSize.value || "normal";
-			callback(size);
-		});
-	});
 }
 
 function adjustFontSize(size) {
@@ -137,19 +119,8 @@ function iframeOnLoaded(iframe) {
 }
 
 function loadContent() {
-	// retrieve locale settings from LocalStorage - if it doesn't exist use the defaults!
-	var settingsDB = new Lawnchair({name:"settingsDB"}, function() {
-		this.get("locale", function(config) {
-
-			if (config) {
-				(config.value.url) ? currentLocale.url = config.value.url : currentLocale.url = defaultLocale.url;
-				(config.value.languageCode) ? currentLocale.languageCode = config.value.languageCode : currentLocale.languageCode = defaultLocale.languageCode;
-			}
-			
-			enableCaching();
-			window.loadWikiContent();
-		});
-	});
+	enableCaching();
+	window.loadWikiContent();
 }
 
 function enableCaching() {
@@ -164,7 +135,7 @@ function loadWikiContent() {
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.all(function(history){
 			if(history.length==0 || window.history.length > 1) {
-				navigateToPage(currentLocale.url);
+				navigateToPage(app.baseURL);
 			} else {
 				navigateToPage(history[history.length-1].value);
 			}
@@ -336,12 +307,11 @@ function setActiveState() {
 }
 
 function homePage() {
-	var homeUrl = "https://" + currentLocale.languageCode + ".m.wikipedia.org";
-	navigateToPage(homeUrl);
+	navigateToPage(app.baseURL);
 }
 
 function aboutPage() {
-	var aboutUrl = "https://" + currentLocale.languageCode + ".wikipedia.org/w/index.php?title=Wikipedia:About&useformat=mobile";
+	var aboutUrl = app.baseURL + "/w/index.php?title=Wikipedia:About&useformat=mobile";
 	navigateToPage(aboutUrl);
 }
 

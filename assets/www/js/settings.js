@@ -10,21 +10,12 @@ function getSettings() {
 						'</select></div>' + 
 						'<div class="item"><label><msg key="settings-app-version-label"></msg></label><p>' + result.version + '</p></div>';
 				$('#settingsList').append(markup).localize();
-				var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
-					this.get('fontSize', function(fontSize) {
-						fontSize = fontSize || {value: 'normal'};
-						var size = fontSize.value;
-						console.log('fontSize is set to ' + size);
-						$("#fontSizeSelector").val(size);
-					});
-				});
+				$("#fontSizeSelector").val(preferencesDB.get('fontSize'));
 				$("#fontSizeSelector").change(function() {
 					var selected = $(this).val();
 					console.log('selected  ' + selected);
-					var settingsDB = new Lawnchair({name:'settingsDB'}, function() {
-						this.save({key: 'fontSize', value: selected});
-						adjustFontSize(selected);
-					});
+					preferencesDB.set('fontSize', selected);
+					adjustFontSize(selected);
 				});
 			},
 			function(error){ $('#settingsList').append(error); },
@@ -76,7 +67,7 @@ function displayLanguages(results) {
 					var len = parseInt(JSON.stringify(locale.site.length));
 					for (var j=0;j<len;j++) {
 						if (locale.site[j].code == "wiki") {
-							if (locale.code == currentLocale.languageCode) {
+							if (locale.code == preferencesDB.get('language')) {
 								markup += "<option value='" + locale.code + "' selected='selected'>"  + locale.name + "</option>";
 							} else {
 								markup += "<option value='" + locale.code + "'>"  + locale.name + "</option>";
@@ -100,13 +91,9 @@ function displayLanguages(results) {
 
 function onLocaleChanged(selectedValue) {
 
-	currentLocale.languageCode = selectedValue;
-	currentLocale.url = "https://" + selectedValue + ".m.wikipedia.org";
-
-	// save / update currentLocale in LocalStorage
-	var settingsDB = new Lawnchair({name:"settingsDB"}, function() {
-		this.save({key: "locale", value: currentLocale});
-		homePage();
-		hideOverlays();
-	});
+    preferencesDB.set('language', selectedValue);
+    app.baseURL = 'https://' + selectedValue + '.m.wikipedia.org';
+	
+	homePage();
+	hideOverlays();
 }
