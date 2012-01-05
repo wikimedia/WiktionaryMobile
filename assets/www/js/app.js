@@ -74,8 +74,9 @@ app = {
 		return html;
 	},
 	loadErrorPage: function(page) {
+		$('base').attr('href', 'file:///android_asset/www/');
 		$('#main').load(page, function() {
-			$(this).localize();
+			$('#main').localize();
 			app.onPageLoaded();
 		});
 		//Save page and Change Language don't make sense for error page
