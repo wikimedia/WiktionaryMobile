@@ -1,24 +1,3 @@
-/**
- * Fetch language links from the iframe.
- *
- * @return array of {name: string, url: string, selected: bool} objects
- */
-function getLangLinks() {
-	var langs = [],
-		win = $('#main')[0].contentWindow,
-		doc = win.document;
-
-	$('#languageselection option', doc).each(function(i, option) {
-		var $option = $(this);
-		langs.push({
-			name: $option.text(),
-			url: processLanguageUrl($option.val()),
-			selected: ($option.attr('selected') != null)
-		});
-	});
-	
-	return langs;
-}
 
 /**
  * Protocol-relative data will break against our 'file://' pages :)
@@ -59,7 +38,7 @@ function langLinkSelector(languages) {
 }
 
 function selectLanguage() {
-	langLinkSelector(getLangLinks());
+	langLinkSelector(app.getLangLinks());
 
 	hideOverlayDivs();
 	$('#langlinks').localize().show();

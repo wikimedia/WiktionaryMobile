@@ -15,7 +15,7 @@ function getSettings() {
 					var selected = $(this).val();
 					console.log('selected  ' + selected);
 					preferencesDB.set('fontSize', selected);
-					adjustFontSize(selected);
+					app.adjustFontSize(selected);
 				});
 			},
 			function(error){ $('#settingsList').append(error); },

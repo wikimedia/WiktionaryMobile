@@ -101,7 +101,7 @@ app = {
 					.one('load', function() {
 						var doc = $('#main')[0].contentDocument;
 						doc.writeln(html);
-						hideMobileLinks(preferencesDB.get('fontSize'));
+						app.hideMobileLinks(preferencesDB.get('fontSize'));
 				});
 			},
 			error: function(xhr) {
@@ -131,5 +131,65 @@ app = {
 		$('#savePageCmd').attr('disabled', 'true');
 		console.log('disabling language');
 		$('#languageCmd').attr('disabled', 'true');
+	},
+
+	/**
+	 * Fetch language links from the iframe.
+	 *
+	 * @return array of {name: string, url: string, selected: bool} objects
+	 */
+	getLangLinks: function() {
+		var langs = [],
+			win = $('#main')[0].contentWindow,
+			doc = win.document;
+
+		$('#languageselection option', doc).each(function(i, option) {
+			var $option = $(this);
+			langs.push({
+				name: $option.text(),
+				url: processLanguageUrl($option.val()),
+				selected: ($option.attr('selected') != null)
+			});
+		});
+		
+		return langs;
+	},
+
+	adjustFontSize: function(size) {
+		var frameDoc = $("#main")[0].contentDocument;
+		var head = $('head', frameDoc);
+		var styleTag = '<style type=\"text/css\">#content { font-size: ' + fontOptions[size] + ' !important;} </style>';
+		head.append(styleTag);
+	},
+
+	hideMobileLinks: function(size) {
+		var frameDoc = $("#main")[0].contentDocument;
+		this.adjustFontSize(size);
+		frameDoc.addEventListener('click', function(event) {
+			var target = event.target;
+			if (target.tagName == "A") {
+				var url = target.href,             // expanded from relative links for us
+					href = $(target).attr('href'); // unexpanded, may be relative
+				
+				if (href.substr(0, 1) == '#') {
+					// A local hashlink; let it through.
+					return;
+				}
+
+				// Stop the link from opening in the iframe directly...
+				event.preventDefault();
+
+				if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
+					// ...and load it through our intermediate cache layer.
+					navigateToPage(url);
+				} else {
+					// ...and open it in parent context for reals.
+					//
+					// This seems to successfully launch the native browser, and works
+					// both with the stock browser and Firefox as user's default browser
+					document.location = url;
+				}
+			}
+		}, true);
 	}
 }
