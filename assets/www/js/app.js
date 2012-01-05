@@ -81,32 +81,26 @@ app = {
 		
 	}, 
 	hideAndLoad: function(url) {
-		$.ajax({
+		app.loadingXhr = $.ajax({
 			url: url,
 			dataType: 'text',
 			headers: {
 				"Application_Version": "Wikipedia Mobile (Android)/1.0.0"
 			},
 			success: function(data) {
+				app.loadingXhr = null;
+
 				if (data === '') {
 					// this ain't right. shouldn't this call error?
 					app.loadErrorPage('error.html');
 					return;
 				}
-				/*
-				html = app.rewriteHtmlLightweight(data, url);
-				$('#main')
-					.attr('src', 'about:blank')
-					.one('load', function() {
-						var doc = $('#main')[0].contentDocument;
-						doc.writeln(html);
-						app.hideMobileLinks(preferencesDB.get('fontSize'));
-				});
-				*/
+
 				app.importPage(data, url);
 				app.onPageLoaded();
 			},
 			error: function(xhr) {
+				app.loadingXhr = null;
 				if(xhr.status == 404) {
 					app.loadErrorPage('404.html');
 				} else {
@@ -123,11 +117,10 @@ app = {
 		return html;
 	},
 	loadErrorPage: function(page) {
-		$('#main')
-			.attr('src', page)
-			.one('load', function() {
-				$('#error', $('#main')[0].contentDocument).localize();
-			});
+		$('#main').load(page, function() {
+			$(this).localize();
+			app.onPageLoaded();
+		});
 		//Save page and Change Language don't make sense for error page
 		app.langs = [];
 		$('#savePageCmd').attr('disabled', 'true');
@@ -252,5 +245,14 @@ app = {
 		$('#search').removeClass('inProgress');        
 		hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
+	},
+	
+	stopLoading: function() {
+		// 		window.frames[0].stop();
+		if (app.loadingXhr) {
+			app.loadingXhr.abort();
+			app.loadingXhr = null;
+		}
+
 	}
 }
