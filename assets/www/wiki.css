@@ -344,12 +344,12 @@ img.thumbborder {
 	padding-top: 1em;
 }
 
-#footer #perm {
+#main #perm {
 	padding-top: 2em;
 	font-size: 90%;
 }
 
-#footer #copyright {
+#main #copyright {
 	padding: 1em 0;
 	font-size: 80%;
 }
