@@ -239,6 +239,7 @@ app = {
 		
 		app.scroller = new iScroll('content', {
 			// options
+			zoom: true
 		});
 	},
 	
