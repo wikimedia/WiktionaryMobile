@@ -1,12 +1,4 @@
 var currentHistoryIndex = 0;
-var currentLocale = new Object();
-var defaultLocale = new Object();
-// default locale info
-defaultLocale.languageCode = removeCountryCode(navigator.language.toLowerCase());
-defaultLocale.url = "https://" + defaultLocale.languageCode + ".m.wikipedia.org";
-
-currentLocale.languageCode = defaultLocale.languageCode;
-currentLocale.url = defaultLocale.url;
 
 // Font options configuration
 var fontOptions = {
@@ -32,6 +24,7 @@ function onDeviceReady() {
 	PhoneGap.UsePolling = true;
 
 	preferencesDB.initializeDefaults(function() { 
+        app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
 		initLanguages();
 	});
 
@@ -142,7 +135,7 @@ function loadWikiContent() {
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.all(function(history){
 			if(history.length==0 || window.history.length > 1) {
-				navigateToPage(currentLocale.url);
+				navigateToPage(app.baseURL);
 			} else {
 				navigateToPage(history[history.length-1].value);
 			}
@@ -314,12 +307,11 @@ function setActiveState() {
 }
 
 function homePage() {
-	var homeUrl = "https://" + currentLocale.languageCode + ".m.wikipedia.org";
-	navigateToPage(homeUrl);
+	navigateToPage(app.baseURL);
 }
 
 function aboutPage() {
-	var aboutUrl = "https://" + currentLocale.languageCode + ".wikipedia.org/w/index.php?title=Wikipedia:About&useformat=mobile";
+	var aboutUrl = app.baseURL + "/w/index.php?title=Wikipedia:About&useformat=mobile";
 	navigateToPage(aboutUrl);
 }
 

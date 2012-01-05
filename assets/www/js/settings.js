@@ -67,7 +67,7 @@ function displayLanguages(results) {
 					var len = parseInt(JSON.stringify(locale.site.length));
 					for (var j=0;j<len;j++) {
 						if (locale.site[j].code == "wiki") {
-							if (locale.code == currentLocale.languageCode) {
+							if (locale.code == preferencesDB.get('language')) {
 								markup += "<option value='" + locale.code + "' selected='selected'>"  + locale.name + "</option>";
 							} else {
 								markup += "<option value='" + locale.code + "'>"  + locale.name + "</option>";
@@ -91,10 +91,9 @@ function displayLanguages(results) {
 
 function onLocaleChanged(selectedValue) {
 
-	currentLocale.languageCode = selectedValue;
-	currentLocale.url = "https://" + selectedValue + ".m.wikipedia.org";
+    preferencesDB.set('language', selectedValue);
+    app.baseURL = 'https://' + selectedValue + '.m.wikipedia.org';
 	
-	preferencesDB.set('language', selectedValue);
 	homePage();
 	hideOverlays();
 }

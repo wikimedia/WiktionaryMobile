@@ -35,7 +35,7 @@ app = {
 					if (src.substr(0, 2) == '//') {
 						src = 'https:' + src;
 					} else if (src.substr(0, 1) == '/') {
-						src = currentLocale.url + src;
+						src = app.baseURL + src;
 					}
 					var gotScriptPath = function(scriptPath) {
 						// Changing the src on the existing node doesn't seem to work.
@@ -52,7 +52,7 @@ app = {
 			});
 			// Site-relative links: rewrite to http: and local site
 			$('a[href^="/"]', frameDoc).each(function() {
-				$(this).attr('href', currentLocale.url + this.href.replace('file://', '') );
+				$(this).attr('href', app.baseURL + this.href.replace('file://', '') );
 			});
 			
 			// images

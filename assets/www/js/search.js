@@ -21,7 +21,7 @@ function search(isSuggestion) {
 			return;
 		}
 
-		var requestUrl = currentLocale.url + "/w/api.php";
+		var requestUrl = app.baseURL + "/w/api.php";
 		$.ajax({
 			type: 'GET',
 			url: requestUrl,
@@ -41,7 +41,7 @@ function search(isSuggestion) {
 }
 
 function urlForTitle(title) {
-    return currentLocale.url + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
+    return app.baseURL + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
 }
 
 function displayResults(results, isSuggestion) {
