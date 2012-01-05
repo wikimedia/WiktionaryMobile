@@ -1,5 +1,5 @@
 // Preferences singleton, to access all 'preferences'
-// Data storage still uses Lawnchair
+// localStorage is used for persistance
 // Call initializeDefaults before using.
 
 window.preferencesDB = {
