@@ -1,4 +1,4 @@
-var currentHistoryIndex = 0;
+var currentHistoryIndex = -1;
 
 // Font options configuration
 var fontOptions = {
@@ -119,7 +119,8 @@ function noConnectionMsg() {
 }
 
 function toggleForward() {
-	currentHistoryIndex < pageHistory.length ?
+	// Length starts from 1, indexes don't.
+	currentHistoryIndex < ( pageHistory.length - 1) ?
 	$('#forwardCmd').attr('disabled', 'false') :
 	$('#forwardCmd').attr('disabled', 'true');
 }
@@ -134,7 +135,7 @@ function goBack() {
 		// Jumping through history is unsafe with the current urlCache system
 		// sometimes we get loaded without the fixups, and everything esplodes.
 		//window.history.go(-1);
-		if(currentHistoryIndex <= 0) {
+		if(currentHistoryIndex < 0) {
 			console.log("no more history to browse exiting...");
 			navigator.app.exitApp();
 		} else {
