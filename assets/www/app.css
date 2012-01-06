@@ -65,8 +65,9 @@ header
 	top:52px;
 }
 
-iframe#main {
-	width:100%;
+#main
+{
+	padding: 8px;
 }
 
 .listItemContainer
