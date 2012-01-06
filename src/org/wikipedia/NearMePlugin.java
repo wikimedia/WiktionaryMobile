@@ -1,6 +1,7 @@
 package org.wikipedia;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.content.Intent;
 import android.util.Log;
@@ -18,9 +19,16 @@ public class NearMePlugin extends Plugin {
 	public PluginResult execute(String action, JSONArray args, String callbackId) {
 		PluginResult result = null;
 		this.callbackId = callbackId;
+		String lang = null;
+		try {
+			lang = args.getString(0);
+		} catch (JSONException e1) {
+			lang = "en"; 
+		}
 		if(action.compareTo("startNearMeActivity") == 0) {
 			try {
 				Intent intent = new Intent(ctx, Class.forName("org.wikipedia.NearMeActivity"));
+				intent.putExtra("language", lang);
 				ctx.startActivityForResult((Plugin) this, intent, GET_GEONAME_URL);
 	            result = new PluginResult(PluginResult.Status.NO_RESULT);
 	            result.setKeepCallback(true);

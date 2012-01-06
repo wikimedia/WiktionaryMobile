@@ -32,6 +32,7 @@ public class NearMeActivity extends MapActivity {
 	private ProgressDialog progressDialog;
 	private List<Overlay> mapOverlays;
 	private MyLocationOverlay myLocationOverlay;
+	private String lang;
 	
 	private class UpdateGeonames extends AsyncTask<Double, Void, Integer>{
 		protected void onPreExecute() {
@@ -40,7 +41,7 @@ public class NearMeActivity extends MapActivity {
 		}
 		protected Integer doInBackground(Double... gps) {
 			WikipediaApp app = (WikipediaApp)getApplicationContext();
-			app.geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1]);
+			app.geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1], lang);
 			if(app.geonames != null) {
 				for(GeoName g: app.geonames) {
 					mapOverlays.add(createItemizedOverlay(g));
@@ -107,6 +108,8 @@ public class NearMeActivity extends MapActivity {
 		mapOverlays = mapView.getOverlays();
 		
 		myLocationOverlay = new MyLocationOverlay(this, mapView);
+		
+		lang = getIntent().getExtras().getString("language");
 		
 		if(app.geonames != null) {
 			myLocationOverlay.enableMyLocation();
