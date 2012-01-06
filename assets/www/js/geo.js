@@ -1,5 +1,5 @@
 function getCurrentPosition() {
-	PhoneGap.exec(geoNameSuccess, geoNameFailure, "NearMePlugin", "startNearMeActivity", []);
+	PhoneGap.exec(geoNameSuccess, geoNameFailure, "NearMePlugin", "startNearMeActivity", [preferencesDB.get('language')]);
 }
 
 function geoNameSuccess(wikipediaUrl) {

@@ -18,14 +18,15 @@ import org.json.JSONObject;
 public class RestJsonClient {
 
 	public static ArrayList<GeoName> getWikipediaNearbyLocations(
-			double latitude, double longitude) {
+			double latitude, double longitude, String lang) {
 		HttpURLConnection urlConnection = null;
 		ArrayList<GeoName> geoList = new ArrayList<GeoName>();
 		try {
 			String requestUrl = "http://ws.geonames.net/findNearbyWikipediaJSON?formatted=true&";
 			requestUrl += "lat=" + latitude + "&";
 			requestUrl += "lng=" + longitude + "&";
-			requestUrl += "username=wikimedia";
+			requestUrl += "username=wikimedia&";
+			requestUrl += "lang=" + lang;
 			//Log.d("RestJsonClient", requestUrl);
 			URL url = new URL(requestUrl);
 			urlConnection = (HttpURLConnection) url.openConnection();
