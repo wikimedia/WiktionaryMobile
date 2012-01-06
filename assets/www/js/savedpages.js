@@ -1,11 +1,11 @@
 function clearSavedPages() {
-	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() { this.nuke() });
+	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() { this.nuke() });
 }
 
 function savePage() {
 	var MAX_LIMIT = 50;
 
-	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 		this.keys(function(records) {
 			if (records != null) {
 				if (records.length > MAX_LIMIT) {
@@ -24,15 +24,15 @@ function savePagePrompt() {
 	var title = currentPageTitle();
 	var url = currentPageUrl();
 	
-	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 		this.get(url, function(r) {	
 		
 			if (r == null) {
-				bookmarksDB.save({key: url, title: title});
+				savedPagesDB.save({key: url, title: title});
 
 				// Cache the URL...
 				console.log('saving page: ' + url);
-				navigateToPage(url, {
+				app.navigateToPage(url, {
 					cache: true,
 					updateHistory: false
 				});
@@ -49,7 +49,7 @@ function savePagePrompt() {
 function showSavedPages() {
 	$('#savedPagesList').html('');
 
-	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 		this.each(function(record, index) {	
 			$('#savedPagesList').prepend(formatSavedPageEntry(record));
 		});
@@ -79,7 +79,7 @@ function onSavedPageClicked(url) {
 	$('#searchParam').val('');        
 	showSpinner();  
 	$('#search').addClass('inProgress');
-	navigateToPage(url, {cache: true});
+	app.navigateToPage(url, {cache: true});
 	hideOverlays();
 }
 
@@ -87,7 +87,7 @@ function deleteSavedPagePrompt(title, url) {
 	var answer = confirm(mw.message('saved-page-remove-prompt', title).plain());
 
 	if (answer) {
-		var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			this.remove(url, function() {
 				lightweightNotification(mw.message('saved-page-removed', key).plain());
 				$(".listItemContainer[data-page-url=\'" + url + "\']").hide();

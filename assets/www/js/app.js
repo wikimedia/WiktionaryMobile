@@ -66,13 +66,6 @@ app = {
 			}
 		})
 	},
-	rewriteHtmlLightweight: function(html, url) {
-		// Make URLs absolute
-		var base = '<base href="' + url.replace(/&/g, '&amp;') + '">',
-			style = '<style type="text/css">#header,#footmenu{display:none}</style>';
-		var html = html.replace(/(<head[^>]*>)/i, '$1' + base + style);
-		return html;
-	},
 	loadErrorPage: function(page) {
 		$('base').attr('href', 'file:///android_asset/www/');
 		$('#main').load(page, function() {
@@ -153,7 +146,7 @@ app = {
 
 			if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
 				// ...and load it through our intermediate cache layer.
-				navigateToPage(url);
+				app.navigateToPage(url);
 			} else {
 				// ...and open it in parent context for reals.
 				//
@@ -179,6 +172,35 @@ app = {
 			app.loadingXhr.abort();
 			app.loadingXhr = null;
 		}
+	},
 
+	navigateToPage: function(url, options) {
+		var options = $.extend({cache: false, updateHistory: true}, options || {});
+		$('#searchParam').val('');
+		$('#search').addClass('inProgress');
+		showSpinner();
+		
+		if (options.cache) {
+			app.setRootPage(url);
+		} else {
+			app.hideAndLoad(url);
+		}
+		if (options.updateHistory) {
+			currentHistoryIndex += 1;
+			pageHistory[currentHistoryIndex] = url;
+		}
+		console.log("navigating to " + url);
+		var savedPagesDB = new Lawnchair({name: "savedPagesDB"}, function() {
+			this.exists(url, function(exists) {
+				if(!exists) {
+					$("#savePageCmd").attr("disabled", "false");
+				} else {
+					$("#savePageCmd").attr("disabled", "true");
+				}
+			});
+		});
+		// Enable change language - might've been disabled in a prior error page
+		console.log('enabling language');
+		$('#languageCmd').attr('disabled', 'false');  
 	}
 }

@@ -67,7 +67,7 @@ function listHistory(record, index) {
 }
 
 function onHistoryItemClicked(url) {
-	navigateToPage(url);
+	app.navigateToPage(url);
 	hideOverlays();
 }
 

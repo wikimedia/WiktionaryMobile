@@ -8,7 +8,7 @@ function geoNameSuccess(wikipediaUrl) {
 		$.ajax({url: "https://en.m.wikipedia.org",
 			success: function(data) {
 				if(data) {
-					navigateToPage('https://'+wikipediaUrl)
+					app.navigateToPage('https://'+wikipediaUrl)
 				} else {
 					noConnectionMsg();
 					navigator.app.exitApp();

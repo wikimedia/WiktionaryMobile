@@ -85,11 +85,11 @@ function displayResults(results, isSuggestion) {
 	$('#resultList').html(formattedResults);
 
 	// Replace icon of savd pages in search suggestions
-	var bookmarksDB = new Lawnchair({name:"bookmarksDB"}, function() {
+	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 		$("#resultList .listItemContainer").each(function() {
 			var container = this;
 			var url = $(this).attr('data-page-url');
-			bookmarksDB.exists(url, function(exists) {
+			savedPagesDB.exists(url, function(exists) {
 				if(exists) {
 					$(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconSavedPage");
 				}
@@ -108,7 +108,7 @@ function displayResults(results, isSuggestion) {
 
 function goToResult(url) {
 	if (hasNetworkConnection()) {
-		navigateToPage(url);
+		app.navigateToPage(url);
 		hideOverlays();
 	} else {
 		noConnectionMsg();

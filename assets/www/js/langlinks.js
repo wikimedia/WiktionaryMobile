@@ -12,7 +12,7 @@ function processLanguageUrl(url) {
 }
 
 /**
- * Format the language list in the same style as bookmarks & history,
+ * Format the language list in the same style as saved pages & history,
  * pulling link data from the iframe.
  */
 function langLinkSelector(languages) {
@@ -29,7 +29,7 @@ function langLinkSelector(languages) {
 			.end()
 		.find('a')
 			.click(function() {
-				navigateToPage(lang.url);
+				app.navigateToPage(lang.url);
 				hideOverlays();
 			})
 			.end()
