@@ -111,7 +111,7 @@ function hideContent() {
 	$('#content').hide();
 }
 
-function checkLength() {
+function startSearch() {
 	var searchTerm = $('#searchParam').val();
 
 	if (searchTerm.length > 0) {
