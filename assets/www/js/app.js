@@ -159,8 +159,9 @@ app = {
 	
 	onPageLoaded: function() {
 		window.scroll(0,0);
-		toggleForward();
 		addToHistory();
+		toggleForward();
+		updateMenuState();
 		$('#search').removeClass('inProgress');        
 		hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
@@ -188,7 +189,9 @@ app = {
 		if (options.updateHistory) {
 			currentHistoryIndex += 1;
 			pageHistory[currentHistoryIndex] = url;
-		}
+			// We're adding an entry to the 'forward/backwards' chain.
+			// So disable forward.
+		} 
 		console.log("navigating to " + url);
 		var savedPagesDB = new Lawnchair({name: "savedPagesDB"}, function() {
 			this.exists(url, function(exists) {

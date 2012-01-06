@@ -62,14 +62,7 @@ function lightweightNotification(text) {
 	window.plugins.ToastPlugin.show_short(text);
 }
 
-var origToggleForward = toggleForward;
-
-//@Override
-toggleForward = function() {
-	origToggleForward();
-    console.log('Forward command disabled '+$('#forwardCmd').attr('disabled')); 
-
-    // Update menu state & locale
+function updateMenuState() {
 	$('#appMenu command').each(function() {
 		var $command = $(this),
 			id = $command.attr('id'),
@@ -78,9 +71,9 @@ toggleForward = function() {
 		$command.attr('label', label);
 	});
 
-    window.plugins.SimpleMenu.loadMenu($('#appMenu')[0], 
-                                       function(success) {console.log(success);},
-                                       function(error) {console.log(error);});
+	window.plugins.SimpleMenu.loadMenu($('#appMenu')[0], 
+									   function(success) {console.log(success);},
+									   function(error) {console.log(error);});
 };
 
 //@Override
