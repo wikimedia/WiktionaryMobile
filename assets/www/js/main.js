@@ -149,7 +149,7 @@ function navigateToPage(url, options) {
 		pageHistory[currentHistoryIndex] = url;
 	}
 	console.log("navigating to " + url);
-	var bookmarksDB = new Lawnchair({name: "bookmarksDB"}, function() {
+	var savedPagesDB = new Lawnchair({name: "savedPagesDB"}, function() {
 		this.exists(url, function(exists) {
 			if(!exists) {
 				$("#savePageCmd").attr("disabled", "false");

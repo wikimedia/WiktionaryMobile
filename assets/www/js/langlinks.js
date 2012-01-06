@@ -12,7 +12,7 @@ function processLanguageUrl(url) {
 }
 
 /**
- * Format the language list in the same style as bookmarks & history,
+ * Format the language list in the same style as saved pages & history,
  * pulling link data from the iframe.
  */
 function langLinkSelector(languages) {
