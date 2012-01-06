@@ -26,5 +26,4 @@ function wm_toggle_section( section_id ) {
 			e.style.display = e.style.display == 'block' ? 'none' : 'block';
 		}
 	}
-	app.scroller.refresh();
 }

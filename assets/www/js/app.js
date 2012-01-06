@@ -236,10 +236,6 @@ app = {
 				document.location = url;
 			}
 		});
-		
-		app.scroller = new iScroll('content', {
-			// options
-		});
 	},
 	
 	onPageLoaded: function() {
@@ -249,7 +245,6 @@ app = {
 		$('#search').removeClass('inProgress');        
 		hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
-		app.scroller.refresh();
 	},
 	
 	stopLoading: function() {
