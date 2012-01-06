@@ -46,31 +46,16 @@ function onDeviceReady() {
 	});
 }
 
-function removeCountryCode(localeCode) {
-	
-	if (localeCode.indexOf("-") >= 0) {
-		return localeCode.substr(0, localeCode.indexOf("-"));
-	}
-	
-	if (localeCode.indexOf("_") >= 0) {
-		return localeCode.substr(0, localeCode.indexOf("_"));
-	}
-	
-	return localeCode;
-}
-
-
-
 function loadContent() {
 	enableCaching();
-	window.loadWikiContent();
+	window.loadFirstPage();
 }
 
 function enableCaching() {
 	// do nothing by default
 }
 
-function loadWikiContent() {
+function loadFirstPage() {
 	showSpinner();
 	$('#search').addClass('inProgress');
    

@@ -66,13 +66,6 @@ app = {
 			}
 		})
 	},
-	rewriteHtmlLightweight: function(html, url) {
-		// Make URLs absolute
-		var base = '<base href="' + url.replace(/&/g, '&amp;') + '">',
-			style = '<style type="text/css">#header,#footmenu{display:none}</style>';
-		var html = html.replace(/(<head[^>]*>)/i, '$1' + base + style);
-		return html;
-	},
 	loadErrorPage: function(page) {
 		$('base').attr('href', 'file:///android_asset/www/');
 		$('#main').load(page, function() {
@@ -179,6 +172,5 @@ app = {
 			app.loadingXhr.abort();
 			app.loadingXhr = null;
 		}
-
 	}
 }
