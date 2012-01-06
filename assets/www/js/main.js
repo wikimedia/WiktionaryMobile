@@ -63,9 +63,9 @@ function loadFirstPage() {
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {
 		this.all(function(history){
 			if(history.length==0 || window.history.length > 1) {
-				navigateToPage(app.baseURL);
+				app.navigateToPage(app.baseURL);
 			} else {
-				navigateToPage(history[history.length-1].value);
+				app.navigateToPage(history[history.length-1].value);
 			}
 		});
 	});
@@ -118,36 +118,6 @@ function noConnectionMsg() {
 	alert("Please try again when you're connected to a network.");
 }
 
-function navigateToPage(url, options) {
-	var options = $.extend({cache: false, updateHistory: true}, options || {});
-	$('#searchParam').val('');
-	$('#search').addClass('inProgress');
-	showSpinner();
-	
-	if (options.cache) {
-		app.setRootPage(url);
-	} else {
-		app.hideAndLoad(url);
-	}
-	if (options.updateHistory) {
-		currentHistoryIndex += 1;
-		pageHistory[currentHistoryIndex] = url;
-	}
-	console.log("navigating to " + url);
-	var savedPagesDB = new Lawnchair({name: "savedPagesDB"}, function() {
-		this.exists(url, function(exists) {
-			if(!exists) {
-				$("#savePageCmd").attr("disabled", "false");
-			} else {
-				$("#savePageCmd").attr("disabled", "true");
-			}
-		});
-	});
-	// Enable change language - might've been disabled in a prior error page
-	console.log('enabling language');
-	$('#languageCmd').attr('disabled', 'false');  
-}
-
 function toggleForward() {
 	currentHistoryIndex < pageHistory.length ?
 	$('#forwardCmd').attr('disabled', 'false') :
@@ -169,7 +139,7 @@ function goBack() {
 			navigator.app.exitApp();
 		} else {
 			console.log('going back to item ' + currentHistoryIndex + ': ' + pageHistory[currentHistoryIndex]);
-			navigateToPage(pageHistory[currentHistoryIndex], {
+			app.navigateToPage(pageHistory[currentHistoryIndex], {
 				updateHistory: false
 			});
 		}
@@ -184,7 +154,7 @@ function goForward() {
 	$('#search').addClass('inProgress');
 	//window.history.go(1);
 	if (currentHistoryIndex < pageHistory.length) {
-		navigateToPage(pageHistory[++currentHistoryIndex], {
+		app.navigateToPage(pageHistory[++currentHistoryIndex], {
 			updateHistory: false
 		});
 	}
@@ -234,12 +204,12 @@ function setActiveState() {
 }
 
 function homePage() {
-	navigateToPage(app.baseURL);
+	app.navigateToPage(app.baseURL);
 }
 
 function aboutPage() {
 	var aboutUrl = app.baseURL + "/w/index.php?title=Wikipedia:About&useformat=mobile";
-	navigateToPage(aboutUrl);
+	app.navigateToPage(aboutUrl);
 }
 
 function currentPageUrl() {

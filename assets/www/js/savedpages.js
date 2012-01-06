@@ -32,7 +32,7 @@ function savePagePrompt() {
 
 				// Cache the URL...
 				console.log('saving page: ' + url);
-				navigateToPage(url, {
+				app.navigateToPage(url, {
 					cache: true,
 					updateHistory: false
 				});
@@ -79,7 +79,7 @@ function onSavedPageClicked(url) {
 	$('#searchParam').val('');        
 	showSpinner();  
 	$('#search').addClass('inProgress');
-	navigateToPage(url, {cache: true});
+	app.navigateToPage(url, {cache: true});
 	hideOverlays();
 }
 

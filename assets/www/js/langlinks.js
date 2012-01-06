@@ -29,7 +29,7 @@ function langLinkSelector(languages) {
 			.end()
 		.find('a')
 			.click(function() {
-				navigateToPage(lang.url);
+				app.navigateToPage(lang.url);
 				hideOverlays();
 			})
 			.end()

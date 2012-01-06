@@ -108,7 +108,7 @@ function displayResults(results, isSuggestion) {
 
 function goToResult(url) {
 	if (hasNetworkConnection()) {
-		navigateToPage(url);
+		app.navigateToPage(url);
 		hideOverlays();
 	} else {
 		noConnectionMsg();
