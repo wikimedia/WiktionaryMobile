@@ -34,7 +34,7 @@ function onBackButton() {
 
 function onSearchButton() {
     //hmmm...doesn't seem to set the cursor in the input field - maybe a browser bug???
-    $('#searchParam').focus();
+    $('#searchParam').focus().addClass('active');
     plugins.SoftKeyBoard.show();
 }
 
