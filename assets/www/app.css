@@ -196,6 +196,7 @@ header
 	background-size: 160px 240px;
 	height: 30px;
 	width: 30px;
+	visibility: hidden;
 }
 
 .spinner {
