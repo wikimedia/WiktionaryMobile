@@ -324,6 +324,21 @@ header
 	outline: none;
 }
 
+.error-overlay {
+	background: white;
+	background-image: url(image/globe-bg.jpg);
+	background-position: top left;
+	background-repeat: no-repeat;
+	background-size: 140px 325px;
+	color: black;
+	font-family: "Droid Sans", "Helvetica", sans-serif;
+	padding-left: 120px;
+	padding-top: 20px;
+	padding-right: 20px;
+	font-size: 20px;
+	padding-bottom: 40px;
+	margin-left: -8px;
+}
 /*
 .titlebar div:last-child {
     border-right:none;
