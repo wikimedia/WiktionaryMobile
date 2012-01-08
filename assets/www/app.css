@@ -339,11 +339,20 @@ header
 	padding-bottom: 40px;
 	margin-left: -8px;
 }
-/*
-.titlebar div:last-child {
-    border-right:none;
+
+#about-page-overlay {
+	background: white;
+	color: DarkGrey;
+	font-family: "Droid Sans", "Helvetica", sans-serif;
+	text-align: center;
 }
-.titlebar div:first-child {
-    border-left:none;
+
+#about-version {
+	font-size: 30px;
+	color: Black;
+	font-variant: small-caps;
 }
-*/
+
+#about-license {
+	font-size: 10px;
+}

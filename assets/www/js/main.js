@@ -209,8 +209,7 @@ function homePage() {
 }
 
 function aboutPage() {
-	var aboutUrl = app.baseURL + "/w/index.php?title=Wikipedia:About&useformat=mobile";
-	app.navigateToPage(aboutUrl);
+	app.loadLocalPage('about.html');
 }
 
 function currentPageUrl() {

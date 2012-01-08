@@ -59,24 +59,23 @@ app = {
 				console.log('errored!!!!');
 				app.loadingXhr = null;
 				if(xhr.status == 404) {
-					app.loadErrorPage('404.html');
+					app.loadLocalPage('404.html');
 				} else {
-					app.loadErrorPage('error.html');
+					app.loadLocalPage('error.html');
 				}
+				app.langs = [];
+				$('#savePageCmd').attr('disabled', 'true');
+				console.log('disabling language');
+				$('#languageCmd').attr('disabled', 'true');
 			}
 		})
 	},
-	loadErrorPage: function(page) {
+	loadLocalPage: function(page) {
 		$('base').attr('href', 'file:///android_asset/www/');
 		$('#main').load(page, function() {
 			$('#main').localize();
 			app.onPageLoaded();
 		});
-		//Save page and Change Language don't make sense for error page
-		app.langs = [];
-		$('#savePageCmd').attr('disabled', 'true');
-		console.log('disabling language');
-		$('#languageCmd').attr('disabled', 'true');
 	},
 
 	/**
