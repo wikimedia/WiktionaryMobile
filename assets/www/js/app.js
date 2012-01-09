@@ -1,5 +1,5 @@
 app = {
-	setRootPage: function(url) {
+	loadCachedPage: function(url) {
 		// Hide the iframe until the stylesheets are loaded,
 		// to avoid flash of unstyled text.
 		// Instead we're hidden, which also sucks.
@@ -16,7 +16,7 @@ app = {
 			});
 		};
 		var gotPath = function(cachedPage) {
-			app.hideAndLoad('file://' + cachedPage.file, url, function() {
+			app.loadPage('file://' + cachedPage.file, url, function() {
 				replaceRes();
 			});
 		}
@@ -29,35 +29,20 @@ app = {
 		window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
 		
 	}, 
-	hideAndLoad: function(url, origUrl, callback) {
+	loadPage: function(url, origUrl, callback) {
 		origUrl = origUrl || url;
 		console.log('hideAndLoad url ' + url);
 		console.log('hideAndLoad origUrl ' + origUrl);
-		app.loadingXhr = $.ajax({
-			url: url,
-			dataType: 'text',
-			headers: {
-				"Application_Version": "Wikipedia Mobile (Android)/1.0.0"
-			},
+		app.network.makeRequest({
+			url: url, 
 			success: function(data) {
-				console.log('received!!!!');
-				app.loadingXhr = null;
-
-				if (data === '') {
-					// this ain't right. shouldn't this call error?
-					app.loadErrorPage('error.html');
-					return;
-				}
-
-				app.importPage(data, origUrl);
-				if (callback) {
-					callback();
-				}
-				app.onPageLoaded();
-			},
+					app.renderHtml(data, origUrl);
+					if(callback) {
+						callback();
+					}
+					app.onPageLoaded();
+				},
 			error: function(xhr) {
-				console.log('errored!!!!');
-				app.loadingXhr = null;
 				if(xhr.status == 404) {
 					app.loadLocalPage('404.html');
 				} else {
@@ -68,7 +53,7 @@ app = {
 				console.log('disabling language');
 				$('#languageCmd').attr('disabled', 'true');
 			}
-		})
+		});
 	},
 	loadLocalPage: function(page) {
 		$('base').attr('href', 'file:///android_asset/www/');
@@ -98,7 +83,7 @@ app = {
 	 * @param string html
 	 * @param string url - base URL
 	 */
-	importPage: function(html, url) {
+	renderHtml: function(html, url) {
 		$('base').attr('href', url);
 		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
 
@@ -165,14 +150,6 @@ app = {
 		hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	},
-	
-	stopLoading: function() {
-		// 		window.frames[0].stop();
-		if (app.loadingXhr) {
-			app.loadingXhr.abort();
-			app.loadingXhr = null;
-		}
-	},
 
 	navigateToPage: function(url, options) {
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
@@ -181,9 +158,9 @@ app = {
 		showSpinner();
 		
 		if (options.cache) {
-			app.setRootPage(url);
+			app.loadCachedPage(url);
 		} else {
-			app.hideAndLoad(url);
+			app.loadPage(url);
 		}
 		if (options.updateHistory) {
 			currentHistoryIndex += 1;
@@ -204,5 +181,8 @@ app = {
 		// Enable change language - might've been disabled in a prior error page
 		console.log('enabling language');
 		$('#languageCmd').attr('disabled', 'false');  
-	}
+	},
+
+	network: network()
 }
+
