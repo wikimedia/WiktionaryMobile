@@ -82,7 +82,7 @@ function hideOverlayDivs() {
 	$('#history').hide();
 	$('#searchresults').hide();
 	$('#settings').hide();
-	$('#about').hide();
+	$('#about-page-overlay').hide();
 	$('#langlinks').hide();
 }
 
@@ -209,8 +209,8 @@ function homePage() {
 }
 
 function aboutPage() {
-	var aboutUrl = app.baseURL + "/w/index.php?title=Wikipedia:About&useformat=mobile";
-	app.navigateToPage(aboutUrl);
+	hideContent();
+	$("#about-page-overlay").localize().show();
 }
 
 function currentPageUrl() {

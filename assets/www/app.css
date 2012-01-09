@@ -33,7 +33,7 @@ header
 	z-index:30000;
 }   
 
-#savedPages, #history, #settings, #searchresults, #langlinks
+#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay
 {
 	background-color:white;
 	width:100%;
@@ -324,11 +324,36 @@ header
 	outline: none;
 }
 
-/*
-.titlebar div:last-child {
-    border-right:none;
+.error-overlay {
+	background: white;
+	background-image: url(image/globe-bg.jpg);
+	background-position: top left;
+	background-repeat: no-repeat;
+	background-size: 140px 325px;
+	color: black;
+	font-family: "Droid Sans", "Helvetica", sans-serif;
+	padding-left: 120px;
+	padding-top: 20px;
+	padding-right: 20px;
+	font-size: 20px;
+	padding-bottom: 40px;
+	margin-left: -8px;
 }
-.titlebar div:first-child {
-    border-left:none;
+
+#about-page-overlay {
+	padding-top: 10px;
+	background: white;
+	color: DarkGrey;
+	font-family: "Droid Sans", "Helvetica", sans-serif;
+	text-align: center;
 }
-*/
+
+#about-version {
+	font-size: 30px;
+	color: Black;
+	font-variant: small-caps;
+}
+
+#about-license {
+	font-size: 10px;
+}
