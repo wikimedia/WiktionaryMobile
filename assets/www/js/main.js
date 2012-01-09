@@ -82,7 +82,7 @@ function hideOverlayDivs() {
 	$('#history').hide();
 	$('#searchresults').hide();
 	$('#settings').hide();
-	$('#about').hide();
+	$('#about-page-overlay').hide();
 	$('#langlinks').hide();
 }
 
@@ -209,7 +209,8 @@ function homePage() {
 }
 
 function aboutPage() {
-	app.loadLocalPage('about.html');
+	hideContent();
+	$("#about-page-overlay").localize().show();
 }
 
 function currentPageUrl() {

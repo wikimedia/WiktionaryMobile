@@ -33,7 +33,7 @@ header
 	z-index:30000;
 }   
 
-#savedPages, #history, #settings, #searchresults, #langlinks
+#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay
 {
 	background-color:white;
 	width:100%;
@@ -341,6 +341,7 @@ header
 }
 
 #about-page-overlay {
+	padding-top: 10px;
 	background: white;
 	color: DarkGrey;
 	font-family: "Droid Sans", "Helvetica", sans-serif;
