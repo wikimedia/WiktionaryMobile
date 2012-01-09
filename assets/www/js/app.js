@@ -1,5 +1,5 @@
 app = {
-	setRootPage: function(url) {
+	loadCachedPage: function(url) {
 		// Hide the iframe until the stylesheets are loaded,
 		// to avoid flash of unstyled text.
 		// Instead we're hidden, which also sucks.
@@ -16,7 +16,7 @@ app = {
 			});
 		};
 		var gotPath = function(cachedPage) {
-			app.hideAndLoad('file://' + cachedPage.file, url, function() {
+			app.loadPage('file://' + cachedPage.file, url, function() {
 				replaceRes();
 			});
 		}
@@ -29,7 +29,7 @@ app = {
 		window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
 		
 	}, 
-	hideAndLoad: function(url, origUrl, callback) {
+	loadPage: function(url, origUrl, callback) {
 		origUrl = origUrl || url;
 		console.log('hideAndLoad url ' + url);
 		console.log('hideAndLoad origUrl ' + origUrl);
@@ -158,9 +158,9 @@ app = {
 		showSpinner();
 		
 		if (options.cache) {
-			app.setRootPage(url);
+			app.loadCachedPage(url);
 		} else {
-			app.hideAndLoad(url);
+			app.loadPage(url);
 		}
 		if (options.updateHistory) {
 			currentHistoryIndex += 1;
