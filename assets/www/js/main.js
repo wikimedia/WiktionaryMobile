@@ -209,8 +209,10 @@ function homePage() {
 }
 
 function aboutPage() {
+	hideOverlayDivs();
 	hideContent();
 	$("#about-page-overlay").localize().show();
+	setActiveState();
 }
 
 function currentPageUrl() {
