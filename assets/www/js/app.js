@@ -36,7 +36,7 @@ app = {
 		app.network.makeRequest({
 			url: url, 
 			success: function(data) {
-					app.importPage(data, origUrl);
+					app.renderHtml(data, origUrl);
 					if(callback) {
 						callback();
 					}
@@ -83,7 +83,7 @@ app = {
 	 * @param string html
 	 * @param string url - base URL
 	 */
-	importPage: function(html, url) {
+	renderHtml: function(html, url) {
 		$('base').attr('href', url);
 		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
 
