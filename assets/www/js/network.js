@@ -17,7 +17,7 @@ function network() {
 				}
 				currentXhr = null;
 			},
-			error: function(data) {
+			error: function(xhr, data) {
 				options.error(xhr);
 				currentXhr = null;
 			}
