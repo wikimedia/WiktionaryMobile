@@ -89,7 +89,7 @@ function deleteSavedPagePrompt(title, url) {
 	if (answer) {
 		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			this.remove(url, function() {
-				lightweightNotification(mw.message('saved-page-removed', key).plain());
+				lightweightNotification(mw.message('saved-page-removed', title ).plain());
 				$(".listItemContainer[data-page-url=\'" + url + "\']").hide();
 			});
 		});
