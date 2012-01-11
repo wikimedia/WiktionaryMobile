@@ -85,13 +85,24 @@ app = {
 	 */
 	renderHtml: function(html, url) {
 		$('base').attr('href', url);
+
+		// Horrible hack to grab the lang & dir attributes from
+		// the target page's <html> without parsing the rest
+		var stub = html.match(/<html ([^>]+)>/i, '$1')[1],
+			$stubdiv = $('<div ' + stub + '></div>'),
+			lang = $stubdiv.attr('lang'),
+			dir = $stubdiv.attr('dir');
+
 		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
 
 		var selectors = ['#content>*', '#copyright'],
 			$target = $('#main'),
 			$div = $('<div>').html(trimmed);
 
-		$target.empty();
+		$target
+			.empty()
+			.attr('lang', lang)
+			.attr('dir', dir);
 		$.each(selectors, function(i, sel) {
 			$div.find(sel).remove().appendTo($target);
 		});
