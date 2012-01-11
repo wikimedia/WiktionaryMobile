@@ -15,6 +15,10 @@ function updateMenuState() {
 			action: getHistory
 		},
 		{
+			id: 'menu-savePage',
+			action: savePage
+		},
+		{
 			id: 'menu-savedPages',
 			action: showSavedPages
 		},

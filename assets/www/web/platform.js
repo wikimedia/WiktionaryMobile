@@ -16,12 +16,20 @@ function updateMenuState() {
 			action: goBack
 		},
 		{
+			id: 'menu-forward',
+			action: goForward
+		},
+		{
 			id: 'menu-language',
 			action: selectLanguage
 		},
 		{
 			id: 'menu-history',
 			action: getHistory
+		},
+		{
+			id: 'menu-savePage',
+			action: savePage
 		},
 		{
 			id: 'menu-savedPages',
