@@ -21,7 +21,7 @@ function onDeviceReady() {
 	$('#content').css('display', 'block');
 
 	// this has to be set for the window.history API to work properly
-	PhoneGap.UsePolling = true;
+	//PhoneGap.UsePolling = true;
 
 	preferencesDB.initializeDefaults(function() { 
         app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
@@ -225,4 +225,8 @@ function currentPageTitle() {
 		unescaped = decodeURIComponent(page),
 		title = unescaped.replace(/_/g, ' ');
 	return title;
+}
+
+function getPhoneGapVersion(callback, error) {
+	PhoneGap.exec(callback, error, 'ApplicationVersion', 'getVersion', []);
 }

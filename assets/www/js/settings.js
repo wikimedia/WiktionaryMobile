@@ -1,7 +1,7 @@
 function getSettings() {
 	$('#settingsList').html('');
 	getLanguages(function() {
-		PhoneGap.exec(
+		getPhoneGapVersion(
 			function(result){
 				markup = '<div class="item"><label><msg key="settings-font-size-label"></msg></label><p><msg key="settings-font-size-desc"></msg><select id="fontSizeSelector">' + 
 							'<option value="smaller"><msg key="settings-font-size-smaller">Smaller</msg></option>' + 
@@ -18,8 +18,7 @@ function getSettings() {
 					app.adjustFontSize(selected);
 				});
 			},
-			function(error){ $('#settingsList').append(error); },
-			'ApplicationVersion', 'getVersion', []
+			function(error){ $('#settingsList').append(error); }
 		); 
 	});
 }
