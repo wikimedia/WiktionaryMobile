@@ -1,3 +1,6 @@
+function savedPages() {
+
+}
 function clearSavedPages() {
 	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() { this.nuke() });
 }
@@ -63,15 +66,13 @@ function showSavedPages() {
 }
 
 function formatSavedPageEntry(record) {
-	var markup = "<div class='listItemContainer' data-page-url='" + record.key + "'>";
-	markup += "<a class='listItem' onclick=\"javascript:onSavedPageClicked(\'" + record.key + "\');\">";
-	markup += "<span class='iconSavedPage'></span>";
-	markup += "<span class='text deleteEnabled'>" + record.title + "</span>";
-	markup += "</a>";
-	markup += "<a class='deleteSavedPage deleteButton' href=\"javascript:deleteSavedPagePrompt(\'" + record.title + "\', \'" + record.key + "\');\"></a>";
-	markup += "</div>";
-	
-	return markup;
+	var template = Hogan.compile($("#saved-page-item-template").html());
+	var data = {
+		url: record.key,
+		title: record.title
+	};
+
+	return template.render(data);
 }
 
 function onSavedPageClicked(url) {
