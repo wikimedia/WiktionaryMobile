@@ -28,7 +28,7 @@ function updateMenuState() {
 			action: showSavedPages
 		},
 		{
-			id: 'settings',
+			id: 'menu-settings',
 			action: getSettings
 		}
 	];
@@ -36,21 +36,16 @@ function updateMenuState() {
 	var $menu = $('<div>');
 	$menu
 		.attr('id', 'menu')
-		.css('position', 'fixed')
-		.css('height', '52px')
-		.css('bottom', 0)
-		.css('left', 0)
-		.css('right', 0)
-		.css('background', '#888')
 		.appendTo('body');
 
 	$.each(items, function(i, item) {
 		var $button = $('<button>');
 		$button
-			.text(mw.message(item.id).plain())
+			.attr('id', item.id)
 			.click(function() {
 				item.action();
 			})
+			.append('<span>')
 			.appendTo($menu);
 	});
 };

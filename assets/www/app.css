@@ -358,3 +358,47 @@ header
 #about-license {
 	font-size: 10px;
 }
+
+
+
+/* Web, iOS menu */
+#menu {
+	position: fixed;
+	height: 52px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #888;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.75, #333));
+}
+
+#menu button {
+	display: inline-block;
+	border: none;
+	background: none;
+}
+#menu button span {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+}
+
+#menu-back span {
+	background: url(img/mdpi/optionBack.png);
+}
+
+#menu-language span {
+	background: url(img/mdpi/optionLanguage.png);
+}
+
+#menu-history span {
+	background: url(img/mdpi/optionViewHistory.png);
+}
+
+#menu-savedPages span {
+	background: url(img/mdpi/optionReadLater.png);
+}
+
+#menu-settings span {
+	background: url(img/mdpi/optionSettings.png);
+}
