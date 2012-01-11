@@ -379,7 +379,7 @@ header
 	display: inline-block;
 	border: none;
 	background: none;
-	padding: 0;
+	padding: 0px 2px;
 	margin: 0;
 }
 #menu button span {
@@ -387,6 +387,10 @@ header
 	width: 48px;
 	height: 48px;
 	background-size: 48px 48px;
+}
+
+#menu button:active {
+	background-image: -webkit-gradient(radial, center center, 8, center center, 24, from(white), to(rgba(255,255,255,0)));
 }
 
 #menu-back span {
