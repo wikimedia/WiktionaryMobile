@@ -1,9 +1,6 @@
 function savedPages() {
 
 }
-function clearSavedPages() {
-	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() { this.nuke() });
-}
 
 function savePage() {
 	var MAX_LIMIT = 50;
@@ -66,7 +63,7 @@ function showSavedPages() {
 }
 
 function formatSavedPageEntry(record) {
-	var template = Hogan.compile($("#saved-page-item-template").html());
+	var template = app.templates.getTemplate("saved-page-item-template");
 	var data = {
 		url: record.key,
 		title: record.title
@@ -77,9 +74,6 @@ function formatSavedPageEntry(record) {
 
 function onSavedPageClicked(url) {
 	// Load cached page!
-	$('#searchParam').val('');        
-	showSpinner();  
-	$('#search').addClass('inProgress');
 	app.navigateToPage(url, {cache: true});
 	hideOverlays();
 }

@@ -194,6 +194,7 @@ app = {
 		$('#languageCmd').attr('disabled', 'false');  
 	},
 
-	network: network()
+	network: network(),
+	templates: templates()
 }
 
