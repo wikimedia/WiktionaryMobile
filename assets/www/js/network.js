@@ -5,9 +5,6 @@ function network() {
 		currentXhr = $.ajax({
 			url: options.url,
 			dataType: 'text',
-			headers: {
-				"Application-Version": "Wikipedia Mobile (Android)/1.0.0"
-			},
 			success: function(data, xhr) {
 				if(data == '') {
 					// Sometimes we get an empty response. Why? Not sure.
