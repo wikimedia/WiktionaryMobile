@@ -24,9 +24,10 @@
 	<!-- app logic -->
 	<script type="text/javascript" charset="utf-8" src="js/network.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/templates.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/savedpages.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/chrome.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/app_history.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/search.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/geo.js"></script>
@@ -49,13 +50,16 @@
 	<div id="templates">
 		<script type="text/html" id="saved-pages-template">
 			{{#pages}}
-				<div class="listItemContainer" data-page-url="{{key}}">
-					<a class="listItem" onclick="javascript:onSavedPageClicked('{{key}}');">
+				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+					<a class="listItem savedPage">
 						<span class="iconSavedPage"></span>
 						<span class="text deleteEnabled">{{title}}</span>
 					</a>
 					<a class="deleteSavedPage deleteButton"></a>
 				</div>
+			{{/pages}}
+			{{^pages}}
+				<div class="lisItemContainer"></div>
 			{{/pages}}
 		</script>
 	</div>
@@ -146,16 +150,16 @@
 	</div>
 
 	<menu id="appMenu" type="context">
-		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="false" action="selectLanguage();" />
-		<command type="command" id="nearbyCmd" icon="optionNearMe.png" disabled="false" action="getCurrentPosition();" />
-		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="getHistory();" />
-		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="savePage();" />
-		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="showSavedPages();" />
-		<command type="command" id="sharePageCmd" disabled="false" action="sharePage();" />
-		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="goForward();" />
-		<command type="command" id="selectTextCmd" disabled="false" action="selectText();" />
-		<command type="command" id="settingsCmd" icon="optionSettings.png" disabled="false" action="getSettings();" />
-		<command type="command" id="aboutCmd" disabled="false" action="aboutPage();" />
+		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="false" action="read-in" />
+		<command type="command" id="nearbyCmd" icon="optionNearMe.png" disabled="false" action="near-me" />
+		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="view-history" />
+		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="save-page" />
+		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="view-saved-pages" />
+		<command type="command" id="sharePageCmd" disabled="false" action="share-page" />
+		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="go-forward" />
+		<command type="command" id="selectTextCmd" disabled="false" action="select-text" />
+		<command type="command" id="settingsCmd" icon="optionSettings.png" disabled="false" action="view-settings" />
+		<command type="command" id="aboutCmd" disabled="false" action="view-about" />
 	</menu>
 
 </body>

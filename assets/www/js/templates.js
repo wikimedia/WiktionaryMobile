@@ -1,6 +1,6 @@
 // Cache that compiles and stores templates so they don't keep getting recompiled
 // Currently takes templates from index.html
-function templates() {
+window.templates = function() {
 	var compiled_templates = {};
 	function getTemplate(name) {
 		if(!compiled_templates[name]) {
@@ -13,4 +13,4 @@ function templates() {
 	return {
 		getTemplate: getTemplate
 	};
-}
+}();

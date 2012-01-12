@@ -1,4 +1,4 @@
-function network() {
+window.network = function() {
 	var currentXhr = null;
 
 	function makeRequest(options) {
@@ -33,4 +33,4 @@ function network() {
 		stopCurrentRequest: stopCurrentRequest
 	};
 
-}
+}();

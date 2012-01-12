@@ -62,7 +62,7 @@ function lightweightNotification(text) {
 	window.plugins.ToastPlugin.show_short(text);
 }
 
-function updateMenuState() {
+function updateMenuState(menu_handlers) {
 	$('#appMenu command').each(function() {
 		var $command = $(this),
 			id = $command.attr('id'),
@@ -71,7 +71,8 @@ function updateMenuState() {
 		$command.attr('label', label);
 	});
 
-	window.plugins.SimpleMenu.loadMenu($('#appMenu')[0], 
+	window.plugins.SimpleMenu.loadMenu($('#appMenu')[0],
+									   menu_handlers,
 									   function(success) {console.log(success);},
 									   function(error) {console.log(error);});
 };
