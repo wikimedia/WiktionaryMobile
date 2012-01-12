@@ -5,6 +5,9 @@ function savedPages() {
 function savePage() {
 	var MAX_LIMIT = 50;
 
+	var title = currentPageTitle();
+	var url = currentPageUrl();
+
 	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 		this.keys(function(records) {
 			if (records != null) {
@@ -13,45 +16,23 @@ function savePage() {
 					// @todo this is probably not great, remove this :)
 					alert(mw.message("saved-pages-max-warning").plain());
 				}else{
-					savePagePrompt();
+					savedPagesDB.save({key: url, title: title});
+					app.navigateToPage(url, {
+						cache: true,
+						updateHistory: false
+					});
+					lightweightNotification(mw.message('page-saved', title).plain());
 				}
 			}
 		});
 	});
 }
 
-function savePagePrompt() {
-	var title = currentPageTitle();
-	var url = currentPageUrl();
-	
-	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
-		this.get(url, function(r) {	
-		
-			if (r == null) {
-				savedPagesDB.save({key: url, title: title});
-
-				// Cache the URL...
-				console.log('saving page: ' + url);
-				app.navigateToPage(url, {
-					cache: true,
-					updateHistory: false
-				});
-				lightweightNotification(mw.message('page-saved', title).plain());
-			} else {
-				// @fixme this shouldn't happen; we should check first and
-				// instead have an option to remove the page from saved pages!
-				alert(mw.message('page-already-saved', title).plain());
-			}
-		});
-	});	
-}
-
 function showSavedPages() {
-	$('#savedPagesList').html('');
-
+	var template = app.templates.getTemplate('saved-pages-template');
 	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
-		this.each(function(record, index) {	
-			$('#savedPagesList').prepend(formatSavedPageEntry(record));
+		this.all(function(savedpages) {	
+			$('#savedPagesList').html(template.render({'pages': savedpages}));
 		});
 	});
 
@@ -60,16 +41,6 @@ function showSavedPages() {
 	hideContentIfNeeded();
 	
 	setActiveState();	
-}
-
-function formatSavedPageEntry(record) {
-	var template = app.templates.getTemplate("saved-page-item-template");
-	var data = {
-		url: record.key,
-		title: record.title
-	};
-
-	return template.render(data);
 }
 
 function onSavedPageClicked(url) {

@@ -47,14 +47,16 @@
 <body onload="init();">
 
 	<div id="templates">
-		<script type="text/html" id="saved-page-item-template">
-			<div class="listItemContainer" data-page-url="{{url}}">
-				<a class="listItem" onclick="javascript:onSavedPageClicked('{{url}}');">
-					<span class="iconSavedPage"></span>
-					<span class="text deleteEnabled">{{title}}</span>
-				</a>
-				<a class="deleteSavedPage deleteButton"></a>
-			</div>
+		<script type="text/html" id="saved-pages-template">
+			{{#pages}}
+				<div class="listItemContainer" data-page-url="{{key}}">
+					<a class="listItem" onclick="javascript:onSavedPageClicked('{{key}}');">
+						<span class="iconSavedPage"></span>
+						<span class="text deleteEnabled">{{title}}</span>
+					</a>
+					<a class="deleteSavedPage deleteButton"></a>
+				</div>
+			{{/pages}}
 		</script>
 	</div>
 
