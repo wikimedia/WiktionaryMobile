@@ -4,7 +4,7 @@ function search(isSuggestion) {
 		$('#search').removeClass('inProgress');
 		return;
 	}
-	if (hasNetworkConnection()) {
+	if (network.isConnected()) {
 		var searchParam = $('#searchParam').val();
 
 		if (searchParam == '') {
@@ -112,7 +112,7 @@ function displayResults(results, isSuggestion) {
 }
 
 function goToResult(url) {
-	if (hasNetworkConnection()) {
+	if (network.isConnected()) {
 		app.navigateToPage(url);
 		if (!twoColumnView()) {
 			hideOverlays();

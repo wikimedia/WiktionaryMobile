@@ -28,9 +28,15 @@ window.network = function() {
 		}
 	}
 
+	function isConnected() 
+	{
+		return window.navigator.onLine;
+	}
+
 	return {
 		makeRequest: makeRequest,
-		stopCurrentRequest: stopCurrentRequest
+		stopCurrentRequest: stopCurrentRequest,
+		isConnected: isConnected
 	};
 
 }();

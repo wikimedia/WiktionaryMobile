@@ -179,10 +179,6 @@ function lightweightNotification(text) {
 	alert(text);
 }
 
-function hasNetworkConnection() 
-{
-	return window.navigator.onLine;
-}
 
 function setActiveState() {
 	var applicableClasses = [

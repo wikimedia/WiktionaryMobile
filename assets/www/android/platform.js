@@ -77,10 +77,8 @@ function updateMenuState(menu_handlers) {
 									   function(error) {console.log(error);});
 };
 
-//@Override
-function hasNetworkConnection() 
-{
-    return navigator.network.connection.type == Connection.NONE ? false : true;
+network.isConnected = function()  {
+	return navigator.network.connection.type == Connection.NONE ? false : true;
 }
 
 //@Override
