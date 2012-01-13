@@ -1,5 +1,4 @@
 window.app = function() {
-	var langs = [];
 	function loadCachedPage (url) {
 		// Hide the iframe until the stylesheets are loaded,
 		// to avoid flash of unstyled text.
@@ -49,7 +48,7 @@ window.app = function() {
 				} else {
 					loadLocalPage('error.html');
 				}
-				langs = [];
+				languageLinks.clearLanguages();
 				$('#savePageCmd').attr('disabled', 'true');
 				console.log('disabling language');
 				$('#languageCmd').attr('disabled', 'true');
@@ -63,15 +62,6 @@ window.app = function() {
 			$('#main').localize();
 			onPageLoaded();
 		});
-	}
-
-	/**
-	 * Fetch language links from the iframe.
-	 *
-	 * @return array of {name: string, url: string, selected: bool} objects
-	 */
-	function getLangLinks() {
-		return langs;
 	}
 
 	function adjustFontSize(size) {
@@ -109,18 +99,7 @@ window.app = function() {
 			$div.find(sel).remove().appendTo($target);
 		});
 
-		// Also import the language selections, we'll need them later.
-		var langs = [];
-		$div.find('#languageselection option').each(function(i, option) {
-			var $option = $(this);
-			langs.push({
-				name: $option.text(),
-				url: processLanguageUrl($option.val()),
-				selected: ($option.attr('selected') != null)
-			});
-		});
-
-		langs = langs;
+		languageLinks.parseAvailableLanguages($div);
 	}
 	
 	function initLinkHandlers() {
@@ -198,7 +177,6 @@ window.app = function() {
 
 	var exports = {
 		adjustFontSize: adjustFontSize,
-		getLangLinks: getLangLinks,
 		navigateToPage: navigateToPage,
 		initLinkHandlers: initLinkHandlers
 	};

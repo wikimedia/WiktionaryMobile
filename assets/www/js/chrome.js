@@ -1,6 +1,6 @@
 window.chrome = function() {
 	var menu_handlers = {
-		'read-in': function() { selectLanguage(); },
+		'read-in': function() { languageLinks.showAvailableLanguages(); },
 		'near-me': function() { getCurrentPosition(); },
 		'view-history': function() { getHistory(); } ,
 		'save-page': function() { savedPages.saveCurrentPage() },

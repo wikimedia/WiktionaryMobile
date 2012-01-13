@@ -1,48 +1,64 @@
-
-/**
- * Protocol-relative data will break against our 'file://' pages :)
- * @param url string
- * @returns string
- */
-function processLanguageUrl(url) {
-	if (url.substr(0, 2) == '//') {
-		url = 'https:' + url;
+window.languageLinks = function() {
+	var langs = [];
+	function onLanguageLinkClick() {
+		var parent = $(this).parents(".listItemContainer");
+		var url = parent.attr("data-page-url");
+		app.navigateToPage(url);
+		hideOverlays();
 	}
-	return url;
-}
 
-/**
- * Format the language list in the same style as saved pages & history,
- * pulling link data from the iframe.
- */
-function langLinkSelector(languages) {
-	var $list = $('#langList').empty();
+	/**
+	 * Helper function for converting protocol relative urls to https
+	 */
+	function processLanguageUrl(url) {
+		if (url.substr(0, 2) == '//') {
+			url = 'https:' + url;
+		}
+		return url;
+	}
 
-	$.each(languages, function(i, lang) {
-		$("<div class='listItemContainer'>" +
-			"<a class='listItem'>" +
-			"<span class='text'></span>" +
-			"</a>" +
-			"</div>")
-		.find('.text')
-			.text(lang.name)
-			.end()
-		.find('a')
-			.click(function() {
-				app.navigateToPage(lang.url);
-				hideOverlays();
-			})
-			.end()
-		.appendTo($list);
-	});
-}
+	/**
+	 * Function called with div of current page
+	 * Saves languages that page is available in for use in Read-in
+	 */
+	function parseAvailableLanguages(body) {
+		langs = [];
+		body.find('#languageselection option').each(function(i, option) {
+			var $option = $(this);
+			langs.push({
+				name: $option.text(),
+				url: processLanguageUrl($option.val()),
+				selected: ($option.attr('selected') != null)
+			});
+		});
+	}
 
-function selectLanguage() {
-	langLinkSelector(app.getLangLinks());
+	/**
+	 * Clears languages available. Also blanks out the 'Read in' menu item
+	 */
+	function clearLanguages() {
+		langs = [];
+	}
 
-	hideOverlayDivs();
-	$('#langlinks').localize().show();
-	hideContentIfNeeded();
-	
-	setActiveState();
-}
+	/**
+	 * Format the language list in the same style as saved pages & history,
+	 * pulling link data from the iframe.
+	 */
+	function showAvailableLanguages() {
+		var template = templates.getTemplate("language-links-template");
+		$("#langList").html(template.render({languages: langs}));
+		$(".languageLink").click(onLanguageLinkClick);
+		hideOverlayDivs();
+
+		$('#langlinks').localize().show();
+		hideContentIfNeeded();
+		
+		setActiveState();	
+	}
+
+	return {
+		showAvailableLanguages: showAvailableLanguages,
+		parseAvailableLanguages: parseAvailableLanguages,
+		clearLanguages: clearLanguages
+	};
+}();
