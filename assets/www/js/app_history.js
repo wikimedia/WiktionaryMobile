@@ -1,6 +1,6 @@
 function addToHistory() {
-	var title = currentPageTitle();
-	var url = currentPageUrl();
+	var title = app.getCurrentTitle();
+	var url = app.getCurrentUrl();
 
 	if (url != "about:blank") {
 		// let's add stuff to the history!

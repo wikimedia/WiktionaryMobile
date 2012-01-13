@@ -220,17 +220,6 @@ function aboutPage() {
 	setActiveState();
 }
 
-function currentPageUrl() {
-	return pageHistory[currentHistoryIndex];
-}
-
-function currentPageTitle() {
-	var url = currentPageUrl(),
-		page = url.replace(/^https?:\/\/[^\/]+\/wiki\//, ''),
-		unescaped = decodeURIComponent(page),
-		title = unescaped.replace(/_/g, ' ');
-	return title;
-}
 
 function getPhoneGapVersion(callback, error) {
 	PhoneGap.exec(callback, error, 'ApplicationVersion', 'getVersion', []);

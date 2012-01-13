@@ -3,8 +3,8 @@ window.savedPages = function() {
 	function saveCurrentPage() {
 		var MAX_LIMIT = 50;
 
-		var title = currentPageTitle();
-		var url = currentPageUrl();
+		var title = app.getCurrentTitle();
+		var url = app.getCurrentUrl();
 
 		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			this.keys(function(records) {

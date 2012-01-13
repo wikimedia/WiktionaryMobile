@@ -175,10 +175,24 @@ window.app = function() {
 		$('#languageCmd').attr('disabled', 'false');  
 	}
 
+	function getCurrentUrl() {
+		return pageHistory[currentHistoryIndex];
+	}
+
+	function getCurrentTitle() {
+		var url = getCurrentUrl(),
+			page = url.replace(/^https?:\/\/[^\/]+\/wiki\//, ''),
+			unescaped = decodeURIComponent(page),
+			title = unescaped.replace(/_/g, ' ');
+		return title;
+	}
+
 	var exports = {
 		adjustFontSize: adjustFontSize,
 		navigateToPage: navigateToPage,
-		initLinkHandlers: initLinkHandlers
+		initLinkHandlers: initLinkHandlers,
+		getCurrentUrl: getCurrentUrl,
+		getCurrentTitle: getCurrentTitle
 	};
 
 	return exports;
