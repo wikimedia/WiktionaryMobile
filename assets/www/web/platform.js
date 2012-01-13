@@ -24,16 +24,16 @@ function updateMenuState() {
 			action: selectLanguage
 		},
 		{
-			id: 'menu-history',
-			action: getHistory
+			id: 'menu-output',
+			action: function() {
+				alert('save / copy link / share');
+			}
 		},
 		{
-			id: 'menu-savePage',
-			action: savePage
-		},
-		{
-			id: 'menu-savedPages',
-			action: showSavedPages
+			id: 'menu-sources',
+			action: function() {
+				alert('nearby / saved pages / history')
+			}
 		},
 		{
 			id: 'menu-settings',

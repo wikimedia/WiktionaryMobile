@@ -387,6 +387,11 @@ header
 	width: 48px;
 	height: 48px;
 	background-size: 48px 48px;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	vertical-align: center;
+	text-align: center;
 }
 
 #menu button:active {
@@ -402,11 +407,17 @@ header
 }
 
 #menu-language span {
-	background: url(img/xhdpi/optionLanguage.png);
+	background: url(image/ios/toolbar-language.png);
+	background-size: 27px 17px !important;
 }
 
-#menu-history span {
-	background: url(img/xhdpi/optionViewHistory.png);
+#menu-output span {
+	background-image: url(image/ios/toolbar-output.png);
+	background-size: 23px 18px !important;
+}
+
+#menu-sources span {
+	background: url(img/xhdpi/optionReadLater.png);
 }
 
 #menu-savePage span {
@@ -418,5 +429,6 @@ header
 }
 
 #menu-settings span {
-	background: url(img/xhdpi/optionSettings.png);
+	background: url(image/ios/toolbar-settings.png);
+	background-size: 26px 28px !important;
 }
