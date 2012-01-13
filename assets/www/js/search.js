@@ -12,7 +12,7 @@ function search(isSuggestion) {
 			return;
 		}
 
-		showSpinner();
+		chrome.showSpinner();
 		$('#search').addClass('inProgress');
 
 		if(!isSuggestion) {
@@ -98,7 +98,7 @@ function displayResults(results, isSuggestion) {
 	});
 
 	$('#search').removeClass('inProgress');
-	hideSpinner();
+	chrome.hideSpinner();
 	hideOverlays();
 
 	$('#searchresults').show();
@@ -120,14 +120,4 @@ function goToResult(url) {
 	} else {
 		noConnectionMsg();
 	}
-}
-
-function showSpinner() {
-	$('.titlebar .spinner').css({display:'block'});
-	$('#clearSearch').css({height:0});
-}
-
-function hideSpinner() {
-	$('.titlebar .spinner').css({display:'none'});	
-	$('#clearSearch').css({height:30});
 }

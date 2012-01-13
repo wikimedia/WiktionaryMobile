@@ -56,7 +56,7 @@ function enableCaching() {
 }
 
 function loadFirstPage() {
-	showSpinner();
+	chrome.showSpinner();
 	$('#search').addClass('inProgress');
    
 	// restore browsing to last visited page

@@ -22,7 +22,7 @@ window.app = function() {
 		}
 		var gotError = function(error) {
 			console.log('Error: ' + error);
-			hideSpinner();
+			chrome.hideSpinner();
 			// noConnectionMsg();
 			// navigator.app.exitApp();
 		}
@@ -139,7 +139,7 @@ window.app = function() {
 		toggleForward();
 		updateMenuState(chrome.menu_handlers);
 		$('#search').removeClass('inProgress');        
-		hideSpinner();  
+		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
 
@@ -147,7 +147,7 @@ window.app = function() {
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
 		$('#searchParam').val('');
 		$('#search').addClass('inProgress');
-		showSpinner();
+		chrome.showSpinner();
 		
 		if (options.cache) {
 			loadCachedPage(url);
