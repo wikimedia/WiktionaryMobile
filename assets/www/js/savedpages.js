@@ -19,7 +19,7 @@ window.savedPages = function() {
 							cache: true,
 							updateHistory: false
 						});
-						lightweightNotification(mw.message('page-saved', title).plain());
+						chrome.lightweightNotification(mw.message('page-saved', title).plain());
 					}
 				}
 			});
@@ -46,7 +46,7 @@ window.savedPages = function() {
 		if (answer) {
 			var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 				this.remove(url, function() {
-					lightweightNotification(mw.message('saved-page-removed', title ).plain());
+					chrome.lightweightNotification(mw.message('saved-page-removed', title ).plain());
 					$(".listItemContainer[data-page-url=\'" + url + "\']").hide();
 				});
 			});

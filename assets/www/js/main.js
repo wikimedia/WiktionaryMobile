@@ -175,11 +175,6 @@ function goForward() {
 	}
 }
 
-function lightweightNotification(text) {
-	alert(text);
-}
-
-
 function setActiveState() {
 	var applicableClasses = [
 		'.deleteButton',

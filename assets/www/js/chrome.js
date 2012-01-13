@@ -21,9 +21,14 @@ window.chrome = function() {
 		$('.titlebar .spinner').css({display:'none'});	
 		$('#clearSearch').css({height:30});
 	}
+
+	function lightweightNotification(text) {
+		alert(text);
+	}
+
 	return {
 		menu_handlers: menu_handlers,
-		chrome.showSpinner: showSpinner,
+		showSpinner: showSpinner,
 		hideSpinner: hideSpinner
 	};
 }();
