@@ -135,7 +135,7 @@ window.app = function() {
 	
 	function onPageLoaded() {
 		window.scroll(0,0);
-		addToHistory();
+		addCurrentPageToHistory();
 		toggleForward();
 		updateMenuState(chrome.menu_handlers);
 		$('#search').removeClass('inProgress');        

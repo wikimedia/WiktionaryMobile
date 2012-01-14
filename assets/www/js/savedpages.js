@@ -60,14 +60,13 @@ window.savedPages = function() {
 				$('#savedPagesList').html(template.render({'pages': savedpages}));
 				$(".savedPage").click(onSavedPageClick);
 				$(".deleteSavedPage").click(onSavedPageDelete);
+				hideOverlayDivs();
+				$('#savedPages').toggle();
+				hideContent();
+				setActiveState();	
 			});
 		});
 
-		hideOverlayDivs();
-		$('#savedPages').toggle();
-		hideContentIfNeeded();
-		
-		setActiveState();	
 	}
 
 	return {

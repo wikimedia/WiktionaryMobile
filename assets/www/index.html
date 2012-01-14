@@ -63,6 +63,20 @@
 			{{/pages}}
 		</script>
 
+		<script type="text/html" id="history-template">
+			{{#pages}}
+				<div class="listItemContainer" data-page-url="{{value}}" data-page-title="{{title}}">
+					<a class="listItem historyItem">
+						<span class="iconHistory"></span>
+						<span class="text">{{title}}</span>
+					</a>
+				</div>
+			{{/pages}}
+			{{^pages}}
+				<div class="listItemContainer"></div>
+			{{/pages}}
+		</script>
+
 		<script type="text/html" id="language-links-template">
 			{{#languages}}
 			<div class="listItemContainer" data-page-url="{{url}}">
@@ -114,9 +128,6 @@
 			</div>
 		</header>
 		<div id="historyList"></div>
-		<!--
-		<div onclick="javascript:purgeHistory();">purge</div>
-		-->
 	</div>
 
 	<div id="searchresults">
