@@ -27,6 +27,8 @@
 	</array>
 	<key>Plugins</key>
 	<dict>
+		<key>ActionSheet</key>
+		<string>ActionSheet</string>
 		<key>com.phonegap.accelerometer</key>
 		<string>PGAccelerometer</string>
 		<key>com.phonegap.camera</key>

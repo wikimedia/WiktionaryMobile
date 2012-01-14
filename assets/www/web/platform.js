@@ -24,16 +24,43 @@ function updateMenuState() {
 			action: selectLanguage
 		},
 		{
-			id: 'menu-history',
-			action: getHistory
+			id: 'menu-output',
+			action: function() {
+				popupMenu([
+					mw.msg('menu-savepage'),
+					mw.msg('menu-share'),
+					mw.msg('menu-cancel')
+				], function(value, index) {
+					if (index == 0) {
+						savePage();
+					} else if (index == 1) {
+						sharePage();
+					}
+				}, {
+					cancelButtonIndex: 2
+				});
+			}
 		},
 		{
-			id: 'menu-savePage',
-			action: savePage
-		},
-		{
-			id: 'menu-savedPages',
-			action: showSavedPages
+			id: 'menu-sources',
+			action: function() {
+				popupMenu([
+					mw.msg('menu-nearby'),
+					mw.msg('menu-savedPages'),
+					mw.msg('menu-history'),
+					mw.msg('menu-cancel')
+				], function(val, index) {
+					if (index == 0) {
+						getCurrentPosition();
+					} else if (index == 1) {
+						showSavedPages();
+					} else if (index == 2) {
+						getHistory();
+					}
+				}, {
+					cancelButtonIndex: 3
+				});
+			}
 		},
 		{
 			id: 'menu-settings',
@@ -61,4 +88,28 @@ function updateMenuState() {
 // @Override
 function getPhoneGapVersion(callback, error) {
 	callback('n/a');
+}
+
+// @Override
+function popupMenu(items, callback, options) {
+	options = $.extend({destructiveButtonIndex: null, cancelButtonIndex: null}, options || {});
+
+	var $bg = $('<div class="actionsheet-bg"></div>').appendTo('body'),
+		$sheet = $('<div class="actionsheet"></div>').appendTo('body');
+	$.each(items, function(index, label) {
+		var $button = $('<button>')
+			.text(label)
+			.appendTo($sheet)
+			.click(function() {
+				$sheet.remove();
+				$bg.remove();
+				callback(label, index);
+			});
+		if (index === options.destructiveButtonIndex) {
+			$button.addClass('destructive');
+		}
+		if (index === options.cancelButtonIndex) {
+			$button.addClass('cancel');
+		}
+	});
 }
