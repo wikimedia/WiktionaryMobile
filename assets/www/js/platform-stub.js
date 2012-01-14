@@ -30,7 +30,10 @@ if (platform == 'unknown') {
 			'share/share.js',
 			'cachemode/cachemode.js',
 			'globalization/globalization.js'
-		]
+		],
+		ios: [
+			'ActionSheet.js'
+		],
 	};
 	if (platform in plugins) {
 		$.each(plugins[platform], function(i, path) {
