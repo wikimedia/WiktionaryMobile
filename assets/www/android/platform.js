@@ -54,7 +54,7 @@ function sharePage() {
 	);
 }
 
-chrome.lightweightNotification = function(text) {
+chrome.showNotification = function(text) {
 	// Using PhoneGap-Toast plugin for Android's lightweight "Toast" style notifications.
 	// https://github.com/m00sey/PhoneGap-Toast
 	// http://developer.android.com/guide/topics/ui/notifiers/toasts.html

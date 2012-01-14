@@ -57,7 +57,6 @@ function enableCaching() {
 
 function loadFirstPage() {
 	chrome.showSpinner();
-	$('#search').addClass('inProgress');
    
 	// restore browsing to last visited page
 	var historyDB = new Lawnchair({name:"historyDB"}, function() {

@@ -14,6 +14,7 @@ window.chrome = function() {
 
 	function showSpinner() {
 		$('.titlebar .spinner').css({display:'block'});
+		$('#search').addClass('inProgress');
 		$('#clearSearch').css({height:0});
 	}
 
@@ -22,13 +23,14 @@ window.chrome = function() {
 		$('#clearSearch').css({height:30});
 	}
 
-	function lightweightNotification(text) {
+	function showNotification(text) {
 		alert(text);
 	}
 
 	return {
 		menu_handlers: menu_handlers,
 		showSpinner: showSpinner,
-		hideSpinner: hideSpinner
+		hideSpinner: hideSpinner,
+		showNotification: showNotification
 	};
 }();
