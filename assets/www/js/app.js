@@ -64,6 +64,10 @@ window.app = function() {
 		});
 	}
 
+	function urlForTitle(title) {
+		return app.baseURL + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
+	}
+
 	function adjustFontSize(size) {
 		var frameDoc = $("#main");
 		$('#main').css('font-size', fontOptions[size]);
@@ -192,7 +196,8 @@ window.app = function() {
 		navigateToPage: navigateToPage,
 		initLinkHandlers: initLinkHandlers,
 		getCurrentUrl: getCurrentUrl,
-		getCurrentTitle: getCurrentTitle
+		getCurrentTitle: getCurrentTitle,
+		urlForTitle: urlForTitle 
 	};
 
 	return exports;

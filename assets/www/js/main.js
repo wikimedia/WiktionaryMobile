@@ -32,9 +32,11 @@ function onDeviceReady() {
             return false;
         });
         $("#searchForm").bind('submit', function() {
-            search(false);
+            search.performSearch($("#searchForm").val(), false);
             return false;
-        });
+        }).bind('keypress', function() {
+			search.performSearch($("#searchForm").val(), true);
+		});
         $("#clearSearch").bind('touchstart', function() {
             clearSearch();
             return false;
@@ -105,20 +107,6 @@ function hideContentIfNeeded() {
 	if (!twoColumnView()) {
 		// Narrow screen
 		hideContent();
-	}
-}
-
-
-function startSearch() {
-	var searchTerm = $('#searchParam').val();
-
-	if (searchTerm.length > 0) {
-		$('#clearSearch').show();
-		console.log(searchTerm);
-		search(true);
-	} else {
-		$('#clearSearch').hide();
-		hideOverlays();
 	}
 }
 

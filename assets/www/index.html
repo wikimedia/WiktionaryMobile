@@ -65,6 +65,28 @@
 
 		<script type="text/html" id="history-template">
 			{{#pages}}
+				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+					<a class="listItem searchItem">
+						<span class="iconSearchResult"></span>
+						<span class="text deleteEnabled">{{title}}</span>
+					</a>
+				</div>
+			{{/pages}}
+			{{^pages}}
+				<div class="listItemContainer">
+					<a class="listItem searchItem">
+						<span class="iconSearchResult"></span>
+						<span class="text deleteEnabled">No results found</span>
+					</a>
+				</div>
+			{{/pages}}
+			<div class="listItemContainer closeSearch">
+				<div class="listItem">Close</div>
+			</div>
+		</script>
+
+		<script type="text/html" id="history-template">
+			{{#pages}}
 				<div class="listItemContainer" data-page-url="{{value}}" data-page-title="{{title}}">
 					<a class="listItem historyItem">
 						<span class="iconHistory"></span>
@@ -86,6 +108,7 @@
 			</div>
 			{{/languages}}
 		</script>
+
 	</div>
 
 	<header id="mainHeader">
