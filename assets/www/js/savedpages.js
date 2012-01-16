@@ -57,7 +57,7 @@ function showSavedPages() {
 
 	hideOverlayDivs();
 	$('#savedPages').toggle();
-	hideContent();
+	hideContentIfNeeded();
 	
 	setActiveState();	
 }

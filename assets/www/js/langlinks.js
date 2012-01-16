@@ -42,7 +42,7 @@ function selectLanguage() {
 
 	hideOverlayDivs();
 	$('#langlinks').localize().show();
-	hideContent();
+	hideContentIfNeeded();
 	
-	setActiveState();	
+	setActiveState();
 }

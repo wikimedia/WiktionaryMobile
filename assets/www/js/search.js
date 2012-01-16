@@ -102,14 +102,18 @@ function displayResults(results, isSuggestion) {
 	hideOverlays();
 
 	$('#searchresults').show();
-	$('#content').hide();
+	//$('#content').hide();
+	hideContentIfNeeded();
+
 	
 }
 
 function goToResult(url) {
 	if (hasNetworkConnection()) {
 		app.navigateToPage(url);
-		hideOverlays();
+		if (!twoColumnView()) {
+			hideOverlays();
+		}
 	} else {
 		noConnectionMsg();
 	}

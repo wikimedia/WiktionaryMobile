@@ -96,6 +96,20 @@ function hideContent() {
 	$('#content').hide();
 }
 
+function twoColumnView() {
+	// should match the CSS media queries
+	return (document.width >= 640);
+}
+
+function hideContentIfNeeded() {
+	if (!twoColumnView()) {
+		// Narrow screen
+		alert('narrow screen');
+		hideContent();
+	}
+}
+
+
 function startSearch() {
 	var searchTerm = $('#searchParam').val();
 
@@ -210,7 +224,7 @@ function homePage() {
 
 function aboutPage() {
 	hideOverlayDivs();
-	hideContent();
+	hideContentIfNeeded();
 	$("#about-page-overlay").localize().show();
 	setActiveState();
 }

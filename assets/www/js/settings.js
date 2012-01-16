@@ -25,7 +25,7 @@ function getSettings() {
 
 function showSettings() {
 	hideOverlayDivs();
-	hideContent();
+	hideContentIfNeeded();
 	$('#settings').localize().show();
 	setActiveState();                                   
 }

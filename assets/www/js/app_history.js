@@ -84,6 +84,6 @@ function purgeHistory() {
 function showHistory() {
 	hideOverlayDivs();
 	$('#history').localize().show();
-	hideContent();
+	hideContentIfNeeded();
 	setActiveState();
 }
