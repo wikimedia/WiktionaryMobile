@@ -29,7 +29,11 @@
 	NSArray *items = [options objectForKey:@"items"];
 	NSInteger cancelButtonIndex = [[options objectForKey:@"cancelButtonIndex"] intValue] ?: false;
 	NSInteger destructiveButtonIndex = [[options objectForKey:@"destructiveButtonIndex"] intValue] ?: false;
-	
+    NSInteger left = [[options objectForKey:@"left"] intValue] ?: false;
+    NSInteger top = [[options objectForKey:@"top"] intValue] ?: false;
+    NSInteger width = [[options objectForKey:@"width"] intValue] ?: false;
+    NSInteger height = [[options objectForKey:@"height"] intValue] ?: false;
+
 	// Create actionSheet
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
 												   delegate:self
@@ -55,7 +59,13 @@
 	}
 
 	// Toggle ActionSheet
-    [actionSheet showInView:self.webView.superview];
+    if (left || top || width || height) {
+        // Position the sheet as a callout from the given origin rectangle
+        CGRect rect = CGRectMake(left, top, width, height);
+        [actionSheet showFromRect:rect inView:self.webView.superview animated:YES];
+    } else {
+        [actionSheet showInView:self.webView.superview];
+    }
 
 }
 

@@ -27,8 +27,8 @@ function updateMenuState() {
 			id: 'menu-output',
 			action: function() {
 				popupMenu([
-					mw.msg('menu-savepage'),
-					mw.msg('menu-share'),
+					mw.msg('menu-savePage'),
+					mw.msg('menu-sharePage'),
 					mw.msg('menu-cancel')
 				], function(value, index) {
 					if (index == 0) {
@@ -37,7 +37,8 @@ function updateMenuState() {
 						sharePage();
 					}
 				}, {
-					cancelButtonIndex: 2
+					cancelButtonIndex: 2,
+					origin: this
 				});
 			}
 		},
@@ -58,7 +59,8 @@ function updateMenuState() {
 						getHistory();
 					}
 				}, {
-					cancelButtonIndex: 3
+					cancelButtonIndex: 3,
+					origin: this
 				});
 			}
 		},
@@ -78,7 +80,7 @@ function updateMenuState() {
 		$button
 			.attr('id', item.id)
 			.click(function() {
-				item.action();
+				item.action.apply(this);
 			})
 			.append('<span>')
 			.appendTo($menu);
