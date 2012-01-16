@@ -470,3 +470,18 @@ header
 .actionsheet button.cancel {
 	background: #888;
 }
+
+
+@media only screen and (min-width: 640px) {
+	header {
+		width: 320px;
+		left: inherit;
+	}
+	#menu {
+		top: 0;
+		bottom: inherit;
+		left: 320px;
+		text-align: right;
+    background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
+	}
+}
