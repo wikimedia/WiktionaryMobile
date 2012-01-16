@@ -22,6 +22,11 @@ window.appSettings = function() {
 						site.code == "wiki";
 					});
 				});
+				renderSettings(usableLocales, fontSizes);
+				chrome.hideOverlays();
+				chrome.hideContent();
+				$('#settings').localize().show();
+				chrome.doFocusHack();                                   
 			}
 		});
 
@@ -38,14 +43,12 @@ window.appSettings = function() {
 		var selectedLanguage = $(this).val();
 		app.setContentLanguage(selectedLanguage);
 		homePage();
-		hideOverlays();
 	}
 
 	function onFontSizeChanged() {
 		var selectedFontSize = $(this).val();
 		app.setFontSize(size);
-		hideOverlays();
-		showContent();
+		chrome.showContent();
 	}
 
 	return {

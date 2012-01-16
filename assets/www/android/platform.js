@@ -20,16 +20,13 @@ function navigatorLang(success) {
 }
 
 
-var origOnDeviceReady = onDeviceReady;
-onDeviceReady = function() {
+chrome.addPlatformInitializer(function() {
     document.addEventListener("backbutton", onBackButton, false);
     document.addEventListener("searchbutton", onSearchButton, false);
-	
-	origOnDeviceReady();
-};
+});
 
 function onBackButton() {
-	goBack();
+	chrome.goBack();
 }
 
 function onSearchButton() {
@@ -81,7 +78,7 @@ network.isConnected = function()  {
 }
 
 //@Override
-function enableCaching() {
+app.enableCaching = function() {
 	$(document).bind('offline', function() {
 		console.log('OFFLINE');
 		window.plugins.CacheMode.setCacheMode('LOAD_CACHE_ELSE_NETWORK');

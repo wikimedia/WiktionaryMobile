@@ -30,7 +30,6 @@ window.savedPages = function() {
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
 		app.navigateToPage(url, {cache: true});
-		hideOverlays();
 	}
 
 	function onSavedPageDelete() {
@@ -60,10 +59,10 @@ window.savedPages = function() {
 				$('#savedPagesList').html(template.render({'pages': savedpages}));
 				$(".savedPage").click(onSavedPageClick);
 				$(".deleteSavedPage").click(onSavedPageDelete);
-				hideOverlayDivs();
+				chrome.hideOverlays();
 				$('#savedPages').toggle();
-				hideContent();
-				setActiveState();	
+				chrome.hideContent();
+				chrome.doFocusHack();	
 			});
 		});
 

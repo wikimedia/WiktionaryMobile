@@ -23,7 +23,7 @@ window.app = function() {
 		var gotError = function(error) {
 			console.log('Error: ' + error);
 			chrome.hideSpinner();
-			// noConnectionMsg();
+			// chrome.showNoConnectionMessage();
 			// navigator.app.exitApp();
 		}
 		window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
@@ -36,11 +36,11 @@ window.app = function() {
 		network.makeRequest({
 			url: url, 
 			success: function(data) {
-					renderHtml(data, origUrl);
+					chrome.renderHtml(data, origUrl);
 					if(callback) {
 						callback();
 					}
-					onPageLoaded();
+					chrome.onPageLoaded();
 				},
 			error: function(xhr) {
 				if(xhr.status == 404) {
@@ -60,7 +60,7 @@ window.app = function() {
 		$('base').attr('href', 'file:///android_asset/www/');
 		$('#main').load(page, function() {
 			$('#main').localize();
-			onPageLoaded();
+			chrome.onPageLoaded();
 		});
 	}
 
@@ -78,79 +78,11 @@ window.app = function() {
 		$('#main').css('font-size', fontOptions[size]);
 	}
 	
-	/**
-	 * Import page components from HTML string and display them in #main
-	 *
-	 * @param string html
-	 * @param string url - base URL
-	 */
-	function renderHtml(html, url) {
-		$('base').attr('href', url);
-
-		// Horrible hack to grab the lang & dir attributes from
-		// the target page's <html> without parsing the rest
-		var stub = html.match(/<html ([^>]+)>/i, '$1')[1],
-			$stubdiv = $('<div ' + stub + '></div>'),
-			lang = $stubdiv.attr('lang'),
-			dir = $stubdiv.attr('dir');
-
-		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
-
-		var selectors = ['#content>*', '#copyright'],
-			$target = $('#main'),
-			$div = $('<div>').html(trimmed);
-
-		$target
-			.empty()
-			.attr('lang', lang)
-			.attr('dir', dir);
-		$.each(selectors, function(i, sel) {
-			$div.find(sel).remove().appendTo($target);
-		});
-
-		languageLinks.parseAvailableLanguages($div);
-	}
 	
-	function initLinkHandlers() {
-		setFontSize(preferencesDB.get('fontSize'));
-		$('#main').delegate('a', 'click', function(event) {
-			var target = this,
-				url = target.href,             // expanded from relative links for us
-				href = $(target).attr('href'); // unexpanded, may be relative
-
-			// Stop the link from opening in the iframe directly...
-			event.preventDefault();
-			
-			if (href.substr(0, 1) == '#') {
-				// A local hashlink; simulate?
-				var off = $(href).offset(),
-					y = off ? off.top : 52;
-				window.scrollTo(0, y - 52);
-				return;
-			}
-
-			if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
-				// ...and load it through our intermediate cache layer.
-				navigateToPage(url);
-			} else {
-				// ...and open it in parent context for reals.
-				//
-				// This seems to successfully launch the native browser, and works
-				// both with the stock browser and Firefox as user's default browser
-				document.location = url;
-			}
-		});
+	function enableCaching() {
+		// do nothing by default
 	}
-	
-	function onPageLoaded() {
-		window.scroll(0,0);
-		addCurrentPageToHistory();
-		toggleForward();
-		updateMenuState(chrome.menu_handlers);
-		$('#search').removeClass('inProgress');        
-		chrome.hideSpinner();  
-		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
-	}
+
 
 	function navigateToPage(url, options) {
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
@@ -182,6 +114,7 @@ window.app = function() {
 		// Enable change language - might've been disabled in a prior error page
 		console.log('enabling language');
 		$('#languageCmd').attr('disabled', 'false');  
+		chrome.chrome.showContent();
 	}
 
 	function getCurrentUrl() {
@@ -202,7 +135,8 @@ window.app = function() {
 		initLinkHandlers: initLinkHandlers,
 		getCurrentUrl: getCurrentUrl,
 		getCurrentTitle: getCurrentTitle,
-		urlForTitle: urlForTitle 
+		urlForTitle: urlForTitle,
+		enableCaching: enableCaching
 	};
 
 	return exports;

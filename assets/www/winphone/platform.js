@@ -11,7 +11,7 @@ window.addEventListener('load', function() {
 	fixFrameSize();
 
     loadContent();
-    setActiveState();
+    chrome.doFocusHack();
 }, true);
 
 // Hack for sizing the iframe...

@@ -41,7 +41,6 @@ window.appHistory = function() {
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
 		app.navigateToPage(url);
-		hideOverlays();
 	}
 
 	function showHistory() {	
@@ -50,10 +49,11 @@ window.appHistory = function() {
 			this.all(function(history) {
 				$('#historyList').html(template.render({'pages': history}));
 				$(".historyItem").click(onHistoryItemClicked);
-				hideOverlayDivs();
+				chrome.hideOverlays();
+				chrome.hideContent();
 				$('#history').localize().show();
 				hideContentIfNeeded();
-				setActiveState();
+				chrome.doFocusHack();
 			});
 		});
 

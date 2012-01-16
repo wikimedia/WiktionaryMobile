@@ -4,7 +4,6 @@ window.languageLinks = function() {
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
 		app.navigateToPage(url);
-		hideOverlays();
 	}
 
 	/**
@@ -48,12 +47,12 @@ window.languageLinks = function() {
 		var template = templates.getTemplate("language-links-template");
 		$("#langList").html(template.render({languages: langs}));
 		$(".languageLink").click(onLanguageLinkClick);
-		hideOverlayDivs();
+		chrome.hideOverlays();
 
 		$('#langlinks').localize().show();
 		hideContentIfNeeded();
 		
-		setActiveState();	
+		chrome.doFocusHack();	
 	}
 
 	return {
