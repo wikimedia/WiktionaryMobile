@@ -67,9 +67,9 @@ window.chrome = function() {
 	}
 
 	function initialize() {
-		for(var fun in platform_initializers) {
+		$.each(platform_initializers, function(index, fun) {
 			fun();
-		}
+		});
 		// some reason the android browser is not recognizing the style=block when set in the CSS
 		// it only seems to recognize the style when dynamically set here or when set inline...
 		// the style needs to be explicitly set for logic used in the backButton handler
@@ -224,7 +224,7 @@ window.chrome = function() {
 	}
 
 	function initContentLinkHandlers() {
-		setFontSize(preferencesDB.get('fontSize'));
+		app.setFontSize(preferencesDB.get('fontSize'));
 		$('#main').delegate('a', 'click', function(event) {
 			var target = this,
 				url = target.href,             // expanded from relative links for us
@@ -256,7 +256,7 @@ window.chrome = function() {
 	
 	function onPageLoaded() {
 		window.scroll(0,0);
-		addCurrentPageToHistory();
+		appHistory.addCurrentPage();
 		toggleForward();
 		updateMenuState(menu_handlers);
 		$('#search').removeClass('inProgress');        
@@ -265,6 +265,8 @@ window.chrome = function() {
 	}
 
 	return {
+		initialize: initialize,
+		renderHtml: renderHtml,
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
 		showNotification: showNotification,

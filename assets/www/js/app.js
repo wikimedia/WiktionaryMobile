@@ -75,7 +75,7 @@ window.app = function() {
 
 	function setFontSize(size) {
 		preferencesDB.set('fontSize', size);
-		$('#main').css('font-size', fontOptions[size]);
+		$('#main').css('font-size', size);
 	}
 	
 	
@@ -114,7 +114,7 @@ window.app = function() {
 		// Enable change language - might've been disabled in a prior error page
 		console.log('enabling language');
 		$('#languageCmd').attr('disabled', 'false');  
-		chrome.chrome.showContent();
+		chrome.showContent();
 	}
 
 	function getCurrentUrl() {
@@ -132,7 +132,6 @@ window.app = function() {
 	var exports = {
 		setFontSize: setFontSize,
 		navigateToPage: navigateToPage,
-		initLinkHandlers: initLinkHandlers,
 		getCurrentUrl: getCurrentUrl,
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
