@@ -48,6 +48,27 @@
 <body onload="init();">
 
 	<div id="templates">
+		<script type="text/html" id="settings-page-template">
+			<div class="item">
+				<label><msg key="settings-language-label"></msg></label>
+				<p id="settings-language-desc"></p>
+				<select id='contentLanguageSelector'>
+					{{#languages}}
+					<option value="{{code}}">{{name}}</option>
+					{{/languages}}
+				</select>
+			</div>
+
+			<div class="item">
+				<label><msg key="settings-font-size-label"></msg></label>
+				<p><msg key="settings-font-size-desc"></msg></p>
+				<select id="fontSizeSelector">
+					{{#fontSizes}}
+					<option value="{{value}}"><msg key="{{msg}}"></msg></option>
+					{{/fontSizes}}
+				</select>
+			</div>
+		</script>
 		<script type="text/html" id="saved-pages-template">
 			{{#pages}}
 				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">

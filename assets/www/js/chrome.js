@@ -8,7 +8,7 @@ window.chrome = function() {
 		'share-page': function() { sharePage(); },
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
-		'view-settings': function() { getSettings(); },
+		'view-settings': function() { appSettings.showSettings(); },
 		'view-about': function() { aboutPage(); }
 	};
 

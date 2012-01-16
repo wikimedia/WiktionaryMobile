@@ -68,8 +68,13 @@ window.app = function() {
 		return app.baseURL + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
 	}
 
-	function adjustFontSize(size) {
-		var frameDoc = $("#main");
+	function setContentLanguage(language) {
+		preferencesDB.set('language', language);
+		app.baseURL = 'https://' + language + '.m.wikipedia.org';
+	}
+
+	function setFontSize(size) {
+		preferencesDB.set('fontSize', size);
 		$('#main').css('font-size', fontOptions[size]);
 	}
 	
@@ -107,7 +112,7 @@ window.app = function() {
 	}
 	
 	function initLinkHandlers() {
-		adjustFontSize(preferencesDB.get('fontSize'));
+		setFontSize(preferencesDB.get('fontSize'));
 		$('#main').delegate('a', 'click', function(event) {
 			var target = this,
 				url = target.href,             // expanded from relative links for us
@@ -192,7 +197,7 @@ window.app = function() {
 	}
 
 	var exports = {
-		adjustFontSize: adjustFontSize,
+		setFontSize: setFontSize,
 		navigateToPage: navigateToPage,
 		initLinkHandlers: initLinkHandlers,
 		getCurrentUrl: getCurrentUrl,

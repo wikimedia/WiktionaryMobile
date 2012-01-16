@@ -9,7 +9,7 @@ window.preferencesDB = {
 	// And then call the 'success()' parameter
 	// If it is not a function, is just used as is
 	defaults: {
-		'fontSize': 'normal',
+		'fontSize': '100%',
 		// The locale. Default content language + UI language
 		'locale': function(success) {
 			var defaults = this;

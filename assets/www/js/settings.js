@@ -1,98 +1,54 @@
-function getSettings() {
-	$('#settingsList').html('');
-	getLanguages(function() {
-		getPhoneGapVersion(
-			function(result){
-				markup = '<div class="item"><label><msg key="settings-font-size-label"></msg></label><p><msg key="settings-font-size-desc"></msg><select id="fontSizeSelector">' + 
-							'<option value="smaller"><msg key="settings-font-size-smaller">Smaller</msg></option>' + 
-							'<option value="normal"><msg key="settings-font-size-normal">Normal</msg></option>' + 
-							'<option value="larger"><msg key="settings-font-size-larger">Larger</msg></option>' + 
-						'</select></div>' + 
-						'<div class="item"><label><msg key="settings-app-version-label"></msg></label><p>' + result.version + '</p></div>';
-				$('#settingsList').append(markup).localize();
-				$("#fontSizeSelector").val(preferencesDB.get('fontSize'));
-				$("#fontSizeSelector").change(function() {
-					var selected = $(this).val();
-					console.log('selected  ' + selected);
-					preferencesDB.set('fontSize', selected);
-					app.adjustFontSize(selected);
+window.appSettings = function() {
+	// Font options configuration
+	var fontSizes = [
+	 {value: '75%', msg: 'settings-font-size-smaller'},
+	 {value: '100%', msg: 'settings-font-size-normal'},
+	 {value: '125%', msg: 'settings-font-size-larger'}
+	];
+
+	function showSettings(callback) {
+		var requestUrl = "https://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
+
+		$.ajax({
+			type:'Get', 
+			url:requestUrl, 
+			success:function(data) {
+				var results = JSON.parse(data);
+				var locales = results.sitematrix;
+
+				// Needs to be fixed to handle keys/values properly
+				var usableLocales = locales.filter(function(locale) {
+					return locale.site.some(function(site) {
+						site.code == "wiki";
+					});
 				});
-			},
-			function(error){ $('#settingsList').append(error); }
-		); 
-	});
-}
-
-function showSettings() {
-	hideOverlayDivs();
-	hideContentIfNeeded();
-	$('#settings').localize().show();
-	setActiveState();                                   
-}
-
-function getLanguages(callback) {
-  
-	//$('#settings').addClass('inProgress');  
-
-	console.log("get languages");          
-
-	var requestUrl = "https://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
-
-	$.ajax({
-		type:'Get', 
-		url:requestUrl, 
-		success:function(data) {
-			displayLanguages(data);
-			callback();
-			showSettings();
-		}
-	});
-
-}
-
-function displayLanguages(results) {
-
-	var numberOfSites = -1;
-	var markup = '';
-	markup += "<form class='item'><label><msg key='settings-language-label'></msg></label><p id='settings-language-desc'></p><select id='localeSelector' onChange='javascript:onLocaleChanged(this.options[this.selectedIndex].value);'>";
-
-	if (results != null) {
-		results = JSON.parse(results);
-		if (results.sitematrix) {       
-			numberOfSites = parseInt(results.sitematrix.count);
-			for (var i=0;i<numberOfSites;i++) {
-				var locale = results.sitematrix[i.toString()];
-				if (locale) {
-					var len = parseInt(JSON.stringify(locale.site.length));
-					for (var j=0;j<len;j++) {
-						if (locale.site[j].code == "wiki") {
-							if (locale.code == preferencesDB.get('language')) {
-								markup += "<option value='" + locale.code + "' selected='selected'>"  + locale.name + "</option>";
-							} else {
-								markup += "<option value='" + locale.code + "'>"  + locale.name + "</option>";
-							}
-							break;
-						}
-					} 
-				}             
 			}
-		}         
+		});
+
 	}
-	
-	markup += "</select></form>";  
 
-	$('#settingsList').append(markup).localize();
-	$('#settings-language-desc').text(mw.msg('settings-language-desc', mw.msg('sitename')));
+	function renderSettings(locales, fontSettings) {
+		var template = templates.getTemplate('settings-page-template');
+		$("#settingsList").html(template.render({languages: locales, fontSizes: fontSizes}));
+		$("#contentLanguageSelector").val(preferencesDB.get("language")).change(onContentLanguageChanged);
+		$("#fontSizeSelector").val(preferencesDB.get("fontSize")).change(onFontSizeChanged);
+	}
 
-	//hideProgressLoader();
-	//$('#settings').removeClass('inProgress');
-}
+	function onContentLanguageChanged() {
+		var selectedLanguage = $(this).val();
+		app.setContentLanguage(selectedLanguage);
+		homePage();
+		hideOverlays();
+	}
 
-function onLocaleChanged(selectedValue) {
+	function onFontSizeChanged() {
+		var selectedFontSize = $(this).val();
+		app.setFontSize(size);
+		hideOverlays();
+		showContent();
+	}
 
-    preferencesDB.set('language', selectedValue);
-    app.baseURL = 'https://' + selectedValue + '.m.wikipedia.org';
-	
-	homePage();
-	hideOverlays();
-}
+	return {
+		showSettings: showSettings
+	};
+}();
