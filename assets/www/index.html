@@ -84,7 +84,7 @@
 			{{/pages}}
 		</script>
 
-		<script type="text/html" id="history-template">
+		<script type="text/html" id="search-results-template">
 			{{#pages}}
 				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
 					<a class="listItem searchItem">
@@ -137,7 +137,7 @@
 			<div id="searchFormHolder">
 			<div class="titlebarIcon"></div>
 			<form id="searchForm">
-				<input type="text" id="searchParam" onkeypress="setTimeout('javascript:startSearch()', 5);"></input>
+				<input type="text" id="searchParam"></input>
 				<input type="submit" id="search" value=""></input>
 			</form>
 			<div id="clearSearch"></div>

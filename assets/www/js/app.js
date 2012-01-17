@@ -114,7 +114,9 @@ window.app = function() {
 		// Enable change language - might've been disabled in a prior error page
 		console.log('enabling language');
 		$('#languageCmd').attr('disabled', 'false');  
-		chrome.showContent();
+		if(!twoColumnView()) {
+			chrome.showContent();
+		}
 	}
 
 	function getCurrentUrl() {
