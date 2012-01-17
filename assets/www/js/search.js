@@ -102,8 +102,11 @@ function displayResults(results, isSuggestion) {
 	hideOverlays();
 
 	$('#searchresults').show();
-	//$('#content').hide();
-	hideContentIfNeeded();
+	if (!twoColumnView()) {
+		// Narrow screen
+		$('#content').hide();
+		// leave header intact
+	}
 
 	
 }
