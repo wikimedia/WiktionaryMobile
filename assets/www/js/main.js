@@ -104,7 +104,6 @@ function twoColumnView() {
 function hideContentIfNeeded() {
 	if (!twoColumnView()) {
 		// Narrow screen
-		alert('narrow screen');
 		hideContent();
 	}
 }
