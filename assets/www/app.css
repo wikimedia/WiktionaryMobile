@@ -485,7 +485,13 @@ header
 		background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
 	}
 	#content {
-		margin-left: 320px;
+		position: absolute;
+		left: 320px;
+		top: 52px;
+		bottom: 0px;
+		right: 0px;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
 	}
 	#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay {
 		position: fixed;
@@ -493,5 +499,8 @@ header
 		left: 0px;
 		width: 320px;
 		bottom: 0px;
+
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
 	}
 }
