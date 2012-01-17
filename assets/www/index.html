@@ -14,6 +14,8 @@
 	<script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
 
+	<script type="text/javascript" charset="utf-8" src="leaflet/leaflet.js"></script>
+
 	<script type="text/javascript" charset="utf-8" src="js/propertiesFileReader.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/preferences.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
@@ -32,6 +34,8 @@
 
 	<!-- platform-specific setup and overrides -->
 	<script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
+
+	<link rel="stylesheet" href="leaflet/leaflet.css" />  
 
 	<link rel="stylesheet" href="app.css" />  
 	<link rel="stylesheet" href="wiki.css" />
@@ -114,6 +118,16 @@
 	<div id="content">
 		<div id="main"></div>
 	</div>  
+	
+	<div id="nearby-overlay">
+		<header>
+			<div class="titlebar">
+				<div class="titlebarItem"><msg key="nearby-title">Nearby</msg></div>
+				<div class="titlebarItem closeButton" onclick="javascript:hideOverlays();"></div>
+			</div>
+		</header>
+		<div id="map"></div>
+	</div>
 
 	<menu id="appMenu" type="context">
 		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="false" action="selectLanguage();" />

@@ -22,6 +22,8 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>ws.geonames.net</string>
+		<string>*.tile.openstreetmap.org</string>
 		<string>*.wikipedia.org</string>
 		<string>*.wikimedia.org</string>
 	</array>

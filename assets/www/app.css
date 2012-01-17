@@ -33,7 +33,7 @@ header
 	z-index:30000;
 }   
 
-#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay
+#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay, #nearby-overlay
 {
 	background-color:white;
 	width:100%;
@@ -46,6 +46,14 @@ header
 	position:relative;
 	top:52px;
 	width: 100%;
+}
+
+#map {
+	position: absolute;
+	top: 52px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 }
 
 /*
@@ -503,4 +511,7 @@ header
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 	}
+	#map {
+	}
 }
+

@@ -84,6 +84,7 @@ function hideOverlayDivs() {
 	$('#settings').hide();
 	$('#about-page-overlay').hide();
 	$('#langlinks').hide();
+	$('#nearby-overlay').hide();
 }
 
 function showContent() {
