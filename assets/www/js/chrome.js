@@ -141,7 +141,9 @@ window.chrome = function() {
 
 	function hideContent() {  
 		$('#mainHeader').hide();
-		$('#content').hide();
+		if(!twoColumnView()) {
+			$('#content').hide();
+		}
 	}
 
 	function showNoConnectionMessage() {

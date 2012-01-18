@@ -41,7 +41,7 @@ header
 	display:none;
 }
 
-#savedPagesList, #historyList, #resultList, #langList
+#savedPagesList, #historyList, #resultList, #langList, #about-page-content
 {
 	position:relative;
 	top:52px;
