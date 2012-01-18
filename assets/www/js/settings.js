@@ -1,42 +1,56 @@
 window.appSettings = function() {
-	// Font options configuration
-	var fontSizes = [
-	 {value: '75%', msg: 'settings-font-size-smaller'},
-	 {value: '100%', msg: 'settings-font-size-normal'},
-	 {value: '125%', msg: 'settings-font-size-larger'}
-	];
+	var fontSizes = [];	
+	var locales = [];
 
 	function showSettings(callback) {
 		var requestUrl = "https://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
 
-		$.ajax({
-			type:'Get', 
-			url:requestUrl, 
-			success:function(data) {
-				var results = JSON.parse(data);
-				var locales = results.sitematrix;
+		if(fontSizes.length == 0) {
+			fontSizes = [
+				{value: '75%', name: mw.message('settings-font-size-smaller').plain() },
+				{value: '100%', name: mw.message('settings-font-size-normal').plain() },
+				{value: '125%', name: mw.message('settings-font-size-larger').plain() }
+			];
+		}
 
-				// Needs to be fixed to handle keys/values properly
-				var usableLocales = locales.filter(function(locale) {
-					return locale.site.some(function(site) {
-						site.code == "wiki";
+		if(locales.length == 0) {
+			$.ajax({
+				type:'Get', 
+				url:requestUrl, 
+				success:function(data) {
+					var results = JSON.parse(data);
+					var allLocales = results.sitematrix;
+
+					$.each(allLocales, function(key, value) {
+						// Because the JSON result from sitematrix is messed up
+						if(!isNaN(key)) {
+							if(value.site.some(function(site) { return site.code == "wiki"; })) {
+								locales.push({
+									code: value.code,
+									name: value.name
+								});
+							}
+						}
 					});
-				});
-				renderSettings(usableLocales, fontSizes);
-				chrome.hideOverlays();
-				chrome.hideContent();
-				$('#settings').localize().show();
-				chrome.doFocusHack();                                   
-			}
-		});
+					renderSettings();
+				}
+			});
+		} else {
+			renderSettings();
+		}
 
 	}
 
-	function renderSettings(locales, fontSettings) {
+	function renderSettings() {
 		var template = templates.getTemplate('settings-page-template');
 		$("#settingsList").html(template.render({languages: locales, fontSizes: fontSizes}));
 		$("#contentLanguageSelector").val(preferencesDB.get("language")).change(onContentLanguageChanged);
+		$("#selectedLanguage").html(preferencesDB.get("language"));	
 		$("#fontSizeSelector").val(preferencesDB.get("fontSize")).change(onFontSizeChanged);
+		chrome.hideOverlays();
+		chrome.hideContent();
+		$('#settings').localize().show();
+		chrome.doFocusHack();                                   
 	}
 
 	function onContentLanguageChanged() {
@@ -47,7 +61,7 @@ window.appSettings = function() {
 
 	function onFontSizeChanged() {
 		var selectedFontSize = $(this).val();
-		app.setFontSize(size);
+		app.setFontSize(selectedFontSize);
 		chrome.showContent();
 	}
 

@@ -14,7 +14,7 @@ window.appHistory = function() {
 		var historyDB = new Lawnchair({name:"historyDB"},function() {
 			this.keys(function(records) {
 				if (records.length > MAX_LIMIT) {
-					cleanupHistory(addCurrentPageToHistory);
+					cleanupHistory(addCurrentPage);
 				}else{			
 					if (records.length == 0 || records[records.length - 1].value !== url) {
 						// Add if the last thing we saw wasn't the same URL

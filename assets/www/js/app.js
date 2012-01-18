@@ -133,6 +133,7 @@ window.app = function() {
 
 	var exports = {
 		setFontSize: setFontSize,
+		setContentLanguage: setContentLanguage,
 		navigateToPage: navigateToPage,
 		getCurrentUrl: getCurrentUrl,
 		getCurrentTitle: getCurrentTitle,
