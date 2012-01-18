@@ -2,10 +2,10 @@ var geomap = false,
 	geomarkers = false;
 
 function getCurrentPosition() {
-	hideOverlayDivs();
-	hideContentIfNeeded();
+	chrome.hideOverlays();
+	chrome.hideContent();
 	$("#nearby-overlay").localize().show();
-	setActiveState();
+	chrome.doFocusHack();
 
 	if (!geomap) {
 		geomap = new L.Map('map');

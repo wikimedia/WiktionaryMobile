@@ -272,6 +272,7 @@ window.chrome = function() {
 		hideSpinner: hideSpinner,
 		showNotification: showNotification,
 		goBack: goBack,
+		goForward: goForward,
 		onPageLoaded: onPageLoaded,
 		hideOverlays: hideOverlays,
 		showContent: showContent,
