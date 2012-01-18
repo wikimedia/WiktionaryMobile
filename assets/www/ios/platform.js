@@ -4,15 +4,15 @@ function updateMenuState() {
 	var items = [
 		{
 			id: 'menu-back',
-			action: goBack
+			action: chrome.goBack
 		},
 		{
 			id: 'menu-forward',
-			action: goForward
+			action: chrome.goForward
 		},
 		{
 			id: 'menu-language',
-			action: selectLanguage
+			action:  languageLinks.showAvailableLanguages
 		},
 		{
 			id: 'menu-output',
@@ -23,7 +23,7 @@ function updateMenuState() {
 					mw.msg('menu-cancel')
 				], function(value, index) {
 					if (index == 0) {
-						savePage();
+						savedPages.saveCurrentPage();
 					} else if (index == 1) {
 						sharePage();
 					}
@@ -45,9 +45,9 @@ function updateMenuState() {
 					if (index == 0) {
 						getCurrentPosition();
 					} else if (index == 1) {
-						showSavedPages();
+						savedPages.showSavedPages();
 					} else if (index == 2) {
-						getHistory();
+						appHistory.showHistory();
 					}
 				}, {
 					cancelButtonIndex: 3,
@@ -57,7 +57,7 @@ function updateMenuState() {
 		},
 		{
 			id: 'menu-settings',
-			action: getSettings
+			action: appSettings.showSettings
 		}
 	];
 	$('#menu').remove();
