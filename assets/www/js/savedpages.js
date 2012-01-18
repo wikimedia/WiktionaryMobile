@@ -4,7 +4,7 @@ window.savedPages = function() {
 		var MAX_LIMIT = 50;
 
 		var title = app.getCurrentTitle();
-		var url = appp.getCurrentUrl();
+		var url = app.getCurrentUrl();
 
 		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			this.keys(function(records) {
