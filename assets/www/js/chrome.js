@@ -80,7 +80,7 @@ window.chrome = function() {
 
 		preferencesDB.initializeDefaults(function() { 
 			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
-			initLanguages();
+			l10n.initLanguages();
 
 			$(".titlebarIcon").bind('touchstart', function() {
 				homePage();

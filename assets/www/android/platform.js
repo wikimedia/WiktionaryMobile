@@ -5,7 +5,7 @@
 // @Override
 // navigator.lang always returns 'en' on Android
 // use the Globalization plugin to request the proper value
-function navigatorLang(success) {
+l10n.navigatorLang = function(success) {
 	var lang = navigator.language;
 
 	var glob = new Globalization;
@@ -23,17 +23,19 @@ function navigatorLang(success) {
 chrome.addPlatformInitializer(function() {
     document.addEventListener("backbutton", onBackButton, false);
     document.addEventListener("searchbutton", onSearchButton, false);
+
+	function onBackButton() {
+		chrome.goBack();
+	}
+
+	function onSearchButton() {
+		//hmmm...doesn't seem to set the cursor in the input field - maybe a browser bug???
+		$('#searchParam').focus().addClass('active');
+		plugins.SoftKeyBoard.show();
+	}
+
 });
 
-function onBackButton() {
-	chrome.goBack();
-}
-
-function onSearchButton() {
-    //hmmm...doesn't seem to set the cursor in the input field - maybe a browser bug???
-    $('#searchParam').focus().addClass('active');
-    plugins.SoftKeyBoard.show();
-}
 
 function selectText() {
     PhoneGap.exec(null, null, 'SelectTextPlugin', 'selectText', []);

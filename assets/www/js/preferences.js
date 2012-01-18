@@ -13,8 +13,8 @@ window.preferencesDB = {
 		// The locale. Default content language + UI language
 		'locale': function(success) {
 			var defaults = this;
-			navigatorLang(function(lang) {
-				defaults.locale = normalizeLanguageCode(lang);
+			l10n.navigatorLang(function(lang) {
+				defaults.locale = l10n.normalizeLanguageCode(lang);
 				console.log('done with navigate');
 				success();
 			});
