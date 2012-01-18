@@ -52,7 +52,6 @@ window.appHistory = function() {
 				chrome.hideOverlays();
 				chrome.hideContent();
 				$('#history').localize().show();
-				hideContentIfNeeded();
 				chrome.doFocusHack();
 			});
 		});

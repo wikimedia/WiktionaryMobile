@@ -46,6 +46,10 @@ window.search = function() {
 		app.navigateToPage(url);
 	}
 
+	function onCloseSearchResults() {
+		chrome.hideOverlays();
+	}
+
 	function renderResults(results) {
 
 		results = JSON.parse(results);
@@ -61,7 +65,7 @@ window.search = function() {
 			$("#resultList").html(template.render({pages: searchResults}));
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
-
+		$(".closeSearch").click(onCloseSearchResults);
 		// Replace icon of savd pages in search suggestions
 		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			$("#resultList .listItemContainer").each(function() {
@@ -79,7 +83,9 @@ window.search = function() {
 		chrome.hideSpinner();
 		chrome.hideOverlays();
 
-		$("#content").hide(); // Not chrome.hideContent() since we want the header
+		if(!twoColumnView()) {
+			$("#content").hide(); // Not chrome.hideContent() since we want the header
+		}
 
 		chrome.doFocusHack();
 		$('#searchresults').show();

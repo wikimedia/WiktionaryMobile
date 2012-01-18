@@ -11,12 +11,6 @@ function twoColumnView() {
 	return (document.width >= 640);
 }
 
-function hideContentIfNeeded() {
-	if (!twoColumnView()) {
-		// Narrow screen
-		hideContent();
-	}
-}
 function homePage() {
 	app.navigateToPage(app.baseURL);
 }

@@ -41,7 +41,7 @@ header
 	display:none;
 }
 
-#savedPagesList, #historyList, #resultList, #langList
+#savedPagesList, #historyList, #resultList, #langList, #about-page-content
 {
 	position:relative;
 	top:52px;
@@ -238,13 +238,13 @@ header
 
 #wHolder {
 	display:inline-block;
-	margin-top:7px;"
+	margin-top:7px;
 }
 
 #searchFormHolder {
 	white-space:nowrap;
 	margin-left:5px;
-	margin-top:7px;"
+	margin-top:7px;
 }
 
 .titlebar {
