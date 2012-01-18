@@ -48,9 +48,9 @@ window.languageLinks = function() {
 		$("#langList").html(template.render({languages: langs}));
 		$(".languageLink").click(onLanguageLinkClick);
 		chrome.hideOverlays();
+		chrome.hideCon();
 
 		$('#langlinks').localize().show();
-		hideContentIfNeeded();
 		
 		chrome.doFocusHack();	
 	}
