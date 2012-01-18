@@ -74,35 +74,6 @@ window.search = function() {
 				});
 			});
 		});
-<<<<<<< HEAD
-<<<<<<< HEAD
-	});
-
-	$('#search').removeClass('inProgress');
-	chrome.hideSpinner();
-	hideOverlays();
-
-	$('#searchresults').show();
-	if (!twoColumnView()) {
-		// Narrow screen
-		$('#content').hide();
-		// leave header intact
-	}
-
-	
-}
-
-function goToResult(url) {
-	if (network.isConnected()) {
-		app.navigateToPage(url);
-		if (!twoColumnView()) {
-			hideOverlays();
-		}
-	} else {
-		noConnectionMsg();
-=======
-=======
->>>>>>> Moved most UI things out of main into chrome.js
 
 		$('#search').removeClass('inProgress');
 		chrome.hideSpinner();
