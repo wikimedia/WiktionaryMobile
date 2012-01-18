@@ -83,7 +83,7 @@ window.search = function() {
 		chrome.hideSpinner();
 		chrome.hideOverlays();
 
-		if(!twoColumnView()) {
+		if(!chrome.isTwoColumnView()) {
 			$("#content").hide(); // Not chrome.hideContent() since we want the header
 		}
 

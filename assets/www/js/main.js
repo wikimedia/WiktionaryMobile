@@ -6,11 +6,6 @@ function init() {
 	document.addEventListener("deviceready", function() {chrome.initialize(); }, true);
 }
 
-function twoColumnView() {
-	// should match the CSS media queries
-	return (document.width >= 640);
-}
-
 function homePage() {
 	app.navigateToPage(app.baseURL);
 }
