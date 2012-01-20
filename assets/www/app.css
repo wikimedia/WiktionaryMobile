@@ -505,30 +505,28 @@ header
 
 
 @media only screen and (min-width: 640px) {
-	header {
+	.goodscroll header {
 		width: 320px;
 		left: inherit;
 	}
-	#menu {
+	.goodscroll #menu {
 		top: 0;
 		bottom: inherit;
 		left: 320px;
 		text-align: right;
 		background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
 	}
-	#content {
+	.goodscroll #content {
 		position: absolute;
 		left: 320px;
 		right: 0px;
 		width: auto;
 	}
-	#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay {
+	.goodscroll #savedPages, .goodscroll #history, .goodscroll #settings, .goodscroll #searchresults, .goodscroll #langlinks, .goodscroll #about-page-overlay {
 		width: 320px;
 	}
-	.scroller {
+	.goodscroll .scroller {
 		bottom: 0px;
-	}
-	#map {
 	}
 }
 

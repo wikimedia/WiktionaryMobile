@@ -125,7 +125,8 @@ window.chrome = function() {
 
 	function isTwoColumnView() {
 		// should match the CSS media queries
-		return (document.width >= 640);
+		// check for goodscroll is so we don't use it on Android 2.x tablets
+		return (document.width >= 640) && $('html').hasClass('goodscroll');
 	}
 
 	function hideOverlays() {

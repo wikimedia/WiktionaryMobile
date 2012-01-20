@@ -25,7 +25,7 @@ chrome.addPlatformInitializer(function() {
 	if (navigator.userAgent.match(/Android 2\./)) {
 		// Android 2.2/2.3 doesn't do overflow:scroll
 		// so we need to engage alternate styles for phone view.
-		$('html').addClass('badscroll');
+		$('html').removeClass('goodscroll').addClass('badscroll');
 	}
 
     document.addEventListener("backbutton", onBackButton, false);
