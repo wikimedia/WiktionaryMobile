@@ -21,6 +21,13 @@ l10n.navigatorLang = function(success) {
 
 
 chrome.addPlatformInitializer(function() {
+	$('html').addClass('android');
+	if (navigator.userAgent.match(/Android 2\./)) {
+		// Android 2.2/2.3 doesn't do overflow:scroll
+		// so we need to engage alternate styles for phone view.
+		$('html').addClass('badscroll');
+	}
+
     document.addEventListener("backbutton", onBackButton, false);
     document.addEventListener("searchbutton", onSearchButton, false);
 

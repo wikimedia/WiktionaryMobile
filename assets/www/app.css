@@ -1,3 +1,11 @@
+html {
+	overflow: hidden;
+}
+
+html.badscroll {
+	overflow: auto;
+}
+
 body 
 {
 	margin:0px;
@@ -22,16 +30,20 @@ div
 	margin:0px;
 	padding:0px;
 }
-	  		
+
 header 
 {
-	position:fixed;
+	position:absolute;
 	top:0px;
 	left:0px;
 	width:100%;
-	/*height:100px;*/
-	z-index:30000;
+	height: 52px;
 }   
+
+.badscroll header {
+	position:fixed;
+	z-index:30000;
+}
 
 #savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay, #nearby-overlay
 {
@@ -41,11 +53,27 @@ header
 	display:none;
 }
 
-#savedPagesList, #historyList, #resultList, #langList, #about-page-content
+/*#savedPagesList, #historyList, #resultList, #langList, #about-page-content*/
+.scroller
+{
+	position:absolute;
+	top:52px;
+	width: 100%;
+	bottom: 52px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.badscroll .scroller
 {
 	position:relative;
 	top:52px;
 	width: 100%;
+}
+
+.android .scroller {
+	/* No bottom toolbar */
+	bottom: 0px;
 }
 
 #map {
@@ -69,9 +97,12 @@ header
 #content
 {
 	display:block;
-	position:relative;
-	top:52px;
 }
+
+.badscroll #content {
+	position:relative;
+}
+
 
 #main
 {
@@ -195,7 +226,7 @@ header
 }
 
 #clearSearch {
-	position:fixed;
+	position:absolute;
 	top:12px;
 	right:47px;
 	z-index:2;
@@ -205,6 +236,10 @@ header
 	height: 30px;
 	width: 30px;
 	visibility: hidden;
+}
+
+.badscroll #clearSearch {
+	position:fixed;
 }
 
 .spinner {
@@ -371,7 +406,7 @@ header
 
 /* Web, iOS menu */
 #menu {
-	position: fixed;
+	position: absolute;
 	height: 52px;
 	bottom: 0;
 	left: 0;
@@ -434,7 +469,7 @@ header
 /* For web simulation of iOS action sheets */
 .actionsheet {
 	background: #444;
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -444,7 +479,7 @@ header
 
 .actionsheet-bg {
 	background: rgba(0, 0, 0, 0.5);
-	position: fixed;
+	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -484,21 +519,14 @@ header
 	#content {
 		position: absolute;
 		left: 320px;
-		top: 52px;
-		bottom: 0px;
 		right: 0px;
-		overflow: auto;
-		-webkit-overflow-scrolling: touch;
+		width: auto;
 	}
 	#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay {
-		position: fixed;
-		top: 0px;
-		left: 0px;
 		width: 320px;
+	}
+	.scroller {
 		bottom: 0px;
-
-		overflow: auto;
-		-webkit-overflow-scrolling: touch;
 	}
 	#map {
 	}
