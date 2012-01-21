@@ -52,7 +52,8 @@ window.languageLinks = function() {
 
 		$('#langlinks').localize().show();
 		
-		chrome.doFocusHack();	
+		chrome.doFocusHack();
+		chrome.doScrollHack('#langlinks .scroller');
 	}
 
 	return {

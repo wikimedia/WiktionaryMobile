@@ -89,6 +89,7 @@ window.search = function() {
 
 		chrome.doFocusHack();
 		$('#searchresults').show();
+		chrome.doScrollHack('#searchresults .scroller');
 	}
 
 	return {
