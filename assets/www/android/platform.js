@@ -51,7 +51,7 @@ function selectText() {
 function sharePage() {
 	// @fixme if we don't have a page loaded, this menu item should be disabled...
 	var title = app.getCurrentTitle(),
-		url = app.getCurrentUrl().replace(/\.m\.wikipedia/, '.wikipedia');
+		url = app.getCurrentUrl().replace(/\.m\.wiktionary/, '.wiktionary');
 	window.plugins.share.show(
 		{
 			subject: title,
@@ -101,13 +101,13 @@ function getCurrentPosition() {
 	PhoneGap.exec(geoNameSuccess, geoNameFailure, "NearMePlugin", "startNearMeActivity", [preferencesDB.get('language')]);
 }
 
-function geoNameSuccess(wikipediaUrl) {
-	if(wikipediaUrl) {
+function geoNameSuccess(wiktionaryUrl) {
+	if(wiktionaryUrl) {
 		$('#search').addClass('inProgress');
-		$.ajax({url: "https://en.m.wikipedia.org",
+		$.ajax({url: "https://en.m.wiktionary.org",
 			success: function(data) {
 				if(data) {
-					app.navigateToPage('https://'+wikipediaUrl)
+					app.navigateToPage('https://'+wiktionaryUrl)
 				} else {
 					noConnectionMsg();
 					navigator.app.exitApp();

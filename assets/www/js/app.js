@@ -72,7 +72,7 @@ window.app = function() {
 
 	function setContentLanguage(language) {
 		preferencesDB.set('language', language);
-		app.baseURL = 'https://' + language + '.m.wikipedia.org';
+		app.baseURL = 'https://' + language + '.m.wiktionary.org';
 	}
 
 	function setFontSize(size) {

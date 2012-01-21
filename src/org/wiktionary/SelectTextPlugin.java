@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import org.json.JSONArray;
 

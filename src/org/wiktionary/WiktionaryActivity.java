@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,17 +9,17 @@ import android.webkit.WebView;
 
 import com.phonegap.DroidGap;
 
-public class WikipediaActivity extends DroidGap {
+public class WiktionaryActivity extends DroidGap {
     /** Called when the activity is first created. */
 	
-	public class WikipediaWebViewClient extends GapViewClient {
-		public WikipediaWebViewClient(DroidGap ctx) {
+	public class WiktionaryWebViewClient extends GapViewClient {
+		public WiktionaryWebViewClient(DroidGap ctx) {
 			super(ctx);
 		}
 		
 		//@Override
 		//public void onLoadResource(WebView view, String url) {
-		//	Log.d("WikipediaWebViewClient", "OnLoadResource "+url);
+		//	Log.d("WiktionaryWebViewClient", "OnLoadResource "+url);
 		//}
 		
 	}
@@ -35,7 +35,7 @@ public class WikipediaActivity extends DroidGap {
 		editor.commit();
 		
         super.loadUrl("file:///android_asset/www/index.html");
-        this.webViewClient = new WikipediaWebViewClient(this);
+        this.webViewClient = new WiktionaryWebViewClient(this);
         this.appView.setWebViewClient(this.webViewClient);
     }
     
