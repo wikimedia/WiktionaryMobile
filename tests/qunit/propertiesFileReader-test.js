@@ -228,8 +228,8 @@ test('Escapes', function() {
 
 test('Small sample file', function() {
 	parseEqual('Small sample file',
-		"# English-language messages for Wikipedia Mobile app\n" +
-			"sitename = Wikipedia\n" +
+		"# English-language messages for Wiktionary Mobile app\n" +
+			"sitename = Wiktionary\n" +
 			"spinner-loading = Loading\n" +
 			"spinner-retrieving = Retrieving content from $1\n" +
 			"bookmarks-max-warning = You've reached the maximum number of bookmarks.\n" +
@@ -238,7 +238,7 @@ test('Small sample file', function() {
 			"bookmark-remove-prompt = Remove $1 from bookmarks?\n" +
 			"bookmark-removed = $1 has been removed.\n",
 		{
-			'sitename': 'Wikipedia',
+			'sitename': 'Wiktionary',
 			'spinner-loading': 'Loading',
 			'spinner-retrieving': 'Retrieving content from $1',
 			'bookmarks-max-warning': "You've reached the maximum number of bookmarks.",

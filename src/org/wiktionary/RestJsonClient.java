@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,12 +17,12 @@ import org.json.JSONObject;
 
 public class RestJsonClient {
 
-	public static ArrayList<GeoName> getWikipediaNearbyLocations(
+	public static ArrayList<GeoName> getWiktionaryNearbyLocations(
 			double latitude, double longitude, String lang) {
 		HttpURLConnection urlConnection = null;
 		ArrayList<GeoName> geoList = new ArrayList<GeoName>();
 		try {
-			String requestUrl = "http://ws.geonames.net/findNearbyWikipediaJSON?formatted=true&";
+			String requestUrl = "http://ws.geonames.net/findNearbyWiktionaryJSON?formatted=true&";
 			requestUrl += "lat=" + latitude + "&";
 			requestUrl += "lng=" + longitude + "&";
 			requestUrl += "username=wikimedia&";
@@ -48,7 +48,7 @@ public class RestJsonClient {
 				try {
 					JSONObject geonameObj = geonames.getJSONObject(i);
 					geoList.add(new GeoName(
-							geonameObj.getString("wikipediaUrl"), geonameObj
+							geonameObj.getString("wiktionaryUrl"), geonameObj
 									.getString("title"), geonameObj
 									.getString("summary"), geonameObj
 									.getDouble("lat"), geonameObj
