@@ -1,18 +1,18 @@
-package org.wikipedia;
+package org.wiktionary;
 
 public class GeoName {
 
-	public GeoName(String wikipediaUrl, String title, String summary,
+	public GeoName(String wiktionaryUrl, String title, String summary,
 			double latitude, double longitude) {
 		super();
-		this.wikipediaUrl = wikipediaUrl;
+		this.wiktionaryUrl = wiktionaryUrl;
 		this.title = title;
 		this.summary = summary;
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
-	private String wikipediaUrl;
+	private String wiktionaryUrl;
 	private String title;
 	private String summary;
 	private double latitude;
@@ -39,12 +39,12 @@ public class GeoName {
 		this.longitude = longitude;
 	}
 
-	public String getWikipediaUrl() {
-		return wikipediaUrl;
+	public String getWiktionaryUrl() {
+		return wiktionaryUrl;
 	}
 
-	public void setWikipediaUrl(String wikipediaUrl) {
-		this.wikipediaUrl = wikipediaUrl;
+	public void setWiktionaryUrl(String wiktionaryUrl) {
+		this.wiktionaryUrl = wiktionaryUrl;
 	}
 
 	public String getTitle() {

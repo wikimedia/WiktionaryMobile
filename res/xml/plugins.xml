@@ -17,13 +17,13 @@
     <plugin name="FileTransfer" value="com.phonegap.FileTransfer"/>
     <plugin name="Capture" value="com.phonegap.Capture"/>
     <plugin name="SimpleMenu" value="com.phonegap.menu.AppMenu"/> 
-    <plugin name="NearMePlugin" value="org.wikipedia.NearMePlugin" />
-    <plugin name="SelectTextPlugin" value="org.wikipedia.SelectTextPlugin" />
+    <plugin name="NearMePlugin" value="org.wiktionary.NearMePlugin" />
+    <plugin name="SelectTextPlugin" value="org.wiktionary.SelectTextPlugin" />
     <plugin name="SoftKeyBoard" value="com.phonegap.softkeyboard.SoftKeyBoard" />
     <plugin name="ToastPlugin" value="com.chariotsolutions.toast.plugin.ToastPlugin" />
     <plugin name="Share" value="com.schaul.plugins.share.Share"/>
     <plugin name="URLCache" value="com.phonegap.urlcache.URLCache"/>
-    <plugin name="CacheModePlugin" value="org.wikipedia.CacheModePlugin" />
-    <plugin name="ApplicationVersion" value="org.wikipedia.ApplicationVersion"/>
+    <plugin name="CacheModePlugin" value="org.wiktionary.CacheModePlugin" />
+    <plugin name="ApplicationVersion" value="org.wiktionary.ApplicationVersion"/>
     <plugin name="GlobalizationCommand" value="com.phonegap.plugins.globalization.GlobalizationCommand"/>
 </plugins>

@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,8 +40,8 @@ public class NearMeActivity extends MapActivity {
 			mapView.getOverlays().clear();
 		}
 		protected Integer doInBackground(Double... gps) {
-			WikipediaApp app = (WikipediaApp)getApplicationContext();
-			app.geonames = RestJsonClient.getWikipediaNearbyLocations(gps[0], gps[1], lang);
+			WiktionaryApp app = (WiktionaryApp)getApplicationContext();
+			app.geonames = RestJsonClient.getWiktionaryNearbyLocations(gps[0], gps[1], lang);
 			if(app.geonames != null) {
 				for(GeoName g: app.geonames) {
 					mapOverlays.add(createItemizedOverlay(g));
@@ -60,7 +60,7 @@ public class NearMeActivity extends MapActivity {
 	}
 	
 	public GeoName getGeoName(String title) {
-		WikipediaApp app = (WikipediaApp)getApplicationContext();
+		WiktionaryApp app = (WiktionaryApp)getApplicationContext();
 		Iterator<GeoName> it = app.geonames.iterator();
 		while(it.hasNext()) {
 			GeoName geoname = it.next();
@@ -98,7 +98,7 @@ public class NearMeActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nearme);
 		
-		WikipediaApp app = (WikipediaApp)getApplicationContext();
+		WiktionaryApp app = (WiktionaryApp)getApplicationContext();
 		
 		mapView = (MapView)findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);

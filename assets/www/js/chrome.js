@@ -81,7 +81,7 @@ window.chrome = function() {
 		//PhoneGap.UsePolling = true;
 
 		preferencesDB.initializeDefaults(function() { 
-			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
+			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wiktionary.org';
 			l10n.initLanguages();
 
 			$(".titlebarIcon").bind('touchstart', function() {
@@ -250,7 +250,7 @@ window.chrome = function() {
 				return;
 			}
 
-			if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
+			if (url.match(/^https?:\/\/([^\/]+)\.wiktionary\.org\/wiki\//)) {
 				// ...and load it through our intermediate cache layer.
 				app.navigateToPage(url);
 			} else {

@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +27,7 @@ public class NearMePlugin extends Plugin {
 		}
 		if(action.compareTo("startNearMeActivity") == 0) {
 			try {
-				Intent intent = new Intent(ctx, Class.forName("org.wikipedia.NearMeActivity"));
+				Intent intent = new Intent(ctx, Class.forName("org.wiktionary.NearMeActivity"));
 				intent.putExtra("language", lang);
 				ctx.startActivityForResult((Plugin) this, intent, GET_GEONAME_URL);
 	            result = new PluginResult(PluginResult.Status.NO_RESULT);
@@ -44,8 +44,8 @@ public class NearMePlugin extends Plugin {
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if(requestCode == GET_GEONAME_URL && intent != null) {
 			if(resultCode == RESULT_OK) {
-				Log.d("NearMePlugin", intent.getExtras().getString("wikipediaUrl"));
-				this.success(new PluginResult(PluginResult.Status.OK, intent.getExtras().getString("wikipediaUrl")), callbackId);
+				Log.d("NearMePlugin", intent.getExtras().getString("wiktionaryUrl"));
+				this.success(new PluginResult(PluginResult.Status.OK, intent.getExtras().getString("wiktionaryUrl")), callbackId);
 			}
 		} else {
 			this.success(new PluginResult(PluginResult.Status.NO_RESULT), callbackId);
