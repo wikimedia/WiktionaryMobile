@@ -26,4 +26,6 @@ function wm_toggle_section( section_id ) {
 			e.style.display = e.style.display == 'block' ? 'none' : 'block';
 		}
 	}
+	// update iScroll if being used.
+	chrome.doScrollHack('#content', true);
 }

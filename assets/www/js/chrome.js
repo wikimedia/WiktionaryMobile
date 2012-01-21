@@ -60,6 +60,8 @@ window.chrome = function() {
 		});
 
 		languageLinks.parseAvailableLanguages($div);
+		
+		chrome.doScrollHack('#content');
 	}
 
 	function showNotification(text) {
@@ -210,7 +212,6 @@ window.chrome = function() {
 			applicableClasses[key] += ':not(.activeEnabled)';
 		}
 		console.log(applicableClasses);
-		
 		function onTouchEnd() {
 			$('.active').removeClass('active');
 			$('body').unbind('touchend', onTouchEnd);
@@ -271,6 +272,10 @@ window.chrome = function() {
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
+	
+	function doScrollHack(element) {
+		// placeholder for iScroll where needed
+	}
 
 	return {
 		initialize: initialize,
@@ -287,6 +292,7 @@ window.chrome = function() {
 		addPlatformInitializer: addPlatformInitializer,
 		showNoConnectionMessage: showNoConnectionMessage,
 		doFocusHack: doFocusHack,
-		isTwoColumnView: isTwoColumnView
+		isTwoColumnView: isTwoColumnView,
+		doScrollHack: doScrollHack
 	};
 }();

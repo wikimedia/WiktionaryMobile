@@ -62,7 +62,8 @@ window.savedPages = function() {
 				chrome.hideOverlays();
 				$('#savedPages').toggle();
 				chrome.hideContent();
-				chrome.doFocusHack();	
+				chrome.doFocusHack();
+				chrome.doScrollHack('#savedPages .scroller');
 			});
 		});
 

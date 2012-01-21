@@ -90,3 +90,26 @@ function popupMenu(items, callback, options) {
 	}
 	window.plugins.actionSheet.create('', items, callback, options);
 }
+
+origDoScrollHack = chrome.doScrollHack;
+// @Override
+chrome.doScrollHack = function(element, leaveInPlace) {
+	// @fixme only use on iOS 4.2?
+	if (navigator.userAgent.match(/iPhone OS [34]/)) {
+		var $el = $(element),
+			scroller = $el[0].scroller;
+		if (scroller) {
+			window.setTimeout(function() {
+				scroller.refresh();
+			}, 0);
+		} else {
+			scroller = new iScroll($el[0]);
+			$el[0].scroller = scroller;
+		}
+		if (!leaveInPlace) {
+			scroller.scrollTo(0, 0);
+		}
+	} else {
+		origDoScrollHack();
+	}
+}
