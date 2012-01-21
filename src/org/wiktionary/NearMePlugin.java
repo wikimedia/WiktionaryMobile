@@ -29,7 +29,7 @@ public class NearMePlugin extends Plugin {
 			try {
 				Intent intent = new Intent(ctx, Class.forName("org.wiktionary.NearMeActivity"));
 				intent.putExtra("language", lang);
-				ctx.startActivityForResult((Plugin) this, intent, GET_GEONAME_URL);
+				ctx.startActivityForResult(this, intent, GET_GEONAME_URL);
 	            result = new PluginResult(PluginResult.Status.NO_RESULT);
 	            result.setKeepCallback(true);
 			} catch (ClassNotFoundException e) {
