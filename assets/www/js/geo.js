@@ -82,7 +82,7 @@ window.geo = function() {
 	}
 	
 	function geoLookup(latitude, longitude, lang, success, error) {
-		var requestUrl = "http://ws.geonames.net/findNearbyWikipediaJSON?formatted=true&";
+		var requestUrl = "http://ws.geonames.net/findNearbyWiktionaryJSON?formatted=true&";
 		requestUrl += "lat=" + latitude + "&";
 		requestUrl += "lng=" + longitude + "&";
 		requestUrl += "username=wikimedia&";
@@ -102,7 +102,7 @@ window.geo = function() {
 		}
 		geo.markers = new L.LayerGroup();
 		$.each(data.geonames, function(i, item) {
-			var url = item.wikipediaUrl.replace(/^([a-z0-9-]+)\.wikipedia\.org/, 'https://$1.m.wikipedia.org');
+			var url = item.wiktionaryUrl.replace(/^([a-z0-9-]+)\.wiktionary\.org/, 'https://$1.m.wiktionary.org');
 			var marker = new L.Marker(new L.LatLng(item.lat, item.lng));
 			geo.markers.addLayer(marker);
 			marker.bindPopup('<div onclick="app.navigateToPage(&quot;' + url + '&quot;);hideOverlays();">' +
