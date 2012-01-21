@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import java.util.ArrayList;
 
@@ -65,8 +65,8 @@ public class WikiItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 					dialog.dismiss();
 					Intent i = new Intent();
 					Bundle b = new Bundle();
-					b.putString("wikipediaUrl", geoname.getWikipediaUrl());
-					Log.d("WikiItemizedOverlay", "Overlay URL "+geoname.getWikipediaUrl());
+					b.putString("wiktionaryUrl", geoname.getWiktionaryUrl());
+					Log.d("WikiItemizedOverlay", "Overlay URL "+geoname.getWiktionaryUrl());
 					i.putExtras(b);
 					ma.setResult(NearMePlugin.RESULT_OK, i);
 					ma.finish();
