@@ -273,8 +273,13 @@ window.chrome = function() {
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
 	
-	function doScrollHack(element) {
-		// placeholder for iScroll where needed
+	function doScrollHack(element, leaveInPlace) {
+		// placeholder for iScroll etc where needed
+		
+		// Reset scroll unless asked otherwise
+		if (!leaveInPlace) {
+			$(element)[0].scrollTop = 0;
+		}
 	}
 
 	return {
