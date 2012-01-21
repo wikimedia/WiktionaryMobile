@@ -20,7 +20,7 @@ function getCurrentPosition() {
 		geomap.setView(new L.LatLng(lat, lon), 13);
 		var ping = function() {
 			var pos = geomap.getCenter();
-			geoLookup(pos.lat, pos.lng, 'en', function(data) {
+			geoLookup(pos.lat, pos.lng, preferencesDB.get("language"), function(data) {
 				geoAddMarkers(data);
 			}, function(err) {
 				alert(err);
