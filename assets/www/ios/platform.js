@@ -110,6 +110,6 @@ chrome.doScrollHack = function(element, leaveInPlace) {
 			scroller.scrollTo(0, 0);
 		}
 	} else {
-		origDoScrollHack();
+		origDoScrollHack(element, leaveInPlace);
 	}
 }
