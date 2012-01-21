@@ -87,15 +87,13 @@ network.isConnected = function()  {
 }
 
 //@Override
-app.enableCaching = function() {
-	$(document).bind('offline', function() {
-		console.log('OFFLINE');
+app.setCaching = function(enabled) {
+	console.log('inside the caching thing');
+	if(enabled) {
 		window.plugins.CacheMode.setCacheMode('LOAD_CACHE_ELSE_NETWORK');
-	});
-	$(document).bind('online', function() {
-		console.log('ONLINE');
+	} else {
 		window.plugins.CacheMode.setCacheMode('LOAD_DEFAULT');
-	});
+	}
 }
 
 //@Override

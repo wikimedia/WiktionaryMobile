@@ -101,7 +101,6 @@ window.chrome = function() {
 			$(".closeButton").bind('click', showContent);
 
 			initContentLinkHandlers();
-			app.enableCaching();
 			loadFirstPage();
 			doFocusHack();
 		});

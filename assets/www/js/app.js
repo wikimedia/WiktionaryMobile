@@ -33,6 +33,7 @@ window.app = function() {
 		origUrl = origUrl || url;
 		console.log('hideAndLoad url ' + url);
 		console.log('hideAndLoad origUrl ' + origUrl);
+		app.setCaching(true);
 		network.makeRequest({
 			url: url, 
 			success: function(data) {
@@ -54,6 +55,7 @@ window.app = function() {
 				$('#languageCmd').attr('disabled', 'true');
 			}
 		});
+		app.setCaching(false);
 	}
 
 	function loadLocalPage(page) {
@@ -79,7 +81,7 @@ window.app = function() {
 	}
 	
 	
-	function enableCaching() {
+	function setCaching() {
 		// do nothing by default
 	}
 
@@ -136,7 +138,7 @@ window.app = function() {
 		getCurrentUrl: getCurrentUrl,
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
-		enableCaching: enableCaching
+		setCaching: setCaching
 	};
 
 	return exports;
