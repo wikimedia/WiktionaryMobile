@@ -1,9 +1,11 @@
 package org.wiktionary;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
@@ -33,12 +35,10 @@ public class NearMeActivity extends MapActivity {
 	private String lang;
 	
 	private class UpdateGeonames extends AsyncTask<Double, Void, Integer>{
-		@Override
 		protected void onPreExecute() {
 			showDialog();
 			mapView.getOverlays().clear();
 		}
-		@Override
 		protected Integer doInBackground(Double... gps) {
 			WiktionaryApp app = (WiktionaryApp)getApplicationContext();
 			app.geonames = RestJsonClient.getWiktionaryNearbyLocations(gps[0], gps[1], lang);
@@ -51,7 +51,6 @@ public class NearMeActivity extends MapActivity {
 			}
 			return 0;
 		}
-		@Override
 		protected void onPostExecute(Integer result) {
 			myLocationOverlay.enableMyLocation();
 			mapView.getOverlays().add(myLocationOverlay);
@@ -168,7 +167,6 @@ public class NearMeActivity extends MapActivity {
 		new UpdateGeonames().execute(latitude, longitude);
 	}
 	
-	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
 	}

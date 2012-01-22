@@ -96,6 +96,11 @@ app.setCaching = function(enabled) {
 	}
 }
 
+//@Override
+function getCurrentPosition() {
+	PhoneGap.exec(geoNameSuccess, geoNameFailure, "NearMePlugin", "startNearMeActivity", [preferencesDB.get('language')]);
+}
+
 function geoNameSuccess(wiktionaryUrl) {
 	if(wiktionaryUrl) {
 		$('#search').addClass('inProgress');
