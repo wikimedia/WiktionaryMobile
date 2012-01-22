@@ -67,6 +67,10 @@ window.chrome = function() {
 		languageLinks.parseAvailableLanguages($div);
 		
 		chrome.doScrollHack('#content');
+
+		if (window.wiktionary) {
+			window.wiktionary.onPageLoad();
+		}
 	}
 
 	function showNotification(text) {
