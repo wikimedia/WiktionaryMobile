@@ -7,6 +7,7 @@ window.wiktionary = function() {
 	function onPageLoad() {
 
 		// Move the user's section up to the top, and open it up
+		// TODO(pfhayes): Should OPEN, not toggle
 		wm_toggle_section(1);
 	}
 
