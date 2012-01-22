@@ -19,26 +19,7 @@ window.search = function() {
 				app.navigateToPage(url);
 				return;
 			}
-
-			var requestUrl = app.baseURL + "/w/api.php";
-			$.ajax({
-				type: 'GET',
-				url: requestUrl,
-				data: {
-					action: 'opensearch',
-					search: term,
-					format: 'json'
-				},
-				success: function(data) {
-					var results = JSON.parse( data );
-					if ( results[1].length == 0 ) { 
-						console.log( "Performing 'did you mean' AJAX request..." );
-						getDidYouMeanResults( results );
-					} else {
-						renderResults(results);
-					}			
-				}
-			});
+			getSearchResults( term );
 		} else {
 			chrome.showNoConnectionMessage();
 			chrome.showContent();
@@ -47,6 +28,7 @@ window.search = function() {
 
 	function getDidYouMeanResults(results) {
 		// perform did you mean search
+		console.log( "Performing 'did you mean' search for", results[0] );
 		var requestUrl = app.baseURL + "/w/api.php";        
 		$.ajax({
    			type: 'GET',
@@ -60,13 +42,48 @@ window.search = function() {
        		},
        		success: function(data) {
 				var suggestion_results = JSON.parse( data );
-				console.log( "Suggestion results", suggestion_results );
-				if ( typeof suggestion_results.query.searchinfo != 'undefined' ) {
-					console.log( "Suggestion", suggestion_results.query.searchinfo.suggestion );
-					var suggestion = suggestion_results.query.searchinfo.suggestion;
-					results[1] = [ suggestion ];
-					renderResults( results, 'true' );
+				var suggestion = getSuggestionFromSuggestionResults( suggestion_results );
+				if ( suggestion ) {
+					getSearchResults( suggestion, 'true' );
 				}
+			}
+		});
+	}
+
+	function getSuggestionFromSuggestionResults( suggestion_results ) {
+		console.log( "Suggestion results", suggestion_results );
+		if ( typeof suggestion_results.query.searchinfo != 'undefined' ) {
+			var suggestion = suggestion_results.query.searchinfo.suggestion;
+			console.log( 'Suggestion found:', suggestion );
+			return suggestion;
+		} else {
+			return false;
+		}
+	}
+	
+	function getSearchResults(term, didyoumean) {
+		console.log( 'Getting search results for term:', term );
+		var requestUrl = app.baseURL + "/w/api.php";
+		$.ajax({
+			type: 'GET',
+			url: requestUrl,
+			data: {
+				action: 'opensearch',
+				search: term,
+				format: 'json'
+			},
+			success: function(data) {
+				var results = JSON.parse( data );
+				if ( results[1].length === 0 ) { 
+					console.log( "No results for", term );
+					getDidYouMeanResults( results );
+				} else {
+					if ( typeof didyoumean == 'undefined' ) {
+						didyoumean = false;
+					}
+					console.log( 'Did you mean?', didyoumean );
+					renderResults(results, didyoumean);
+				}			
 			}
 		});
 	}
@@ -86,13 +103,22 @@ window.search = function() {
 		if (results.length > 0) {
 
 			var searchParam = results[0];
+			console.log( "searchParam", searchParam );
 			var searchResults = results[1].map(function(title) {
 				return {
 					key: app.urlForTitle(title),
 					title: title
 				};
 			});
-			$("#resultList").html(template.render({pages: searchResults, didyoumean: didyoumean}));
+			if ( didyoumean ) {
+				var didyoumean_link = {
+					key: app.urlForTitle(results[0]),
+					title: results[0]
+				};
+				$("#resultList").html(template.render({'pages': searchResults, 'didyoumean': didyoumean_link}));
+			} else {
+				$("#resultList").html(template.render({'pages': searchResults}));
+			}
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
 		$(".closeSearch").click(onCloseSearchResults);
@@ -126,5 +152,4 @@ window.search = function() {
 		performSearch: performSearch
 	};
 }();
-
 

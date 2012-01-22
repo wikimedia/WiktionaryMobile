@@ -90,30 +90,44 @@
 		</script>
 
 		<script type="text/html" id="search-results-template">
-			{{#pages}}
+			{{#didyoumean}}
 				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
 					<a class="listItem searchItem">
-							{{#didyoumean}}
-								<span class="didYouMeanLabel"><msg key="search-results-did-you-mean-label"></msg> </span>
-								<span class="didYouMeanResult">{{title}}</span>
-							{{/didyoumean}}
-							{{^didyoumean}}
-								<span class="iconSearchResult"></span>
-								<span class="text deleteEnabled">
+						<span class="didYouMeanLabel"><msg key="search-results-did-you-mean-label"></msg> </span>
+						<span class="didYouMeanResult">{{title}}</span>
+					</a>
+				</div>	
+				{{#pages}}
+					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+						<a class="listItem searchItem">
+							<span class="iconSearchResult"></span>
+							<span class="text deleteEnabled">
 								{{title}}
-							{{/didyoumean}}	
-						</span>
-					</a>
-				</div>
-			{{/pages}}
-			{{^pages}}
-				<div class="listItemContainer">
-					<a class="listItem searchItem">
-						<span class="iconSearchResult"></span>
-						<span class="text deleteEnabled"><msg key="search-results-no-results"></msg></span>
-					</a>
-				</div>
-			{{/pages}}
+							</span>
+						</a>	
+					</div>
+				{{/pages}}
+			{{/didyoumean}}
+			{{^didyoumean}}
+				{{#pages}}
+					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+						<a class="listItem searchItem">
+							<span class="iconSearchResult"></span>
+							<span class="text deleteEnabled">
+								{{title}}
+							</span>
+						</a>	
+					</div>
+				{{/pages}}
+				{{^pages}}
+					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+						<a class="listItem searchItem">
+							<span class="iconSearchResult"></span>
+							<span class="text deleteEnabled"><msg key="search-results-no-results"></msg></span>
+						</a>
+					</div>
+				{{/pages}}
+			{{/didyoumean}}
 			<div class="listItemContainer closeSearch">
 				<div class="listItem"><msg key="search-results-close"></msg></div>
 			</div>
