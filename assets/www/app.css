@@ -503,6 +503,14 @@ header
 	background: #888;
 }
 
+.didYouMeanLabel {
+	color: red;
+}
+
+.didYouMeanResult {
+	color: blue;
+	font-style: italic;
+}
 
 @media only screen and (min-width: 640px) {
 	.goodscroll header {
