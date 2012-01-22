@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phonegap>
+<<<<<<< HEAD
     <access origin="http://en.m.wiktionary.org" subdomains="true"/>
+=======
+    <access origin="http://127.0.0.1*"/>
+>>>>>>> 356d03fbf6ba8fe34ee372d965b30e8fe3765233
     <log level="DEBUG"/>
 </phonegap>
