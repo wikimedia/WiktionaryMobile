@@ -1,24 +1,25 @@
 window.languages = function() {
-	var locales = [];
-	var localeCodesToNames = {};
+	var languages = [];
+	var languageCodesToNames = {};
+	var requestUrl = "https://en.wiktionary.org/w/api.php?action=sitematrix&format=json";
 
-	function loadLocales(callback) {
+	function loadLanguages(callback) {
 		$.ajax({
 			type:'Get', 
 			url:requestUrl, 
 			success:function(data) {
 				var results = JSON.parse(data);
-				var allLocales = results.sitematrix;
+				var allLanguages = results.sitematrix;
 
-				$.each(allLocales, function(key, value) {
+				$.each(allLanguages, function(key, value) {
 					// Because the JSON result from sitematrix is messed up
 					if(!isNaN(key)) {
 						if(value.site.some(function(site) { return site.code == "wiki"; })) {
-							locales.push({
+							languages.push({
 								code: value.code,
 								name: value.name
 							});
-							localeCodesToNames[value.code] = value.name;
+							languageCodesToNames[value.code] = value.name;
 						}
 					}
 				});
@@ -27,33 +28,33 @@ window.languages = function() {
 		});
 	}
 
-	function areLocalesLoaded() {
-		return (locales.length != 0);
+	function areLanguagesLoaded() {
+		return (languages.length != 0);
 	}
 
-	function getLocales(callback) {
-		if(areLocalesLoaded()) {
-			callback(locales);
+	function getLanguages(callback) {
+		if(areLanguagesLoaded()) {
+			callback(languages);
 		} else {
-			loadLocales(function() {
-				callback(locales);
+			loadLanguages(function() {
+				callback(languages);
 			});
 		}
 	}
 
-	function getLocaleCodesToNames(callback) {
-		if(areLocalesLoaded()) {
-			callback(localeCodesToNames);
+	function getLanguageCodesToNames(callback) {
+		if(areLanguagesLoaded()) {
+			callback(languageCodesToNames);
 		} else {
-			loadLocales(function() {
-				callback(localeCodesToNames);
+			loadLanguages(function() {
+				callback(languageCodesToNames);
 			});
 		}
 	}
 
 	return {
-		getLocales: getLocales,
-		getLocaleCodesToNames: getLocaleCodesToNames
+		getLanguages: getLanguages,
+		getLanguageCodesToNames: getLanguageCodesToNames
 	};
 
 }();
