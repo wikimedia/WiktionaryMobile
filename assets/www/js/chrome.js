@@ -1,7 +1,7 @@
 window.chrome = function() {
 	var menu_handlers = {
 		'read-in': function() { languageLinks.showAvailableLanguages(); },
-		'near-me': function() { getCurrentPosition(); },
+		'near-me': function() { geo.showNearbyArticles(); },
 		'view-history': function() { appHistory.showHistory(); } ,
 		'save-page': function() { savedPages.saveCurrentPage() },
 		'view-saved-pages': function() { savedPages.showSavedPages(); },
@@ -9,7 +9,8 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
-		'view-about': function() { aboutPage(); }
+		'view-about': function() { aboutPage(); },
+		'show-random-article': function() { app.navigateToPage( 'https://en.m.wikipedia.org/wiki/Special:Random' ) }
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
@@ -267,6 +268,7 @@ window.chrome = function() {
 		appHistory.addCurrentPage();
 		toggleForward();
 		updateMenuState(menu_handlers);
+		geo.addShowNearbyLinks();
 		$('#search').removeClass('inProgress');        
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
