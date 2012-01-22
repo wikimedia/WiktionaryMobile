@@ -30,7 +30,13 @@ window.search = function() {
 					format: 'json'
 				},
 				success: function(data) {
-					renderResults(data);
+					var results = JSON.parse( data );
+					if ( results[1].length == 0 ) { 
+						console.log( "Performing 'did you mean' AJAX request..." );
+						getDidYouMeanResults( results );
+					} else {
+						renderResults(results);
+					}			
 				}
 			});
 		} else {
@@ -39,6 +45,31 @@ window.search = function() {
 		}
 	}
 
+	function getDidYouMeanResults(results) {
+		// perform did you mean search
+		var requestUrl = app.baseURL + "/w/api.php";        
+		$.ajax({
+   			type: 'GET',
+			url: requestUrl,
+			data: {
+				action: 'query',
+       			list: 'search',                
+				srsearch: results[0],
+       			srinfo: 'suggestion',
+				format: 'json'
+       		},
+       		success: function(data) {
+				var suggestion_results = JSON.parse( data );
+				console.log( "Suggestion results", suggestion_results );
+				if ( typeof suggestion_results.query.searchinfo != 'undefined' ) {
+					console.log( "Suggestion", suggestion_results.query.searchinfo.suggestion );
+					var suggestion = suggestion_results.query.searchinfo.suggestion;
+					results[1] = [ suggestion ];
+					renderResults( results, 'true' );
+				}
+			}
+		});
+	}
 
 	function onSearchResultClicked() {
 		var parent = $(this).parents(".listItemContainer");
@@ -50,11 +81,10 @@ window.search = function() {
 		chrome.hideOverlays();
 	}
 
-	function renderResults(results) {
-
-		results = JSON.parse(results);
+	function renderResults(results, didyoumean) {
 		var template = templates.getTemplate('search-results-template');
 		if (results.length > 0) {
+
 			var searchParam = results[0];
 			var searchResults = results[1].map(function(title) {
 				return {
@@ -62,7 +92,7 @@ window.search = function() {
 					title: title
 				};
 			});
-			$("#resultList").html(template.render({pages: searchResults}));
+			$("#resultList").html(template.render({pages: searchResults, didyoumean: didyoumean}));
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
 		$(".closeSearch").click(onCloseSearchResults);
@@ -88,7 +118,7 @@ window.search = function() {
 		}
 
 		chrome.doFocusHack();
-		$('#searchresults').show();
+		$('#searchresults').localize().show();
 		chrome.doScrollHack('#searchresults .scroller');
 	}
 
@@ -96,3 +126,5 @@ window.search = function() {
 		performSearch: performSearch
 	};
 }();
+
+

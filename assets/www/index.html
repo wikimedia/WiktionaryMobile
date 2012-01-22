@@ -90,8 +90,16 @@
 			{{#pages}}
 				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
 					<a class="listItem searchItem">
-						<span class="iconSearchResult"></span>
-						<span class="text deleteEnabled">{{title}}</span>
+							{{#didyoumean}}
+								<span class="didYouMeanLabel"><msg key="search-results-did-you-mean-label"></msg> </span>
+								<span class="didYouMeanResult">{{title}}</span>
+							{{/didyoumean}}
+							{{^didyoumean}}
+								<span class="iconSearchResult"></span>
+								<span class="text deleteEnabled">
+								{{title}}
+							{{/didyoumean}}	
+						</span>
 					</a>
 				</div>
 			{{/pages}}
@@ -99,12 +107,12 @@
 				<div class="listItemContainer">
 					<a class="listItem searchItem">
 						<span class="iconSearchResult"></span>
-						<span class="text deleteEnabled">No results found</span>
+						<span class="text deleteEnabled"><msg key="search-results-no-results"></msg></span>
 					</a>
 				</div>
 			{{/pages}}
 			<div class="listItemContainer closeSearch">
-				<div class="listItem">Close</div>
+				<div class="listItem"><msg key="search-results-close"></msg></div>
 			</div>
 		</script>
 
