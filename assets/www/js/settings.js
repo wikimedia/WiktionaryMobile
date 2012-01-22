@@ -1,10 +1,7 @@
 window.appSettings = function() {
 	var fontSizes = [];	
-	var locales = [];
 
 	function showSettings(callback) {
-		var requestUrl = "https://en.wiktionary.org/w/api.php?action=sitematrix&format=json";
-
 		if(fontSizes.length == 0) {
 			fontSizes = [
 				{value: '75%', name: mw.message('settings-font-size-smaller').plain() },
@@ -13,35 +10,10 @@ window.appSettings = function() {
 			];
 		}
 
-		if(locales.length == 0) {
-			$.ajax({
-				type:'Get', 
-				url:requestUrl, 
-				success:function(data) {
-					var results = JSON.parse(data);
-					var allLocales = results.sitematrix;
-
-					$.each(allLocales, function(key, value) {
-						// Because the JSON result from sitematrix is messed up
-						if(!isNaN(key)) {
-							if(value.site.some(function(site) { return site.code == "wiki"; })) {
-								locales.push({
-									code: value.code,
-									name: value.name
-								});
-							}
-						}
-					});
-					renderSettings();
-				}
-			});
-		} else {
-			renderSettings();
-		}
-
+		languages.getLanguages(renderSettings);
 	}
 
-	function renderSettings() {
+	function renderSettings(locales) {
 		var template = templates.getTemplate('settings-page-template');
 		$("#settingsList").html(template.render({languages: locales, fontSizes: fontSizes, aboutPage: aboutPage}));
 		$("#contentLanguageSelector").val(preferencesDB.get("language")).change(onContentLanguageChanged);
