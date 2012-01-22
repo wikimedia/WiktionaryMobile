@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <string name="hello">Hello World, WiktionaryActivity!</string>
     <string name="app_name">Wiktionary</string>
     <string name="search_hint">Current location</string>
 </resources>
+=======
+
+    <string name="hello">Hello World, WiktionaryActivity!</string>
+    <string name="app_name">WiktionaryMobile</string>
+
+</resources>
+>>>>>>> 356d03fbf6ba8fe34ee372d965b30e8fe3765233
