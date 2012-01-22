@@ -17,10 +17,14 @@ window.appSettings = function() {
 
 	function renderSettings(locales) {
 		var template = templates.getTemplate('settings-page-template');
-		$("#settingsList").html(template.render({languages: locales, fontSizes: fontSizes}));
+		$("#settingsList").html(template.render({languages: locales, fontSizes: fontSizes, aboutPage: aboutPage}));
 		$("#contentLanguageSelector").val(preferencesDB.get("language")).change(onContentLanguageChanged);
 		$("#selectedLanguage").html(preferencesDB.get("language"));	
 		$("#fontSizeSelector").val(preferencesDB.get("fontSize")).change(onFontSizeChanged);
+        $("#aboutPageLabel").click(function () { 
+                                   aboutPage();
+                                   });
+       
 		chrome.hideOverlays();
 		chrome.hideContent();
 		$('#settings').localize().show();

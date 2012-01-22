@@ -449,6 +449,11 @@ header
 	background: url(image/ios/toolbar-forward.png);
 }
 
+/* Add this style to the markup to Dim the menu forward and backward icon image */
+#menu-forward-backward-dim {
+    opacity : .4;
+}
+
 #menu-language span {
 	background: url(image/ios/toolbar-language.png);
 }
@@ -503,6 +508,14 @@ header
 	background: #888;
 }
 
+.didYouMeanLabel {
+	color: red;
+}
+
+.didYouMeanResult {
+	color: blue;
+	font-style: italic;
+}
 
 @media only screen and (min-width: 640px) {
 	.goodscroll header {

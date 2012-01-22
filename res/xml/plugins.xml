@@ -16,7 +16,6 @@
     <plugin name="Temperature" value="com.phonegap.TempListener"/>
     <plugin name="FileTransfer" value="com.phonegap.FileTransfer"/>
     <plugin name="Capture" value="com.phonegap.Capture"/>
-<<<<<<< HEAD
     <plugin name="SimpleMenu" value="com.phonegap.menu.AppMenu"/> 
     <plugin name="NearMePlugin" value="org.wiktionary.NearMePlugin" />
     <plugin name="SelectTextPlugin" value="org.wiktionary.SelectTextPlugin" />
@@ -28,6 +27,3 @@
     <plugin name="ApplicationVersion" value="org.wiktionary.ApplicationVersion"/>
     <plugin name="GlobalizationCommand" value="com.phonegap.plugins.globalization.GlobalizationCommand"/>
 </plugins>
-=======
-</plugins>
->>>>>>> 356d03fbf6ba8fe34ee372d965b30e8fe3765233

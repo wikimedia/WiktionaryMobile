@@ -1,7 +1,7 @@
 window.chrome = function() {
 	var menu_handlers = {
 		'read-in': function() { languageLinks.showAvailableLanguages(); },
-		'near-me': function() { getCurrentPosition(); },
+		'near-me': function() { geo.showNearbyArticles(); },
 		'view-history': function() { appHistory.showHistory(); } ,
 		'save-page': function() { savedPages.saveCurrentPage() },
 		'view-saved-pages': function() { savedPages.showSavedPages(); },
@@ -262,7 +262,8 @@ window.chrome = function() {
 				//
 				// This seems to successfully launch the native browser, and works
 				// both with the stock browser and Firefox as user's default browser
-				document.location = url;
+				//document.location = url;
+				window.open(url);
 			}
 		});
 	}
@@ -272,13 +273,19 @@ window.chrome = function() {
 		appHistory.addCurrentPage();
 		toggleForward();
 		updateMenuState(menu_handlers);
+		geo.addShowNearbyLinks();
 		$('#search').removeClass('inProgress');        
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
 	
-	function doScrollHack(element) {
-		// placeholder for iScroll where needed
+	function doScrollHack(element, leaveInPlace) {
+		// placeholder for iScroll etc where needed
+		
+		// Reset scroll unless asked otherwise
+		if (!leaveInPlace) {
+			$(element)[0].scrollTop = 0;
+		}
 	}
 
 	return {
