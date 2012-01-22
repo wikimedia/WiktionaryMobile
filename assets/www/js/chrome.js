@@ -9,8 +9,7 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
-		'view-about': function() { aboutPage(); },
-		'show-random-article': function() { app.navigateToPage( 'https://en.m.wikipedia.org/wiki/Special:Random' ) }
+		'view-about': function() { aboutPage(); }
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
