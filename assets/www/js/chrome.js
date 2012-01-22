@@ -1,7 +1,7 @@
 window.chrome = function() {
 	var menu_handlers = {
 		'read-in': function() { languageLinks.showAvailableLanguages(); },
-		'near-me': function() { getCurrentPosition(); },
+		'near-me': function() { geo.showNearbyArticles(); },
 		'view-history': function() { appHistory.showHistory(); } ,
 		'save-page': function() { savedPages.saveCurrentPage() },
 		'view-saved-pages': function() { savedPages.showSavedPages(); },
@@ -269,6 +269,7 @@ window.chrome = function() {
 		appHistory.addCurrentPage();
 		toggleForward();
 		updateMenuState(menu_handlers);
+		geo.addShowNearbyLinks();
 		$('#search').removeClass('inProgress');        
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
