@@ -110,17 +110,24 @@ window.chrome = function() {
 
 	function loadFirstPage() {
 		chrome.showSpinner();
-	   
-		// restore browsing to last visited page
-		var historyDB = new Lawnchair({name:"historyDB"}, function() {
-			this.all(function(history){
-				if(history.length==0 || window.history.length > 1) {
-					app.navigateToPage(app.baseURL);
-				} else {
-					app.navigateToPage(history[history.length-1].value);
-				}
-			});
-		});
+		
+		plugins.webintent.getUri(
+				function(url) {
+					if(url != "") {
+						app.navigateToPage(url);
+					} else {
+						// restore browsing to last visited page
+						var historyDB = new Lawnchair({name:"historyDB"}, function() {
+							this.all(function(history){
+								if(history.length==0 || window.history.length > 1) {
+									app.navigateToPage(app.baseURL);
+								} else {
+									app.navigateToPage(history[history.length-1].value);
+								}
+							});
+						});
+					}
+				});
 
 	}
 
