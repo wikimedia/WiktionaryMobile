@@ -36,6 +36,18 @@ window.appHistory = function() {
 			});
 		});
 	}
+	
+	// Removes all the elements from history
+	function deleteHistory() {
+		title = mw.message('menu-history');
+		var answer = confirm(mw.message('remove-list-prompt', title).plain());
+		if (answer) {
+			var historyDB = new Lawnchair({name:"historyDB"}, function() {
+				this.nuke();
+				$("#historyList").hide();
+			});
+		}
+	}
 
 	function onHistoryItemClicked() {
 		var parent = $(this).parents(".listItemContainer");
@@ -45,6 +57,7 @@ window.appHistory = function() {
 
 	function showHistory() {	
 		var template = templates.getTemplate('history-template');
+		$(".cleanButton").click(deleteHistory);
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history) {
 				$('#historyList').html(template.render({'pages': history.reverse()}));
