@@ -1,11 +1,11 @@
 package org.wiktionary;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-//import android.util.Log;
-//import android.webkit.WebView;
 
 import com.phonegap.DroidGap;
 
@@ -34,7 +34,29 @@ public class WiktionaryActivity extends DroidGap {
 		editor.remove("doSearchNearBy");
 		editor.commit();
 		
-        super.loadUrl("file:///android_asset/www/index.html");
+		// Check if we were started by another app's Intent
+		boolean startedFromAnotherApp = false;
+		String wordToShow = null;
+		
+		Intent startingIntent = this.getIntent();
+		if (startingIntent != null) {
+			Bundle extraParams = startingIntent.getExtras();
+			if (extraParams != null) {
+				String value = extraParams.getString(Intent.EXTRA_TEXT);
+				if (value != null && !value.trim().equals("")) {
+					startedFromAnotherApp = true;
+					wordToShow = value;
+				}
+			}
+		}
+		
+		String startingUrl = "file:///android_asset/www/index.html";
+		
+		if (startedFromAnotherApp) {
+			startingUrl += "?define=" + URLEncoder.encode(wordToShow);
+		}
+		
+        super.loadUrl(startingUrl);
         this.webViewClient = new WiktionaryWebViewClient(this);
         this.appView.setWebViewClient(this.webViewClient);
     }
