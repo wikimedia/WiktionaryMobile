@@ -23,6 +23,8 @@
 	<script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
 
 	<!-- app logic -->
+  <script type="text/javascript" charset="utf-8" src="js/wiktionary.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/languages.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/network.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/templates.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
@@ -43,7 +45,7 @@
 
 	<link rel="stylesheet" href="app.css" />  
 	<link rel="stylesheet" href="wiki.css" />
-
+  <link rel="stylesheet" href="wiktionary.css" />
 </head>
 
 <body onload="init();">
@@ -90,30 +92,44 @@
 		</script>
 
 		<script type="text/html" id="search-results-template">
-			{{#pages}}
+			{{#didyoumean}}
 				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
 					<a class="listItem searchItem">
-							{{#didyoumean}}
-								<span class="didYouMeanLabel"><msg key="search-results-did-you-mean-label"></msg> </span>
-								<span class="didYouMeanResult">{{title}}</span>
-							{{/didyoumean}}
-							{{^didyoumean}}
-								<span class="iconSearchResult"></span>
-								<span class="text deleteEnabled">
+						<span class="didYouMeanLabel"><msg key="search-results-did-you-mean-label"></msg> </span>
+						<span class="didYouMeanResult">{{title}}</span>
+					</a>
+				</div>	
+				{{#pages}}
+					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+						<a class="listItem searchItem">
+							<span class="iconSearchResult"></span>
+							<span class="text deleteEnabled">
 								{{title}}
-							{{/didyoumean}}	
-						</span>
-					</a>
-				</div>
-			{{/pages}}
-			{{^pages}}
-				<div class="listItemContainer">
-					<a class="listItem searchItem">
-						<span class="iconSearchResult"></span>
-						<span class="text deleteEnabled"><msg key="search-results-no-results"></msg></span>
-					</a>
-				</div>
-			{{/pages}}
+							</span>
+						</a>	
+					</div>
+				{{/pages}}
+			{{/didyoumean}}
+			{{^didyoumean}}
+				{{#pages}}
+					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+						<a class="listItem searchItem">
+							<span class="iconSearchResult"></span>
+							<span class="text deleteEnabled">
+								{{title}}
+							</span>
+						</a>	
+					</div>
+				{{/pages}}
+				{{^pages}}
+					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+						<a class="listItem searchItem">
+							<span class="iconSearchResult"></span>
+							<span class="text deleteEnabled"><msg key="search-results-no-results"></msg></span>
+						</a>
+					</div>
+				{{/pages}}
+			{{/didyoumean}}
 			<div class="listItemContainer closeSearch">
 				<div class="listItem"><msg key="search-results-close"></msg></div>
 			</div>
@@ -234,20 +250,10 @@
 	<div id="content" class="scroller">
 		<div id="main"></div>
 	</div>  
-	
-	<div id="nearby-overlay">
-		<header>
-			<div class="titlebar">
-				<div class="titlebarItem"><msg key="nearby-title">Nearby</msg></div>
-				<div class="titlebarItem closeButton"></div>
-			</div>
-		</header>
-		<div id="map"></div>
-	</div>
+
 
 	<menu id="appMenu" type="context">
 		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="false" action="read-in" />
-		<command type="command" id="nearbyCmd" icon="optionNearMe.png" disabled="false" action="near-me" />
 		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="view-history" />
 		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="save-page" />
 		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="view-saved-pages" />
