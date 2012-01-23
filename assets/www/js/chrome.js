@@ -302,7 +302,7 @@ window.chrome = function() {
 		appHistory.addCurrentPage();
 		toggleForward();
 		updateMenuState(menu_handlers);
-		geo.addShowNearbyLinks();
+		$('#search').removeClass('inProgress');        
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
