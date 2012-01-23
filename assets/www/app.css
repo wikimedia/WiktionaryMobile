@@ -1,3 +1,11 @@
+html {
+	overflow: hidden;
+}
+
+html.badscroll {
+	overflow: auto;
+}
+
 body 
 {
 	margin:0px;
@@ -22,18 +30,22 @@ div
 	margin:0px;
 	padding:0px;
 }
-	  		
+
 header 
 {
-	position:fixed;
+	position:absolute;
 	top:0px;
 	left:0px;
 	width:100%;
-	/*height:100px;*/
-	z-index:30000;
+	height: 52px;
 }   
 
-#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay
+.badscroll header {
+	position:fixed;
+	z-index:30000;
+}
+
+#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay, #nearby-overlay
 {
 	background-color:white;
 	width:100%;
@@ -41,11 +53,35 @@ header
 	display:none;
 }
 
-#savedPagesList, #historyList, #resultList, #langList
+/*#savedPagesList, #historyList, #resultList, #langList, #about-page-content*/
+.scroller
+{
+	position:absolute;
+	top:52px;
+	width: 100%;
+	bottom: 52px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.badscroll .scroller
 {
 	position:relative;
 	top:52px;
 	width: 100%;
+}
+
+.android .scroller {
+	/* No bottom toolbar */
+	bottom: 0px;
+}
+
+#map {
+	position: absolute;
+	top: 52px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 }
 
 /*
@@ -61,9 +97,12 @@ header
 #content
 {
 	display:block;
-	position:relative;
-	top:52px;
 }
+
+.badscroll #content {
+	position:relative;
+}
+
 
 #main
 {
@@ -187,7 +226,7 @@ header
 }
 
 #clearSearch {
-	position:fixed;
+	position:absolute;
 	top:12px;
 	right:47px;
 	z-index:2;
@@ -197,6 +236,10 @@ header
 	height: 30px;
 	width: 30px;
 	visibility: hidden;
+}
+
+.badscroll #clearSearch {
+	position:fixed;
 }
 
 .spinner {
@@ -230,13 +273,13 @@ header
 
 #wHolder {
 	display:inline-block;
-	margin-top:7px;"
+	margin-top:7px;
 }
 
 #searchFormHolder {
 	white-space:nowrap;
 	margin-left:5px;
-	margin-top:7px;"
+	margin-top:7px;
 }
 
 .titlebar {
@@ -363,7 +406,7 @@ header
 
 /* Web, iOS menu */
 #menu {
-	position: fixed;
+	position: absolute;
 	height: 52px;
 	bottom: 0;
 	left: 0;
@@ -399,45 +442,39 @@ header
 }
 
 #menu-back span {
-	background: url(img/xhdpi/optionBack.png);
+	background: url(image/ios/toolbar-back.png);
 }
 
 #menu-forward span {
-	background: url(img/xhdpi/optionForward.png);
+	background: url(image/ios/toolbar-forward.png);
+}
+
+/* Add this style to the markup to Dim the menu forward and backward icon image */
+#menu-forward-backward-dim {
+    opacity : .4;
 }
 
 #menu-language span {
 	background: url(image/ios/toolbar-language.png);
-	background-size: 27px 17px !important;
 }
 
 #menu-output span {
 	background-image: url(image/ios/toolbar-output.png);
-	background-size: 23px 18px !important;
 }
 
 #menu-sources span {
-	background: url(img/xhdpi/optionReadLater.png);
-}
-
-#menu-savePage span {
-	background: url(img/xhdpi/optionAddBookmark.png);
-}
-
-#menu-savedPages span {
-	background: url(img/xhdpi/optionReadLater.png);
+	background: url(image/ios/toolbar-sources.png);
 }
 
 #menu-settings span {
 	background: url(image/ios/toolbar-settings.png);
-	background-size: 26px 28px !important;
 }
 
 
 /* For web simulation of iOS action sheets */
 .actionsheet {
 	background: #444;
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -447,7 +484,7 @@ header
 
 .actionsheet-bg {
 	background: rgba(0, 0, 0, 0.5);
-	position: fixed;
+	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -470,3 +507,44 @@ header
 .actionsheet button.cancel {
 	background: #888;
 }
+
+.didYouMeanLabel {
+	color: red;
+}
+
+.didYouMeanResult {
+	color: blue;
+	font-style: italic;
+}
+
+@media only screen and (min-width: 640px) {
+	.goodscroll header {
+		width: 320px;
+		left: inherit;
+	}
+	.goodscroll.android header {
+		/* @fixme add menu/actionbar */
+		width: 100%;
+	}
+	.goodscroll #menu {
+		top: 0;
+		bottom: inherit;
+		left: 320px;
+		text-align: right;
+		background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
+	}
+	.goodscroll #content {
+		position: absolute;
+		left: 320px;
+		right: 0px;
+		width: auto;
+	}
+	.goodscroll #savedPages, .goodscroll #history, .goodscroll #settings, .goodscroll #searchresults, .goodscroll #langlinks, .goodscroll #about-page-overlay {
+		width: 320px;
+	}
+	.goodscroll .scroller {
+		bottom: 0px;
+		width: 320px;
+	}
+}
+

@@ -1,126 +1,155 @@
-function search(isSuggestion) {
-	if($('#search').hasClass('inProgress')) {
-		app.network.stopCurrentRequest();
-		$('#search').removeClass('inProgress');
-		return;
+window.search = function() {
+	function performSearch(term, isSuggestion) {
+		if($('#search').hasClass('inProgress')) {
+			network.stopCurrentRequest();
+			$('#search').removeClass('inProgress');
+			return;
+		}
+		if (network.isConnected()) {
+			if (term == '') {
+				chrome.showContent();
+				return;
+			}
+
+			chrome.showSpinner();
+			$('#search').addClass('inProgress');
+
+			if(!isSuggestion) {
+				var url = app.urlForTitle(term);
+				app.navigateToPage(url);
+				return;
+			}
+			getSearchResults( term );
+		} else {
+			chrome.showNoConnectionMessage();
+			chrome.showContent();
+		}
 	}
-	if (hasNetworkConnection()) {
-		var searchParam = $('#searchParam').val();
 
-		if (searchParam == '') {
-			hideOverlays();
-			return;
+	function getDidYouMeanResults(results) {
+		// perform did you mean search
+		console.log( "Performing 'did you mean' search for", results[0] );
+		var requestUrl = app.baseURL + "/w/api.php";        
+		$.ajax({
+   			type: 'GET',
+			url: requestUrl,
+			data: {
+				action: 'query',
+       			list: 'search',                
+				srsearch: results[0],
+       			srinfo: 'suggestion',
+				format: 'json'
+       		},
+       		success: function(data) {
+				var suggestion_results = JSON.parse( data );
+				var suggestion = getSuggestionFromSuggestionResults( suggestion_results );
+				if ( suggestion ) {
+					getSearchResults( suggestion, 'true' );
+				}
+			}
+		});
+	}
+
+	function getSuggestionFromSuggestionResults( suggestion_results ) {
+		console.log( "Suggestion results", suggestion_results );
+		if ( typeof suggestion_results.query.searchinfo != 'undefined' ) {
+			var suggestion = suggestion_results.query.searchinfo.suggestion;
+			console.log( 'Suggestion found:', suggestion );
+			return suggestion;
+		} else {
+			return false;
 		}
-
-		showSpinner();
-		$('#search').addClass('inProgress');
-
-		if(!isSuggestion) {
-			var url = urlForTitle(searchParam);
-			goToResult(url);
-			return;
-		}
-
+	}
+	
+	function getSearchResults(term, didyoumean) {
+		console.log( 'Getting search results for term:', term );
 		var requestUrl = app.baseURL + "/w/api.php";
 		$.ajax({
 			type: 'GET',
 			url: requestUrl,
 			data: {
 				action: 'opensearch',
-				search: searchParam,
+				search: term,
 				format: 'json'
 			},
 			success: function(data) {
-				displayResults(data, isSuggestion);
+				var results = JSON.parse( data );
+				if ( results[1].length === 0 ) { 
+					console.log( "No results for", term );
+					getDidYouMeanResults( results );
+				} else {
+					if ( typeof didyoumean == 'undefined' ) {
+						didyoumean = false;
+					}
+					console.log( 'Did you mean?', didyoumean );
+					renderResults(results, didyoumean);
+				}			
 			}
 		});
-	} else {
-		noConnectionMsg();
-		hideOverlays();
 	}
-}
 
-function urlForTitle(title) {
-    return app.baseURL + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
-}
+	function onSearchResultClicked() {
+		var parent = $(this).parents(".listItemContainer");
+		var url = parent.attr("data-page-url");
+		app.navigateToPage(url);
+	}
 
-function displayResults(results, isSuggestion) {
-	setActiveState();
-	var formattedResults = "";
+	function onCloseSearchResults() {
+		chrome.hideOverlays();
+	}
 
-	if (results != null) {
-		results = JSON.parse(results);
-
+	function renderResults(results, didyoumean) {
+		var template = templates.getTemplate('search-results-template');
 		if (results.length > 0) {
+
 			var searchParam = results[0];
-			var searchResults = results[1];
-
-			for (var i=0;i<searchResults.length;i++) {
-				var article = searchResults[i];
-				var url = urlForTitle(article);
-
-				formattedResults += "<div data-page-url=\'" + url + "\' class='listItemContainer' onclick=\"javascript:goToResult(\'" + url + "\');\">";
-				formattedResults += "<div class='listItem'>";
-				formattedResults += "<span class='iconSearchResult'></span>";
-				formattedResults += "<span class='text'>" + article + "</span>";
-				formattedResults += "</div>";
-				formattedResults += "</div>";
+			console.log( "searchParam", searchParam );
+			var searchResults = results[1].map(function(title) {
+				return {
+					key: app.urlForTitle(title),
+					title: title
+				};
+			});
+			if ( didyoumean ) {
+				var didyoumean_link = {
+					key: app.urlForTitle(results[0]),
+					title: results[0]
+				};
+				$("#resultList").html(template.render({'pages': searchResults, 'didyoumean': didyoumean_link}));
+			} else {
+				$("#resultList").html(template.render({'pages': searchResults}));
 			}
-		} else {
-			formattedResults += "<div class='listItemContainer'>";
-			formattedResults += "<div class='listItem'>";
-			formattedResults += "<span class='iconSearchResult'></span>";
-			formattedResults += "<span class='text'>No results found</span>";
-			formattedResults += "</div>";
-			formattedResults += "</div>";
+			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
-	} else {
-		// no result from the server...
-	}
-
-	formattedResults += "<div class='listItemContainer' onclick='javascript:hideOverlays();'>";
-	formattedResults += "<div class='listItem'>Close</div>";
-	formattedResults += "</div>";
-
-	$('#resultList').html(formattedResults);
-
-	// Replace icon of savd pages in search suggestions
-	var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
-		$("#resultList .listItemContainer").each(function() {
-			var container = this;
-			var url = $(this).attr('data-page-url');
-			savedPagesDB.exists(url, function(exists) {
-				if(exists) {
-					$(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconSavedPage");
-				}
+		$(".closeSearch").click(onCloseSearchResults);
+		// Replace icon of savd pages in search suggestions
+		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
+			$("#resultList .listItemContainer").each(function() {
+				var container = this;
+				var url = $(this).attr('data-page-url');
+				savedPagesDB.exists(url, function(exists) {
+					if(exists) {
+						$(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconSavedPage");
+					}
+				});
 			});
 		});
-	});
 
-	$('#search').removeClass('inProgress');
-	hideSpinner();
-	hideOverlays();
+		$('#search').removeClass('inProgress');
+		chrome.hideSpinner();
+		chrome.hideOverlays();
 
-	$('#searchresults').show();
-	$('#content').hide();
-	
-}
+		if(!chrome.isTwoColumnView()) {
+			$("#content").hide(); // Not chrome.hideContent() since we want the header
+		}
 
-function goToResult(url) {
-	if (hasNetworkConnection()) {
-		app.navigateToPage(url);
-		hideOverlays();
-	} else {
-		noConnectionMsg();
+		chrome.doFocusHack();
+		$('#searchresults').localize().show();
+		chrome.doScrollHack('#searchresults .scroller');
 	}
-}
 
-function showSpinner() {
-	$('.titlebar .spinner').css({display:'block'});
-	$('#clearSearch').css({height:0});
-}
+	return {
+		performSearch: performSearch
+	};
+}();
 
-function hideSpinner() {
-	$('.titlebar .spinner').css({display:'none'});	
-	$('#clearSearch').css({height:30});
-}

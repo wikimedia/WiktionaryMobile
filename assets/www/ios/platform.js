@@ -4,15 +4,15 @@ function updateMenuState() {
 	var items = [
 		{
 			id: 'menu-back',
-			action: goBack
+			action: chrome.goBack
 		},
 		{
 			id: 'menu-forward',
-			action: goForward
+			action: chrome.goForward
 		},
 		{
 			id: 'menu-language',
-			action: selectLanguage
+			action:  languageLinks.showAvailableLanguages
 		},
 		{
 			id: 'menu-output',
@@ -23,12 +23,13 @@ function updateMenuState() {
 					mw.msg('menu-cancel')
 				], function(value, index) {
 					if (index == 0) {
-						savePage();
+						savedPages.saveCurrentPage();
 					} else if (index == 1) {
 						sharePage();
 					}
 				}, {
-					cancelButtonIndex: 2
+					cancelButtonIndex: 2,
+					origin: this
 				});
 			}
 		},
@@ -44,18 +45,19 @@ function updateMenuState() {
 					if (index == 0) {
 						getCurrentPosition();
 					} else if (index == 1) {
-						showSavedPages();
+						savedPages.showSavedPages();
 					} else if (index == 2) {
-						getHistory();
+						appHistory.showHistory();
 					}
 				}, {
-					cancelButtonIndex: 3
+					cancelButtonIndex: 3,
+					origin: this
 				});
 			}
 		},
 		{
 			id: 'menu-settings',
-			action: getSettings
+			action: appSettings.showSettings
 		}
 	];
 	$('#menu').remove();
@@ -69,7 +71,7 @@ function updateMenuState() {
 		$button
 			.attr('id', item.id)
 			.click(function() {
-				item.action();
+				item.action.apply(this);
 			})
 			.append('<span>')
 			.appendTo($menu);
@@ -78,5 +80,36 @@ function updateMenuState() {
 
 // @Override
 function popupMenu(items, callback, options) {
+	if (options.origin) {
+		var $origin = $(options.origin),
+			pos = $origin.offset();
+		options.left = pos.left;
+		options.top = 0; // hack pos.top;
+		options.width = $origin.width();
+		options.height = $origin.height();
+	}
 	window.plugins.actionSheet.create('', items, callback, options);
+}
+
+origDoScrollHack = chrome.doScrollHack;
+// @Override
+chrome.doScrollHack = function(element, leaveInPlace) {
+	// @fixme only use on iOS 4.2?
+	if (navigator.userAgent.match(/iPhone OS [34]/)) {
+		var $el = $(element),
+			scroller = $el[0].scroller;
+		if (scroller) {
+			window.setTimeout(function() {
+				scroller.refresh();
+			}, 0);
+		} else {
+			scroller = new iScroll($el[0]);
+			$el[0].scroller = scroller;
+		}
+		if (!leaveInPlace) {
+			scroller.scrollTo(0, 0);
+		}
+	} else {
+		origDoScrollHack(element, leaveInPlace);
+	}
 }

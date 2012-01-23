@@ -1,4 +1,4 @@
-function network() {
+window.network = function() {
 	var currentXhr = null;
 
 	function makeRequest(options) {
@@ -28,9 +28,15 @@ function network() {
 		}
 	}
 
+	function isConnected() 
+	{
+		return window.navigator.onLine;
+	}
+
 	return {
 		makeRequest: makeRequest,
-		stopCurrentRequest: stopCurrentRequest
+		stopCurrentRequest: stopCurrentRequest,
+		isConnected: isConnected
 	};
 
-}
+}();

@@ -134,6 +134,12 @@ public class NearMeActivity extends MapActivity {
 		});
 	}
 	
+	@Override
+	public void onStop() {
+		super.onStop();
+		myLocationOverlay.disableMyLocation();
+	}
+
 	private  void showDialog() {
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);

@@ -22,8 +22,11 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>ws.geonames.net</string>
+		<string>*.tile.openstreetmap.org</string>
 		<string>*.wikipedia.org</string>
 		<string>*.wikimedia.org</string>
+		<string>*</string>
 	</array>
 	<key>Plugins</key>
 	<dict>
@@ -54,7 +57,5 @@
 		<key>com.phonegap.splashscreen</key>
 		<string>PGSplashScreen</string>
 	</dict>
-	<key>OpenAllWhitelistURLsInWebView</key>
-	<true/>
 </dict>
 </plist>

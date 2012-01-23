@@ -21,9 +21,10 @@ var SimpleMenu = function()
   });
 }
 
-SimpleMenu.prototype.loadMenu = function(menu, win, fail)
+SimpleMenu.prototype.loadMenu = function(menu, triggers, win, fail)
 {
   this.menu = [];
+  this.triggers = triggers;
   var commands = menu.getElementsByTagName('command');
   for(var i = 0; i < commands.length; ++i)
   {
@@ -72,13 +73,12 @@ SimpleMenu.prototype.setRefresh = function(win, fail)
   "SimpleMenu", "refresh", []);
 }
 
-/* This is actually really bad code, I'm glad it's in JS, and we protect it with JSON objects, but I'm still not super stoked*/
 SimpleMenu.prototype.fireCallback = function(index)
 {
   if(this.menu != null && this.menu.length > index)
   {
-    var cmd = this.menu[index].action;
-    eval(cmd);
+    var action = this.menu[index].action;
+	this.triggers[action].call(this);
   }
 }
 

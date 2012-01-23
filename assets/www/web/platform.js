@@ -6,38 +6,39 @@
 // @todo need menus!
 
 window.addEventListener('load', function() {
-	onDeviceReady();
+	chrome.initialize();
 }, true);
 
 function updateMenuState() {
 	var items = [
 		{
 			id: 'menu-back',
-			action: goBack
+			action: chrome.goBack
 		},
 		{
 			id: 'menu-forward',
-			action: goForward
+			action: chrome.goForward
 		},
 		{
 			id: 'menu-language',
-			action: selectLanguage
+			action:  languageLinks.showAvailableLanguages
 		},
 		{
 			id: 'menu-output',
 			action: function() {
 				popupMenu([
-					mw.msg('menu-savepage'),
-					mw.msg('menu-share'),
+					mw.msg('menu-savePage'),
+					mw.msg('menu-sharePage'),
 					mw.msg('menu-cancel')
 				], function(value, index) {
 					if (index == 0) {
-						savePage();
+						savedPages.saveCurrentPage();
 					} else if (index == 1) {
 						sharePage();
 					}
 				}, {
-					cancelButtonIndex: 2
+					cancelButtonIndex: 2,
+					origin: this
 				});
 			}
 		},
@@ -53,18 +54,19 @@ function updateMenuState() {
 					if (index == 0) {
 						getCurrentPosition();
 					} else if (index == 1) {
-						showSavedPages();
+						savedPages.showSavedPages();
 					} else if (index == 2) {
-						getHistory();
+						appHistory.showHistory();
 					}
 				}, {
-					cancelButtonIndex: 3
+					cancelButtonIndex: 3,
+					origin: this
 				});
 			}
 		},
 		{
 			id: 'menu-settings',
-			action: getSettings
+			action: appSettings.showSettings
 		}
 	];
 	$('#menu').remove();
@@ -78,7 +80,7 @@ function updateMenuState() {
 		$button
 			.attr('id', item.id)
 			.click(function() {
-				item.action();
+				item.action.apply(this);
 			})
 			.append('<span>')
 			.appendTo($menu);

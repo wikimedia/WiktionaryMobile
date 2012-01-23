@@ -22,7 +22,11 @@ ActionSheet.prototype.create = function(title, items, fn, options) {
 		scope: options.hasOwnProperty('scope') ? options.scope : null,
 		style : options.hasOwnProperty('style') ? options.style+'' : 'default',
 		destructiveButtonIndex : options.hasOwnProperty('destructiveButtonIndex') ? options.destructiveButtonIndex*1 : undefined,
-		cancelButtonIndex : options.hasOwnProperty('cancelButtonIndex') ? options.cancelButtonIndex*1 : undefined
+		cancelButtonIndex : options.hasOwnProperty('cancelButtonIndex') ? options.cancelButtonIndex*1 : undefined,
+		left: options.hasOwnProperty('left') ? options.left*1 : undefined,
+		top: options.hasOwnProperty('top') ? options.top*1 : undefined,
+		width: options.hasOwnProperty('width') ? options.width*1 : undefined,
+		height: options.hasOwnProperty('height') ? options.height*1 : undefined,
 	};
 
 	var callback = function(result) {
