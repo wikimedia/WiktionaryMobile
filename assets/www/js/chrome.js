@@ -140,7 +140,6 @@ window.chrome = function() {
 		$('#settings').hide();
 		$('#about-page-overlay').hide();
 		$('#langlinks').hide();
-		$('#nearby-overlay').hide();
 	}
 
 	function showContent() {
@@ -272,7 +271,6 @@ window.chrome = function() {
 		appHistory.addCurrentPage();
 		toggleForward();
 		updateMenuState(menu_handlers);
-		geo.addShowNearbyLinks();
 		$('#search').removeClass('inProgress');        
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
