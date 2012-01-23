@@ -131,7 +131,23 @@ window.chrome = function() {
 
 	function loadFirstPage() {
 		chrome.showSpinner();
-
+		
+		var word = "";
+		var getParams = window.location.search.substring(1);
+		var vars = getParams.split("&");
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split("=");
+			if (pair[0] == 'define') {
+				word = pair[1];
+				
+				if (word !== undefined && word !== null && word !== '') {
+					var url = app.urlForTitle(word);
+					app.navigateToPage(url);
+					return;
+				}
+			}
+		}
+	   
 		// restore browsing to last visited page
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history){
