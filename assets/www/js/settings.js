@@ -16,8 +16,18 @@ window.appSettings = function() {
 	function renderSettings(locales) {
 		var template = templates.getTemplate('settings-page-template');
 		$("#settingsList").html(template.render({languages: locales, fontSizes: fontSizes, aboutPage: aboutPage}));
-		$("#contentLanguageSelector").val(preferencesDB.get("language")).change(onContentLanguageChanged);
-		$("#selectedLanguage").html(preferencesDB.get("language"));	
+
+		var currentContentLanguage = preferencesDB.get("language");		
+		$("#contentLanguageSelector").val(currentContentLanguage).change(onContentLanguageChanged);
+		
+		/* Look up the human readable form of the languagecode */ 
+		$.each(locales, function(index, value) {
+			if( value.code == currentContentLanguage) {
+				currentContentLanguage = value.name;
+				return;
+			}
+		});
+		$("#selectedLanguage").html(currentContentLanguage);	
 		$("#fontSizeSelector").val(preferencesDB.get("fontSize")).change(onFontSizeChanged);
         $("#aboutPageLabel").click(function () { 
                                    aboutPage();
