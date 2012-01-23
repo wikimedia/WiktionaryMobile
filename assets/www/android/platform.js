@@ -132,31 +132,6 @@ app.setCaching = function(enabled, success) {
 	}
 }
 
-function geoNameSuccess(wiktionaryUrl) {
-	if(wiktionaryUrl) {
-		$('#search').addClass('inProgress');
-		$.ajax({url: "https://en.m.wiktionary.org",
-			success: function(data) {
-				if(data) {
-					app.navigateToPage('https://'+wiktionaryUrl)
-				} else {
-					noConnectionMsg();
-					navigator.app.exitApp();
-				}
-			},
-			error: function(xhr) {
-				noConnectionMsg();
-			},
-			timeout: 3000
-		});
-	}
-}
-
-function geoNameFailure(error) {
-	console.log(error);
-	alert('Google Maps service is not available on this device.');
-}
-
 window.preferencesDB.addOnSet(function(id, value) {
 	window.plugins.preferences.set(id, value, function(){}, function(){});
 });
