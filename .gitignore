@@ -1,14 +1,15 @@
-<<<<<<< HEAD
 /*.properties
-bin/*
-gen/*
-
 /.settings
 /bin
 /gen
 !project.properties
-=======
-bin/*
-gen/*
-local.properties
->>>>>>> 356d03fbf6ba8fe34ee372d965b30e8fe3765233
+
+# Mac OS X ignores
+.DS_Store*
+._*
+
+# Xcode ignore
+*.pbxuser
+*.perspective
+*.perspectivev3
+xcuserdata
