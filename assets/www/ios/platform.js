@@ -37,7 +37,6 @@ function updateMenuState() {
 			id: 'menu-sources',
 			action: function() {
 				popupMenu([
-					mw.msg('menu-nearby'),
 					mw.msg('menu-savedPages'),
 					mw.msg('menu-history'),
 					mw.msg('menu-cancel')
