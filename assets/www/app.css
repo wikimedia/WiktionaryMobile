@@ -329,6 +329,23 @@ header
 	border-left: 1px solid #777;
 }
 
+.cleanButton {
+	background: url(image/spr.png) -92px 14px no-repeat;
+	background-size: 160px 240px;
+	height: 52px;
+	margin-top: 0px;
+	position: absolute;
+	right: 44px;
+	top: 0px;
+	width: 44px;
+	border-left: 1px solid #777;
+}
+
+.cleanButton.active {
+	background-color: #666;
+}
+
+
 .titlebar div {
     /*
     border-left:1px solid #666;
