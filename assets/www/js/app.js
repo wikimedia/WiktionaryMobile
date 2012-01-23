@@ -33,7 +33,9 @@ window.app = function() {
 		origUrl = origUrl || url;
 		console.log('hideAndLoad url ' + url);
 		console.log('hideAndLoad origUrl ' + origUrl);
-		app.setCaching(true);
+		if(!network.isConnected()) {
+			app.setCaching(true);
+		}
 		network.makeRequest({
 			url: url, 
 			success: function(data) {
