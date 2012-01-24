@@ -9,6 +9,7 @@
 
 #import "SHKTwitter.h"
 #import "SHKFacebook.h"
+#import "SHKMail.h"
 
 
 @interface ShareKitPlugin (PrivateMethods)
@@ -19,11 +20,13 @@
 
 @implementation ShareKitPlugin
 
+@synthesize callbackID;
 
 - (void) share:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options { 
-    
-    NSString *message = [arguments objectAtIndex:1];
-    NSURL *itemUrl = [NSURL URLWithString:[arguments objectAtIndex:2]];
+    self.callbackID = [arguments pop];
+	
+    NSString *message = [options objectForKey:@"message"];
+    NSURL *itemUrl = [NSURL URLWithString:[options objectForKey:@"url"]];
 	SHKItem *item = [SHKItem URL:itemUrl title:message];
     
     
@@ -34,11 +37,14 @@
 }
 
 - (void)isLoggedToTwitter:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+	self.callbackID = [arguments pop];
+	
     NSString *callback = [arguments objectAtIndex:0];   
     [self IsLoggedToService:[SHKTwitter isServiceAuthorized] callback:callback];
 }
 
 - (void)isLoggedToFacebook:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+	self.callbackID = [arguments pop];
     
     NSString *callback = [arguments objectAtIndex:0];   
     [self IsLoggedToService:[SHKFacebook isServiceAuthorized] callback:callback];
@@ -51,23 +57,29 @@
 }
 
 
-- (void)logoutFromTwitter:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {    
+- (void)logoutFromTwitter:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+	self.callbackID = [arguments pop];
+	
     [SHKTwitter logout];
 }
 
-- (void)logoutFromFacebook:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+- (void)logoutFromFacebook:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {\
+	self.callbackID = [arguments pop];
    
     [SHKFacebook logout];
 }
 
 - (void)facebookConnect:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
-    if (![SHKFacebook isServiceAuthorized]) {
+	self.callbackID = [arguments pop];
+	
+	if (![SHKFacebook isServiceAuthorized]) {
         [[SHK currentHelper] setRootViewController:self.appViewController];
         [SHKFacebook loginToService];
     }
 }
 
 - (void)shareToFacebook:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+	self.callbackID = [arguments pop];
         
     [[SHK currentHelper] setRootViewController:self.appViewController];
     
@@ -86,6 +98,8 @@
 }
 
 - (void)shareToTwitter:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+	self.callbackID = [arguments pop];
+	
     [[SHK currentHelper] setRootViewController:self.appViewController];
     
     SHKItem *item;
@@ -103,6 +117,8 @@
 }
 
 - (void)shareToMail:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+	self.callbackID = [arguments pop];
+	
     [[SHK currentHelper] setRootViewController:self.appViewController];
     
     SHKItem *item;

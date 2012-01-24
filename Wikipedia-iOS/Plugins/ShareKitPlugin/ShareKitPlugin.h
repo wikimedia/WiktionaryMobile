@@ -13,20 +13,19 @@
 #ifdef PHONEGAP_FRAMEWORK
 #import <PhoneGap/PGPlugin.h>
 #import <PhoneGap/PluginResult.h>
-#import <PhoneGap/SBJSON.h>
 
 #else
 #import "PGPlugin.h"
 #import "PluginResult.h"
-#import "SBJSON.h"
 #endif
 
 
 
 @interface ShareKitPlugin : PGPlugin {
-
-    
+	NSString* callbackID;
 }
+
+@property (nonatomic, copy) NSString* callbackID;
 
 
 - (void)share:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
