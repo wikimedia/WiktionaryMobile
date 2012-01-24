@@ -81,14 +81,22 @@ public class WebIntent extends Plugin {
 				} else {
 					return new PluginResult(PluginResult.Status.ERROR);
 				}
-			} else if (action.equals("getUri")) {
+			} else if (action.equals("getIntentData")) {
 				if (args.length() != 0) {
 					return new PluginResult(PluginResult.Status.INVALID_ACTION);
 				}
 
-				Intent i = this.ctx.getIntent();
-				String uri = i.getDataString();
-				return new PluginResult(PluginResult.Status.OK, uri);
+				JSONObject intentData = new JSONObject();
+				try {
+					intentData.put("action", this.ctx.getIntent().getAction());
+					intentData.put("uri", this.ctx.getIntent().getDataString());
+				} catch (JSONException ex) {
+					// This code should technically never be reached
+					// Thank you, whoever who wrote up checked exceptions
+					ex.printStackTrace();
+				}
+				PluginResult result = new PluginResult(PluginResult.Status.OK, intentData);
+				return result;
 			} else if (action.equals("onNewIntent")) {
 				if (args.length() != 0) {
 					return new PluginResult(PluginResult.Status.INVALID_ACTION);
@@ -110,7 +118,16 @@ public class WebIntent extends Plugin {
 	public void onNewIntent(Intent intent) {
 		Log.d("Intenti", "New intent received for" + intent.getDataString());
 		if (this.onNewIntentCallback != null) {
-			PluginResult result = new PluginResult(PluginResult.Status.OK, intent.getDataString());
+			JSONObject args = new JSONObject();
+			try {
+				args.put("action", intent.getAction());
+				args.put("uri", intent.getDataString());
+			} catch (JSONException ex) {
+				// This code should technically never be reached
+				// Thank you, whoever who wrote up checked exceptions
+				ex.printStackTrace();
+			}
+			PluginResult result = new PluginResult(PluginResult.Status.OK, args);
 			result.setKeepCallback(true);
 			this.success(result, this.onNewIntentCallback);
 		}
