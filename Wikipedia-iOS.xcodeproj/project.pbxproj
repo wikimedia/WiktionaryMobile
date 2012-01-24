@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D424DEDA14C0FAC40086FF61 /* ActionSheet.js in Sources */ = {isa = PBXBuildFile; fileRef = D424DED714C0FAC40086FF61 /* ActionSheet.js */; };
 		D424DEDB14C0FAC40086FF61 /* ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D424DED814C0FAC40086FF61 /* ActionSheet.m */; };
 		D481B960145DFE5D00D9F872 /* www in Resources */ = {isa = PBXBuildFile; fileRef = D481B95F145DFE5D00D9F872 /* www */; };
 		D4843A8B147DAC2D007499DC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D4843A89147DAC2D007499DC /* Default-Landscape~ipad.png */; };
@@ -347,7 +346,6 @@
 			files = (
 				D4BE961F145DFD2D0025EC00 /* main.m in Sources */,
 				D4BE963F145DFD2D0025EC00 /* AppDelegate.m in Sources */,
-				D424DEDA14C0FAC40086FF61 /* ActionSheet.js in Sources */,
 				D424DEDB14C0FAC40086FF61 /* ActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
