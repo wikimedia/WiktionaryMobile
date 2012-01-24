@@ -43,6 +43,26 @@ chrome.addPlatformInitializer(function() {
 
 });
 
+chrome.addPlatformInitializer(function() {
+	// For first time loading
+	var origLoadFirstPage = chrome.loadFirstPage;
+	chrome.loadFirstPage = function() {
+		plugins.webintent.getUri(function(uri) {
+			if(uri) {
+				app.navigateToPage(uri);
+			} else {
+				origLoadFirstPage();
+			}
+		});
+	};
+
+	// Used only if we switch to singleTask
+	plugins.webintent.onNewIntent(function(url) {
+		if(url !== null) {
+			app.navigateToPage(url);
+		}
+	});
+});
 
 function selectText() {
     PhoneGap.exec(null, null, 'SelectTextPlugin', 'selectText', []);
@@ -125,3 +145,4 @@ function geoNameFailure(error) {
 	console.log(error);
 	alert('Google Maps service is not available on this device.');
 }
+

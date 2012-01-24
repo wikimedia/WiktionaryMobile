@@ -103,31 +103,24 @@ window.chrome = function() {
 			$(".closeButton").bind('click', showContent);
 
 			initContentLinkHandlers();
-			loadFirstPage();
+			chrome.loadFirstPage();
 			doFocusHack();
 		});
 	}
 
 	function loadFirstPage() {
 		chrome.showSpinner();
-		
-		plugins.webintent.getUri(
-				function(url) {
-					if(url != "") {
-						app.navigateToPage(url);
-					} else {
-						// restore browsing to last visited page
-						var historyDB = new Lawnchair({name:"historyDB"}, function() {
-							this.all(function(history){
-								if(history.length==0 || window.history.length > 1) {
-									app.navigateToPage(app.baseURL);
-								} else {
-									app.navigateToPage(history[history.length-1].value);
-								}
-							});
-						});
-					}
-				});
+
+		// restore browsing to last visited page
+		var historyDB = new Lawnchair({name:"historyDB"}, function() {
+			this.all(function(history){
+				if(history.length==0 || window.history.length > 1) {
+					app.navigateToPage(app.baseURL);
+				} else {
+					app.navigateToPage(history[history.length-1].value);
+				}
+			});
+		});
 
 	}
 
@@ -294,6 +287,7 @@ window.chrome = function() {
 	return {
 		initialize: initialize,
 		renderHtml: renderHtml,
+		loadFirstPage: loadFirstPage,
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
 		showNotification: showNotification,

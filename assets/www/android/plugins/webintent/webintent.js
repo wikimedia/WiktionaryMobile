@@ -44,6 +44,14 @@ WebIntent.prototype.getExtra = function(params, success, fail) {
     }, 'WebIntent', 'getExtra', [params]);
 };
 
+
+WebIntent.prototype.onNewIntent = function(callback) {
+	return PhoneGap.exec(function(args) {
+		callback(args);
+    }, function(args) {
+    }, 'WebIntent', 'onNewIntent', []);
+};
+
 PhoneGap.addConstructor(function() {
 	PhoneGap.addPlugin('webintent', new WebIntent());
 });
