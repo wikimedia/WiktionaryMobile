@@ -43,7 +43,7 @@ window.appHistory = function() {
 		if (answer) {
 			var historyDB = new Lawnchair({name:"historyDB"}, function() {
 				this.nuke();
-				$("#historyList").hide();
+				chrome.showContent();
 			});
 		}
 	}
@@ -56,12 +56,11 @@ window.appHistory = function() {
 
 	function showHistory() {	
 		var template = templates.getTemplate('history-template');
-		$(".cleanButton").unbind();
-		$(".cleanButton").bind('click', deleteHistory);
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history) {
 				$('#historyList').html(template.render({'pages': history.reverse()}));
 				$(".historyItem").click(onHistoryItemClicked);
+				$("#history .cleanButton").unbind('click', deleteHistory).bind('click', deleteHistory);
 				chrome.hideOverlays();
 				chrome.hideContent();
 				$('#history').localize().show();
