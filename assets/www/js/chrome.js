@@ -205,6 +205,7 @@ window.chrome = function() {
 			'.listItem',
 			'#search',
 			'.closeButton',
+			'.cleanButton',
 			'.titlebarIcon'
 		];
 	  

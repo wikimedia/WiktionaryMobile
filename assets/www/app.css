@@ -301,6 +301,10 @@ header
 	margin-top:12px;
 }
 
+.closeButton.active, .cleanButton.active {
+	background-color: #666;
+}
+
 .closeButton {
 	background: url(image/spr.png) -92px 14px no-repeat;
 	background-size: 160px 240px;
@@ -311,10 +315,6 @@ header
 	top: 0px;
 	width: 44px;
 	border-left: 1px solid #777;
-}
-
-.closeButton.active {
-	background-color: #666;
 }
 
 .cleanButton {
@@ -328,11 +328,6 @@ header
 	width: 44px;
 	border-left: 1px solid #777;
 }
-
-.cleanButton.active {
-	background-color: #666;
-}
-
 
 .titlebar div {
     /*

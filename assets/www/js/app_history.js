@@ -57,7 +57,7 @@ window.appHistory = function() {
 
 	function showHistory() {	
 		var template = templates.getTemplate('history-template');
-		$(".cleanButton").click(deleteHistory);
+		$(".cleanButton").bind('click', deleteHistory);
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history) {
 				$('#historyList').html(template.render({'pages': history.reverse()}));
