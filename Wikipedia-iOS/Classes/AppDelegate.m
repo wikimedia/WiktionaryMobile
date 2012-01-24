@@ -14,6 +14,7 @@
 #endif
 
 #import "SHK.h"
+#import "SHKConfiguration.h"
 #import "WMSHKConfigurator.h"
 
 @implementation AppDelegate
