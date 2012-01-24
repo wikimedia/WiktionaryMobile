@@ -117,6 +117,8 @@
 		07220CAC14CDFFE500339B1F /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07220B3F14CDFFE500339B1F /* ShareKit.bundle */; };
 		07220CAE14CE057000339B1F /* SHKVkontakteOAuthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07220BB314CDFFE500339B1F /* SHKVkontakteOAuthView.m */; };
 		07220CB114CE0A3400339B1F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07220CB014CE0A2A00339B1F /* CFNetwork.framework */; };
+		07220CBA14CE367B00339B1F /* WMSHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07220CB814CE367B00339B1F /* WMSHKConfigurator.m */; };
+		07220CBB14CE367B00339B1F /* WMSHKSharers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07220CB914CE367B00339B1F /* WMSHKSharers.plist */; };
 		D424DEDB14C0FAC40086FF61 /* ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D424DED814C0FAC40086FF61 /* ActionSheet.m */; };
 		D481B960145DFE5D00D9F872 /* www in Resources */ = {isa = PBXBuildFile; fileRef = D481B95F145DFE5D00D9F872 /* www */; };
 		D4843A8B147DAC2D007499DC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D4843A89147DAC2D007499DC /* Default-Landscape~ipad.png */; };
@@ -379,6 +381,9 @@
 		07220CAD14CE02C700339B1F /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		07220CAF14CE059100339B1F /* SHKVkontakteOAuthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKVkontakteOAuthView.h; sourceTree = "<group>"; };
 		07220CB014CE0A2A00339B1F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		07220CB714CE367B00339B1F /* WMSHKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMSHKConfigurator.h; sourceTree = "<group>"; };
+		07220CB814CE367B00339B1F /* WMSHKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMSHKConfigurator.m; sourceTree = "<group>"; };
+		07220CB914CE367B00339B1F /* WMSHKSharers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WMSHKSharers.plist; sourceTree = "<group>"; };
 		D424DED614C0FAC40086FF61 /* ActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheet.h; sourceTree = "<group>"; };
 		D424DED714C0FAC40086FF61 /* ActionSheet.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ActionSheet.js; sourceTree = "<group>"; };
 		D424DED814C0FAC40086FF61 /* ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheet.m; sourceTree = "<group>"; };
@@ -1062,6 +1067,16 @@
 			path = ../../../../../Submodules/objectiveflickr/Source;
 			sourceTree = "<group>";
 		};
+		07220CB614CE366200339B1F /* ShareKitConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				07220CB714CE367B00339B1F /* WMSHKConfigurator.h */,
+				07220CB814CE367B00339B1F /* WMSHKConfigurator.m */,
+				07220CB914CE367B00339B1F /* WMSHKSharers.plist */,
+			);
+			path = ShareKitConfiguration;
+			sourceTree = "<group>";
+		};
 		D424DED514C0FAC30086FF61 /* ActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1200,6 +1215,7 @@
 		D4BE9640145DFD2D0025EC00 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				07220CB614CE366200339B1F /* ShareKitConfiguration */,
 				07220B3714CDFFE500339B1F /* ShareKit */,
 				0719935C14CDDE7A00D60D9C /* ShareKitPlugin */,
 				D424DED514C0FAC30086FF61 /* ActionSheet */,
@@ -1279,6 +1295,7 @@
 				07220C7C14CDFFE500339B1F /* SHKEvernote.md in Resources */,
 				07220C7D14CDFFE500339B1F /* FBDialog.bundle in Resources */,
 				07220CAC14CDFFE500339B1F /* ShareKit.bundle in Resources */,
+				07220CBB14CE367B00339B1F /* WMSHKSharers.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1411,6 +1428,7 @@
 				07220CA814CDFFE500339B1F /* SHKShareMenu.m in Sources */,
 				07220CA914CDFFE500339B1F /* SHKViewControllerWrapper.m in Sources */,
 				07220CAE14CE057000339B1F /* SHKVkontakteOAuthView.m in Sources */,
+				07220CBA14CE367B00339B1F /* WMSHKConfigurator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

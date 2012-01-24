@@ -13,6 +13,9 @@
 	#import "PhoneGapViewController.h"
 #endif
 
+#import "SHK.h"
+#import "WMSHKConfigurator.h"
+
 @implementation AppDelegate
 
 @synthesize invokeString;
@@ -38,6 +41,10 @@
 		self.invokeString = [url absoluteString];
 		NSLog(@"Wikipedia-iOS launchOptions = %@",url);
 	}
+	
+	/* Setup ShareKit */
+	DefaultSHKConfigurator *configurator = [[WMSHKConfigurator alloc] init];
+	[SHKConfiguration sharedInstanceWithConfigurator:configurator];
 	
 	return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
