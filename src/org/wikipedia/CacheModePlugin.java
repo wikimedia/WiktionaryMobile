@@ -16,10 +16,14 @@ public class CacheModePlugin extends Plugin {
 	public PluginResult execute(String action, JSONArray params,
 			String callbackId) {
 		PluginResult result = null;
+		Log.d("PhoneGap", "Cache Mode entered!");
+
 		if (action.compareTo("setCacheMode") == 0) {
 			try {
 				setCacheMode(params.getString(0));
-				result = new PluginResult(Status.NO_RESULT);
+				Log.d("PhoneGap", "Cache Mode Set!");
+				result = new PluginResult(Status.OK);
+				this.success(result, callbackId);
 			} catch (JSONException e) {
 				Log.d("CacheMode plugin", "JSON exception");
 				result = new PluginResult(Status.JSON_EXCEPTION);
@@ -27,11 +31,6 @@ public class CacheModePlugin extends Plugin {
 			return result;
 		}
 		return result;
-	}
-
-	@Override
-	public boolean isSynch(String action) {
-		return true;
 	}
 
 	public void setCacheMode(String mode) {
