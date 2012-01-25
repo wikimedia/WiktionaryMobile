@@ -54,8 +54,7 @@ window.savedPages = function() {
 	
 	// Removes all the elements from saved pages
 	function deleteSavedPages() {
-		title = mw.message('menu-savedPages');
-		var answer = confirm(mw.message('remove-list-prompt', title).plain());
+		var answer = confirm(mw.message('clear-all-saved-pages-prompt').plain());
 		if (answer) {
 			var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 				this.nuke();
@@ -67,6 +66,7 @@ window.savedPages = function() {
 
 	function showSavedPages() {
 		var template = templates.getTemplate('saved-pages-template');
+		$(".cleanButton").unbind();
 		$(".cleanButton").bind('click', deleteSavedPages);
 		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			this.all(function(savedpages) {	
