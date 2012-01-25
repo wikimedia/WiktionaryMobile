@@ -51,9 +51,23 @@ window.savedPages = function() {
 			});
 		}
 	}
+	
+	// Removes all the elements from saved pages
+	function deleteSavedPages() {
+		title = mw.message('menu-savedPages');
+		var answer = confirm(mw.message('remove-list-prompt', title).plain());
+		if (answer) {
+			var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
+				this.nuke();
+				$("#savedPagesList").hide();
+			});
+		}
+	}
+
 
 	function showSavedPages() {
 		var template = templates.getTemplate('saved-pages-template');
+		$(".cleanButton").bind('click', deleteSavedPages);
 		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			this.all(function(savedpages) {	
 				$('#savedPagesList').html(template.render({'pages': savedpages}));
