@@ -74,5 +74,11 @@
 	return @"";
 }
 
+// Name of the plist file that defines the class names of the sharers to use. Usually should not be changed, but 
+// this allows you to subclass a sharer and have the subclass be used.
+- (NSString*)sharersPlistName {
+	return @"WMSHKSharers.plist";
+}
+
 
 @end
