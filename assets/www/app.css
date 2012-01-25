@@ -225,6 +225,12 @@ header
 	border: 3px solid #f86600;
 }
 
+#searchParam, #searchParam:focus, #searchParam.active {
+	/* This overrides the default looks of type=search on Apple WebKit */
+	-webkit-appearance: textfield;
+	box-sizing: content-box;
+}
+
 #clearSearch {
 	position:absolute;
 	top:12px;
