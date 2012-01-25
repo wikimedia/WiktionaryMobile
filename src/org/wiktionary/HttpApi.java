@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class HttpApi {
 			}
 			return new String(content.toByteArray());
 		} catch (IOException e) {
-			Log.e("Wikipedia-api", e.getMessage());
+			Log.e("Wiktionary-api", e.getMessage());
 			throw new Exception("Problem communicating with API", e);
 		}
 	}
