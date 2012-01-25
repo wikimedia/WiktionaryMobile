@@ -21,7 +21,8 @@ window.search = function() {
 			}
 			getSearchResults( term );
 		} else {
-			chrome.showNoConnectionMessage();
+			if(!isSuggestion)
+				chrome.showNoConnectionMessage();
 			chrome.showContent();
 		}
 	}
