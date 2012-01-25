@@ -106,14 +106,14 @@ window.chrome = function() {
 			$(".closeButton").bind('click', showContent);
 
 			initContentLinkHandlers();
-			loadFirstPage();
+			chrome.loadFirstPage();
 			doFocusHack();
 		});
 	}
 
 	function loadFirstPage() {
 		chrome.showSpinner();
-	   
+
 		// restore browsing to last visited page
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history){
@@ -288,6 +288,7 @@ window.chrome = function() {
 	return {
 		initialize: initialize,
 		renderHtml: renderHtml,
+		loadFirstPage: loadFirstPage,
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
 		showNotification: showNotification,

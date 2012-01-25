@@ -47,7 +47,7 @@ window.appHistory = function() {
 		var template = templates.getTemplate('history-template');
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history) {
-				$('#historyList').html(template.render({'pages': history}));
+				$('#historyList').html(template.render({'pages': history.reverse()}));
 				$(".historyItem").click(onHistoryItemClicked);
 				chrome.hideOverlays();
 				chrome.hideContent();

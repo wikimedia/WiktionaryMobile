@@ -25,4 +25,5 @@
     <plugin name="CacheModePlugin" value="org.wiktionary.CacheModePlugin" />
     <plugin name="ApplicationVersion" value="org.wiktionary.ApplicationVersion"/>
     <plugin name="GlobalizationCommand" value="com.phonegap.plugins.globalization.GlobalizationCommand"/>
+    <plugin name="WebIntent" value="com.borismus.webintent.WebIntent"/>
 </plugins>
