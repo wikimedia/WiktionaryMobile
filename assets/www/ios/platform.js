@@ -70,6 +70,7 @@ function updateMenuState() {
 		var $button = $('<button>');
 		$button
 			.attr('id', item.id)
+			.attr('title', mw.msg(item.id))
 			.click(function() {
 				item.action.apply(this);
 			})
