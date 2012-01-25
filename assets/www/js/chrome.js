@@ -154,7 +154,7 @@ window.chrome = function() {
 	}
 
 	function showNoConnectionMessage() {
-		alert("Please try again when you're connected to a network.");
+		alert(mw.message('error-offline-prompt'));
 	}
 
 	function toggleForward() {
