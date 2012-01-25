@@ -7,6 +7,6 @@
 	android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
 	android:includeInGlobalSearch="true"
 	android:searchSettingsDescription="@string/search_description"
-	android:searchSuggestAuthority="org.wikipedia.searchsuggestions"
+	android:searchSuggestAuthority="org.wiktionary.searchsuggestions"
 	>
 </searchable>
