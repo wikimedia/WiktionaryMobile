@@ -57,6 +57,8 @@ chrome.addPlatformInitializer(function() {
 					}, function(err) {
 						console.log("Error in search!");
 					});
+			} else {
+				origLoadFirstPage();
 			}
 		});
 	};
