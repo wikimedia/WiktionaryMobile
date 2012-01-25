@@ -65,6 +65,14 @@ $.fn.localize = function( options ) {
 					.attr( 'alt', msg( $el.attr( 'alt-msg' ) ) )
 					.removeAttr( 'alt-msg' );
 			} )
+			.end()
+		.find( '[placeholder-msg]' )
+			.each( function() {
+				var $el = $(this);
+				$el
+					.attr( 'placeholder', msg( $el.attr( 'placeholder-msg' ) ) )
+					.removeAttr( 'placeholder-msg' );
+			} )
 			.end();
 };
 
