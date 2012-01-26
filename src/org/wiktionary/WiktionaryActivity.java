@@ -1,6 +1,5 @@
 package org.wiktionary;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import android.content.Intent;
@@ -43,13 +42,13 @@ public class WiktionaryActivity extends DroidGap {
             }
           }
         }
-        
+		
         String startingUrl = "file:///android_asset/www/index.html";
         
-        if (startedFromAnotherApp) {
+        if (startedFromAnotherApp) { // Specify the word display on startup
           startingUrl += "?define=" + URLEncoder.encode(wordToShow);
         }
-      
+		
         super.loadUrl(startingUrl);
         this.webViewClient = new WiktionaryWebViewClient(this);
         this.appView.setWebViewClient(this.webViewClient);
