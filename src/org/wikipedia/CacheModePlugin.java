@@ -23,7 +23,6 @@ public class CacheModePlugin extends Plugin {
 				setCacheMode(params.getString(0));
 				Log.d("PhoneGap", "Cache Mode Set!");
 				result = new PluginResult(Status.OK);
-				this.success(result, callbackId);
 			} catch (JSONException e) {
 				Log.d("CacheMode plugin", "JSON exception");
 				result = new PluginResult(Status.JSON_EXCEPTION);
@@ -33,6 +32,11 @@ public class CacheModePlugin extends Plugin {
 		return result;
 	}
 
+	@Override
+	public boolean isSynch(String action) {
+		return true;
+	}
+	
 	public void setCacheMode(String mode) {
 		// Don't trigger this until after the PhoneGap app is all loaded!
 		//
