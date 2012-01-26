@@ -3,7 +3,6 @@ package org.wiktionary;
 import java.net.URLEncoder;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.phonegap.DroidGap;
@@ -26,13 +25,7 @@ public class WiktionaryActivity extends DroidGap {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        // NearBy shit
-		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
-		SharedPreferences.Editor editor = preferences.edit();
-		editor.remove("doSearchNearBy");
-		editor.commit();
-		
+
 		// Check if we were started by another app's Intent (and thus have a word to define)
 		boolean startedFromAnotherApp = false;
 		String wordToShow = null;
@@ -51,11 +44,12 @@ public class WiktionaryActivity extends DroidGap {
 		
 		String startingUrl = "file:///android_asset/www/index.html";
 		
-		if (startedFromAnotherApp) { // Specify the word display on startup
+		if (startedFromAnotherApp) { // Specify the word display o startup
 			startingUrl += "?define=" + URLEncoder.encode(wordToShow);
 		}
 		
         super.loadUrl(startingUrl);
+
         this.webViewClient = new WiktionaryWebViewClient(this);
         this.appView.setWebViewClient(this.webViewClient);
     }

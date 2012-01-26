@@ -106,14 +106,14 @@ window.chrome = function() {
 			$(".closeButton").bind('click', showContent);
 
 			initContentLinkHandlers();
-			loadFirstPage();
+			chrome.loadFirstPage();
 			doFocusHack();
 		});
 	}
 
 	function loadFirstPage() {
 		chrome.showSpinner();
-		
+
 		// Check if the 'define' parameter is set
 		// 'define' indicates the word to display on startup
 		var word = '';
@@ -134,7 +134,7 @@ window.chrome = function() {
 				}
 			}
 		}
-	   
+
 		// restore browsing to last visited page
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history){
@@ -161,7 +161,6 @@ window.chrome = function() {
 		$('#settings').hide();
 		$('#about-page-overlay').hide();
 		$('#langlinks').hide();
-		$('#nearby-overlay').hide();
 	}
 
 	function showContent() {
@@ -293,7 +292,6 @@ window.chrome = function() {
 		appHistory.addCurrentPage();
 		toggleForward();
 		updateMenuState(menu_handlers);
-		geo.addShowNearbyLinks();
 		$('#search').removeClass('inProgress');        
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
@@ -311,6 +309,7 @@ window.chrome = function() {
 	return {
 		initialize: initialize,
 		renderHtml: renderHtml,
+		loadFirstPage: loadFirstPage,
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
 		showNotification: showNotification,

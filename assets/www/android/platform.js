@@ -43,6 +43,31 @@ chrome.addPlatformInitializer(function() {
 
 });
 
+chrome.addPlatformInitializer(function() {
+	// For first time loading
+	var origLoadFirstPage = chrome.loadFirstPage;
+	chrome.loadFirstPage = function() {
+		plugins.webintent.getIntentData(function(args) {
+			if(args.action == "android.intent.action.VIEW" && args.uri) {
+				app.navigateToPage(args.uri);
+			} else if(args.action == "android.intent.action.SEARCH") {
+				plugins.webintent.getExtra("query", 
+					function(query) {
+						search.performSearch(query, false);
+					}, function(err) {
+						console.log("Error in search!");
+					});
+			}
+		});
+	};
+
+	// Used only if we switch to singleTask
+	plugins.webintent.onNewIntent(function(args) {
+		if(args.uri !== null) {
+			app.navigateToPage(args.uri);
+		}
+	});
+});
 
 function selectText() {
     PhoneGap.exec(null, null, 'SelectTextPlugin', 'selectText', []);
@@ -96,27 +121,3 @@ app.setCaching = function(enabled) {
 	}
 }
 
-function geoNameSuccess(wiktionaryUrl) {
-	if(wiktionaryUrl) {
-		$('#search').addClass('inProgress');
-		$.ajax({url: "https://en.m.wiktionary.org",
-			success: function(data) {
-				if(data) {
-					app.navigateToPage('https://'+wiktionaryUrl)
-				} else {
-					noConnectionMsg();
-					navigator.app.exitApp();
-				}
-			},
-			error: function(xhr) {
-				noConnectionMsg();
-			},
-			timeout: 3000
-		});
-	}
-}
-
-function geoNameFailure(error) {
-	console.log(error);
-	alert('Google Maps service is not available on this device.');
-}

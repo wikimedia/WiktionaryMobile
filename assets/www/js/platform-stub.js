@@ -29,6 +29,7 @@ if (platform == 'unknown') {
 			'toast/phonegap-toast.js',
 			'share/share.js',
 			'cachemode/cachemode.js',
+			'webintent/webintent.js',
 			'globalization/globalization.js'
 		],
 		ios: [
