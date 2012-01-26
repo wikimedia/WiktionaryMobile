@@ -20,7 +20,7 @@ window.languageLinks = function() {
 	 * Helper function for getting language codes from URLs
 	 */
 	function extractLanguage(url) {
-		var matches = url.match(/\/([a-z0-9-]+)\.m\.wikipedia\.org\//);
+		var matches = url.match(/\/([a-z0-9-]+)\.m\.wiktionary\.org\//);
 		if (matches) {
 			return matches[1];
 		} else {
