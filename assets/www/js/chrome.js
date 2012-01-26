@@ -25,8 +25,21 @@ window.chrome = function() {
 	}
 
 	function hideSpinner() {
+		$('#search').removeClass('inProgress');
 		$('.titlebar .spinner').css({display:'none'});	
 		$('#clearSearch').css({height:30});
+	}
+	
+	function isSpinning() {
+		$('#search').hasClass('inProgress');
+	}
+	
+	function disableSearchBox() {
+		$('#searchParam').attr("disabled", "true");
+	}
+	
+	function enableSearchBox() {
+		$('#searchParam').removeAttr('disabled');
 	}
 
 	/**
@@ -115,6 +128,7 @@ window.chrome = function() {
 	}
 
 	function loadFirstPage() {
+		chrome.disableSearchBox();
 		chrome.showSpinner();
 
 		// restore browsing to last visited page
@@ -179,7 +193,8 @@ window.chrome = function() {
 		if ($('#content').css('display') == "block") {
 			// We're showing the main view
 			currentHistoryIndex -= 1;
-			$('#search').addClass('inProgress');
+			chrome.disableSearchBox();
+			chrome.showSpinner();
 			// Jumping through history is unsafe with the current urlCache system
 			// sometimes we get loaded without the fixups, and everything esplodes.
 			//window.history.go(-1);
@@ -199,7 +214,8 @@ window.chrome = function() {
 	}
 
 	function goForward() {
-		$('#search').addClass('inProgress');
+		chrome.disableSearchBox();
+		chrome.showSpinner();
 		if (currentHistoryIndex < pageHistory.length) {
 			app.navigateToPage(pageHistory[++currentHistoryIndex], {
 				updateHistory: false
@@ -280,7 +296,7 @@ window.chrome = function() {
 		toggleForward();
 		updateMenuState(menu_handlers);
 		geo.addShowNearbyLinks();
-		$('#search').removeClass('inProgress');        
+		chrome.enableSearchBox();
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
@@ -300,6 +316,9 @@ window.chrome = function() {
 		loadFirstPage: loadFirstPage,
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
+		isSpinning: isSpinning,
+		disableSearchBox: disableSearchBox,
+		enableSearchBox: enableSearchBox, 
 		showNotification: showNotification,
 		goBack: goBack,
 		goForward: goForward,
