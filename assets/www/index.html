@@ -51,7 +51,7 @@
 	<div id="templates">
 		<script type="text/html" id="settings-page-template">
 			<div class="item">
-				<label><msg key="settings-language-label"></msg></label>
+				<label for="contentLanguageSelector"><msg key="settings-language-label"></msg></label>
 				<p id="selectedLanguage"></p>
 				<select id='contentLanguageSelector'>
 					{{#languages}}
@@ -61,7 +61,7 @@
 			</div>
 
 			<div class="item">
-				<label><msg key="settings-font-size-label"></msg></label>
+				<label for="fontSizeSelector"><msg key="settings-font-size-label"></msg></label>
 				<p><msg key="settings-font-size-desc"></msg></p>
 				<select id="fontSizeSelector">
 					{{#fontSizes}}
