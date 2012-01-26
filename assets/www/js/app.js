@@ -33,31 +33,39 @@ window.app = function() {
 		origUrl = origUrl || url;
 		console.log('hideAndLoad url ' + url);
 		console.log('hideAndLoad origUrl ' + origUrl);
-		if(!network.isConnected()) {
-			app.setCaching(true);
-		}
-		network.makeRequest({
-			url: url, 
-			success: function(data) {
-					chrome.renderHtml(data, origUrl);
-					if(callback) {
-						callback();
+		var doRequest = function() {
+			network.makeRequest({
+				url: url, 
+				success: function(data) {
+						chrome.renderHtml(data, origUrl);
+						if(callback) {
+							callback();
+						}
+						chrome.onPageLoaded();
+					},
+				error: function(xhr) {
+					if(xhr.status == 404) {
+						loadLocalPage('404.html');
+					} else {
+						loadLocalPage('error.html');
 					}
-					chrome.onPageLoaded();
-				},
-			error: function(xhr) {
-				if(xhr.status == 404) {
-					loadLocalPage('404.html');
-				} else {
-					loadLocalPage('error.html');
+					languageLinks.clearLanguages();
+					$('#savePageCmd').attr('disabled', 'true');
+					console.log('disabling language');
+					$('#languageCmd').attr('disabled', 'true');
 				}
-				languageLinks.clearLanguages();
-				$('#savePageCmd').attr('disabled', 'true');
-				console.log('disabling language');
-				$('#languageCmd').attr('disabled', 'true');
-			}
-		});
-		app.setCaching(false);
+			});
+		};
+		console.log("Apparently we are connected = " + network.isConnected());
+		if(!network.isConnected()) {
+			app.setCaching(true, function() { 
+				console.log("HEYA!");
+				doRequest(); 
+				app.setCaching(false);
+			});
+		} else {
+			doRequest();
+		}
 	}
 
 	function loadLocalPage(page) {
@@ -83,8 +91,9 @@ window.app = function() {
 	}
 	
 	
-	function setCaching() {
-		// do nothing by default
+	function setCaching(enabled, success) {
+		// Do nothing by default
+		success();
 	}
 
 

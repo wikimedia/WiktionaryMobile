@@ -57,6 +57,8 @@ chrome.addPlatformInitializer(function() {
 					}, function(err) {
 						console.log("Error in search!");
 					});
+			} else {
+				origLoadFirstPage();
 			}
 		});
 	};
@@ -112,12 +114,12 @@ network.isConnected = function()  {
 }
 
 //@Override
-app.setCaching = function(enabled) {
-	console.log('inside the caching thing');
+app.setCaching = function(enabled, success) {
+	console.log('setting cache to ' + enabled);
 	if(enabled) {
-		window.plugins.CacheMode.setCacheMode('LOAD_CACHE_ELSE_NETWORK');
+		window.plugins.CacheMode.setCacheMode('LOAD_CACHE_ELSE_NETWORK', success);
 	} else {
-		window.plugins.CacheMode.setCacheMode('LOAD_DEFAULT');
+		window.plugins.CacheMode.setCacheMode('LOAD_DEFAULT', success);
 	}
 }
 

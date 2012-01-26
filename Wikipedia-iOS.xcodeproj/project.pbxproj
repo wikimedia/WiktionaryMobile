@@ -119,7 +119,6 @@
 		07220CB114CE0A3400339B1F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07220CB014CE0A2A00339B1F /* CFNetwork.framework */; };
 		07220CBA14CE367B00339B1F /* WMSHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07220CB814CE367B00339B1F /* WMSHKConfigurator.m */; };
 		07220CBB14CE367B00339B1F /* WMSHKSharers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07220CB914CE367B00339B1F /* WMSHKSharers.plist */; };
-		D424DEDB14C0FAC40086FF61 /* ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D424DED814C0FAC40086FF61 /* ActionSheet.m */; };
 		D481B960145DFE5D00D9F872 /* www in Resources */ = {isa = PBXBuildFile; fileRef = D481B95F145DFE5D00D9F872 /* www */; };
 		D4843A8B147DAC2D007499DC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D4843A89147DAC2D007499DC /* Default-Landscape~ipad.png */; };
 		D4843A8C147DAC2D007499DC /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D4843A8A147DAC2D007499DC /* Default-Portrait~ipad.png */; };
@@ -148,6 +147,8 @@
 		D4BE9639145DFD2D0025EC00 /* Capture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D4BE9638145DFD2D0025EC00 /* Capture.bundle */; };
 		D4BE963B145DFD2D0025EC00 /* PhoneGap.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4BE963A145DFD2D0025EC00 /* PhoneGap.plist */; };
 		D4BE963F145DFD2D0025EC00 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BE963E145DFD2D0025EC00 /* AppDelegate.m */; };
+		D4E8A4B514D08ED400993351 /* ActionSheet.js in Sources */ = {isa = PBXBuildFile; fileRef = D4E8A4B314D08ED400993351 /* ActionSheet.js */; };
+		D4E8A4B614D08ED400993351 /* ActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E8A4B414D08ED400993351 /* ActionSheet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -384,9 +385,6 @@
 		07220CB714CE367B00339B1F /* WMSHKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMSHKConfigurator.h; sourceTree = "<group>"; };
 		07220CB814CE367B00339B1F /* WMSHKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMSHKConfigurator.m; sourceTree = "<group>"; };
 		07220CB914CE367B00339B1F /* WMSHKSharers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WMSHKSharers.plist; sourceTree = "<group>"; };
-		D424DED614C0FAC40086FF61 /* ActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheet.h; sourceTree = "<group>"; };
-		D424DED714C0FAC40086FF61 /* ActionSheet.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ActionSheet.js; sourceTree = "<group>"; };
-		D424DED814C0FAC40086FF61 /* ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheet.m; sourceTree = "<group>"; };
 		D424DED914C0FAC40086FF61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D481B95F145DFE5D00D9F872 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = assets/www; sourceTree = "<group>"; };
 		D4843A89147DAC2D007499DC /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "Resources/splash/Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -421,7 +419,10 @@
 		D4BE963A145DFD2D0025EC00 /* PhoneGap.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PhoneGap.plist; sourceTree = "<group>"; };
 		D4BE963D145DFD2D0025EC00 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		D4BE963E145DFD2D0025EC00 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
-		D4BE9641145DFD2D0025EC00 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		D4BE9641145DFD2D0025EC00 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; name = README; path = Plugins/README; sourceTree = "<group>"; };
+		D4E8A4B214D08ED400993351 /* ActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionSheet.h; path = "Wikipedia-iOS/Plugins/ActionSheet/ActionSheet.h"; sourceTree = SOURCE_ROOT; };
+		D4E8A4B314D08ED400993351 /* ActionSheet.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = ActionSheet.js; path = "Wikipedia-iOS/Plugins/ActionSheet/ActionSheet.js"; sourceTree = SOURCE_ROOT; };
+		D4E8A4B414D08ED400993351 /* ActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionSheet.m; path = "Wikipedia-iOS/Plugins/ActionSheet/ActionSheet.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1080,9 +1081,9 @@
 		D424DED514C0FAC30086FF61 /* ActionSheet */ = {
 			isa = PBXGroup;
 			children = (
-				D424DED614C0FAC40086FF61 /* ActionSheet.h */,
-				D424DED714C0FAC40086FF61 /* ActionSheet.js */,
-				D424DED814C0FAC40086FF61 /* ActionSheet.m */,
+				D4E8A4B214D08ED400993351 /* ActionSheet.h */,
+				D4E8A4B314D08ED400993351 /* ActionSheet.js */,
+				D4E8A4B414D08ED400993351 /* ActionSheet.m */,
 				D424DED914C0FAC40086FF61 /* README.md */,
 			);
 			path = ActionSheet;
@@ -1324,7 +1325,8 @@
 			files = (
 				D4BE961F145DFD2D0025EC00 /* main.m in Sources */,
 				D4BE963F145DFD2D0025EC00 /* AppDelegate.m in Sources */,
-				D424DEDB14C0FAC40086FF61 /* ActionSheet.m in Sources */,
+				D4E8A4B514D08ED400993351 /* ActionSheet.js in Sources */,
+				D4E8A4B614D08ED400993351 /* ActionSheet.m in Sources */,
 				0719936514CDDE7A00D60D9C /* ShareKitPlugin.m in Sources */,
 				0719936614CDDE7A00D60D9C /* SHKSharer+Phonegap.m in Sources */,
 				07220C4214CDFFE500339B1F /* SHKCustomActionSheet.m in Sources */,
@@ -1517,12 +1519,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = /Users/Shared/PhoneGap/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wikipedia-iOS/Wikipedia-iOS-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "PHONEGAP_FRAMEWORK=YES";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Wikipedia-iOS/Wikipedia-iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = (
@@ -1545,12 +1549,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = /Users/Shared/PhoneGap/Frameworks;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wikipedia-iOS/Wikipedia-iOS-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "PHONEGAP_FRAMEWORK=YES";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Wikipedia-iOS/Wikipedia-iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = (

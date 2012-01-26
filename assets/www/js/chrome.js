@@ -144,6 +144,7 @@ window.chrome = function() {
 		$('#about-page-overlay').hide();
 		$('#langlinks').hide();
 		$('#nearby-overlay').hide();
+		$('html').removeClass('overlay-open');
 	}
 
 	function showContent() {
@@ -156,11 +157,13 @@ window.chrome = function() {
 		$('#mainHeader').hide();
 		if(!isTwoColumnView()) {
 			$('#content').hide();
+		} else {
+			$('html').addClass('overlay-open');
 		}
 	}
 
 	function showNoConnectionMessage() {
-		alert("Please try again when you're connected to a network.");
+		alert(mw.message('error-offline-prompt'));
 	}
 
 	function toggleForward() {
@@ -211,6 +214,7 @@ window.chrome = function() {
 			'.listItem',
 			'#search',
 			'.closeButton',
+			'.cleanButton',
 			'.titlebarIcon'
 		];
 	  
