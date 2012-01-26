@@ -17,7 +17,7 @@ window.appSettings = function() {
 			$.ajax({
 				type:'GET', 
 				url:requestUrl, 
-				type: 'json',
+				dataType: 'json',
 				success:function(results) {
 					var allLocales = results.sitematrix;
 
