@@ -99,22 +99,26 @@ window.geo = function() {
 	}
 	
 	function geoAddMarkers( data, geomap ) {
-		var geomarkers = new L.LayerGroup();
+		if (geo.markers) {
+			geomap.removeLayer(geo.markers);
+		}
+		geo.markers = new L.LayerGroup();
 		$.each(data.geonames, function(i, item) {
 			var url = item.wikipediaUrl.replace(/^([a-z0-9-]+)\.wikipedia\.org/, 'https://$1.m.wikipedia.org');
 			var marker = new L.Marker(new L.LatLng(item.lat, item.lng));
-			geomarkers.addLayer(marker);
+			geo.markers.addLayer(marker);
 			marker.bindPopup('<div onclick="app.navigateToPage(&quot;' + url + '&quot;);hideOverlays();">' +
 			                 '<strong>' + item.title + '</strong>' +
 			                 '<p>' + item.summary + '</p>' +
 			                 '</div>');
 		});
-		geomap.addLayer(geomarkers);
+		geomap.addLayer(geo.markers);
 	}
 	
 	return {
 		showNearbyArticles: showNearbyArticles,
-		addShowNearbyLinks: addShowNearbyLinks
+		addShowNearbyLinks: addShowNearbyLinks,
+		markers: null
 	};
 
 }();
