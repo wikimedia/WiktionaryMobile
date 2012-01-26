@@ -224,13 +224,15 @@
 	</div>
 
 	<div id="settings">
-		<header>
+		<!-- Not using header or .scroller here to work around bug 33884; it caused -->
+		<!-- the selects to become unselectable on Android 2.x for some reason. -->
+		<div>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="settings-title">Settings</msg></div>
 				<div class="titlebarItem closeButton"></div>
 			</div>
-		</header>
-		<div class="scroller">
+		</div>
+		<div>
 			<div id="settingsList"></div>
 		</div>
 	</div>
