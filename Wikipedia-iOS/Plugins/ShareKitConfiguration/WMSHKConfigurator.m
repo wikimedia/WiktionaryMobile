@@ -18,6 +18,11 @@
 	return @"http://itunes.apple.com/app/wikipedia-mobile/id324715238";
 }
 
+// Read It Later - http://readitlaterlist.com/api/signup/
+- (NSString*)readItLaterKey {
+	return @"4d7T9V8bg636el5818dn2a3u41ptb8c1";
+}
+
 // Facebook - https://developers.facebook.com/apps
 // SHKFacebookAppID is the Application ID provided by Facebook
 // SHKFacebookLocalAppID is used if you need to differentiate between several iOS apps running against a single Facebook app. Useful, if you have full and lite versions of the same app,
