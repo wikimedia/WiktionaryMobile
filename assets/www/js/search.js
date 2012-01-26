@@ -42,7 +42,7 @@ window.search = function() {
 				format: 'json'
        		},
        		success: function(data) {
-				var suggestion_results = JSON.parse( data );
+				var suggestion_results = data;
 				var suggestion = getSuggestionFromSuggestionResults( suggestion_results );
 				if ( suggestion ) {
 					getSearchResults( suggestion, 'true' );
@@ -73,8 +73,7 @@ window.search = function() {
 				search: term,
 				format: 'json'
 			},
-			success: function(data) {
-				var results = JSON.parse( data );
+			success: function(results) {
 				if ( results[1].length === 0 ) { 
 					console.log( "No results for", term );
 					getDidYouMeanResults( results );

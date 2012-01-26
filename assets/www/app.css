@@ -231,7 +231,7 @@ header
 
 #searchParam, #searchParam:focus, #searchParam.active {
 	/* This overrides the default looks of type=search on Apple WebKit */
-	-webkit-appearance: textfield;
+	-webkit-appearance: none;
 	box-sizing: content-box;
 }
 

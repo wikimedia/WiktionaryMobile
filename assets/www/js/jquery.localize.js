@@ -78,4 +78,4 @@ $.fn.localize = function( options ) {
 
 // Let IE know about the msg tag before it's used...
 document.createElement( 'msg' );
-} )( Zepto );
+} )( jQuery );

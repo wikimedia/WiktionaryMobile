@@ -15,10 +15,10 @@ window.appSettings = function() {
 
 		if(locales.length == 0) {
 			$.ajax({
-				type:'Get', 
+				type:'GET', 
 				url:requestUrl, 
-				success:function(data) {
-					var results = JSON.parse(data);
+				type: 'json',
+				success:function(results) {
 					var allLocales = results.sitematrix;
 
 					$.each(allLocales, function(key, value) {

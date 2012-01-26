@@ -49,14 +49,15 @@ window.chrome = function() {
 
 		var selectors = ['#content>*', '#copyright'],
 			$target = $('#main'),
-			$div = $('<div>').html(trimmed);
+			$div = $(trimmed);
 
 		$target
 			.empty()
 			.attr('lang', lang)
 			.attr('dir', dir);
 		$.each(selectors, function(i, sel) {
-			$div.find(sel).remove().appendTo($target);
+			var con = $div.find(sel).remove();
+			con.appendTo($target);
 		});
 
 		languageLinks.parseAvailableLanguages($div);
@@ -94,11 +95,13 @@ window.chrome = function() {
 				return false;
 			});
 			$("#searchForm").bind('submit', function() {
-				search.performSearch($("#searchParam").val(), false);
+				window.search.performSearch($("#searchParam").val(), false);
 				return false;
 			}).bind('keypress', function() {
 				// Needed because .val doesn't seem to update instantly
-				setTimeout(function() { search.performSearch($("#searchParam").val(), true); }, 5);
+				setTimeout(function() { 
+					window.search.performSearch($("#searchParam").val(), true); 
+				}, 5);
 			});
 			$("#clearSearch").bind('touchstart', function() {
 				clearSearch();

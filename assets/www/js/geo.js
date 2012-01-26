@@ -29,7 +29,7 @@ window.geo = function() {
 			geoLookup( lat, lon, preferencesDB.get("language"), function( data ) {
 				geoAddMarkers( data, geomap );
 			}, function(err) {
-				alert(err);
+				console.log(JSON.stringify(err));
 			});
 		};
 		
@@ -92,7 +92,7 @@ window.geo = function() {
 		$.ajax({
 			url: requestUrl,
 			success: function(data) {
-				success(JSON.parse(data));
+				success(data);
 			},
 			error: error
 		});
