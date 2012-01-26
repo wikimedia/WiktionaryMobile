@@ -82,6 +82,11 @@ window.chrome = function() {
 
 		preferencesDB.initializeDefaults(function() { 
 			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
+			
+			// Do localization of the initial interface
+			$(document).bind("mw-messages-ready", function() {
+				$('#mainHeader, #menu').localize();
+			});
 			l10n.initLanguages();
 
 			$(".titlebarIcon").bind('touchstart', function() {
@@ -106,6 +111,7 @@ window.chrome = function() {
 			chrome.loadFirstPage();
 			doFocusHack();
 		});
+		
 	}
 
 	function loadFirstPage() {

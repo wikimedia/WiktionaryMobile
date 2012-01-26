@@ -1,0 +1,3 @@
+[submodule "Wikipedia-iOS/Submodules/ShareKit"]
+	path = Wikipedia-iOS/Submodules/ShareKit
+	url = git://github.com/ShareKit/ShareKit.git
