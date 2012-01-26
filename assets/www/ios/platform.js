@@ -43,7 +43,7 @@ function updateMenuState() {
 					mw.msg('menu-cancel')
 				], function(val, index) {
 					if (index == 0) {
-						getCurrentPosition();
+						geo.showNearbyArticles();
 					} else if (index == 1) {
 						savedPages.showSavedPages();
 					} else if (index == 2) {
