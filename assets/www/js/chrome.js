@@ -34,14 +34,6 @@ window.chrome = function() {
 		$('#search').hasClass('inProgress');
 	}
 	
-	function disableSearchBox() {
-		$('#searchParam').attr("disabled", "true");
-	}
-	
-	function enableSearchBox() {
-		$('#searchParam').removeAttr('disabled');
-	}
-
 	/**
 	 * Import page components from HTML string and display them in #main
 	 *
@@ -128,7 +120,6 @@ window.chrome = function() {
 	}
 
 	function loadFirstPage() {
-		chrome.disableSearchBox();
 		chrome.showSpinner();
 
 		// restore browsing to last visited page
@@ -193,7 +184,6 @@ window.chrome = function() {
 		if ($('#content').css('display') == "block") {
 			// We're showing the main view
 			currentHistoryIndex -= 1;
-			chrome.disableSearchBox();
 			chrome.showSpinner();
 			// Jumping through history is unsafe with the current urlCache system
 			// sometimes we get loaded without the fixups, and everything esplodes.
@@ -214,7 +204,6 @@ window.chrome = function() {
 	}
 
 	function goForward() {
-		chrome.disableSearchBox();
 		chrome.showSpinner();
 		if (currentHistoryIndex < pageHistory.length) {
 			app.navigateToPage(pageHistory[++currentHistoryIndex], {
@@ -296,7 +285,6 @@ window.chrome = function() {
 		toggleForward();
 		updateMenuState(menu_handlers);
 		geo.addShowNearbyLinks();
-		chrome.enableSearchBox();
 		chrome.hideSpinner();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
@@ -317,8 +305,6 @@ window.chrome = function() {
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
 		isSpinning: isSpinning,
-		disableSearchBox: disableSearchBox,
-		enableSearchBox: enableSearchBox, 
 		showNotification: showNotification,
 		goBack: goBack,
 		goForward: goForward,
