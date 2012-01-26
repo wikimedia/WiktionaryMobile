@@ -51,7 +51,7 @@
 	<div id="templates">
 		<script type="text/html" id="settings-page-template">
 			<div class="item">
-				<label><msg key="settings-language-label"></msg></label>
+				<label for="contentLanguageSelector"><msg key="settings-language-label"></msg></label>
 				<p id="selectedLanguage"></p>
 				<select id='contentLanguageSelector'>
 					{{#languages}}
@@ -61,7 +61,7 @@
 			</div>
 
 			<div class="item">
-				<label><msg key="settings-font-size-label"></msg></label>
+				<label for="fontSizeSelector"><msg key="settings-font-size-label"></msg></label>
 				<p><msg key="settings-font-size-desc"></msg></p>
 				<select id="fontSizeSelector">
 					{{#fontSizes}}
@@ -162,10 +162,10 @@
 	<header id="mainHeader">
 		<div class="titlebar" id="titlebar">
 			<div id="searchFormHolder">
-			<div class="titlebarIcon" role="button"></div>
+			<button class="titlebarIcon" title-msg="menu-home"></button>
 			<form id="searchForm">
 				<input type="text" id="searchParam" placeholder-msg="search-placeholder"></input>
-				<input type="submit" id="search" value=""></input>
+				<button type="submit" id="search" value="" title-msg="search-button"></button>
 			</form>
 			<div id="clearSearch"></div>
 			<div class="spinner"></div>
@@ -177,7 +177,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="about-page-title">About</msg></div>
-				<div class="titlebarItem closeButton"></div>
+				<button class="titlebarItem closeButton" title-msg="about-close"></button>
 			</div>
 		</header>
 		<div class="scroller">
@@ -195,8 +195,8 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="saved-pages-title">Saved Pages</msg></div>
-				<div class="titlebarItem closeButton"></div>
-				<div class="titlebarItem cleanButton"></div>
+				<button class="titlebarItem closeButton" title-msg="saved-pages-close"></button>
+				<button class="titlebarItem cleanButton" title-msg="saved-pages-clear-all"></button>
 			</div>
 		</header>
 		<div class="scroller">
@@ -208,8 +208,8 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="history-title">History</msg></div>
-				<div class="titlebarItem closeButton"></div>
-				<div class="titlebarItem cleanButton"></div>
+				<button class="titlebarItem closeButton" title-msg="history-close"></button>
+				<button class="titlebarItem cleanButton" title-msg="history-clear-all"></button>
 			</div>
 		</header>
 		<div class="scroller">
@@ -229,7 +229,7 @@
 		<div>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="settings-title">Settings</msg></div>
-				<div class="titlebarItem closeButton"></div>
+				<button class="titlebarItem closeButton" title-msg="settings-close"></button>
 			</div>
 		</div>
 		<div>
@@ -241,7 +241,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="langlinks-title">Read article in...</msg></div>
-				<div class="titlebarItem closeButton"></div>
+				<button class="titlebarItem closeButton" title-msg="langlinks-close"></button>
 			</div>
 		</header>
 		<div class="scroller">
@@ -257,7 +257,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="nearby-title">Nearby</msg></div>
-				<div class="titlebarItem closeButton"></div>
+				<button class="titlebarItem closeButton" title-msg="nearby-close"></button>
 			</div>
 		</header>
 		<div id="map"></div>

@@ -324,6 +324,7 @@ header
 	right: 0px;
 	top: 0px;
 	width: 44px;
+	border: 0;
 	border-left: 1px solid #777;
 }
 
@@ -336,6 +337,7 @@ header
 	right: 44px;
 	top: 0px;
 	width: 44px;
+	border: 0;
 	border-left: 1px solid #777;
 }
 
