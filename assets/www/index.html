@@ -147,7 +147,7 @@
 		<script type="text/html" id="language-links-template">
 			{{#languages}}
 			<div class="listItemContainer" data-page-url="{{url}}">
-				<a class="listItem languageLink" >
+				<a class="listItem languageLink" lang="{{lang}}">
 					<span class="text">{{name}}</span>
 				</a>
 			</div>
@@ -159,9 +159,9 @@
 	<header id="mainHeader">
 		<div class="titlebar" id="titlebar">
 			<div id="searchFormHolder">
-			<div class="titlebarIcon"></div>
+			<div class="titlebarIcon" role="button"></div>
 			<form id="searchForm">
-				<input type="text" id="searchParam"></input>
+				<input type="search" id="searchParam" placeholder-msg="search-placeholder""></input>
 				<input type="submit" id="search" value=""></input>
 			</form>
 			<div id="clearSearch"></div>
@@ -193,6 +193,7 @@
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="saved-pages-title">Saved Pages</msg></div>
 				<div class="titlebarItem closeButton"></div>
+				<div class="titlebarItem cleanButton"></div>
 			</div>
 		</header>
 		<div class="scroller">
@@ -205,6 +206,7 @@
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="history-title">History</msg></div>
 				<div class="titlebarItem closeButton"></div>
+				<div class="titlebarItem cleanButton"></div>
 			</div>
 		</header>
 		<div class="scroller">

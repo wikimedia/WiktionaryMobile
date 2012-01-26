@@ -17,6 +17,18 @@ window.languageLinks = function() {
 	}
 
 	/**
+	 * Helper function for getting language codes from URLs
+	 */
+	function extractLanguage(url) {
+		var matches = url.match(/\/([a-z0-9-]+)\.m\.wikipedia\.org\//);
+		if (matches) {
+			return matches[1];
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * Function called with div of current page
 	 * Saves languages that page is available in for use in Read-in
 	 */
@@ -26,6 +38,7 @@ window.languageLinks = function() {
 			var $option = $(this);
 			langs.push({
 				name: $option.text(),
+				lang: extractLanguage($option.val()),
 				url: processLanguageUrl($option.val()),
 				selected: ($option.attr('selected') != null)
 			});

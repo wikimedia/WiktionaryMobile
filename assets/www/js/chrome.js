@@ -85,6 +85,11 @@ window.chrome = function() {
 
 		preferencesDB.initializeDefaults(function() { 
 			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wiktionary.org';
+			
+			// Do localization of the initial interface
+			$(document).bind("mw-messages-ready", function() {
+				$('#mainHeader, #menu').localize();
+			});
 			l10n.initLanguages();
 
 			$(".titlebarIcon").bind('touchstart', function() {
@@ -109,6 +114,7 @@ window.chrome = function() {
 			loadFirstPage();
 			doFocusHack();
 		});
+		
 	}
 
 	function loadFirstPage() {
@@ -161,6 +167,7 @@ window.chrome = function() {
 		$('#settings').hide();
 		$('#about-page-overlay').hide();
 		$('#langlinks').hide();
+		$('html').removeClass('overlay-open');
 	}
 
 	function showContent() {
@@ -173,11 +180,13 @@ window.chrome = function() {
 		$('#mainHeader').hide();
 		if(!isTwoColumnView()) {
 			$('#content').hide();
+		} else {
+			$('html').addClass('overlay-open');
 		}
 	}
 
 	function showNoConnectionMessage() {
-		alert("Please try again when you're connected to a network.");
+		alert(mw.message('error-offline-prompt'));
 	}
 
 	function toggleForward() {
@@ -228,6 +237,7 @@ window.chrome = function() {
 			'.listItem',
 			'#search',
 			'.closeButton',
+			'.cleanButton',
 			'.titlebarIcon'
 		];
 	  

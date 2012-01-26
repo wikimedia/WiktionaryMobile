@@ -21,7 +21,8 @@ window.search = function() {
 			}
 			getSearchResults( term );
 		} else {
-			chrome.showNoConnectionMessage();
+			if(!isSuggestion)
+				chrome.showNoConnectionMessage();
 			chrome.showContent();
 		}
 	}
@@ -141,6 +142,8 @@ window.search = function() {
 
 		if(!chrome.isTwoColumnView()) {
 			$("#content").hide(); // Not chrome.hideContent() since we want the header
+		} else {
+			$("html").addClass('overlay-open');
 		}
 
 		chrome.doFocusHack();

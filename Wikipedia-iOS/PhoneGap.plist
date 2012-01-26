@@ -30,6 +30,8 @@
 	</array>
 	<key>Plugins</key>
 	<dict>
+		<key>ShareKitPlugin</key>
+		<string>ShareKitPlugin</string>
 		<key>ActionSheet</key>
 		<string>ActionSheet</string>
 		<key>com.phonegap.accelerometer</key>

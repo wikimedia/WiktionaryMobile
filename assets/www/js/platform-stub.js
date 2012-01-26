@@ -33,7 +33,8 @@ if (platform == 'unknown') {
 			'globalization/globalization.js'
 		],
 		ios: [
-			'ActionSheet.js'
+			'ActionSheet.js',
+			'ShareKitPlugin.js'
 		],
 	};
 	if (platform in plugins) {

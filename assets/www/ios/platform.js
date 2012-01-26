@@ -69,6 +69,7 @@ function updateMenuState() {
 		var $button = $('<button>');
 		$button
 			.attr('id', item.id)
+			.attr('title', mw.msg(item.id))
 			.click(function() {
 				item.action.apply(this);
 			})
@@ -88,6 +89,18 @@ function popupMenu(items, callback, options) {
 		options.height = $origin.height();
 	}
 	window.plugins.actionSheet.create('', items, callback, options);
+}
+
+function sharePage() {
+	// @fixme if we don't have a page loaded, this menu item should be disabled...
+	var title = app.getCurrentTitle(),
+	url = app.getCurrentUrl().replace(/\.m\.wikipedia/, '.wikipedia');
+	window.plugins.shareKit.share(
+							  {
+								  message: title,
+								  url: url
+							  }
+							  );
 }
 
 origDoScrollHack = chrome.doScrollHack;
