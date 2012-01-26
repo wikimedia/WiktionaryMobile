@@ -94,7 +94,7 @@ function popupMenu(items, callback, options) {
 function sharePage() {
 	// @fixme if we don't have a page loaded, this menu item should be disabled...
 	var title = app.getCurrentTitle(),
-	url = app.getCurrentUrl().replace(/\.m\.wikipedia/, '.wikipedia');
+	url = app.getCurrentUrl().replace(/\.m\.wiktionary/, '.wiktionary');
 	window.plugins.shareKit.share(
 							  {
 								  message: title,
