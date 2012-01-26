@@ -79,9 +79,13 @@ header
 #map {
 	position: absolute;
 	top: 52px;
-	bottom: 0px;
+	bottom: 52px;
 	left: 0px;
 	right: 0px;
+}
+
+.android #map {
+	bottom: 0px; /* no toolbar */
 }
 
 /*
@@ -564,6 +568,9 @@ header
 	.goodscroll .scroller {
 		bottom: 0px;
 		width: 320px;
+	}
+	.goodscroll #map {
+		bottom: 0px; /* no toolbar */
 	}
 }
 
