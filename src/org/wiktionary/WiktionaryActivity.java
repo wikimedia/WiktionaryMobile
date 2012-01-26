@@ -1,6 +1,5 @@
 package org.wiktionary;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import android.content.Intent;
@@ -34,7 +33,7 @@ public class WiktionaryActivity extends DroidGap {
 		editor.remove("doSearchNearBy");
 		editor.commit();
 		
-		// Check if we were started by another app's Intent
+		// Check if we were started by another app's Intent (and thus have a word to define)
 		boolean startedFromAnotherApp = false;
 		String wordToShow = null;
 		
@@ -52,7 +51,7 @@ public class WiktionaryActivity extends DroidGap {
 		
 		String startingUrl = "file:///android_asset/www/index.html";
 		
-		if (startedFromAnotherApp) {
+		if (startedFromAnotherApp) { // Specify the word display on startup
 			startingUrl += "?define=" + URLEncoder.encode(wordToShow);
 		}
 		
