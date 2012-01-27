@@ -65,7 +65,6 @@ window.appSettings = function() {
 		chrome.hideContent();
 		$('#settings').localize().show();
 		chrome.doFocusHack();                                   
-		chrome.doScrollHack('#settings .scroller');
 	}
 
 	function onContentLanguageChanged() {
