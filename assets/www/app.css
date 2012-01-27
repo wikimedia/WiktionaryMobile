@@ -270,7 +270,7 @@ header
 	background: url(image/spr.png) -96px -42px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
 	background-size: 160px 240px;
-	height: 35px;
+	height: 37px;
 	width: 40px;
 	border: 1px solid #333;
 	-webkit-border-radius: 5px 0px 0px 5px;	
