@@ -1,5 +1,5 @@
 window.geo = function() {
-	
+
 	function showNearbyArticles( args ) {
 		var args = $.extend(
 			{
@@ -15,34 +15,36 @@ window.geo = function() {
 		$("#nearby-overlay").localize().show();
 		chrome.doFocusHack();
 		
-		var geomap = new L.Map('map');
-		var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			maxZoom: 18,
-			attribution: 'Map data &copy; 2011 OpenStreetMap contributors'
-		});
-		geomap.addLayer(tiles);
+		if (!geo.map) {
+			geo.map = new L.Map('map');
+			var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 18,
+				attribution: 'Map data &copy; 2011 OpenStreetMap contributors'
+			});
+			geo.map.addLayer(tiles);
+		}
 
 		// @fixme load last-seen coordinates
-		geomap.setView(new L.LatLng(args.lat, args.lon), 13);
+		geo.map.setView(new L.LatLng(args.lat, args.lon), 13);
 		
 		var findAndDisplayNearby = function( lat, lon ) {
 			geoLookup( lat, lon, preferencesDB.get("language"), function( data ) {
-				geoAddMarkers( data, geomap );
+				geoAddMarkers( data );
 			}, function(err) {
 				console.log(JSON.stringify(err));
 			});
 		};
 		
 		var ping = function() {
-			var pos = geomap.getCenter();
+			var pos = geo.map.getCenter();
 			findAndDisplayNearby( pos.lat, pos.lng );
 		};
 		
 		if ( args.current ) {
-			geomap.on('viewreset', ping);
-			geomap.on('locationfound', ping);
-			geomap.on('moveend', ping);
-			geomap.locateAndSetView(13);
+			geo.map.on('viewreset', ping);
+			geo.map.on('locationfound', ping);
+			geo.map.on('moveend', ping);
+			geo.map.locateAndSetView(13);
 		}
 		else {
 			findAndDisplayNearby( args.lat, args.lon );
@@ -98,9 +100,9 @@ window.geo = function() {
 		});
 	}
 	
-	function geoAddMarkers( data, geomap ) {
+	function geoAddMarkers( data ) {
 		if (geo.markers) {
-			geomap.removeLayer(geo.markers);
+			geo.map.removeLayer(geo.markers);
 		}
 		geo.markers = new L.LayerGroup();
 		$.each(data.geonames, function(i, item) {
@@ -112,13 +114,14 @@ window.geo = function() {
 			                 '<p>' + item.summary + '</p>' +
 			                 '</div>');
 		});
-		geomap.addLayer(geo.markers);
+		geo.map.addLayer(geo.markers);
 	}
 	
 	return {
 		showNearbyArticles: showNearbyArticles,
 		addShowNearbyLinks: addShowNearbyLinks,
-		markers: null
+		markers: null,
+		map: null
 	};
 
 }();
