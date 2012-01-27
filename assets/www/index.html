@@ -70,8 +70,8 @@
 				</select>
 			</div>
             
-            <div class="item">
-                <label id="aboutPageLabel"><msg key="about-page-label"></msg></label>
+            <div id="aboutPageLabel" class="item">
+                <label><msg key="about-page-label"></msg></label>
 			</div>
 		</script>
 		<script type="text/html" id="saved-pages-template">
@@ -177,7 +177,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="about-page-title">About</msg></div>
-				<button class="titlebarItem closeButton" title-msg="about-close"></button>
+				<button id="aboutclose" class="titlebarItem closeButton" title-msg="about-close"></button>
 			</div>
 		</header>
 		<div class="scroller">
@@ -273,7 +273,6 @@
 		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="go-forward" />
 		<command type="command" id="selectTextCmd" disabled="false" action="select-text" />
 		<command type="command" id="settingsCmd" icon="optionSettings.png" disabled="false" action="view-settings" />
-		<command type="command" id="aboutCmd" disabled="false" action="view-about" />
 	</menu>
 
 </body>
