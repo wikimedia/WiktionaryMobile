@@ -222,6 +222,7 @@ header
 	border: 1px solid #333;
 	margin: 2px;
 	z-index: 2;
+	border-radius: 0; /* override for iphone where default is curvy */
 }
 
 #searchParam:focus, #searchParam.active {
