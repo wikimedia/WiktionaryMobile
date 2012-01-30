@@ -37,6 +37,10 @@ public class WikipediaActivity extends DroidGap {
         super.loadUrl("file:///android_asset/www/index.html");
         this.webViewClient = new WikipediaWebViewClient(this);
         this.appView.setWebViewClient(this.webViewClient);
+        
+        String currentUA = this.appView.getSettings().getUserAgentString();
+        
+        this.appView.getSettings().setUserAgentString("WikipediaMobile/1.1 " + currentUA);
     }
     
     @Override
