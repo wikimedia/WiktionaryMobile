@@ -119,7 +119,6 @@ window.search = function() {
 				},
 				success: function(data) {
 					var results = data;
-					console.log("RESULTS" + results);
 					if ( results[1].length === 0 ) { 
 						console.log( "No results for", term );
 						getDidYouMeanResults( results );
@@ -152,8 +151,6 @@ window.search = function() {
 	}
 
 	function renderResults(results, didyoumean) {
-		
-		console.log("OHIOHI" + results);
 		var template = templates.getTemplate('search-results-template');
 		if (results.length > 0) {
 
