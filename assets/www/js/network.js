@@ -4,7 +4,9 @@ window.network = function() {
 	function makeRequest(options) {
 		currentXhr = $.ajax({
 			url: options.url,
-			dataType: 'text',
+			data: options.data,
+			type: options.type,
+			dataType: options.dataType,
 			success: function(data, xhr) {
 				if(data == '') {
 					// Sometimes we get an empty response. Why? Not sure.

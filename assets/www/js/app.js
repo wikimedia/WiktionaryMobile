@@ -36,6 +36,7 @@ window.app = function() {
 		var doRequest = function() {
 			network.makeRequest({
 				url: url, 
+				dataType: 'text',
 				success: function(data) {
 						chrome.renderHtml(data, origUrl);
 						if(callback) {
