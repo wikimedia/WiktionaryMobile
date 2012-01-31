@@ -1,10 +1,6 @@
 window.search = function() {
 	function performSearch(term, isSuggestion) {
-		if($('#search').hasClass('inProgress')) {
-			// network.stopCurrentRequest();
-			$('#search').removeClass('inProgress');
-			return;
-		}
+		network.stopCurrentRequest();
 		if (network.isConnected()) {
 			if (term == '') {
 				chrome.showContent();
