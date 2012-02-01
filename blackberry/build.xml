@@ -15,7 +15,7 @@
     <property name="widget.dir"   location="${build.dir}/widget" />
     <property name="code.sign"    value="false" />
         
-    <target name="blackberry" >
+    <target name="blackberry" depends="copy-www" >
         <property name="subant.file"  value="blackberry.xml" />
     </target>
     
