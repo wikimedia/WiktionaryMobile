@@ -8,11 +8,7 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
-<<<<<<< HEAD
-		'view-about': function() { aboutPage(); },
-                'word-of-the-day': function() { loadFirstPage(true); }
-=======
->>>>>>> ff2d3c6fab3e29d967e7c619c177dfd543850c07
+		'word-of-the-day': function() { loadFirstPage(true); }
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
