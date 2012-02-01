@@ -8,7 +8,8 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
-		'view-about': function() { aboutPage(); }
+		'view-about': function() { aboutPage(); },
+                'word-of-the-day': function() { loadFirstPage(true); }
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
@@ -117,7 +118,7 @@ window.chrome = function() {
 		
 	}
 
-	function loadFirstPage() {
+	function loadFirstPage(disableReloadHist) {
 		chrome.showSpinner();
 
 		// Check if the 'define' parameter is set
@@ -144,7 +145,7 @@ window.chrome = function() {
 		// restore browsing to last visited page
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history){
-				if(history.length==0 || window.history.length > 1) {
+				if(history.length==0 || window.history.length > 1 || disableReloadHist) {
 					app.navigateToPage(app.baseURL);
 				} else {
 					app.navigateToPage(history[history.length-1].value);
