@@ -10,7 +10,7 @@
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/webkit-sqlite.js"></script>
 
-	<script type="text/javascript" charset="utf-8" src="js/zepto.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/hogan.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
@@ -48,7 +48,7 @@
 	<div id="templates">
 		<script type="text/html" id="settings-page-template">
 			<div class="item">
-				<label><msg key="settings-language-label"></msg></label>
+				<label for="contentLanguageSelector"><msg key="settings-language-label"></msg></label>
 				<p id="selectedLanguage"></p>
 				<select id='contentLanguageSelector'>
 					{{#languages}}
@@ -58,7 +58,7 @@
 			</div>
 
 			<div class="item">
-				<label><msg key="settings-font-size-label"></msg></label>
+				<label for="fontSizeSelector"><msg key="settings-font-size-label"></msg></label>
 				<p><msg key="settings-font-size-desc"></msg></p>
 				<select id="fontSizeSelector">
 					{{#fontSizes}}
@@ -67,8 +67,8 @@
 				</select>
 			</div>
             
-            <div class="item">
-                <label id="aboutPageLabel"><msg key="about-page-label"></msg></label>
+            <div id="aboutPageLabel" class="item">
+                <label><msg key="about-page-label"></msg></label>
 			</div>
 		</script>
 		<script type="text/html" id="saved-pages-template">
@@ -159,10 +159,10 @@
 	<header id="mainHeader">
 		<div class="titlebar" id="titlebar">
 			<div id="searchFormHolder">
-			<div class="titlebarIcon" role="button"></div>
+			<button class="titlebarIcon" title-msg="menu-home"></button>
 			<form id="searchForm">
-				<input type="search" id="searchParam" placeholder-msg="search-placeholder""></input>
-				<input type="submit" id="search" value=""></input>
+				<input type="text" id="searchParam" placeholder-msg="search-placeholder"></input>
+				<button type="submit" id="search" value="" title-msg="search-button"></button>
 			</form>
 			<div id="clearSearch"></div>
 			<div class="spinner"></div>
@@ -174,13 +174,13 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="about-page-title">About</msg></div>
-				<div class="titlebarItem closeButton"></div>
+				<button id="aboutclose" class="titlebarItem closeButton" title-msg="about-close"></button>
 			</div>
 		</header>
 		<div class="scroller">
 			<div id="about-page-content">
 				<img src="image/logo.png" />
-				<p id="about-version"><msg key="about-version"></msg> 1.0</p>
+				<p id="about-version"><msg key="about-version"></msg> 1.1-alpha1</p>
 				<a id="about-wmf-logo" href="http://wikimediafoundation.org/"><img src="image/wmf.png" /></a>
 				<p id="about-copyright"><msg key="about-copyright"></msg></p>
 				<p id="about-license"><msg key="about-license"></msg></p>
@@ -192,8 +192,8 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="saved-pages-title">Saved Pages</msg></div>
-				<div class="titlebarItem closeButton"></div>
-				<div class="titlebarItem cleanButton"></div>
+				<button class="titlebarItem closeButton" title-msg="saved-pages-close"></button>
+				<button class="titlebarItem cleanButton" title-msg="saved-pages-clear-all"></button>
 			</div>
 		</header>
 		<div class="scroller">
@@ -205,8 +205,8 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="history-title">History</msg></div>
-				<div class="titlebarItem closeButton"></div>
-				<div class="titlebarItem cleanButton"></div>
+				<button class="titlebarItem closeButton" title-msg="history-close"></button>
+				<button class="titlebarItem cleanButton" title-msg="history-clear-all"></button>
 			</div>
 		</header>
 		<div class="scroller">
@@ -221,13 +221,15 @@
 	</div>
 
 	<div id="settings">
-		<header>
+		<!-- Not using header or .scroller here to work around bug 33884; it caused -->
+		<!-- the selects to become unselectable on Android 2.x for some reason. -->
+		<div>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="settings-title">Settings</msg></div>
-				<div class="titlebarItem closeButton"></div>
+				<button class="titlebarItem closeButton" title-msg="settings-close"></button>
 			</div>
-		</header>
-		<div class="scroller">
+		</div>
+		<div>
 			<div id="settingsList"></div>
 		</div>
 	</div>
@@ -236,7 +238,7 @@
 		<header>
 			<div class="titlebar">
 				<div class="titlebarItem"><msg key="langlinks-title">Read article in...</msg></div>
-				<div class="titlebarItem closeButton"></div>
+				<button class="titlebarItem closeButton" title-msg="langlinks-close"></button>
 			</div>
 		</header>
 		<div class="scroller">
@@ -248,7 +250,6 @@
 		<div id="main"></div>
 	</div>  
 
-
 	<menu id="appMenu" type="context">
 		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="false" action="read-in" />
 		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="view-history" />
@@ -258,8 +259,7 @@
 		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="go-forward" />
 		<command type="command" id="selectTextCmd" disabled="false" action="select-text" />
 		<command type="command" id="settingsCmd" icon="optionSettings.png" disabled="false" action="view-settings" />
-		<command type="command" id="aboutCmd" disabled="false" action="view-about" />
-                <command type="command" id="WOTDCmd" disabled="false" action="word-of-the-day" />
+    <command type="command" id="WOTDCmd" disabled="false" action="word-of-the-day" />
 	</menu>
 
 </body>

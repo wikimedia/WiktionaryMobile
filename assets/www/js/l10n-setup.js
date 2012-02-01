@@ -46,7 +46,7 @@ window.l10n = function() {
 				try {
 					var messages = propertiesFileReader.parse(data);
 				} catch (e) {
-					alert('Error parsing localization file for ' + lang + ': ' + e);
+					// We have no messages for this particular language code
 					callback(false);
 					return;
 				}
@@ -58,7 +58,6 @@ window.l10n = function() {
 			error: function(xhr, status, err) {
 				// We seem to get "success" on file not found, which feels wrong...
 				// We kinda expect to get 404 errors or similar?
-				alert('Error loading localization file for ' + lang + ': ' + status);
 				callback(false);
 			}
 		});
@@ -82,8 +81,10 @@ window.l10n = function() {
 	function initLanguages() {
 		// Always load english as a fallback
 		var langs = ['en'],
-			lang = preferencesDB.get('locale'), // may be eg "en-us" or "zh-tw"
-			baseLang = lang.replace(/-.*?$/, ''); // strip country code, eg "en" or "zh"
+			lang = preferencesDB.get('locale'); // may be eg "en-us" or "zh-tw"
+			console.log(lang);
+		var	baseLang = lang.replace(/-.*?$/, ''); // strip country code, eg "en" or "zh"
+			console.log(baseLang);
 
 		if (baseLang != 'en') {
 			// Load the base language, eg 'en', 'fr', 'zh'

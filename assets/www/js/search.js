@@ -15,11 +15,11 @@ window.search = function() {
 			$('#search').addClass('inProgress');
 
 			if(!isSuggestion) {
-				var url = app.urlForTitle(term);
-				app.navigateToPage(url);
-				return;
+				console.log('for term: ' + term);
+				getFullTextSearchResults(term);
+			} else {
+				getSearchResults( term );
 			}
-			getSearchResults( term );
 		} else {
 			if(!isSuggestion)
 				chrome.showNoConnectionMessage();
@@ -42,7 +42,7 @@ window.search = function() {
 				format: 'json'
        		},
        		success: function(data) {
-				var suggestion_results = JSON.parse( data );
+				var suggestion_results = data;
 				var suggestion = getSuggestionFromSuggestionResults( suggestion_results );
 				if ( suggestion ) {
 					getSearchResults( suggestion, 'true' );
@@ -61,7 +61,35 @@ window.search = function() {
 			return false;
 		}
 	}
-	
+
+	function getFullTextSearchResults(term) {
+
+		var requestUrl = app.baseURL + "/w/api.php";
+		$.ajax({
+			type: 'GET',
+			url: requestUrl,
+			data: {
+				action: 'query',
+				list: 'search',
+				srsearch: term,
+				srinfo: '',
+				srprop: '',
+				format: 'json'
+			},
+			success: function(data) {
+				var searchResults = [];
+				for(var i = 0; i < data.query.search.length; i++) {
+					var result = data.query.search[i];
+					searchResults.push(result.title);
+				}
+				renderResults([term, searchResults], false);
+			}, 
+			error: function(err) {
+				console.log("ERROR!" + JSON.stringify(err));
+			}
+		});
+	}
+
 	function getSearchResults(term, didyoumean) {
 		console.log( 'Getting search results for term:', term );
 		var requestUrl = app.baseURL + "/w/api.php";
@@ -73,8 +101,7 @@ window.search = function() {
 				search: term,
 				format: 'json'
 			},
-			success: function(data) {
-				var results = JSON.parse( data );
+			success: function(results) {
 				if ( results[1].length === 0 ) { 
 					console.log( "No results for", term );
 					getDidYouMeanResults( results );

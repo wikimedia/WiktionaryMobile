@@ -7,8 +7,8 @@ window.languages = function() {
 		$.ajax({
 			type:'Get', 
 			url:requestUrl, 
-			success:function(data) {
-				var results = JSON.parse(data);
+			dataType: 'json',
+			success:function(results) {
 				var allLanguages = results.sitematrix;
 
 				$.each(allLanguages, function(key, value) {

@@ -79,9 +79,13 @@ header
 #map {
 	position: absolute;
 	top: 52px;
-	bottom: 0px;
+	bottom: 52px;
 	left: 0px;
 	right: 0px;
+}
+
+.android #map {
+	bottom: 0px; /* no toolbar */
 }
 
 /*
@@ -218,6 +222,7 @@ header
 	border: 1px solid #333;
 	margin: 2px;
 	z-index: 2;
+	border-radius: 0; /* override for iphone where default is curvy */
 }
 
 #searchParam:focus, #searchParam.active {
@@ -227,7 +232,7 @@ header
 
 #searchParam, #searchParam:focus, #searchParam.active {
 	/* This overrides the default looks of type=search on Apple WebKit */
-	-webkit-appearance: textfield;
+	-webkit-appearance: none;
 	box-sizing: content-box;
 }
 
@@ -266,7 +271,7 @@ header
 	background: url(image/spr.png) -96px -42px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
 	background-size: 160px 240px;
-	height: 35px;
+	height: 37px;
 	width: 40px;
 	border: 1px solid #333;
 	-webkit-border-radius: 5px 0px 0px 5px;	
@@ -320,6 +325,7 @@ header
 	right: 0px;
 	top: 0px;
 	width: 44px;
+	border: 0;
 	border-left: 1px solid #777;
 }
 
@@ -332,6 +338,7 @@ header
 	right: 44px;
 	top: 0px;
 	width: 44px;
+	border: 0;
 	border-left: 1px solid #777;
 }
 
@@ -564,6 +571,9 @@ header
 	.goodscroll .scroller {
 		bottom: 0px;
 		width: 320px;
+	}
+	.goodscroll #map {
+		bottom: 0px; /* no toolbar */
 	}
 }
 

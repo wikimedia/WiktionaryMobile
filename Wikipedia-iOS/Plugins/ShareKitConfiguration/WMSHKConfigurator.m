@@ -18,6 +18,11 @@
 	return @"http://itunes.apple.com/app/wikipedia-mobile/id324715238";
 }
 
+// Read It Later - http://readitlaterlist.com/api/signup/
+- (NSString*)readItLaterKey {
+	return @"4d7T9V8bg636el5818dn2a3u41ptb8c1";
+}
+
 // Facebook - https://developers.facebook.com/apps
 // SHKFacebookAppID is the Application ID provided by Facebook
 // SHKFacebookLocalAppID is used if you need to differentiate between several iOS apps running against a single Facebook app. Useful, if you have full and lite versions of the same app,
@@ -72,6 +77,12 @@
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {
 	return @"";
+}
+
+// Name of the plist file that defines the class names of the sharers to use. Usually should not be changed, but 
+// this allows you to subclass a sharer and have the subclass be used.
+- (NSString*)sharersPlistName {
+	return @"WMSHKSharers.plist";
 }
 
 

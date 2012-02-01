@@ -1,0 +1,18 @@
+# CHANGELOG
+
+## v1.1 ##
+
+- Integration with QuickSearch in Android
+- Open Wikipedia links from other apps in the Wikipedia App
+- OSM replaced Google Maps for nearby view
+- Added Did You Mean? to search results
+- Moved to jQuery off Zepto
+- Touching co-ordinates inside articles shows map overlay
+- Full text search 
+- Added 'Clear History'
+- Added 'Clear Saved Pages'
+- Localized a few messages that were missing
+- Enable app to be saved to SD card
+- Major code-refactor, still needs more love :)
+- Improved tablet experienced
+- Move to using Hogan.js for templating

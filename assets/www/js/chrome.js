@@ -8,8 +8,11 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
+<<<<<<< HEAD
 		'view-about': function() { aboutPage(); },
                 'word-of-the-day': function() { loadFirstPage(true); }
+=======
+>>>>>>> ff2d3c6fab3e29d967e7c619c177dfd543850c07
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
@@ -49,14 +52,15 @@ window.chrome = function() {
 
 		var selectors = ['#content>*', '#copyright'],
 			$target = $('#main'),
-			$div = $('<div>').html(trimmed);
+			$div = $(trimmed);
 
 		$target
 			.empty()
 			.attr('lang', lang)
 			.attr('dir', dir);
 		$.each(selectors, function(i, sel) {
-			$div.find(sel).remove().appendTo($target);
+			var con = $div.find(sel).remove();
+			con.appendTo($target);
 		});
 
 		languageLinks.parseAvailableLanguages($div);
@@ -98,11 +102,13 @@ window.chrome = function() {
 				return false;
 			});
 			$("#searchForm").bind('submit', function() {
-				search.performSearch($("#searchParam").val(), false);
+				window.search.performSearch($("#searchParam").val(), false);
 				return false;
 			}).bind('keypress', function() {
 				// Needed because .val doesn't seem to update instantly
-				setTimeout(function() { search.performSearch($("#searchParam").val(), true); }, 5);
+				setTimeout(function() { 
+					window.search.performSearch($("#searchParam").val(), true); 
+				}, 5);
 			});
 			$("#clearSearch").bind('touchstart', function() {
 				clearSearch();
