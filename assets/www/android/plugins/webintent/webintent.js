@@ -28,12 +28,12 @@ WebIntent.prototype.hasExtra = function(params, success, fail) {
     }, 'WebIntent', 'hasExtra', [params]);
 };
 
-WebIntent.prototype.getUri = function(success, fail) {
+WebIntent.prototype.getIntentData = function(success, fail) {
 	return PhoneGap.exec(function(args) {
         success(args);
     }, function(args) {
         fail(args);
-    }, 'WebIntent', 'getUri', []);
+    }, 'WebIntent', 'getIntentData', []);
 };
 
 WebIntent.prototype.getExtra = function(params, success, fail) {

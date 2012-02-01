@@ -51,6 +51,18 @@ window.savedPages = function() {
 			});
 		}
 	}
+	
+	// Removes all the elements from saved pages
+	function onClearSavedPages() {
+		var answer = confirm(mw.message('clear-all-saved-pages-prompt').plain());
+		if (answer) {
+			var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
+				this.nuke();
+				chrome.showContent();
+			});
+		}
+	}
+
 
 	function showSavedPages() {
 		var template = templates.getTemplate('saved-pages-template');
@@ -58,6 +70,7 @@ window.savedPages = function() {
 			this.all(function(savedpages) {	
 				$('#savedPagesList').html(template.render({'pages': savedpages}));
 				$(".savedPage").click(onSavedPageClick);
+				$("#savedPages .cleanButton").unbind('click', onClearSavedPages).bind('click', onClearSavedPages);
 				$(".deleteSavedPage").click(onSavedPageDelete);
 				chrome.hideOverlays();
 				$('#savedPages').toggle();

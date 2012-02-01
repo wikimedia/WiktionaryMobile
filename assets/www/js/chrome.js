@@ -9,7 +9,6 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
-		'view-about': function() { aboutPage(); }
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
@@ -49,14 +48,15 @@ window.chrome = function() {
 
 		var selectors = ['#content>*', '#copyright'],
 			$target = $('#main'),
-			$div = $('<div>').html(trimmed);
+			$div = $(trimmed);
 
 		$target
 			.empty()
 			.attr('lang', lang)
 			.attr('dir', dir);
 		$.each(selectors, function(i, sel) {
-			$div.find(sel).remove().appendTo($target);
+			var con = $div.find(sel).remove();
+			con.appendTo($target);
 		});
 
 		languageLinks.parseAvailableLanguages($div);
@@ -82,6 +82,11 @@ window.chrome = function() {
 
 		preferencesDB.initializeDefaults(function() { 
 			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
+			
+			// Do localization of the initial interface
+			$(document).bind("mw-messages-ready", function() {
+				$('#mainHeader, #menu').localize();
+			});
 			l10n.initLanguages();
 
 			$(".titlebarIcon").bind('touchstart', function() {
@@ -89,11 +94,13 @@ window.chrome = function() {
 				return false;
 			});
 			$("#searchForm").bind('submit', function() {
-				search.performSearch($("#searchParam").val(), false);
+				window.search.performSearch($("#searchParam").val(), false);
 				return false;
 			}).bind('keypress', function() {
 				// Needed because .val doesn't seem to update instantly
-				setTimeout(function() { search.performSearch($("#searchParam").val(), true); }, 5);
+				setTimeout(function() { 
+					window.search.performSearch($("#searchParam").val(), true); 
+				}, 5);
 			});
 			$("#clearSearch").bind('touchstart', function() {
 				clearSearch();
@@ -106,6 +113,7 @@ window.chrome = function() {
 			chrome.loadFirstPage();
 			doFocusHack();
 		});
+		
 	}
 
 	function loadFirstPage() {
@@ -138,6 +146,7 @@ window.chrome = function() {
 		$('#about-page-overlay').hide();
 		$('#langlinks').hide();
 		$('#nearby-overlay').hide();
+		$('html').removeClass('overlay-open');
 	}
 
 	function showContent() {
@@ -150,11 +159,13 @@ window.chrome = function() {
 		$('#mainHeader').hide();
 		if(!isTwoColumnView()) {
 			$('#content').hide();
+		} else {
+			$('html').addClass('overlay-open');
 		}
 	}
 
 	function showNoConnectionMessage() {
-		alert("Please try again when you're connected to a network.");
+		alert(mw.message('error-offline-prompt'));
 	}
 
 	function toggleForward() {
@@ -205,6 +216,7 @@ window.chrome = function() {
 			'.listItem',
 			'#search',
 			'.closeButton',
+			'.cleanButton',
 			'.titlebarIcon'
 		];
 	  

@@ -1,5 +1,5 @@
 window.geo = function() {
-	
+
 	function showNearbyArticles( args ) {
 		var args = $.extend(
 			{
@@ -15,34 +15,36 @@ window.geo = function() {
 		$("#nearby-overlay").localize().show();
 		chrome.doFocusHack();
 		
-		var geomap = new L.Map('map');
-		var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			maxZoom: 18,
-			attribution: 'Map data &copy; 2011 OpenStreetMap contributors'
-		});
-		geomap.addLayer(tiles);
+		if (!geo.map) {
+			geo.map = new L.Map('map');
+			var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 18,
+				attribution: 'Map data &copy; 2011 OpenStreetMap contributors'
+			});
+			geo.map.addLayer(tiles);
+		}
 
 		// @fixme load last-seen coordinates
-		geomap.setView(new L.LatLng(args.lat, args.lon), 13);
+		geo.map.setView(new L.LatLng(args.lat, args.lon), 13);
 		
 		var findAndDisplayNearby = function( lat, lon ) {
 			geoLookup( lat, lon, preferencesDB.get("language"), function( data ) {
-				geoAddMarkers( data, geomap );
+				geoAddMarkers( data );
 			}, function(err) {
-				alert(err);
+				console.log(JSON.stringify(err));
 			});
 		};
 		
 		var ping = function() {
-			var pos = geomap.getCenter();
+			var pos = geo.map.getCenter();
 			findAndDisplayNearby( pos.lat, pos.lng );
 		};
 		
 		if ( args.current ) {
-			geomap.on('viewreset', ping);
-			geomap.on('locationfound', ping);
-			geomap.on('moveend', ping);
-			geomap.locateAndSetView(13);
+			geo.map.on('viewreset', ping);
+			geo.map.on('locationfound', ping);
+			geo.map.on('moveend', ping);
+			geo.map.locateAndSetView(13);
 		}
 		else {
 			findAndDisplayNearby( args.lat, args.lon );
@@ -92,29 +94,34 @@ window.geo = function() {
 		$.ajax({
 			url: requestUrl,
 			success: function(data) {
-				success(JSON.parse(data));
+				success(data);
 			},
 			error: error
 		});
 	}
 	
-	function geoAddMarkers( data, geomap ) {
-		var geomarkers = new L.LayerGroup();
+	function geoAddMarkers( data ) {
+		if (geo.markers) {
+			geo.map.removeLayer(geo.markers);
+		}
+		geo.markers = new L.LayerGroup();
 		$.each(data.geonames, function(i, item) {
 			var url = item.wikipediaUrl.replace(/^([a-z0-9-]+)\.wikipedia\.org/, 'https://$1.m.wikipedia.org');
 			var marker = new L.Marker(new L.LatLng(item.lat, item.lng));
-			geomarkers.addLayer(marker);
+			geo.markers.addLayer(marker);
 			marker.bindPopup('<div onclick="app.navigateToPage(&quot;' + url + '&quot;);hideOverlays();">' +
 			                 '<strong>' + item.title + '</strong>' +
 			                 '<p>' + item.summary + '</p>' +
 			                 '</div>');
 		});
-		geomap.addLayer(geomarkers);
+		geo.map.addLayer(geo.markers);
 	}
 	
 	return {
 		showNearbyArticles: showNearbyArticles,
-		addShowNearbyLinks: addShowNearbyLinks
+		addShowNearbyLinks: addShowNearbyLinks,
+		markers: null,
+		map: null
 	};
 
 }();

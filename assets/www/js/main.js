@@ -12,7 +12,11 @@ function homePage() {
 
 function aboutPage() {
 	chrome.hideOverlays();
-	chrome.hideContent();
 	$("#about-page-overlay").localize().show();
+	$("#aboutclose").unbind('click');
+	$("#aboutclose").bind('click', function(){
+		$("#about-page-overlay").hide();
+		appSettings.showSettings();
+	});
 	chrome.doFocusHack();
 }
