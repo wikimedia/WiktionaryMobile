@@ -1,8 +1,8 @@
 window.search = function() {
 	function performSearch(term, isSuggestion) {
-		if($('#search').hasClass('inProgress')) {
+		if(chrome.isSpinning()) {
 			network.stopCurrentRequest();
-			$('#search').removeClass('inProgress');
+			chrome.hideSpinner();
 			return;
 		}
 		if (network.isConnected()) {
@@ -12,7 +12,6 @@ window.search = function() {
 			}
 
 			chrome.showSpinner();
-			$('#search').addClass('inProgress');
 
 			if(!isSuggestion) {
 				console.log('for term: ' + term);
@@ -163,7 +162,6 @@ window.search = function() {
 			});
 		});
 
-		$('#search').removeClass('inProgress');
 		chrome.hideSpinner();
 		chrome.hideOverlays();
 
