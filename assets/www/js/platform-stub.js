@@ -16,7 +16,10 @@ if (ua.match(/; Android /)) {
 	platform = 'ios';
 } else if (ua.match(/; PlayBook /)) {
     // Mozilla/5.0 (PlayBook; U; RIM Tablet OS 2.0.0; en-US) AppleWebKit/535.1+ (KHTML, like Gecko) Version/7.2.0.0 Safari/535.1+
-    platform = 'playbook'
+    platform = 'playbook';
+} else if (ua.match(/BlackBerry/)) {
+    //Mozilla/5.0 (BlackBerry; U; BlackBerry AAAA; en-US) AppleWebKit/534.11+ (KHTML, like Gecko) Version/X.X.X.X Mobile Safari/534.11+
+    platform = 'blackberry'
 }
 
 if (platform == 'unknown') {
