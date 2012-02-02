@@ -96,11 +96,16 @@ window.chrome = function() {
 			$("#searchForm").bind('submit', function() {
 				window.search.performSearch($("#searchParam").val(), false);
 				return false;
-			}).bind('keypress', function() {
-				// Needed because .val doesn't seem to update instantly
-				setTimeout(function() { 
-					window.search.performSearch($("#searchParam").val(), true); 
-				}, 5);
+			}).bind('keypress', function(event) {
+				if(event.keyCode == 13)
+				{
+					$("#searchParam").blur();
+				}else{
+					// Needed because .val doesn't seem to update instantly
+					setTimeout(function() { 
+						window.search.performSearch($("#searchParam").val(), true); 
+					}, 5);
+				}
 			});
 			$("#clearSearch").bind('touchstart', function() {
 				clearSearch();
