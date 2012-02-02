@@ -52,21 +52,17 @@ window.geo = function() {
 	}
 	
 	function getFloatFromDMS( dms ) {
-		console.log('dms: '+ dms);
-		dms = dms.trim().toLowerCase();
-		dms = dms.replace( '′', "'" ).replace( '″', '"' );
-		
 		var multiplier = /[sw]/i.test( dms ) ? -1 : 1;
 		var bits = dms.match(/[\d.]+/g);
 
-		var float = 0;
+		var coord = 0;
 		
 		for ( var i = 0, iLen=bits.length; i<iLen; i++ ) {
-			float += bits[i] / multiplier;
+			coord += bits[i] / multiplier;
 			multiplier *= 60;
 		}
-		console.log('float: '+ float);
-		return float;
+		
+		return coord;
 	}
 	
 	function addShowNearbyLinks() {
