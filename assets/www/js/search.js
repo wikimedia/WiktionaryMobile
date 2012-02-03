@@ -149,18 +149,6 @@ window.search = function() {
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
 		$(".closeSearch").click(onCloseSearchResults);
-		// Replace icon of savd pages in search suggestions
-		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
-			$("#resultList .listItemContainer").each(function() {
-				var container = this;
-				var url = $(this).attr('data-page-url');
-				savedPagesDB.exists(url, function(exists) {
-					if(exists) {
-						$(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconSavedPage");
-					}
-				});
-			});
-		});
 
 		chrome.hideSpinner();
 		chrome.hideOverlays();
