@@ -45,7 +45,7 @@ header
 	z-index:30000;
 }
 
-#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay, #nearby-overlay
+#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay
 {
 	background-color:white;
 	width:100%;
