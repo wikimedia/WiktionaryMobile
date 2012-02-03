@@ -42,14 +42,12 @@ function updateMenuState() {
 					mw.msg('menu-cancel')
 				], function(val, index) {
 					if (index == 0) {
-						geo.showNearbyArticles();
-					} else if (index == 1) {
 						savedPages.showSavedPages();
-					} else if (index == 2) {
+					} else if (index == 1) {
 						appHistory.showHistory();
 					}
 				}, {
-					cancelButtonIndex: 3,
+					cancelButtonIndex: 2,
 					origin: this
 				});
 			}
