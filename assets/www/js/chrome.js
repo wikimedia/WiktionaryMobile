@@ -8,6 +8,7 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
+		'sound-start': function() { openSound(); },
 		'word-of-the-day': function() { loadFirstPage(true); }
 	};
 
@@ -118,6 +119,13 @@ window.chrome = function() {
 			doFocusHack();
 		});
 		
+	}
+	
+	function openSound (){
+		chrome.showSpinner();
+		playAudio ("http://upload.wikimedia.org/wikipedia/commons/5/5b/En-uk-welcome.ogg");
+		
+		chrome.hideSpinner(); 
 	}
 
 	function loadFirstPage(disableReloadHist) {
