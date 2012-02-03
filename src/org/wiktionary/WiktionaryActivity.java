@@ -55,7 +55,7 @@ public class WiktionaryActivity extends DroidGap {
         
         String currentUA = this.appView.getSettings().getUserAgentString();
         
-        this.appView.getSettings().setUserAgentString("WikipediaMobile/1.1 " + currentUA);
+        this.appView.getSettings().setUserAgentString("WiktionaryMobile/1.1 " + currentUA);
     }
     
     @Override
