@@ -30,7 +30,8 @@ if (platform == 'unknown') {
 			'share/share.js',
 			'cachemode/cachemode.js',
 			'webintent/webintent.js',
-			'globalization/globalization.js'
+			'globalization/globalization.js',
+			'preferences/preferences.js'
 		],
 		ios: [
 			'ActionSheet.js',

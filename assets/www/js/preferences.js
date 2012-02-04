@@ -56,5 +56,13 @@ window.preferencesDB = {
 	},
 	set: function(pref, value) {
 		localStorage.setItem(pref, value);
+		$.each(this.onSet, function(index, fun) {
+			fun(pref, value);
+		});
+	},
+	onSet: [],
+	//add an event executed when set method is executed. They must take to params, the id of the preference and his value.
+	addOnSet: function(fun) {
+		this.onSet.push(fun);
 	}
 };

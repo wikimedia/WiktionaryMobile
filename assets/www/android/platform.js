@@ -165,3 +165,6 @@ function geoNameFailure(error) {
 	alert('Google Maps service is not available on this device.');
 }
 
+window.preferencesDB.addOnSet(function(id, value) {
+	window.plugins.preferences.set(id, value, function(){}, function(){});
+});

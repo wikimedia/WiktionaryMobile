@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import android.app.SearchManager;
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
@@ -31,7 +33,9 @@ public class SearchSuggestionsProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		String query = uri.getLastPathSegment();
 		try {
-			String lang = "en";
+			SharedPreferences settings = this.getContext().getSharedPreferences(PreferencesPlugin.PREFS_NAME, Context.MODE_PRIVATE);
+			String lang = settings.getString("language", "en");
+
 			String[] columnNames = {BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1, SearchManager.SUGGEST_COLUMN_INTENT_DATA};
 			MatrixCursor cursor = new MatrixCursor(columnNames);
 			String content = HttpApi.getContent("http://" + lang + ".wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=json&search=" + URLEncoder.encode(query, "UTF-8"));

@@ -27,4 +27,5 @@
     <plugin name="ApplicationVersion" value="org.wikipedia.ApplicationVersion"/>
     <plugin name="GlobalizationCommand" value="com.phonegap.plugins.globalization.GlobalizationCommand"/>
     <plugin name="WebIntent" value="com.borismus.webintent.WebIntent"/>
+    <plugin name="Preferences" value="org.wikipedia.PreferencesPlugin"/>
 </plugins>
