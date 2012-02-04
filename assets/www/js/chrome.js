@@ -180,9 +180,11 @@ window.chrome = function() {
 
 	function toggleForward() {
 		// Length starts from 1, indexes don't.
-		currentHistoryIndex < ( pageHistory.length - 1) ?
-		$('#forwardCmd').attr('disabled', 'false') :
-		$('#forwardCmd').attr('disabled', 'true');
+		if (currentHistoryIndex < pageHistory.length - 1) {
+			$('#forwardCmd').attr('disabled', 'false') 
+		} else {
+			$('#forwardCmd').attr('disabled', 'true');
+		}
 	}
 
 	function goBack() {
@@ -212,10 +214,16 @@ window.chrome = function() {
 
 	function goForward() {
 		chrome.showSpinner();
-		if (currentHistoryIndex < pageHistory.length) {
+		console.log(pageHistory.length);
+		console.log(currentHistoryIndex);
+		if (currentHistoryIndex < pageHistory.length - 1) {
 			app.navigateToPage(pageHistory[++currentHistoryIndex], {
 				updateHistory: false
 			});
+		} else {
+			chrome.hideSpinner();
+			toggleForward();
+			updateMenuState(menu_handlers);
 		}
 	}
 
