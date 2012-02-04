@@ -7,6 +7,7 @@ gen/*
 /gen
 !project.properties
 lint.xml
+*~
 
 # Mac OS X ignores
 .DS_Store*
