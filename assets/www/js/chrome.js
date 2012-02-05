@@ -8,7 +8,8 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
-		'word-of-the-day': function() { loadFirstPage(true); }
+		'word-of-the-day': function() { loadFirstPage(true); },
+		'play-sound': function() { playSound(); }
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
@@ -128,6 +129,10 @@ window.chrome = function() {
 			doFocusHack();
 		});
 		
+	}
+	
+	function playSound() {
+		playAudio("http://upload.wikimedia.org/wikipedia/commons/5/5b/En-uk-welcome.ogg");
 	}
 
 	function loadFirstPage(disableReloadHist) {

@@ -9,3 +9,12 @@ function playAudio (AudioSource) {
 	my_media.play();
 	
 }
+
+//call this when closing program to release OS audio resources
+function releaseMedia () {
+
+	if (my_media != null){
+		my_media.release();
+	}
+
+}
