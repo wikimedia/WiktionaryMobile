@@ -100,7 +100,6 @@ window.app = function() {
 	function navigateToPage(url, options) {
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
 		$('#searchParam').val('');
-		$('#search').addClass('inProgress');
 		chrome.showSpinner();
 		
 		if (options.cache) {
@@ -115,15 +114,6 @@ window.app = function() {
 			// So disable forward.
 		} 
 		console.log("navigating to " + url);
-		var savedPagesDB = new Lawnchair({name: "savedPagesDB"}, function() {
-			this.exists(url, function(exists) {
-				if(!exists) {
-					$("#savePageCmd").attr("disabled", "false");
-				} else {
-					$("#savePageCmd").attr("disabled", "true");
-				}
-			});
-		});
 		// Enable change language - might've been disabled in a prior error page
 		console.log('enabling language');
 		$('#languageCmd').attr('disabled', 'false');  

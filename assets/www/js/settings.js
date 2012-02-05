@@ -1,7 +1,10 @@
 window.appSettings = function() {
 	var fontSizes = [];	
+	var locales = [];
 
 	function showSettings(callback) {
+		var requestUrl = "https://en.wiktionary.org/w/api.php?action=sitematrix&format=json";
+
 		if(fontSizes.length == 0) {
 			fontSizes = [
 				{value: '75%', name: mw.message('settings-font-size-smaller').plain() },
@@ -10,10 +13,35 @@ window.appSettings = function() {
 			];
 		}
 
-		languages.getLanguages(renderSettings);
+		if(locales.length == 0) {
+			$.ajax({
+				type:'GET', 
+				url:requestUrl, 
+				dataType: 'json',
+				success:function(results) {
+					var allLocales = results.sitematrix;
+
+					$.each(allLocales, function(key, value) {
+						// Because the JSON result from sitematrix is messed up
+						if(!isNaN(key)) {
+							if(value.site.some(function(site) { return site.code == "wiki"; })) {
+								locales.push({
+									code: value.code,
+									name: value.name
+								});
+							}
+						}
+					});
+					renderSettings();
+				}
+			});
+		} else {
+			renderSettings();
+		}
+
 	}
 
-	function renderSettings(locales) {
+	function renderSettings() {
 		var template = templates.getTemplate('settings-page-template');
 		$("#settingsList").html(template.render({languages: locales, fontSizes: fontSizes, aboutPage: aboutPage}));
 
@@ -37,6 +65,7 @@ window.appSettings = function() {
 		chrome.hideContent();
 		$('#settings').localize().show();
 		chrome.doFocusHack();                                   
+		chrome.doScrollHack('#settings .scroller');
 	}
 
 	function onContentLanguageChanged() {

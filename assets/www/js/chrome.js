@@ -8,7 +8,6 @@ window.chrome = function() {
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
-		'sound-start': function() { openSound(); },
 		'word-of-the-day': function() { loadFirstPage(true); }
 	};
 
@@ -25,10 +24,15 @@ window.chrome = function() {
 	}
 
 	function hideSpinner() {
+		$('#search').removeClass('inProgress');
 		$('.titlebar .spinner').css({display:'none'});	
 		$('#clearSearch').css({height:30});
 	}
-
+	
+	function isSpinning() {
+		$('#search').hasClass('inProgress');
+	}
+	
 	/**
 	 * Import page components from HTML string and display them in #main
 	 *
@@ -101,11 +105,16 @@ window.chrome = function() {
 			$("#searchForm").bind('submit', function() {
 				window.search.performSearch($("#searchParam").val(), false);
 				return false;
-			}).bind('keypress', function() {
-				// Needed because .val doesn't seem to update instantly
-				setTimeout(function() { 
-					window.search.performSearch($("#searchParam").val(), true); 
-				}, 5);
+			}).bind('keypress', function(event) {
+				if(event.keyCode == 13)
+				{
+					$("#searchParam").blur();
+				}else{
+					// Needed because .val doesn't seem to update instantly
+					setTimeout(function() { 
+						window.search.performSearch($("#searchParam").val(), true); 
+					}, 5);
+				}
 			});
 			$("#clearSearch").bind('touchstart', function() {
 				clearSearch();
@@ -120,17 +129,10 @@ window.chrome = function() {
 		});
 		
 	}
-	
-	function openSound (){
-		chrome.showSpinner();
-		playAudio ("http://upload.wikimedia.org/wikipedia/commons/5/5b/En-uk-welcome.ogg");
-		
-		chrome.hideSpinner(); 
-	}
 
 	function loadFirstPage(disableReloadHist) {
 		chrome.showSpinner();
-
+		
 		// Check if the 'define' parameter is set
 		// 'define' indicates the word to display on startup
 		var word = '';
@@ -151,7 +153,7 @@ window.chrome = function() {
 				}
 			}
 		}
-
+	   
 		// restore browsing to last visited page
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history){
@@ -213,7 +215,7 @@ window.chrome = function() {
 		if ($('#content').css('display') == "block") {
 			// We're showing the main view
 			currentHistoryIndex -= 1;
-			$('#search').addClass('inProgress');
+			chrome.showSpinner();
 			// Jumping through history is unsafe with the current urlCache system
 			// sometimes we get loaded without the fixups, and everything esplodes.
 			//window.history.go(-1);
@@ -233,7 +235,7 @@ window.chrome = function() {
 	}
 
 	function goForward() {
-		$('#search').addClass('inProgress');
+		chrome.showSpinner();
 		if (currentHistoryIndex < pageHistory.length) {
 			app.navigateToPage(pageHistory[++currentHistoryIndex], {
 				updateHistory: false
@@ -333,6 +335,7 @@ window.chrome = function() {
 		loadFirstPage: loadFirstPage,
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
+		isSpinning: isSpinning,
 		showNotification: showNotification,
 		goBack: goBack,
 		goForward: goForward,
