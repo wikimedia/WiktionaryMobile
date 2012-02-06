@@ -180,10 +180,10 @@ window.chrome = function() {
 
 	function toggleForward() {
 		// Length starts from 1, indexes don't.
-		if (currentHistoryIndex < pageHistory.length - 1) {
-			$('#forwardCmd').attr('disabled', 'false') 
+		if (currentHistoryIndex < (pageHistory.length - 1)) {
+			$('#forwardCmd').removeAttr('disabled'); 
 		} else {
-			$('#forwardCmd').attr('disabled', 'true');
+			$('#forwardCmd').attr('disabled', 'disabled');
 		}
 	}
 

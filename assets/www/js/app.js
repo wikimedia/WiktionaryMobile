@@ -50,9 +50,9 @@ window.app = function() {
 						loadLocalPage('error.html');
 					}
 					languageLinks.clearLanguages();
-					$('#savePageCmd').attr('disabled', 'true');
+					$('#savePageCmd').attr('disabled', 'disabled');
 					console.log('disabling language');
-					$('#languageCmd').attr('disabled', 'true');
+					$('#languageCmd').attr('disabled', 'disabled');
 				}
 			});
 		};
@@ -116,7 +116,7 @@ window.app = function() {
 		console.log("navigating to " + url);
 		// Enable change language - might've been disabled in a prior error page
 		console.log('enabling language');
-		$('#languageCmd').attr('disabled', 'false');  
+		$('#languageCmd').removeAttr('disabled');  
 		chrome.showContent();
 	}
 
