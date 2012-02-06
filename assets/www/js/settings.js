@@ -2,6 +2,8 @@ window.appSettings = function() {
 	var fontSizes = [];	
 
 	function showSettings(callback) {
+		var requestUrl = "https://en.wiktionary.org/w/api.php?action=sitematrix&format=json";
+
 		if(fontSizes.length == 0) {
 			fontSizes = [
 				{value: '75%', name: mw.message('settings-font-size-smaller').plain() },
@@ -37,6 +39,7 @@ window.appSettings = function() {
 		chrome.hideContent();
 		$('#settings').localize().show();
 		chrome.doFocusHack();                                   
+		chrome.doScrollHack('#settings .scroller');
 	}
 
 	function onContentLanguageChanged() {

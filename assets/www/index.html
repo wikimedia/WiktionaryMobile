@@ -22,7 +22,6 @@
 
 	<!-- app logic -->
   <script type="text/javascript" charset="utf-8" src="js/wiktionary.js"></script>
-  <script type="text/javascript" charset="utf-8" src="js/languages.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/network.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/templates.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
@@ -94,39 +93,23 @@
 						<span class="didYouMeanResult">{{title}}</span>
 					</a>
 				</div>	
-				{{#pages}}
-					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
-						<a class="listItem searchItem">
-							<span class="iconSearchResult"></span>
-							<span class="text deleteEnabled">
-								{{title}}
-							</span>
-						</a>	
-					</div>
-				{{/pages}}
 			{{/didyoumean}}
-			{{^didyoumean}}
-				{{#pages}}
-					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
-						<a class="listItem searchItem">
-							<span class="iconSearchResult"></span>
-							<span class="text deleteEnabled">
-								{{title}}
-							</span>
-						</a>	
-					</div>
-				{{/pages}}
-				{{^pages}}
-					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
-						<a class="listItem searchItem">
-							<span class="iconSearchResult"></span>
-							<span class="text deleteEnabled"><msg key="search-results-no-results"></msg></span>
-						</a>
-					</div>
-				{{/pages}}
-			{{/didyoumean}}
-			<div class="listItemContainer closeSearch">
-				<div class="listItem"><msg key="search-results-close"></msg></div>
+			{{#pages}}
+				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+					<a class="listItem searchItem">
+						<span class="iconSearchResult"></span>
+						<span class="text deleteEnabled">
+							{{title}}
+						</span>
+					</a>	
+				</div>
+			{{/pages}}
+			<div class="listItemContainer" id="doFullSearch">
+				<a class="listItem">
+					<span class="text">
+						<msg key="do-fulltext-search"></msg>
+					</span>
+				</a>
 			</div>
 		</script>
 

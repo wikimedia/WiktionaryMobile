@@ -2,7 +2,6 @@
 <resources>
     <string name="hello">Hello World, WiktionaryActivity!</string>
     <string name="app_name">Wiktionary</string>
-    <string name="search_hint">Current location</string>
     <string name="search_description">Wiktionary app</string>
     <string name="search_hint_wiki">Search Wiktionary</string>
 </resources>

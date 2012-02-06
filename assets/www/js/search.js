@@ -1,8 +1,8 @@
 window.search = function() {
 	function performSearch(term, isSuggestion) {
-		if($('#search').hasClass('inProgress')) {
+		if(chrome.isSpinning()) {
 			network.stopCurrentRequest();
-			$('#search').removeClass('inProgress');
+			chrome.hideSpinner();
 			return;
 		}
 		if (network.isConnected()) {
@@ -12,7 +12,6 @@ window.search = function() {
 			}
 
 			chrome.showSpinner();
-			$('#search').addClass('inProgress');
 
 			if(!isSuggestion) {
 				console.log('for term: ' + term);
@@ -122,8 +121,8 @@ window.search = function() {
 		app.navigateToPage(url);
 	}
 
-	function onCloseSearchResults() {
-		chrome.hideOverlays();
+	function onDoFullSearch() {
+		performSearch($("#searchParam").val(), false);
 	}
 
 	function renderResults(results, didyoumean) {
@@ -149,21 +148,8 @@ window.search = function() {
 			}
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
-		$(".closeSearch").click(onCloseSearchResults);
-		// Replace icon of savd pages in search suggestions
-		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
-			$("#resultList .listItemContainer").each(function() {
-				var container = this;
-				var url = $(this).attr('data-page-url');
-				savedPagesDB.exists(url, function(exists) {
-					if(exists) {
-						$(container).find(".iconSearchResult").removeClass("iconSearchResult").addClass("iconSavedPage");
-					}
-				});
-			});
-		});
-
-		$('#search').removeClass('inProgress');
+		$("#doFullSearch").click(onDoFullSearch);
+		console.log($("#doFullSearch").html());
 		chrome.hideSpinner();
 		chrome.hideOverlays();
 
