@@ -132,7 +132,8 @@ window.chrome = function() {
 	}
 	
 	function playSound() {
-		playAudio("http://upload.wikimedia.org/wikipedia/commons/5/5b/En-uk-welcome.ogg");
+		mediaPlayer.findMedia();
+		
 	}
 
 	function loadFirstPage(disableReloadHist) {
