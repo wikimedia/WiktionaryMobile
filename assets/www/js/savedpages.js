@@ -18,8 +18,9 @@ window.savedPages = function() {
 						app.navigateToPage(url, {
 							cache: true,
 							updateHistory: false
+						}).then(function() { 
+							chrome.showNotification(mw.message('page-saved', title).plain());
 						});
-						chrome.showNotification(mw.message('page-saved', title).plain());
 					}
 				}
 			});

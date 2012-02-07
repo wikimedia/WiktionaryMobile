@@ -1,5 +1,6 @@
 window.app = function() {
 	function loadCachedPage (url) {
+		var d = $.Deferred();
 		// Hide the iframe until the stylesheets are loaded,
 		// to avoid flash of unstyled text.
 		// Instead we're hidden, which also sucks.
@@ -16,8 +17,9 @@ window.app = function() {
 			});
 		};
 		var gotPath = function(cachedPage) {
-			loadPage('file://' + cachedPage.file, url, function() {
+			loadPage('file://' + cachedPage.file, url).then(function() {
 				replaceRes();
+				d.resolve();
 			});
 		}
 		var gotError = function(error) {
@@ -27,9 +29,11 @@ window.app = function() {
 			// navigator.app.exitApp();
 		}
 		window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
+		return d;
 	}
 
-	function loadPage(url, origUrl, callback) {
+	function loadPage(url, origUrl) {
+		var d = $.Deferred();
 		origUrl = origUrl || url;
 		console.log('hideAndLoad url ' + url);
 		console.log('hideAndLoad origUrl ' + origUrl);
@@ -38,10 +42,8 @@ window.app = function() {
 				url: url, 
 				success: function(data) {
 						chrome.renderHtml(data, origUrl);
-						if(callback) {
-							callback();
-						}
 						chrome.onPageLoaded();
+						d.resolve();
 					},
 				error: function(xhr) {
 					if(xhr.status == 404) {
@@ -66,14 +68,18 @@ window.app = function() {
 		} else {
 			doRequest();
 		}
+		return d;
 	}
 
 	function loadLocalPage(page) {
+		var d = $.Deferred();
 		$('base').attr('href', 'file:///android_asset/www/');
 		$('#main').load(page, function() {
 			$('#main').localize();
 			chrome.onPageLoaded();
+			d.resolve();
 		});
+		return d;
 	}
 
 	function urlForTitle(title) {
@@ -98,14 +104,15 @@ window.app = function() {
 
 
 	function navigateToPage(url, options) {
+		var d = $.Deferred();
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
 		$('#searchParam').val('');
 		chrome.showSpinner();
 		
 		if (options.cache) {
-			loadCachedPage(url);
+			d = loadCachedPage(url);
 		} else {
-			loadPage(url);
+			d = loadPage(url);
 		}
 		if (options.updateHistory) {
 			currentHistoryIndex += 1;
@@ -118,6 +125,7 @@ window.app = function() {
 		console.log('enabling language');
 		$('#languageCmd').attr('disabled', 'false');  
 		chrome.showContent();
+		return d;
 	}
 
 	function getCurrentUrl() {
