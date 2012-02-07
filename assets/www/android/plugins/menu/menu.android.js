@@ -32,7 +32,12 @@ SimpleMenu.prototype.loadMenu = function(menu, triggers, win, fail)
     item.icon = commands[i].getAttribute('icon');
     item.action = commands[i].getAttribute('action');
     item.label = commands[i].getAttribute('label');
-    item.disabled = commands[i].getAttribute('disabled');
+    var disabled = commands[i].getAttribute('disabled');
+    if(disabled == 'disabled')
+    	disabled = true;
+    if(disabled == 'null')
+    	disabled = false;    
+    item.disabled = disabled;
     this.menu.push(item);
   }
   var setRefresh = this.setRefresh;
