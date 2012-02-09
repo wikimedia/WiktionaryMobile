@@ -1,7 +1,4 @@
 /*.properties
-bin/*
-gen/*
-
 /.settings
 /bin
 /gen
@@ -18,4 +15,3 @@ lint.xml
 *.perspective
 *.perspectivev3
 xcuserdata
-
