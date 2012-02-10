@@ -1,11 +1,6 @@
 package org.wikipedia;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-//import android.util.Log;
-//import android.webkit.WebView;
 
 import com.phonegap.DroidGap;
 
