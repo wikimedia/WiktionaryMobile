@@ -28,12 +28,6 @@ public class WikipediaActivity extends DroidGap {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // NearBy shit
-		SharedPreferences preferences = getSharedPreferences("nearby", MODE_PRIVATE);
-		SharedPreferences.Editor editor = preferences.edit();
-		editor.remove("doSearchNearBy");
-		editor.commit();
-		
         super.loadUrl("file:///android_asset/www/index.html");
         this.webViewClient = new WikipediaWebViewClient(this);
         this.appView.setWebViewClient(this.webViewClient);
