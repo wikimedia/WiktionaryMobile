@@ -9,7 +9,7 @@ window.chrome = function() {
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
 		'word-of-the-day': function() { loadFirstPage(true); },
-		'play-sound': function() { playSound(); }
+		'listen-sound': function() { playSound(); }
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
@@ -132,7 +132,8 @@ window.chrome = function() {
 	}
 	
 	function playSound() {
-		mediaPlayer.findMedia();
+		audioPlayer.createMenuArray();
+		
 		
 	}
 
@@ -186,6 +187,7 @@ window.chrome = function() {
 		$('#settings').hide();
 		$('#about-page-overlay').hide();
 		$('#langlinks').hide();
+		$('#audiolinks').hide();
 		$('html').removeClass('overlay-open');
 	}
 
@@ -322,7 +324,8 @@ window.chrome = function() {
 		toggleForward();
 		updateMenuState(menu_handlers);
 		$('#search').removeClass('inProgress');        
-		chrome.hideSpinner();  
+		chrome.hideSpinner();
+		audioPlayer.getMediaList();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
 	
