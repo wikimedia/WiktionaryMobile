@@ -89,9 +89,10 @@ window.chrome = function() {
 			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
 			/* Split language string about '-' */
 			var lan_arr = (preferencesDB.get('locale')).split('-');
-			var spe_arr = new Array("arc","ar","ckb","dv","fa","iw","khw","ks","mzn","pnb","ps","sd","ug","ur","ji");
-			for(a=0;a<15;a++){
-				if(lan_arr[0]==spe_arr[a]){
+			var lan_arr_nor = l10n.normalizeLanguageCode(lan_arr[0]);
+			var spe_arr = new Array("arc","ar","ckb","dv","fa","he","khw","ks","mzn","pnb","ps","sd","ug","ur","yi");
+			for(a=0;a < spe_arr.length;a++){
+				if(lan_arr_nor==spe_arr[a]){
 					$("body").attr('dir','rtl');
 				}
 			}
