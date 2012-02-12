@@ -310,6 +310,7 @@ header
 
 .titlebarItem {
 	margin-top:12px;
+	padding-left: 32px;
 }
 
 .closeButton.active, .cleanButton.active {
@@ -317,16 +318,15 @@ header
 }
 
 .closeButton {
-	background: url(image/button-light-close.png) 6px 10px no-repeat;
-	background-size: 32px;
+	background: url(image/button-dark-back.png) 6px 11px no-repeat;
+	background-size: 20px 31px;
 	height: 52px;
 	margin-top: 0px;
 	position: absolute;
-	right: 0px;
-	top: 0px;
+	left: 0;
+	top: 0;
 	width: 44px;
 	border: 0;
-	border-left: 1px solid #777;
 }
 
 .cleanButton {
@@ -335,8 +335,8 @@ header
 	height: 52px;
 	margin-top: 0px;
 	position: absolute;
-	right: 44px;
-	top: 0px;
+	right: 0;
+	top: 0;
 	width: 44px;
 	border: 0;
 	border-left: 1px solid #777;
