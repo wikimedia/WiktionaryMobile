@@ -3,7 +3,6 @@ package org.wiktionary;
 import java.net.URLEncoder;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.phonegap.DroidGap;
