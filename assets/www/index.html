@@ -153,6 +153,16 @@
 			</div>
 			{{/languages}}
 		</script>
+		
+		<script type="text/html" id="audio-list-template">
+			{{#listen}}
+			<div class="listItemContainer" data-page-url="{{url}}">
+				<a class="listItem audioLink">
+					<span class="text">{{name}}</span>
+				</a>
+			</div>
+			{{/listen}}
+		</script>
 
 	</div>
 
@@ -245,6 +255,19 @@
 			<div id="langList"></div>
 		</div>
 	</div>
+	
+	
+	<div id="audiolinks">
+		<header>
+			<div class="titlebar">
+				<div class="titlebarItem"><msg key="audiolinks-title">Listen in...</msg></div>
+				<button class="titlebarItem closeButton" title-msg="audiolinks-close"></button>
+			</div>
+		</header>
+		<div class="scroller">
+			<div id="audioList"></div>
+		</div>
+	</div>
 
 	<div id="content" class="scroller">
 		<div id="main"></div>
@@ -255,12 +278,12 @@
 		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="view-history" />
 		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="save-page" />
 		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="view-saved-pages" />
-		<command type="command" id="sharePageCmd" disabled="false" action="share-page" />
+		<command type="command" id="soundCmd" disabled="false" action="listen-sound" />
 		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="go-forward" />
 		<command type="command" id="selectTextCmd" disabled="false" action="select-text" />
 		<command type="command" id="settingsCmd" icon="optionSettings.png" disabled="false" action="view-settings" />
-		<command type="command" id="soundCmd" disabled="false" action="play-sound" />
-    <command type="command" id="WOTDCmd" disabled="false" action="word-of-the-day" />
+		<command type="command" id="sharePageCmd" disabled="false" action="share-page" />
+		<command type="command" id="WOTDCmd" disabled="false" action="word-of-the-day" />
 	</menu>
 
 </body>
