@@ -93,6 +93,8 @@ window.chrome = function() {
 				$('#mainHeader, #menu').localize();
 			});
 			l10n.initLanguages();
+			
+			updateMenuState(menu_handlers);
 
 			$(".titlebarIcon").bind('touchstart', function() {
 				homePage();
@@ -248,7 +250,7 @@ window.chrome = function() {
 			$('body').unbind('touchmove', onTouchEnd);
 		}
 	  
-		function onTouchStart() {   
+		function onTouchStart() {
 			$(this).addClass('active');
 			$('body').bind('touchend', onTouchEnd);
 			$('body').bind('touchmove', onTouchEnd);
