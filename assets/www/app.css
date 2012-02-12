@@ -45,7 +45,7 @@ header
 	z-index:30000;
 }
 
-#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay
+#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay, #audiolinks
 {
 	background-color:white;
 	width:100%;
@@ -565,7 +565,7 @@ header
 	.goodscroll.overlay-open #content {
 		left: 320px;
 	}
-	.goodscroll #savedPages, .goodscroll #history, .goodscroll #settings, .goodscroll #searchresults, .goodscroll #langlinks, .goodscroll #about-page-overlay {
+	.goodscroll #savedPages, .goodscroll #history, .goodscroll #settings, .goodscroll #searchresults, .goodscroll #langlinks, .goodscroll #about-page-overlay, .goodscroll #audiolinks {
 		width: 320px;
 	}
 	.goodscroll .scroller {
