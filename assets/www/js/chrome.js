@@ -87,6 +87,14 @@ window.chrome = function() {
 
 		preferencesDB.initializeDefaults(function() { 
 			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
+			/* Split language string about '-' */
+			var lan_arr = (preferencesDB.get('locale')).split('-');
+			var spe_arr = new Array("arc","ar","ckb","dv","fa","iw","khw","ks","mzn","pnb","ps","sd","ug","ur","ji");
+			for(a=0;a<15;a++){
+				if(lan_arr[0]==spe_arr[a]){
+					$("body").attr('dir','rtl');
+				}
+			}
 			
 			// Do localization of the initial interface
 			$(document).bind("mw-messages-ready", function() {
