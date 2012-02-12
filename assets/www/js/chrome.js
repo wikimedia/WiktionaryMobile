@@ -133,8 +133,6 @@ window.chrome = function() {
 	
 	function playSound() {
 		audioPlayer.createMenuArray();
-		
-		
 	}
 
 	function loadFirstPage(disableReloadHist) {
