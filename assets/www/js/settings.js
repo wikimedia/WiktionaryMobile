@@ -15,14 +15,14 @@ window.appSettings = function() {
 
 		if(locales.length == 0) {
 			$.ajax({
-				type:'GET', 
-				url:requestUrl, 
+				type:'GET',
+				url:requestUrl,
 				dataType: 'json',
 				success:function(results) {
 					var allLocales = results.sitematrix;
 
 					$.each(allLocales, function(key, value) {
-						// Because the JSON result from sitematrix is messed up
+						// Because the JSON result from the sitematrix is messed up
 						if(!isNaN(key)) {
 							if(value.site.some(function(site) { return site.code == "wiki"; })) {
 								locales.push({

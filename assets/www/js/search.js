@@ -121,8 +121,8 @@ window.search = function() {
 		app.navigateToPage(url);
 	}
 
-	function onCloseSearchResults() {
-		chrome.hideOverlays();
+	function onDoFullSearch() {
+		performSearch($("#searchParam").val(), false);
 	}
 
 	function renderResults(results, didyoumean) {
@@ -148,8 +148,8 @@ window.search = function() {
 			}
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
-		$(".closeSearch").click(onCloseSearchResults);
-
+		$("#doFullSearch").click(onDoFullSearch);
+		console.log($("#doFullSearch").html());
 		chrome.hideSpinner();
 		chrome.hideOverlays();
 

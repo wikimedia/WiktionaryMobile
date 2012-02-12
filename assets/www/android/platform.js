@@ -38,9 +38,6 @@ chrome.addPlatformInitializer(function() {
 	function onSearchButton() {
 		//hmmm...doesn't seem to set the cursor in the input field - maybe a browser bug???
 		
-		if($('#searchParam').attr('disabled') == 'true')
-			return;
-		
 		$('#searchParam').focus().addClass('active');
 		$('#searchParam').bind('blur', function() {
 			  $('#searchParam').removeClass('active');
@@ -135,3 +132,6 @@ app.setCaching = function(enabled, success) {
 	}
 }
 
+window.preferencesDB.addOnSet(function(id, value) {
+	window.plugins.preferences.set(id, value, function(){}, function(){});
+});

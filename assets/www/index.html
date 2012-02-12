@@ -11,6 +11,7 @@
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/webkit-sqlite.js"></script>
 
 	<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/zepto.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/hogan.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
@@ -94,39 +95,23 @@
 						<span class="didYouMeanResult">{{title}}</span>
 					</a>
 				</div>	
-				{{#pages}}
-					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
-						<a class="listItem searchItem">
-							<span class="iconSearchResult"></span>
-							<span class="text deleteEnabled">
-								{{title}}
-							</span>
-						</a>	
-					</div>
-				{{/pages}}
 			{{/didyoumean}}
-			{{^didyoumean}}
-				{{#pages}}
-					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
-						<a class="listItem searchItem">
-							<span class="iconSearchResult"></span>
-							<span class="text deleteEnabled">
-								{{title}}
-							</span>
-						</a>	
-					</div>
-				{{/pages}}
-				{{^pages}}
-					<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
-						<a class="listItem searchItem">
-							<span class="iconSearchResult"></span>
-							<span class="text deleteEnabled"><msg key="search-results-no-results"></msg></span>
-						</a>
-					</div>
-				{{/pages}}
-			{{/didyoumean}}
-			<div class="listItemContainer closeSearch">
-				<div class="listItem"><msg key="search-results-close"></msg></div>
+			{{#pages}}
+				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+					<a class="listItem searchItem">
+						<span class="iconSearchResult"></span>
+						<span class="text deleteEnabled">
+							{{title}}
+						</span>
+					</a>	
+				</div>
+			{{/pages}}
+			<div class="listItemContainer" id="doFullSearch">
+				<a class="listItem">
+					<span class="text">
+						<msg key="do-fulltext-search"></msg>
+					</span>
+				</a>
 			</div>
 		</script>
 
@@ -274,7 +259,7 @@
 	</div>  
 
 	<menu id="appMenu" type="context">
-		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="false" action="read-in" />
+		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="true" action="read-in" />
 		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="view-history" />
 		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="save-page" />
 		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="view-saved-pages" />
