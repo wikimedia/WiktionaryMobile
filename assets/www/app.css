@@ -268,9 +268,9 @@ header
 	position: absolute;
 	top: 8px;
 	left: 8px;
-	background: url(image/spr.png) -96px -42px no-repeat,
-		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
-	background-size: 160px 240px;
+	background: url(image/button-light-wiki.png) no-repeat,
+				-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#444));
+	background-size: 40px;
 	height: 37px;
 	width: 40px;
 	border: 1px solid #333;
@@ -278,8 +278,8 @@ header
 }
 
 .titlebarIcon.active {
-	background: url(image/spr.png) -96px -42px no-repeat,
-		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666)) !important;
+	background: url(image/button-light-wiki.png) no-repeat,
+		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), to(#777));
 }
 
 #wHolder {
@@ -317,8 +317,8 @@ header
 }
 
 .closeButton {
-	background: url(image/spr.png) -92px 14px no-repeat;
-	background-size: 160px 240px;
+	background: url(image/button-light-close.png) 6px 10px no-repeat;
+	background-size: 32px;
 	height: 52px;
 	margin-top: 0px;
 	position: absolute;
@@ -330,8 +330,8 @@ header
 }
 
 .cleanButton {
-	background: url(image/spr.png) -92px 14px no-repeat;
-	background-size: 160px 240px;
+	background: url(image/button-light-close.png) 6px 10px no-repeat;
+	background-size: 32px;
 	height: 52px;
 	margin-top: 0px;
 	position: absolute;
