@@ -17,9 +17,12 @@ window.geo = function() {
 		
 		if (!geo.map) {
 			geo.map = new L.Map('map');
-			var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			//var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			var tiles = new L.TileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
 				maxZoom: 18,
-				attribution: 'Map data &copy; 2011 OpenStreetMap contributors'
+				subdomains: '1234', // for MapQuest tiles
+				//attribution: 'Map data &copy; 2011 OpenStreetMap contributors'
+				attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data &copy; 2012 OpenStreetMap contributors'
 			});
 			geo.map.addLayer(tiles);
 		}
