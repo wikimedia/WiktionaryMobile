@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 		package="org.wikipedia" 
 		android:versionCode="4" 
-		android:versionName="1.1alpha1"
+		android:versionName="1.1beta1"
 		android:installLocation="auto">
 	<supports-screens android:xlargeScreens="true" android:largeScreens="true"
 		android:normalScreens="true" android:smallScreens="true"

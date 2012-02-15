@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v1.1 ##
+## v1.1alpha1 ##
 
 - Integration with QuickSearch in Android
 - Open Wikipedia links from other apps in the Wikipedia App
@@ -16,3 +16,10 @@
 - Major code-refactor, still needs more love :)
 - Improved tablet experienced
 - Move to using Hogan.js for templating
+
+## v1.1beta1 ##
+
+- Switch to MapQuest's OSM tiles
+- Style update
+- Removed dependency on Google Proprietary APIs
+- QuciSearch integration in Android now works across languages
