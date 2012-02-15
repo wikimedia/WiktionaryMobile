@@ -22,4 +22,7 @@
 - Switch to MapQuest's OSM tiles
 - Style update
 - Removed dependency on Google Proprietary APIs
-- QuciSearch integration in Android now works across languages
+- QuckSearch integration in Android now works across languages
+- UI works slightly better in RTL languages. Still slightly buggy
+- Menu items initialize faster
+- Confusing highlights when scrolling lists removed
