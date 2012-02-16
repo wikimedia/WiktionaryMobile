@@ -12,7 +12,7 @@ window.appSettings = function() {
 				{value: '125%', name: mw.message('settings-font-size-larger').plain() }
 			];
 		}
-
+			
 		if(locales.length == 0) {
 			$.ajax({
 				type:'GET', 
@@ -32,10 +32,12 @@ window.appSettings = function() {
 							}
 						}
 					});
+					chrome.hideSpinner();
 					renderSettings();
 				}
 			});
 		} else {
+			chrome.hideSpinner();
 			renderSettings();
 		}
 
