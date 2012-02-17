@@ -13,8 +13,11 @@ function wm_reveal_for_hash( hash ) {
 }
 
 function wm_toggle_section( section_id ) {
-	var b = document.getElementById( 'section_' + section_id ),
-		bb = b.getElementsByTagName( 'button' );
+	var b = document.getElementById( 'section_' + section_id );
+	if (b === null) {
+		return;
+	}
+	var bb = b.getElementsByTagName( 'button' );
 	for ( var i = 0; i <= 1; i++ ) {
 		var s = bb[i].style;
 		s.display = s.display == 'none' || ( i && !s.display ) ? 'inline-block' : 'none';

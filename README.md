@@ -1,3 +1,5 @@
+This project has been forked from the <a href="https://github.com/wikimedia/WikipediaMobile">WikipediaMobile</a> project.
+
 GETTING STARTED:
 
 1. Setup your development environment
