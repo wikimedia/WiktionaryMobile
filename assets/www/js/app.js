@@ -52,6 +52,7 @@ window.app = function() {
 						loadLocalPage('error.html');
 					}
 					languageLinks.clearLanguages();
+					audioPlayer.clearMenuArray();
 					$('#savePageCmd').attr('disabled', 'disabled');
 					console.log('disabling language');
 					$('#languageCmd').attr('disabled', 'disabled');
