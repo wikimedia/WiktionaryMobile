@@ -78,7 +78,7 @@ window.audioPlayer = function() {
 	function getMediaUrl(filename) {
 		
 		//this get request using (app.baseURL + "/w/api.php") was handing back unusable "https" urls, should investigate getting a non https version of app.baseURL
-		var requestUrl = "http://en.m.wiktionary.org/w/api.php";
+		var requestUrl = "http://en.m." + PROJECTNAME + ".org/w/api.php";
 		
 		$.ajax({
 			type: 'GET',

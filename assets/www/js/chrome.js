@@ -91,13 +91,24 @@ window.chrome = function() {
 		//PhoneGap.UsePolling = true;
 
 		preferencesDB.initializeDefaults(function() { 
-			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wiktionary.org';
+			app.baseURL = app.baseUrlForLanguage(preferencesDB.get('language'));
+			/* Split language string about '-' */
+			var lan_arr = (preferencesDB.get('locale')).split('-');
+			var lan_arr_nor = l10n.normalizeLanguageCode(lan_arr[0]);
+			var spe_arr = new Array("arc","ar","ckb","dv","fa","he","khw","ks","mzn","pnb","ps","sd","ug","ur","yi");
+			for(a=0;a < spe_arr.length;a++){
+				if(lan_arr_nor==spe_arr[a]){
+					$("body").attr('dir','rtl');
+				}
+			}
 			
 			// Do localization of the initial interface
 			$(document).bind("mw-messages-ready", function() {
 				$('#mainHeader, #menu').localize();
 			});
 			l10n.initLanguages();
+			
+			updateMenuState(menu_handlers);
 
 			$(".titlebarIcon").bind('touchstart', function() {
 				homePage();
@@ -259,6 +270,7 @@ window.chrome = function() {
 
 	// Hack to make sure that things in focus actually look like things in focus
 	function doFocusHack() {
+		var scrollEnd = false;
 		var applicableClasses = [
 			'.deleteButton',
 			'.listItem',
@@ -272,21 +284,33 @@ window.chrome = function() {
 			applicableClasses[key] += ':not(.activeEnabled)';
 		}
 		console.log(applicableClasses);
+
+		function onTouchMove() {
+			scrollEnd = true;
+		}
+
 		function onTouchEnd() {
-			$('.active').removeClass('active');
+			if(!scrollEnd)	{
+				$(this).addClass('active');
+				setTimeout(function() {
+					$('.active').removeClass('active');
+				} , 150 ) ;				
+			}
 			$('body').unbind('touchend', onTouchEnd);
-			$('body').unbind('touchmove', onTouchEnd);
+			$('body').unbind('touchmove', onTouchMove);
 		}
 	  
 		function onTouchStart() {   
-			$(this).addClass('active');
 			$('body').bind('touchend', onTouchEnd);
-			$('body').bind('touchmove', onTouchEnd);
-		}
-	  
+			$('body').bind('touchmove', onTouchMove);
+			scrollEnd = false;	
+		}			
+
 		setTimeout(function() {
 			$(applicableClasses.join(',')).each(function(i) {
 				$(this).bind('touchstart', onTouchStart);
+				$(this).bind('touchmove', onTouchMove);
+				$(this).bind('touchend', onTouchEnd);
 				$(this).addClass('activeEnabled');
 			});
 		}, 500);
@@ -310,7 +334,7 @@ window.chrome = function() {
 				return;
 			}
 
-			if (url.match(/^https?:\/\/([^\/]+)\.wiktionary\.org\/wiki\//)) {
+			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
 				// ...and load it through our intermediate cache layer.
 				app.navigateToPage(url);
 			} else {
