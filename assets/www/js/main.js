@@ -2,7 +2,7 @@ var currentHistoryIndex = -1;
 
 var pageHistory = [];
 
-window.PROJECTNAME = 'wikipedia';
+window.PROJECTNAME = 'wiktionary';
 
 function init() {
 	document.addEventListener("deviceready", function() {chrome.initialize(); }, true);

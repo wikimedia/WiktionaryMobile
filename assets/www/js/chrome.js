@@ -334,11 +334,7 @@ window.chrome = function() {
 				return;
 			}
 
-<<<<<<< HEAD
-			if (url.match(/^https?:\/\/([^\/]+)\.wiktionary\.org\/wiki\//)) {
-=======
 			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
->>>>>>> 11abc04bc031773c0b3ee570d2927d313f67fc22
 				// ...and load it through our intermediate cache layer.
 				app.navigateToPage(url);
 			} else {
