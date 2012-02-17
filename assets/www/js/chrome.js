@@ -8,7 +8,7 @@ window.chrome = function() {
 		'share-page': function() { sharePage(); },
 		'go-forward': function() { goForward(); },
 		'select-text': function() { selectText(); },
-		'view-settings': function() { showSettings(); },
+		'view-settings': function() { appSettings.showSettings(); },
 	};
 
 	// List of functions to be called on a per-platform basis before initialize
@@ -86,7 +86,7 @@ window.chrome = function() {
 		//PhoneGap.UsePolling = true;
 
 		preferencesDB.initializeDefaults(function() { 
-			app.baseURL = 'https://' + preferencesDB.get('language') + '.m.wikipedia.org';
+			app.baseURL = app.baseUrlForLanguage(preferencesDB.get('language'));
 			/* Split language string about '-' */
 			var lan_arr = (preferencesDB.get('locale')).split('-');
 			var lan_arr_nor = l10n.normalizeLanguageCode(lan_arr[0]);
@@ -304,7 +304,7 @@ window.chrome = function() {
 				return;
 			}
 
-			if (url.match(/^https?:\/\/([^\/]+)\.wikipedia\.org\/wiki\//)) {
+			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
 				// ...and load it through our intermediate cache layer.
 				app.navigateToPage(url);
 			} else {
@@ -335,12 +335,6 @@ window.chrome = function() {
 		if (!leaveInPlace) {
 			$(element)[0].scrollTop = 0;
 		}
-	}
-
-	/* Menu handler for the settings page. */
-	function showSettings(){
-		chrome.showSpinner();
-		appSettings.showSettings();
 	}
 
 	return {
