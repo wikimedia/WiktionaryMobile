@@ -87,7 +87,7 @@ window.app = function() {
 	}
 
 	function baseUrlForLanguage(lang) {
-		return 'https://' + lang + '.' + PROJECTNAME + '.org';
+		return 'https://' + lang + '.m.' + PROJECTNAME + '.org';
 	}
 
 	function setContentLanguage(language) {
