@@ -87,9 +87,13 @@ window.app = function() {
 		return app.baseURL + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
 	}
 
+	function baseUrlForLanguage(lang) {
+		return 'https://' + lang + '.m.' + PROJECTNAME + '.org';
+	}
+
 	function setContentLanguage(language) {
 		preferencesDB.set('language', language);
-		app.baseURL = 'https://' + language + '.m.wiktionary.org';
+		app.baseURL = app.baseUrlForLanguage(language);
 	}
 
 	function setFontSize(size) {
@@ -148,6 +152,7 @@ window.app = function() {
 		getCurrentUrl: getCurrentUrl,
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
+		baseUrlForLanguage: baseUrlForLanguage,
 		setCaching: setCaching
 	};
 

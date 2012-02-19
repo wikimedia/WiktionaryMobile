@@ -2,6 +2,8 @@ var currentHistoryIndex = -1;
 
 var pageHistory = [];
 
+window.PROJECTNAME = 'wiktionary';
+
 function init() {
 	document.addEventListener("deviceready", function() {chrome.initialize(); }, true);
 }
