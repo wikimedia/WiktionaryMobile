@@ -66,6 +66,7 @@ window.chrome = function() {
 		});
 
 		languageLinks.parseAvailableLanguages($div);
+		audioPlayer.getMediaList();
 		
 		chrome.doScrollHack('#content');
 
@@ -354,8 +355,7 @@ window.chrome = function() {
 		toggleForward();
 		updateMenuState(menu_handlers);
 		$('#search').removeClass('inProgress');        
-		chrome.hideSpinner();  
-		audioPlayer.getMediaList();  
+		chrome.hideSpinner();    
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
 	

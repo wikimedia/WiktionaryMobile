@@ -10,13 +10,12 @@ window.audioPlayer = function() {
 	 *
 	 */
 	function playAudio (AudioSource) {
-		currentMedia = new Media (AudioSource);
+		currentMedia = new Media (AudioSource, releaseMedia);
 		currentMedia.play();	
 	}
 	
 	/**
-	 * TODO: find where to put this?...
-	 * Call this when closing program to release OS audio resources
+	 * Function releases OS audio resources
 	 *
 	 */
 	function releaseMedia () {
@@ -29,7 +28,7 @@ window.audioPlayer = function() {
 	 * Function gets the title of the current page, and makes call to retrieve names
 	 * and URLs of all .ogg files associated with that page, placing names into availableMedia.
 	 * 
-	 * This is currently called in chrome.onPageLoaded() and not on demand, as the internet could 
+	 * This is currently called in chrome.renderHtml() and not on demand, as the internet could 
 	 * be too slow for the request to get back by the time the menu is up, showing a blank menu.
 	 */		
 	function getMediaList() {
@@ -50,6 +49,7 @@ window.audioPlayer = function() {
 			success: function(data) {
 				availableMedia = [];
 				availableUrl = [];
+				var audioIndex = 0;
 				for(var id in data.query.pages){
 					for(var im in data.query.pages[id].images){
 					
@@ -57,7 +57,8 @@ window.audioPlayer = function() {
 						
 						if (filename.search(ending) != -1){
 							availableMedia.push(filename);
-							getMediaUrl(filename);
+							getMediaUrl(filename,audioIndex);
+							audioIndex += 1;
 
 						}
 					}
@@ -75,7 +76,7 @@ window.audioPlayer = function() {
 	 * placing direct URL into availableUrl
 	 *
 	 */	
-	function getMediaUrl(filename) {
+	function getMediaUrl(filename, audioIndex) {
 		
 		//this get request using (app.baseURL + "/w/api.php") was handing back unusable "https" urls, should investigate getting a non https version of app.baseURL
 		var requestUrl = "http://en.m." + PROJECTNAME + ".org/w/api.php";
@@ -96,7 +97,7 @@ window.audioPlayer = function() {
 					for (var im in data.query.pages[id].imageinfo){		
 						
 						var fileUrl = data.query.pages[id].imageinfo[im].url;
-						availableUrl.push(fileUrl);					
+						availableUrl[audioIndex] = fileUrl;					
 						break;
 					}
 				}
@@ -137,6 +138,13 @@ window.audioPlayer = function() {
 		showAvailableAudio();
 	}
 	
+	/**
+	 * Clears audio files available. Also blanks out the 'Listen in' menu item
+	 */
+	function clearMenuArray() {
+		menuArray = [];
+	}
+	
 	
 	/**
 	 * plays file that is clicked in the menu
@@ -152,7 +160,8 @@ window.audioPlayer = function() {
 		playAudio: playAudio,
 		releaseMedia: releaseMedia,
 		getMediaList: getMediaList,
-		createMenuArray: createMenuArray
+		createMenuArray: createMenuArray,
+		clearMenuArray: clearMenuArray
 	};
 
 }();
