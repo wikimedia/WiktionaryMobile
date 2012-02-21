@@ -74,7 +74,7 @@ window.app = function() {
 	function loadLocalPage(page) {
 		var d = $.Deferred();
 		$('base').attr('href', 'file:///android_asset/www/');
-		$('#main').load(page, function() {
+		$('#main').load(ROOT_URL + page, function() {
 			$('#main').localize();
 			chrome.onPageLoaded();
 			d.resolve();
