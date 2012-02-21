@@ -16,6 +16,9 @@ window.geo = function() {
 		chrome.doFocusHack();
 		
 		if (!geo.map) {
+			// Disable webkit 3d CSS transformations for tile positioning
+			// Causes lots of flicker in PhoneGap for some reason...
+			L.Browser.webkit3d = false;
 			geo.map = new L.Map('map');
 			//var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			var tiles = new L.TileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
