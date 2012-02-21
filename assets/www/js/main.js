@@ -29,6 +29,8 @@ function aboutPage() {
 	$.get(ROOT_URL + 'AUTHORS').then(function(authors) { 
 		$("#about-contributors").text($.trim(authors).split('\n').join(', '));
 		$("#about-credits").html(window.CREDITS.join('<br />'));
+		chrome.hideOverlays();
+		chrome.hideContent();
 		$("#about-page-overlay").localize().show();
 		$("#aboutclose").unbind('click');
 		$("#aboutclose").bind('click', function(){
