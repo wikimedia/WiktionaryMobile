@@ -293,7 +293,7 @@ L.Mixin.Events.fire = L.Mixin.Events.fireEvent;
 		ie6: ie && !window.XMLHttpRequest,
 
 		webkit: webkit,
-		webkit3d: webkit && ('WebKitCSSMatrix' in window) && ('m11' in new window.WebKitCSSMatrix()),
+		webkit3d: false, // broken in PhoneGap 1.4.1! // webkit && ('WebKitCSSMatrix' in window) && ('m11' in new window.WebKitCSSMatrix()),
 
 		gecko: ua.indexOf("gecko") !== -1,
 
