@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## V1.0 ##
+
+- First release .. woot!
+- Save article to read later or offline
+- Search articles nearby
+- Share articles using Android "Share" function
+- Read article in a different language
+- Full screen search
+
+## V1.0.1 ##
+
+- Stop using GPS when user exits NearMe activity
+- Better caching support
+
+## V1.0.2 ##
+
+- Making caching far less aggresive
+
+## V1.0.3 ##
+
+- Updating UserAgent to uniquly identify the app
+
 ## v1.1alpha1 ##
 
 - Integration with Android QuickSearch
