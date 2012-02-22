@@ -111,7 +111,10 @@ window.geo = function() {
 			var url = item.wikipediaUrl.replace(/^([a-z0-9-]+)\.wikipedia\.org/, 'https://$1.m.wikipedia.org');
 			var marker = new L.Marker(new L.LatLng(item.lat, item.lng));
 			geo.markers.addLayer(marker);
-			marker.bindPopup('<div onclick="app.navigateToPage(&quot;' + url + '&quot;);hideOverlays();">' +
+			if(!item.summary) {
+				item.summary = "";
+			}
+			marker.bindPopup('<div onclick="app.navigateToPage(&quot;' + url + '&quot;);chrome.hideOverlays();">' +
 			                 '<strong>' + item.title + '</strong>' +
 			                 '<p>' + item.summary + '</p>' +
 			                 '</div>');
