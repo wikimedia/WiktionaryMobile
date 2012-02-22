@@ -3,6 +3,6 @@
     <string name="hello">Hello World, WikipediaActivity!</string>
     <string name="app_name">Wikipedia</string>
     <string name="search_hint_location">Current location</string>
-    <string name="search_description">Wikipedia app</string>
+    <string name="search_description">Article name and text</string>
     <string name="search_hint_wiki">Search Wikipedia</string>
 </resources>
