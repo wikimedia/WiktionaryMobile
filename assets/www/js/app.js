@@ -1,5 +1,23 @@
 window.app = function() {
+
 	function loadCachedPage (url) {
+		// Hide the iframe until the stylesheets are loaded,
+		// to avoid flash of unstyled text.
+		// Instead we're hidden, which also sucks.
+		urlCache.getCachedData(url).then(function(data) {
+			chrome.renderHtml(data, url);
+			chrome.onPageLoaded();
+		});
+		var gotError = function(error) {
+			console.log('Error: ' + error);
+			chrome.hideSpinner();
+			// chrome.showNoConnectionMessage();
+			// navigator.app.exitApp();
+		}
+	}
+
+	function loadCachedPageOld (url) {
+		console.log("Loading cached page: " + url);
 		var d = $.Deferred();
 		// Hide the iframe until the stylesheets are loaded,
 		// to avoid flash of unstyled text.
@@ -10,14 +28,18 @@ window.app = function() {
 			$('#main img').each(function() {
 				var em = $(this);
 				var gotLinkPath = function(linkPath) {
+					console.log("actually replacing for " + JSON.stringify(linkPath));
 					em.attr('src', 'file://' + linkPath.file);
 				}
 				var target = this.src.replace('file:', 'https:');
-				window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
+				console.log("replacing for " + target);
+				window.urlCache.getCachedPathForUrl(target).then(gotLinkPath);
+				//window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 			});
 		};
 		var gotPath = function(cachedPage) {
 			loadPage('file://' + cachedPage.file, url).then(function() {
+				console.log("Supposedly replacing " + JSON.stringify(cachedPage));
 				replaceRes();
 				d.resolve();
 			});
@@ -28,7 +50,10 @@ window.app = function() {
 			// chrome.showNoConnectionMessage();
 			// navigator.app.exitApp();
 		}
-		window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
+		console.log("trying to get cached page");
+		window.urlCache.getCachedPathForUrl(url).then(gotPath);
+		console.log("finished trying");
+		//window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
 		return d;
 	}
 
@@ -73,7 +98,6 @@ window.app = function() {
 
 	function loadLocalPage(page) {
 		var d = $.Deferred();
-		$('base').attr('href', 'file:///android_asset/www/');
 		$('#main').load(ROOT_URL + page, function() {
 			$('#main').localize();
 			chrome.onPageLoaded();
