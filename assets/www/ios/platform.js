@@ -79,6 +79,31 @@ function updateMenuState() {
 	});
 };
 
+// Save page supporting code
+app.loadCachedPage = function (url) {
+	return urlCache.getCachedData(url).then(function(data) {
+		chrome.renderHtml(data, url);
+		chrome.onPageLoaded();
+	}).fail(function(error) {
+		console.log('Error: ' + error);
+		chrome.hideSpinner();
+	});
+}
+
+savedPages.doSave = function(url, title) {
+
+	// Get the entire HTML again
+	// Hopefully this is in cache
+	// What we *really* should be doing is putting all this in an SQLite DataBase. FIXME
+	$.get(url,
+			function(data) {
+				urlCache.saveCompleteHtml(url, data).then(function() {;
+					chrome.showNotification(mw.message('page-saved', title).plain());
+				});
+			}
+		 );
+}
+
 // @Override
 function popupMenu(items, callback, options) {
 	if (options.origin) {

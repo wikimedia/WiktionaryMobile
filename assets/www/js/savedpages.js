@@ -1,5 +1,14 @@
 window.savedPages = function() {
 
+	function doSave(url, title) {
+		app.navigateToPage(url, {
+			cache: true,
+		updateHistory: false
+		}).then(function() { 
+			chrome.showNotification(mw.message('page-saved', title).plain());
+		});
+	}
+
 	function saveCurrentPage() {
 		var MAX_LIMIT = 50;
 
@@ -16,16 +25,7 @@ window.savedPages = function() {
 						alert(mw.message("saved-pages-max-warning").plain());
 					}else{
 						savedPagesDB.save({key: url, title: title});
-						// Get the entire HTML again
-						// Hopefully this is in cache
-						// What we *really* should be doing is putting all this in an SQLite DataBase. FIXME
-						$.get(url,
-							function(data) {
-								urlCache.saveCompleteHtml(url, data).then(function() {;
-								chrome.showNotification(mw.message('page-saved', title).plain());
-								});
-							}
-							);
+						savedPages.doSave(url, title);
 					}
 				}
 			});
@@ -90,6 +90,7 @@ window.savedPages = function() {
 
 	return {
 		showSavedPages: showSavedPages,
-		saveCurrentPage: saveCurrentPage
+		saveCurrentPage: saveCurrentPage,
+		doSave: doSave
 	};
 }();

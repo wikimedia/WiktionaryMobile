@@ -1,45 +1,21 @@
 window.app = function() {
 
 	function loadCachedPage (url) {
-		// Hide the iframe until the stylesheets are loaded,
-		// to avoid flash of unstyled text.
-		// Instead we're hidden, which also sucks.
-		urlCache.getCachedData(url).then(function(data) {
-			chrome.renderHtml(data, url);
-			chrome.onPageLoaded();
-		});
-		var gotError = function(error) {
-			console.log('Error: ' + error);
-			chrome.hideSpinner();
-			// chrome.showNoConnectionMessage();
-			// navigator.app.exitApp();
-		}
-	}
-
-	function loadCachedPageOld (url) {
-		console.log("Loading cached page: " + url);
 		var d = $.Deferred();
-		// Hide the iframe until the stylesheets are loaded,
-		// to avoid flash of unstyled text.
-		// Instead we're hidden, which also sucks.
 		var replaceRes = function() {
 
 			// images
 			$('#main img').each(function() {
 				var em = $(this);
 				var gotLinkPath = function(linkPath) {
-					console.log("actually replacing for " + JSON.stringify(linkPath));
 					em.attr('src', 'file://' + linkPath.file);
 				}
 				var target = this.src.replace('file:', 'https:');
-				console.log("replacing for " + target);
-				window.urlCache.getCachedPathForUrl(target).then(gotLinkPath);
-				//window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
+				window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 			});
 		};
 		var gotPath = function(cachedPage) {
 			loadPage('file://' + cachedPage.file, url).then(function() {
-				console.log("Supposedly replacing " + JSON.stringify(cachedPage));
 				replaceRes();
 				d.resolve();
 			});
@@ -47,13 +23,8 @@ window.app = function() {
 		var gotError = function(error) {
 			console.log('Error: ' + error);
 			chrome.hideSpinner();
-			// chrome.showNoConnectionMessage();
-			// navigator.app.exitApp();
 		}
-		console.log("trying to get cached page");
-		window.urlCache.getCachedPathForUrl(url).then(gotPath);
-		console.log("finished trying");
-		//window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
+		window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
 		return d;
 	}
 
@@ -138,9 +109,9 @@ window.app = function() {
 		chrome.showSpinner();
 		
 		if (options.cache) {
-			d = loadCachedPage(url);
+			d = app.loadCachedPage(url);
 		} else {
-			d = loadPage(url);
+			d = app.loadPage(url);
 		}
 		if (options.updateHistory) {
 			currentHistoryIndex += 1;
@@ -176,7 +147,9 @@ window.app = function() {
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
 		baseUrlForLanguage: baseUrlForLanguage,
-		setCaching: setCaching
+		setCaching: setCaching,
+		loadPage: loadPage,
+		loadCachedPage: loadCachedPage
 	};
 
 	return exports;
