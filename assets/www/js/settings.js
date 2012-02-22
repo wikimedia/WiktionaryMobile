@@ -3,7 +3,8 @@ window.appSettings = function() {
 	var locales = [];
 
 	function showSettings(callback) {
-		var requestUrl = "https://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
+		chrome.showSpinner();
+		var requestUrl = app.baseURL + "/w/api.php?action=sitematrix&format=json";
 
 		if(fontSizes.length == 0) {
 			fontSizes = [
@@ -12,7 +13,7 @@ window.appSettings = function() {
 				{value: '125%', name: mw.message('settings-font-size-larger').plain() }
 			];
 		}
-
+			
 		if(locales.length == 0) {
 			$.ajax({
 				type:'GET', 
@@ -32,10 +33,12 @@ window.appSettings = function() {
 							}
 						}
 					});
+					chrome.hideSpinner();
 					renderSettings();
 				}
 			});
 		} else {
+			chrome.hideSpinner();
 			renderSettings();
 		}
 
