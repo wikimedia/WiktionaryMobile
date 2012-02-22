@@ -16,6 +16,9 @@ window.savedPages = function() {
 						alert(mw.message("saved-pages-max-warning").plain());
 					}else{
 						savedPagesDB.save({key: url, title: title});
+						// Get the entire HTML again
+						// Hopefully this is in cache
+						// What we *really* should be doing is putting all this in an SQLite DataBase. FIXME
 						$.get(url,
 							function(data) {
 								urlCache.saveCompleteHtml(url, data).then(function() {;

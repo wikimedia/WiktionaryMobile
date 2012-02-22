@@ -70,7 +70,7 @@ window.urlCache = function() {
 
 		console.log("Starting to save");
 		var element = $(html);
-
+		var replacements = {};
 		console.log("HTML Parsed");
 		function saveFile(fileEntry) {
 			fileEntry.createWriter(function(writer) {
@@ -85,17 +85,17 @@ window.urlCache = function() {
 		}
 		console.log("About to map stuff");
 
-		//var deferreds = element.find("img").map(function(i, img) {
-			//return urlCache.requestDataUrlForImage(img).then(function(dataURL) {
-				//console.log("Requesting for " + $(img).attr('src'));
-				//$(img).attr("src", dataURL); 
-			//});
-		//});
-
+		// Incredibly wasteful hack going to happen. I'm sorry
+		// I am parsing the entire HTML again, *and* doing string replacement
+		// FIXME: Do only one stupid thing, not two
+		// TODO: Check if Images are actually loaded
 		element.find("img").each(function(i, img) {
-			$(img).attr("src", urlCache.dataUrlForImage(img));
+			replacements[$(img).attr("src")] =  urlCache.dataUrlForImage(img);
 		});
-		
+
+		$.each(replacements, function(href, data) {
+			html = html.replace(href, data);
+		});
 
 		console.log("Done mapping stuff");
 		console.log("Inside the when");
