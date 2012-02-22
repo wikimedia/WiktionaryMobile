@@ -79,6 +79,17 @@
 		NSString* jsString = [NSString stringWithFormat:@"var invokeString = \"%@\";", self.invokeString];
 		[theWebView stringByEvaluatingJavaScriptFromString:jsString];
 	}
+    
+    if ([theWebView respondsToSelector:@selector(scrollView)]) {
+        theWebView.scrollView.scrollEnabled = NO;
+    } else {
+        for (UIView* view in theWebView.subviews) {
+            if ([view isKindOfClass: [UIScrollView class]]) {
+                ((UIScrollView*) view).scrollEnabled = NO;
+            }
+        }
+    }
+    
 	return [ super webViewDidFinishLoad:theWebView ];
 }
 
