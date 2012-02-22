@@ -50,7 +50,7 @@ window.geo = function() {
 			geo.map.on('viewreset', ping);
 			geo.map.on('locationfound', ping);
 			geo.map.on('moveend', ping);
-			geo.map.locateAndSetView(13);
+			geo.map.locateAndSetView(13, {enableHighAccuracy: true});
 		}
 		else {
 			findAndDisplayNearby( args.lat, args.lon );
