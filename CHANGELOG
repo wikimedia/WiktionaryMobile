@@ -48,3 +48,12 @@
 - UI works slightly better in RTL languages. Still slightly buggy
 - Menu items initialize faster
 - Confusing highlights when scrolling lists removed
+
+## v1.1beta2 ##
+
+- Fixed flickering in Android 4.0
+- Fixed bug causing Nearby Me to not work on some locales
+- About page now credits contributors and used Libraries
+- Show indicator when opening settings dialog
+- Upgraded Leaflet and PhoneGap libraries
+
