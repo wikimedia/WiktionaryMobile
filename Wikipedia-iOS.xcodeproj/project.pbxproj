@@ -119,6 +119,8 @@
 		07220CB114CE0A3400339B1F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07220CB014CE0A2A00339B1F /* CFNetwork.framework */; };
 		07220CBA14CE367B00339B1F /* WMSHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07220CB814CE367B00339B1F /* WMSHKConfigurator.m */; };
 		07220CBB14CE367B00339B1F /* WMSHKSharers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07220CB914CE367B00339B1F /* WMSHKSharers.plist */; };
+		61992AAF14F6DAE1009FE7AC /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61992AAD14F6DAE1009FE7AC /* MainViewController.m */; };
+		61992AB014F6DAE1009FE7AC /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61992AAE14F6DAE1009FE7AC /* MainViewController.xib */; };
 		D481B960145DFE5D00D9F872 /* www in Resources */ = {isa = PBXBuildFile; fileRef = D481B95F145DFE5D00D9F872 /* www */; };
 		D4843A8B147DAC2D007499DC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D4843A89147DAC2D007499DC /* Default-Landscape~ipad.png */; };
 		D4843A8C147DAC2D007499DC /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D4843A8A147DAC2D007499DC /* Default-Portrait~ipad.png */; };
@@ -385,6 +387,9 @@
 		07220CB714CE367B00339B1F /* WMSHKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMSHKConfigurator.h; sourceTree = "<group>"; };
 		07220CB814CE367B00339B1F /* WMSHKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMSHKConfigurator.m; sourceTree = "<group>"; };
 		07220CB914CE367B00339B1F /* WMSHKSharers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WMSHKSharers.plist; sourceTree = "<group>"; };
+		61992AAC14F6DAE1009FE7AC /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Classes/MainViewController.h; sourceTree = "<group>"; };
+		61992AAD14F6DAE1009FE7AC /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Classes/MainViewController.m; sourceTree = "<group>"; };
+		61992AAE14F6DAE1009FE7AC /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
 		D424DED914C0FAC40086FF61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D481B95F145DFE5D00D9F872 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = assets/www; sourceTree = "<group>"; };
 		D4843A89147DAC2D007499DC /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "Resources/splash/Default-Landscape~ipad.png"; sourceTree = "<group>"; };
@@ -1207,6 +1212,9 @@
 		D4BE963C145DFD2D0025EC00 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				61992AAC14F6DAE1009FE7AC /* MainViewController.h */,
+				61992AAD14F6DAE1009FE7AC /* MainViewController.m */,
+				61992AAE14F6DAE1009FE7AC /* MainViewController.xib */,
 				D4BE963D145DFD2D0025EC00 /* AppDelegate.h */,
 				D4BE963E145DFD2D0025EC00 /* AppDelegate.m */,
 			);
@@ -1297,6 +1305,7 @@
 				07220C7D14CDFFE500339B1F /* FBDialog.bundle in Resources */,
 				07220CAC14CDFFE500339B1F /* ShareKit.bundle in Resources */,
 				07220CBB14CE367B00339B1F /* WMSHKSharers.plist in Resources */,
+				61992AB014F6DAE1009FE7AC /* MainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1431,6 +1440,7 @@
 				07220CA914CDFFE500339B1F /* SHKViewControllerWrapper.m in Sources */,
 				07220CAE14CE057000339B1F /* SHKVkontakteOAuthView.m in Sources */,
 				07220CBA14CE367B00339B1F /* WMSHKConfigurator.m in Sources */,
+				61992AAF14F6DAE1009FE7AC /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
