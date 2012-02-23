@@ -69,7 +69,8 @@ window.app = function() {
 
 	function loadLocalPage(page) {
 		var d = $.Deferred();
-		$('#main').load(ROOT_URL + page, function() {
+		$('base').attr('href', ROOT_URL);
+		$('#main').load(page, function() {
 			$('#main').localize();
 			chrome.onPageLoaded();
 			d.resolve();
