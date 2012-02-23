@@ -55,5 +55,6 @@
 - Fixed bug causing Nearby Me to not work on some locales
 - About page now credits contributors and used Libraries
 - Show indicator when opening settings dialog
+- Changed default zoom level
 - Upgraded Leaflet and PhoneGap libraries
 
