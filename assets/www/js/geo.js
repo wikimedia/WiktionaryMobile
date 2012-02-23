@@ -31,7 +31,7 @@ window.geo = function() {
 		}
 
 		// @fixme load last-seen coordinates
-		geo.map.setView(new L.LatLng(args.lat, args.lon), 13);
+		geo.map.setView(new L.LatLng(args.lat, args.lon), 18);
 		
 		var findAndDisplayNearby = function( lat, lon ) {
 			geoLookup( lat, lon, preferencesDB.get("language"), function( data ) {
@@ -50,7 +50,7 @@ window.geo = function() {
 			geo.map.on('viewreset', ping);
 			geo.map.on('locationfound', ping);
 			geo.map.on('moveend', ping);
-			geo.map.locateAndSetView(13, {enableHighAccuracy: true});
+			geo.map.locateAndSetView(18, {enableHighAccuracy: true});
 		}
 		else {
 			findAndDisplayNearby( args.lat, args.lon );
