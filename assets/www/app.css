@@ -466,32 +466,29 @@ header
 	background-image: -webkit-gradient(radial, center center, 8, center center, 24, from(white), to(rgba(255,255,255,0)));
 }
 
-#menu-back span {
+/* iOS bottombar iCons */
+
+#go-back span {
 	background: url(image/ios/toolbar-back.png);
 }
 
-#menu-forward span {
+#go-forward span {
 	background: url(image/ios/toolbar-forward.png);
 }
 
-/* Add this style to the markup to Dim the menu forward and backward icon image */
-#menu-forward-backward-dim {
-    opacity : .4;
-}
-
-#menu-language span {
+#read-in span {
 	background: url(image/ios/toolbar-language.png);
 }
 
-#menu-output span {
+#page-actions span {
 	background-image: url(image/ios/toolbar-output.png);
 }
 
-#menu-sources span {
+#list-actions span {
 	background: url(image/ios/toolbar-sources.png);
 }
 
-#menu-settings span {
+#view-settings span {
 	background: url(image/ios/toolbar-settings.png);
 }
 
@@ -577,3 +574,6 @@ header
 	}
 }
 
+.disabled {
+	opacity: 0.1;
+}

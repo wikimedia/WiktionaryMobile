@@ -48,9 +48,8 @@ window.app = function() {
 						loadLocalPage('error.html');
 					}
 					languageLinks.clearLanguages();
-					$('#savePageCmd').attr('disabled', 'disabled');
-					console.log('disabling language');
-					$('#languageCmd').attr('disabled', 'disabled');
+					setMenuItemState('read-in', false);
+					setPageActionsState(false);
 				}
 			});
 		};
@@ -109,22 +108,23 @@ window.app = function() {
 		$('#searchParam').val('');
 		chrome.showSpinner();
 		
+		if (options.updateHistory) {
+			currentHistoryIndex += 1;
+			pageHistory[currentHistoryIndex] = url;
+		} 
 		if (options.cache) {
 			d = app.loadCachedPage(url);
 		} else {
 			d = app.loadPage(url);
 		}
-		if (options.updateHistory) {
-			currentHistoryIndex += 1;
-			pageHistory[currentHistoryIndex] = url;
-			// We're adding an entry to the 'forward/backwards' chain.
-			// So disable forward.
-		} 
-		console.log("navigating to " + url);
-		// Enable change language - might've been disabled in a prior error page
-		console.log('enabling language');
-		$('#languageCmd').removeAttr('disabled');  
-		chrome.showContent();
+		d.done(function() {
+			console.log("navigating to " + url);
+			// Enable change language - might've been disabled in a prior error page
+			console.log('enabling language');
+			setPageActionsState(true);;
+			setMenuItemState('read-in', true);
+			chrome.showContent();
+		});
 		return d;
 	}
 
