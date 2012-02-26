@@ -54,6 +54,7 @@ window.chrome = function() {
 		});
 
 		languageLinks.parseAvailableLanguages($div);
+		audioPlayer.getMediaList();
 		
 		chrome.doScrollHack('#content');
 

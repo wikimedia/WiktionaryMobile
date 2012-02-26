@@ -50,6 +50,7 @@ window.app = function() {
 					languageLinks.clearLanguages();
 					setMenuItemState('read-in', false);
 					setPageActionsState(false);
+					audioPlayer.clearMenuArray();
 				}
 			});
 		};
