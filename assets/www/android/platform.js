@@ -19,6 +19,32 @@ l10n.navigatorLang = function(success) {
 	});
 }
 
+function setMenuItemState(action, state, noUpdate) {
+	if(state) {
+		$("command[action='" + action + "']").removeAttr("disabled");
+	} else {
+		$("command[action='" + action + "']").attr("disabled", "disabled");
+	}
+	if(!noUpdate) { 
+		updateMenuState();
+	}
+}
+
+function setPageActionsState(state) {
+	setMenuItemState("read-in", state, false);
+	setMenuItemState("save-page", state, false);
+	setMenuItemState("share-page", state, false);
+	updateMenuState();
+}
+
+window.CREDITS = [
+	"<a href='http://phonegap.com'>PhoneGap</a>, Apache License 2.0",
+	"<a href='http://jquery.com'>jQuery</a>, MIT License",
+	"<a href='http://leaflet.cloudmade.com/'>Leaflet.js</a>, 2-Clause BSD License",
+	"<a href='http://zeptojs.com'>Zepto</a>, MIT License",
+	"<a href='http://cubiq.org/iscroll-4'>iScroll</a>, MIT License",
+	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, Apache License 2.0"
+	];
 
 chrome.addPlatformInitializer(function() {
 	$('html').addClass('android');
@@ -48,7 +74,6 @@ chrome.addPlatformInitializer(function() {
 		plugins.SoftKeyBoard.show();
 		
 	}
-
 
 });
 
@@ -103,7 +128,19 @@ chrome.showNotification = function(text) {
 	window.plugins.ToastPlugin.show_short(text);
 }
 
-function updateMenuState(menu_handlers) {
+function updateMenuState() {
+	var d = $.Deferred();
+
+	var menu_handlers = {
+		'read-in': function() { languageLinks.showAvailableLanguages(); },
+		'view-history': function() { appHistory.showHistory(); } ,
+		'save-page': function() { savedPages.saveCurrentPage() },
+		'view-saved-pages': function() { savedPages.showSavedPages(); },
+		'share-page': function() { sharePage(); },
+		'go-forward': function() { chrome.goForward(); },
+		'select-text': function() { selectText(); },
+		'view-settings': function() { appSettings.showSettings(); },
+	};
 	$('#appMenu command').each(function() {
 		var $command = $(this),
 			id = $command.attr('id'),
@@ -114,8 +151,15 @@ function updateMenuState(menu_handlers) {
 
 	window.plugins.SimpleMenu.loadMenu($('#appMenu')[0],
 									   menu_handlers,
-									   function(success) {console.log(success);},
-									   function(error) {console.log(error);});
+									   function(success) {
+										   console.log(success);
+										   d.resolve(success);
+									   },
+									   function(error) {
+										   console.log(error);
+										   d.reject(error);
+									   });
+	return d;
 };
 
 network.isConnected = function()  {

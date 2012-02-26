@@ -1,16 +1,4 @@
 window.chrome = function() {
-	var menu_handlers = {
-		'read-in': function() { languageLinks.showAvailableLanguages(); },
-		'view-history': function() { appHistory.showHistory(); } ,
-		'save-page': function() { savedPages.saveCurrentPage() },
-		'view-saved-pages': function() { savedPages.showSavedPages(); },
-		'share-page': function() { sharePage(); },
-		'go-forward': function() { goForward(); },
-		'select-text': function() { selectText(); },
-		'view-settings': function() { appSettings.showSettings(); },
-		'word-of-the-day': function() { loadFirstPage(true); },
-		'listen-sound': function() { playSound(); }
-	};
 
 	// List of functions to be called on a per-platform basis before initialize
 	var platform_initializers = [];
@@ -108,7 +96,7 @@ window.chrome = function() {
 			});
 			l10n.initLanguages();
 			
-			updateMenuState(menu_handlers);
+			updateMenuState();
 
 			$(".titlebarIcon").bind('touchstart', function() {
 				homePage();
@@ -222,9 +210,9 @@ window.chrome = function() {
 	function toggleForward() {
 		// Length starts from 1, indexes don't.
 		if (currentHistoryIndex < (pageHistory.length - 1)) {
-			$('#forwardCmd').removeAttr('disabled'); 
+			setMenuItemState('go-forward', true);
 		} else {
-			$('#forwardCmd').attr('disabled', 'disabled');
+			setMenuItemState('go-forward', false);
 		}
 	}
 
@@ -264,7 +252,6 @@ window.chrome = function() {
 		} else {
 			chrome.hideSpinner();
 			toggleForward();
-			updateMenuState(menu_handlers);
 		}
 	}
 
@@ -352,8 +339,6 @@ window.chrome = function() {
 		window.scroll(0,0);
 		appHistory.addCurrentPage();
 		toggleForward();
-		updateMenuState(menu_handlers);
-		$('#search').removeClass('inProgress');        
 		chrome.hideSpinner();  
 		audioPlayer.getMediaList();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);

@@ -1,20 +1,42 @@
 # CHANGELOG
 
+## V1.0 ##
+
+- First release .. woot!
+- Save article to read later or offline
+- Search articles nearby
+- Share articles using Android "Share" function
+- Read article in a different language
+- Full screen search
+
+## V1.0.1 ##
+
+- Stop using GPS when user exits NearMe activity
+- Better caching support
+
+## V1.0.2 ##
+
+- Making caching far less aggresive
+
+## V1.0.3 ##
+
+- Updating UserAgent to uniquly identify the app
+
 ## v1.1alpha1 ##
 
-- Integration with QuickSearch in Android
+- Integration with Android QuickSearch
 - Open Wikipedia links from other apps in the Wikipedia App
-- OSM replaced Google Maps for nearby view
+- OSM replaced Google Maps for Nearby View
 - Added Did You Mean? to search results
-- Moved to jQuery off Zepto
-- Touching co-ordinates inside articles shows map overlay
+- Moved from Zepto to jQuery
+- Touching co-ordinates inside article infobox shows map overlay
 - Full text search 
 - Added 'Clear History'
 - Added 'Clear Saved Pages'
 - Localized a few messages that were missing
 - Enable app to be saved to SD card
 - Major code-refactor, still needs more love :)
-- Improved tablet experienced
+- Improved tablet experience
 - Move to using Hogan.js for templating
 
 ## v1.1beta1 ##
@@ -26,3 +48,13 @@
 - UI works slightly better in RTL languages. Still slightly buggy
 - Menu items initialize faster
 - Confusing highlights when scrolling lists removed
+
+## v1.1beta2 ##
+
+- Fixed flickering in Android 4.0
+- Fixed bug causing Nearby Me to not work on some locales
+- About page now credits contributors and used Libraries
+- Show indicator when opening settings dialog
+- Changed default zoom level
+- Upgraded Leaflet and PhoneGap libraries
+
