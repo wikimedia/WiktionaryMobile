@@ -31,10 +31,9 @@ function setMenuItemState(action, state, noUpdate) {
 }
 
 function setPageActionsState(state) {
-	setMenuItemState("read-in", state, false);
-	setMenuItemState("save-page", state, false);
-	setMenuItemState("share-page", state, false);
-	updateMenuState();
+	setMenuItemState("read-in", state, true);
+	setMenuItemState("save-page", state, true);
+	setMenuItemState("share-page", state, true);
 }
 
 window.CREDITS = [
