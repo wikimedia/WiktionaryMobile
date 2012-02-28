@@ -19,6 +19,10 @@ l10n.navigatorLang = function(success) {
 	});
 }
 
+function getAboutVersionString() {
+	return "1.1beta2";
+}
+
 function setMenuItemState(action, state, noUpdate) {
 	if(state) {
 		$("command[action='" + action + "']").removeAttr("disabled");
@@ -31,10 +35,9 @@ function setMenuItemState(action, state, noUpdate) {
 }
 
 function setPageActionsState(state) {
-	setMenuItemState("read-in", state, false);
-	setMenuItemState("save-page", state, false);
-	setMenuItemState("share-page", state, false);
-	updateMenuState();
+	setMenuItemState("read-in", state, true);
+	setMenuItemState("save-page", state, true);
+	setMenuItemState("share-page", state, true);
 }
 
 window.CREDITS = [
