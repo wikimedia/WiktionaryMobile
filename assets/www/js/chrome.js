@@ -40,7 +40,7 @@ window.chrome = function() {
 
 		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
 
-		var selectors = ['#content-wrapper>*', '#copyright'],
+		var selectors = ['#content>*', '#copyright'],
 			$target = $('#main'),
 			$div = $(trimmed);
 
