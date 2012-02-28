@@ -997,39 +997,6 @@ Device.prototype.getInfo = function(successCallback, errorCallback) {
     PhoneGap.exec(successCallback, errorCallback, "Device", "getDeviceInfo", []);
 };
 
-/*
- * DEPRECATED
- * This is only for Android.
- *
- * You must explicitly override the back button.
- */
-Device.prototype.overrideBackButton = function() {
-	console.log("Device.overrideBackButton() is deprecated.  Use App.overrideBackbutton(true).");
-	navigator.app.overrideBackbutton(true);
-};
-
-/*
- * DEPRECATED
- * This is only for Android.
- *
- * This resets the back button to the default behaviour
- */
-Device.prototype.resetBackButton = function() {
-	console.log("Device.resetBackButton() is deprecated.  Use App.overrideBackbutton(false).");
-	navigator.app.overrideBackbutton(false);
-};
-
-/*
- * DEPRECATED
- * This is only for Android.
- *
- * This terminates the activity!
- */
-Device.prototype.exitApp = function() {
-	console.log("Device.exitApp() is deprecated.  Use App.exitApp().");
-	navigator.app.exitApp();
-};
-
 PhoneGap.addConstructor(function() {
     if (typeof navigator.device === "undefined") {
         navigator.device = window.device = new Device();
@@ -1248,19 +1215,6 @@ App.prototype.clearHistory = function() {
  */
 App.prototype.backHistory = function() {
     PhoneGap.exec(null, null, "App", "backHistory", []);
-};
-
-/**
- * Override the default behavior of the Android back button.
- * If overridden, when the back button is pressed, the "backKeyDown" JavaScript event will be fired.
- *
- * Note: The user should not have to call this method.  Instead, when the user
- *       registers for the "backbutton" event, this is automatically done.
- *
- * @param override		T=override, F=cancel override
- */
-App.prototype.overrideBackbutton = function(override) {
-    PhoneGap.exec(null, null, "App", "overrideBackbutton", [override]);
 };
 
 /**
@@ -1538,7 +1492,7 @@ Camera.prototype.getPicture = function(successCallback, errorCallback, options) 
         options.maxResolution = 0;
     }
     if (options.destinationType === null || typeof options.destinationType === "undefined") {
-        options.destinationType = Camera.DestinationType.DATA_URL;
+        options.destinationType = Camera.DestinationType.FILE_URI;
     }
     if (options.sourceType === null || typeof options.sourceType === "undefined") {
         options.sourceType = Camera.PictureSourceType.CAMERA;
@@ -3234,11 +3188,9 @@ LocalFileSystem.prototype._castFS = function(pluginResult) {
 LocalFileSystem.prototype._castEntry = function(pluginResult) {
     var entry = null;
     if (pluginResult.message.isDirectory) {
-        console.log("This is a dir");
         entry = new DirectoryEntry();
     }
     else if (pluginResult.message.isFile) {
-        console.log("This is a file");
         entry = new FileEntry();
     }
     entry.isDirectory = pluginResult.message.isDirectory;
@@ -3262,11 +3214,9 @@ LocalFileSystem.prototype._castEntries = function(pluginResult) {
 LocalFileSystem.prototype._createEntry = function(castMe) {
     var entry = null;
     if (castMe.isDirectory) {
-        console.log("This is a dir");
         entry = new DirectoryEntry();
     }
     else if (castMe.isFile) {
-        console.log("This is a file");
         entry = new FileEntry();
     }
     entry.isDirectory = castMe.isDirectory;

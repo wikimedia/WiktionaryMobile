@@ -1,9 +1,7 @@
 window.app = function() {
+
 	function loadCachedPage (url) {
 		var d = $.Deferred();
-		// Hide the iframe until the stylesheets are loaded,
-		// to avoid flash of unstyled text.
-		// Instead we're hidden, which also sucks.
 		var replaceRes = function() {
 
 			// images
@@ -25,8 +23,6 @@ window.app = function() {
 		var gotError = function(error) {
 			console.log('Error: ' + error);
 			chrome.hideSpinner();
-			// chrome.showNoConnectionMessage();
-			// navigator.app.exitApp();
 		}
 		window.plugins.urlCache.getCachedPathForURI(url, gotPath, gotError);
 		return d;
@@ -52,9 +48,9 @@ window.app = function() {
 						loadLocalPage('error.html');
 					}
 					languageLinks.clearLanguages();
-					$('#savePageCmd').attr('disabled', 'disabled');
-					console.log('disabling language');
-					$('#languageCmd').attr('disabled', 'disabled');
+					setMenuItemState('read-in', false);
+					setPageActionsState(false);
+					audioPlayer.clearMenuArray();
 				}
 			});
 		};
@@ -73,7 +69,7 @@ window.app = function() {
 
 	function loadLocalPage(page) {
 		var d = $.Deferred();
-		$('base').attr('href', 'file:///android_asset/www/');
+		$('base').attr('href', ROOT_URL);
 		$('#main').load(page, function() {
 			$('#main').localize();
 			chrome.onPageLoaded();
@@ -87,7 +83,7 @@ window.app = function() {
 	}
 
 	function baseUrlForLanguage(lang) {
-		return 'https://' + lang + '.' + PROJECTNAME + '.org';
+		return 'https://' + lang + '.m.' + PROJECTNAME + '.org';
 	}
 
 	function setContentLanguage(language) {
@@ -113,22 +109,23 @@ window.app = function() {
 		$('#searchParam').val('');
 		chrome.showSpinner();
 		
-		if (options.cache) {
-			d = loadCachedPage(url);
-		} else {
-			d = loadPage(url);
-		}
 		if (options.updateHistory) {
 			currentHistoryIndex += 1;
 			pageHistory[currentHistoryIndex] = url;
-			// We're adding an entry to the 'forward/backwards' chain.
-			// So disable forward.
 		} 
-		console.log("navigating to " + url);
-		// Enable change language - might've been disabled in a prior error page
-		console.log('enabling language');
-		$('#languageCmd').removeAttr('disabled');  
-		chrome.showContent();
+		if (options.cache) {
+			d = app.loadCachedPage(url);
+		} else {
+			d = app.loadPage(url);
+		}
+		d.done(function() {
+			console.log("navigating to " + url);
+			// Enable change language - might've been disabled in a prior error page
+			console.log('enabling language');
+			setPageActionsState(true);;
+			setMenuItemState('read-in', true);
+			chrome.showContent();
+		});
 		return d;
 	}
 
@@ -152,7 +149,9 @@ window.app = function() {
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
 		baseUrlForLanguage: baseUrlForLanguage,
-		setCaching: setCaching
+		setCaching: setCaching,
+		loadPage: loadPage,
+		loadCachedPage: loadCachedPage
 	};
 
 	return exports;

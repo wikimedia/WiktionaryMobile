@@ -393,20 +393,34 @@ header
 	outline: none;
 }
 
-.error-overlay {
-	background: white;
-	background-image: url(image/globe-bg.jpg);
-	background-position: top left;
-	background-repeat: no-repeat;
-	background-size: 140px 325px;
-	color: black;
+/* Error page syling */
+#error-bg-image {
+  position:fixed;
+  top:50%;
+  left:50%;
+  height: 250px;
+  width: 250px;
+  margin-top: -125px;
+  margin-left: -125px;
+  opacity: 0.1;
+}
+.error-text-holder {
+  display:table-cell;
+  vertical-align:middle;
+}
+.error-text {
 	font-family: "Droid Sans", "Helvetica", sans-serif;
-	padding-left: 120px;
+	padding-left: 20px;
 	padding-top: 20px;
 	padding-right: 20px;
 	font-size: 20px;
-	padding-bottom: 40px;
-	margin-left: -8px;
+	padding-bottom: 20px;
+}
+.error-overlay {
+  display:table;
+  height:100%;
+	background: white;
+	color: black;
 }
 
 #about-page-overlay {
@@ -466,32 +480,29 @@ header
 	background-image: -webkit-gradient(radial, center center, 8, center center, 24, from(white), to(rgba(255,255,255,0)));
 }
 
-#menu-back span {
+/* iOS bottombar iCons */
+
+#go-back span {
 	background: url(image/ios/toolbar-back.png);
 }
 
-#menu-forward span {
+#go-forward span {
 	background: url(image/ios/toolbar-forward.png);
 }
 
-/* Add this style to the markup to Dim the menu forward and backward icon image */
-#menu-forward-backward-dim {
-    opacity : .4;
-}
-
-#menu-language span {
+#read-in span {
 	background: url(image/ios/toolbar-language.png);
 }
 
-#menu-output span {
+#page-actions span {
 	background-image: url(image/ios/toolbar-output.png);
 }
 
-#menu-sources span {
+#list-actions span {
 	background: url(image/ios/toolbar-sources.png);
 }
 
-#menu-settings span {
+#view-settings span {
 	background: url(image/ios/toolbar-settings.png);
 }
 
@@ -577,3 +588,6 @@ header
 	}
 }
 
+.disabled {
+	opacity: 0.1;
+}
