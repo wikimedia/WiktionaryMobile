@@ -19,6 +19,10 @@ l10n.navigatorLang = function(success) {
 	});
 }
 
+function getAboutVersionString() {
+	return "1.1beta2";
+}
+
 function setMenuItemState(action, state, noUpdate) {
 	if(state) {
 		$("command[action='" + action + "']").removeAttr("disabled");

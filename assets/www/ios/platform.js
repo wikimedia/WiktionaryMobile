@@ -14,6 +14,10 @@ function setPageActionsState(state) {
 	setMenuItemState("page-actions", state);
 }
 
+function getAboutVersionString() {
+	return "3.1beta1";
+}
+
 var menu_items = [
 	{
 		id: 'go-back',
