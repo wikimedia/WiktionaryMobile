@@ -1,11 +1,21 @@
 window.savedPages = function() {
 
+	function doSave(url, title) {
+		app.navigateToPage(url, {
+			cache: true,
+			updateHistory: false
+		}).then(function() { 
+			chrome.showNotification(mw.message('page-saved', title).plain());
+		});
+	}
+
 	function saveCurrentPage() {
 		var MAX_LIMIT = 50;
 
 		var title = app.getCurrentTitle();
 		var url = app.getCurrentUrl();
 
+		console.log("url is " + url);
 		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			this.keys(function(records) {
 				if (records != null) {
@@ -15,12 +25,7 @@ window.savedPages = function() {
 						alert(mw.message("saved-pages-max-warning").plain());
 					}else{
 						savedPagesDB.save({key: url, title: title});
-						app.navigateToPage(url, {
-							cache: true,
-							updateHistory: false
-						}).then(function() { 
-							chrome.showNotification(mw.message('page-saved', title).plain());
-						});
+						savedPages.doSave(url, title);
 					}
 				}
 			});
@@ -85,6 +90,7 @@ window.savedPages = function() {
 
 	return {
 		showSavedPages: showSavedPages,
-		saveCurrentPage: saveCurrentPage
+		saveCurrentPage: saveCurrentPage,
+		doSave: doSave
 	};
 }();

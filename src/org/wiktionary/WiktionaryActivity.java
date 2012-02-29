@@ -10,18 +10,6 @@ import com.phonegap.DroidGap;
 public class WiktionaryActivity extends DroidGap {
     /** Called when the activity is first created. */
 	
-	public class WiktionaryWebViewClient extends GapViewClient {
-		public WiktionaryWebViewClient(DroidGap ctx) {
-			super(ctx);
-		}
-		
-		//@Override
-		//public void onLoadResource(WebView view, String url) {
-		//	Log.d("WiktionaryWebViewClient", "OnLoadResource "+url);
-		//}
-		
-	}
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,16 +37,10 @@ public class WiktionaryActivity extends DroidGap {
         }
 		
         super.loadUrl(startingUrl);
-        this.webViewClient = new WiktionaryWebViewClient(this);
-        this.appView.setWebViewClient(this.webViewClient);
         
         String currentUA = this.appView.getSettings().getUserAgentString();
         
         this.appView.getSettings().setUserAgentString("WiktionaryMobile/1.1 " + currentUA);
     }
     
-    @Override
-    public void onReceivedError(final int errorCode, final String description, final String failingUrl) {
-    	// no-op!
-    }
 }
