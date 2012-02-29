@@ -38,6 +38,7 @@ function setPageActionsState(state) {
 	setMenuItemState("read-in", state, true);
 	setMenuItemState("save-page", state, true);
 	setMenuItemState("share-page", state, true);
+	setMenuItemState("listen-sound", state, true);
 }
 
 window.CREDITS = [
@@ -143,6 +144,7 @@ function updateMenuState() {
 		'go-forward': function() { chrome.goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
+		'listen-sound': function() { audioPlayer.createMenuArray(); },
 	};
 	$('#appMenu command').each(function() {
 		var $command = $(this),
