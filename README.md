@@ -12,6 +12,11 @@ CHECKING OUT THE SOURCE CODE
 1. Create your own fork of the <a href="https://github.com/wikimedia/WikipediaMobile" target="_blank">Wikipedia</a> code.
 2. Clone your fork onto your computer.
                             
+SETTING UP THE PROJECT WITHOUT ECLIPSE
+
+There is a highly useful tutorial @
+http://www.mediawiki.org/wiki/Mobile/PhoneGap/Tutorial#Setup
+
 SETTING UP THE PROJECT IN ECLIPSE
 
 1. In Eclipse choose to import a project by going to File (in the menu bar) -> Import.
