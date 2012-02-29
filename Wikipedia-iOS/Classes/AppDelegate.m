@@ -49,9 +49,18 @@
 	/** If you need to do any extra app-specific initialization, you can do it here
 	 *  -jm
 	 **/
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSString *currentUserAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    
+    NSDictionary *userAgentDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@%@",@"WikipediaMobile/1.1 ",currentUserAgent], @"UserAgent", nil];
+    [webView release];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:userAgentDictionary];    
+    [userAgentDictionary release];
+    
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage]; 
     [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-    
     [PGURLProtocol registerPGHttpURLProtocol];
     
     return [super init];
