@@ -1,0 +1,31 @@
+== Javascript ==
+
+Javascript code follows the coding conventions set out in
+http://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript
+
+There is one crucial exception in that this project uses slightly different whitespace rules:
+there is no need for a space at the start or end in parentheses.
+e.g.
+
+	function name(arg1, arg2) {
+		// do this
+	}
+	
+	var x = function(arg1, arg2) {
+		// do this
+	}
+	if(x == 4) {
+		// do this
+	}
+	
+	for(x = 0; x < 5; x++) {
+		// do this
+	}
+
+== CSS ==
+
+CSS code should follow the guidelines set out in http://www.mediawiki.org/wiki/Manual:Coding_conventions/CSS
+
+== HTML ==
+
+HTML should validate via http://validator.w3.org/

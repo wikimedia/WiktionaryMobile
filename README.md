@@ -48,3 +48,5 @@ A. You will need to add the PhoneGap library to your project, by following these
 5. Select Java Build Path, click on the Libraries tab and then click the Add JARs button.
 6. Browse to libs/phonegap-1.1.0.jar and choose to add it.
 
+CONTRIBUTING
+Please ensure you read STYLE_GUIDELINES before making any contribution to this project!
