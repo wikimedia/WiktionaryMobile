@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<base><!-- used to process relative links in content -->
 	<title>Wikipedia</title>
-        
+
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/webkit-sqlite.js"></script>
 
@@ -44,9 +44,9 @@
 	<!-- platform-specific setup and overrides -->
 	<script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
 
-	<link rel="stylesheet" href="leaflet/leaflet.css" />  
+	<link rel="stylesheet" href="leaflet/leaflet.css" />
 
-	<link rel="stylesheet" href="app.css" />  
+	<link rel="stylesheet" href="app.css" />
 	<link rel="stylesheet" href="wiki.css" />
 
 </head>
@@ -74,9 +74,9 @@
 					{{/fontSizes}}
 				</select>
 			</div>
-            
-            <div id="aboutPageLabel" class="item">
-                <label><msg key="about-page-label"></msg></label>
+
+			<div id="aboutPageLabel" class="item">
+				<label><msg key="about-page-label"></msg></label>
 			</div>
 		</script>
 		<script type="text/html" id="saved-pages-template">
@@ -101,7 +101,7 @@
 						<span class="didYouMeanLabel"><msg key="search-results-did-you-mean-label"></msg> </span>
 						<span class="didYouMeanResult">{{title}}</span>
 					</a>
-				</div>	
+				</div>
 			{{/didyoumean}}
 			{{#pages}}
 				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
@@ -110,7 +110,7 @@
 						<span class="text deleteEnabled">
 							{{title}}
 						</span>
-					</a>	
+					</a>
 				</div>
 			{{/pages}}
 			<div class="listItemContainer" id="doFullSearch">
@@ -196,7 +196,7 @@
 			<div id="savedPagesList"></div>
 		</div>
 	</div>
-		
+
 	<div id="history">
 		<header>
 			<div class="titlebar">
@@ -244,8 +244,8 @@
 
 	<div id="content" class="scroller">
 		<div id="main"></div>
-	</div>  
-	
+	</div>
+
 	<div id="nearby-overlay">
 		<header>
 			<div class="titlebar">
