@@ -4,7 +4,7 @@ window.savedPages = function() {
 		app.navigateToPage(url, {
 			cache: true,
 			updateHistory: false
-		}).then(function() { 
+		}).then(function() {
 			chrome.showNotification(mw.message('page-saved', title).plain());
 		});
 	}
@@ -57,7 +57,7 @@ window.savedPages = function() {
 			});
 		}
 	}
-	
+
 	// Removes all the elements from saved pages
 	function onClearSavedPages() {
 		var answer = confirm(mw.message('clear-all-saved-pages-prompt').plain());
