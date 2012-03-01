@@ -13,11 +13,11 @@ window.appSettings = function() {
 				{value: '125%', name: mw.message('settings-font-size-larger').plain() }
 			];
 		}
-			
+
 		if(locales.length == 0) {
 			$.ajax({
-				type:'GET', 
-				url:requestUrl, 
+				type:'GET',
+				url:requestUrl,
 				dataType: 'json',
 				success:function(results) {
 					var allLocales = results.sitematrix;
@@ -48,10 +48,10 @@ window.appSettings = function() {
 		var template = templates.getTemplate('settings-page-template');
 		$("#settingsList").html(template.render({languages: locales, fontSizes: fontSizes, aboutPage: aboutPage}));
 
-		var currentContentLanguage = preferencesDB.get("language");		
+		var currentContentLanguage = preferencesDB.get("language");
 		$("#contentLanguageSelector").val(currentContentLanguage).change(onContentLanguageChanged);
-		
-		/* Look up the human readable form of the languagecode */ 
+
+		/* Look up the human readable form of the languagecode */
 		$.each(locales, function(index, value) {
 			if( value.code == currentContentLanguage) {
 				currentContentLanguage = value.name;
@@ -60,14 +60,14 @@ window.appSettings = function() {
 		});
 		$("#selectedLanguage").html(currentContentLanguage);	
 		$("#fontSizeSelector").val(preferencesDB.get("fontSize")).change(onFontSizeChanged);
-        $("#aboutPageLabel").click(function () { 
-                                   aboutPage();
-                                   });
-       
+		$("#aboutPageLabel").click(function () {
+			aboutPage();
+		});
+
 		chrome.hideOverlays();
 		chrome.hideContent();
 		$('#settings').localize().show();
-		chrome.doFocusHack();                                   
+		chrome.doFocusHack();
 	}
 
 	function onContentLanguageChanged() {

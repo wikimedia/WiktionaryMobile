@@ -26,7 +26,7 @@ function homePage() {
 
 function aboutPage() {
 	chrome.hideOverlays();
-	$.get(ROOT_URL + 'AUTHORS').then(function(authors) { 
+	$.get(ROOT_URL + 'AUTHORS').then(function(authors) {
 		$("#about-version-string").text(getAboutVersionString());
 		$("#about-contributors").text($.trim(authors).split('\n').join(', '));
 		$("#about-credits").html(window.CREDITS.join('<br />'));

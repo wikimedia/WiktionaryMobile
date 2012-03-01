@@ -10,7 +10,7 @@ window.appHistory = function() {
 		if(url == 'about:blank') {
 			return;
 		}
-		
+
 		var historyDB = new Lawnchair({name:"historyDB"},function() {
 			this.keys(function(records) {
 				if (records.length > MAX_LIMIT) {
@@ -36,7 +36,7 @@ window.appHistory = function() {
 			});
 		});
 	}
-	
+
 	// Removes all the elements from history
 	function onClearHistory() {
 		var answer = confirm(mw.message('clear-all-history-prompt').plain());
