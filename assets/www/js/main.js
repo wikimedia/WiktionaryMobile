@@ -17,6 +17,7 @@ window.CREDITS = [
 	];
 
 function init() {
+	$(document.body).addClass('jsEnabled');
 	document.addEventListener("deviceready", function() {chrome.initialize(); }, true);
 }
 
