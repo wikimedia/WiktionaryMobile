@@ -9,12 +9,12 @@ window.geo = function() {
 			},
 			args
 		);
-		
+
 		chrome.hideOverlays();
 		chrome.hideContent();
 		$("#nearby-overlay").localize().show();
 		chrome.doFocusHack();
-		
+
 		if (!geo.map) {
 			// Disable webkit 3d CSS transformations for tile positioning
 			// Causes lots of flicker in PhoneGap for some reason...
@@ -32,7 +32,7 @@ window.geo = function() {
 
 		// @fixme load last-seen coordinates
 		geo.map.setView(new L.LatLng(args.lat, args.lon), 18);
-		
+
 		var findAndDisplayNearby = function( lat, lon ) {
 			geoLookup( lat, lon, preferencesDB.get("language"), function( data ) {
 				geoAddMarkers( data );
@@ -40,12 +40,12 @@ window.geo = function() {
 				console.log(JSON.stringify(err));
 			});
 		};
-		
+
 		var ping = function() {
 			var pos = geo.map.getCenter();
 			findAndDisplayNearby( pos.lat, pos.lng );
 		};
-		
+
 		if ( args.current ) {
 			geo.map.on('viewreset', ping);
 			geo.map.on('locationfound', ping);
@@ -56,27 +56,27 @@ window.geo = function() {
 			findAndDisplayNearby( args.lat, args.lon );
 		}
 	}
-	
+
 	function getFloatFromDMS( dms ) {
 		var multiplier = /[sw]/i.test( dms ) ? -1 : 1;
 		var bits = dms.match(/[\d.]+/g);
 
 		var coord = 0;
-		
+
 		for ( var i = 0, iLen=bits.length; i<iLen; i++ ) {
 			coord += bits[i] / multiplier;
 			multiplier *= 60;
 		}
-		
+
 		return coord;
 	}
-	
+
 	function addShowNearbyLinks() {
-		$( 'span.geo-dms' ).each( function() { 
+		$( 'span.geo-dms' ).each( function() {
 			var $coords = $( this ),
 			lat = $coords.find( 'span.latitude' ).text(),
 			lon = $coords.find( 'span.longitude' ).text();
-			
+
 			$coords.closest( 'a' ).attr( 'href', '#' ).click( function() {
 				showNearbyArticles( {
 					'lat': getFloatFromDMS( lat ),
@@ -86,7 +86,7 @@ window.geo = function() {
 			} );
 		} );
 	}
-	
+
 	function geoLookup(latitude, longitude, lang, success, error) {
 		var requestUrl = "http://ws.geonames.net/findNearbyWikipediaJSON?formatted=true&";
 		requestUrl += "lat=" + latitude + "&";
@@ -101,7 +101,7 @@ window.geo = function() {
 			error: error
 		});
 	}
-	
+
 	function geoAddMarkers( data ) {
 		if (geo.markers) {
 			geo.map.removeLayer(geo.markers);
@@ -121,7 +121,7 @@ window.geo = function() {
 		});
 		geo.map.addLayer(geo.markers);
 	}
-	
+
 	return {
 		showNearbyArticles: showNearbyArticles,
 		addShowNearbyLinks: addShowNearbyLinks,

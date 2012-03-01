@@ -29,18 +29,18 @@ window.search = function() {
 	function getDidYouMeanResults(results) {
 		// perform did you mean search
 		console.log( "Performing 'did you mean' search for", results[0] );
-		var requestUrl = app.baseURL + "/w/api.php";        
+		var requestUrl = app.baseURL + "/w/api.php";
 		$.ajax({
-   			type: 'GET',
+			type: 'GET',
 			url: requestUrl,
 			data: {
 				action: 'query',
-       			list: 'search',                
+				list: 'search',
 				srsearch: results[0],
-       			srinfo: 'suggestion',
+				srinfo: 'suggestion',
 				format: 'json'
-       		},
-       		success: function(data) {
+			},
+			success: function(data) {
 				var suggestion_results = data;
 				var suggestion = getSuggestionFromSuggestionResults( suggestion_results );
 				if ( suggestion ) {
@@ -82,7 +82,7 @@ window.search = function() {
 					searchResults.push(result.title);
 				}
 				renderResults([term, searchResults], false);
-			}, 
+			},
 			error: function(err) {
 				console.log("ERROR!" + JSON.stringify(err));
 			}
@@ -101,7 +101,7 @@ window.search = function() {
 				format: 'json'
 			},
 			success: function(results) {
-				if ( results[1].length === 0 ) { 
+				if ( results[1].length === 0 ) {
 					console.log( "No results for", term );
 					getDidYouMeanResults( results );
 				} else {

@@ -64,7 +64,7 @@ window.languageLinks = function() {
 		chrome.hideContent();
 
 		$('#langlinks').localize().show();
-		
+
 		chrome.doFocusHack();
 		chrome.doScrollHack('#langlinks .scroller');
 	}

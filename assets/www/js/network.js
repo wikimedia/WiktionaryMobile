@@ -31,8 +31,7 @@ window.network = function() {
 		}
 	}
 
-	function isConnected() 
-	{
+	function isConnected() {
 		return window.navigator.onLine;
 	}
 
