@@ -307,6 +307,11 @@ window.chrome = function() {
 	}
 	
 	function onPageLoaded() {
+		// TODO: next two lines temporary to deal with legacy mediawiki instances
+		$('.section_heading').removeAttr('onclick');
+		$('.section_heading button').remove();
+		// setup default MobileFrontend behaviour (including toggle)
+		MobileFrontend.init();
 		window.scroll(0,0);
 		appHistory.addCurrentPage();
 		toggleForward();

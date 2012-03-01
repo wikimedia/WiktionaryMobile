@@ -2,6 +2,10 @@ GETTING STARTED:
 
 1. Setup your development environment
 2. Setup the project
+3. Pull down external dependencies via command line by running
+
+	make remotes
+
 
 ENVIRONMENT SETUP
 
