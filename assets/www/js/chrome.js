@@ -51,6 +51,7 @@ window.chrome = function() {
 		$.each(selectors, function(i, sel) {
 			var con = $div.find(sel).remove();
 			con.appendTo($target);
+
 		});
 
 		languageLinks.parseAvailableLanguages($div);
@@ -134,6 +135,10 @@ window.chrome = function() {
 	function playSound() {
 		audioPlayer.createMenuArray();
 	}
+
+    function loadWordoftheDay() {
+        loadFirstPage(true);
+    }
 
 	function loadFirstPage(disableReloadHist) {
 		chrome.showSpinner();
@@ -372,6 +377,7 @@ window.chrome = function() {
 		showNoConnectionMessage: showNoConnectionMessage,
 		doFocusHack: doFocusHack,
 		isTwoColumnView: isTwoColumnView,
-		doScrollHack: doScrollHack
+		doScrollHack: doScrollHack,
+        loadWordoftheDay: loadWordoftheDay
 	};
 }();
