@@ -51,6 +51,7 @@ window.chrome = function() {
 		$.each(selectors, function(i, sel) {
 			var con = $div.find(sel).remove();
 			con.appendTo($target);
+
 		});
 
 		languageLinks.parseAvailableLanguages($div);
