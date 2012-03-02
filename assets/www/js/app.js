@@ -52,7 +52,6 @@ window.app = function() {
 					setMenuItemState('read-in', false);
 					setMenuItemState('listen-sound', false);
 					setPageActionsState(false);
-					
 				}
 			});
 		};

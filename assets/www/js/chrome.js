@@ -135,6 +135,10 @@ window.chrome = function() {
 		audioPlayer.createMenuArray();
 	}
 
+    function loadWordoftheDay() {
+        loadFirstPage(true);
+    }
+
 	function loadFirstPage(disableReloadHist) {
 		chrome.showSpinner();
 		
@@ -372,6 +376,7 @@ window.chrome = function() {
 		showNoConnectionMessage: showNoConnectionMessage,
 		doFocusHack: doFocusHack,
 		isTwoColumnView: isTwoColumnView,
-		doScrollHack: doScrollHack
+		doScrollHack: doScrollHack,
+        loadWordoftheDay: loadWordoftheDay
 	};
 }();
