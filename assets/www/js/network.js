@@ -5,7 +5,7 @@ window.network = function() {
 		currentXhr = $.ajax({
 			url: options.url,
 			data: options.data,
-			type: options.type,
+			type: options.type || 'GET',
 			dataType: options.dataType,
 			success: function(data, xhr) {
 				if(data == '') {

@@ -6,7 +6,6 @@ window.search = function() {
 				chrome.showContent();
 				return;
 			}
-
 			chrome.showSpinner();
 			$('#search').addClass('inProgress');
 
@@ -27,10 +26,8 @@ window.search = function() {
 		// perform did you mean search
 		console.log( "Performing 'did you mean' search for", results[0] );
 		var requestUrl = app.baseURL + "/w/api.php";     
-		
 		var doRequest = function() {
 			network.makeRequest({
-	   			type: 'GET',
 				url: requestUrl,
 				data: {
 					action: 'query',
@@ -50,8 +47,7 @@ window.search = function() {
 					console.log("ERROR!" + JSON.stringify(err));
 				}
 			});
-		};
-		
+		};		
 		doRequest();
 	}
 
@@ -67,12 +63,9 @@ window.search = function() {
 	}
 
 	function getFullTextSearchResults(term) {
-		
 		var requestUrl = app.baseURL + "/w/api.php";
-
 		var doRequest = function() {
 			network.makeRequest({
-				type: 'GET',
 				url: requestUrl,
 				data: {
 					action: 'query',
@@ -95,18 +88,14 @@ window.search = function() {
 				}
 			});
 		};
-		
 		doRequest();
-			
 	}
 
 	function getSearchResults(term, didyoumean) {
 		console.log( 'Getting search results for term:', term );
 		var requestUrl = app.baseURL + "/w/api.php";
-		
 		var doRequest = function() {
 			network.makeRequest({
-				type: 'GET',
 				url: requestUrl,
 				data: {
 					action: 'opensearch',
@@ -131,9 +120,7 @@ window.search = function() {
 				}
 			});
 		};
-		
 		doRequest();
-
 	}
 
 	function onSearchResultClicked() {
@@ -149,7 +136,6 @@ window.search = function() {
 	function renderResults(results, didyoumean) {
 		var template = templates.getTemplate('search-results-template');
 		if (results.length > 0) {
-
 			var searchParam = results[0];
 			console.log( "searchParam", searchParam );
 			var searchResults = results[1].map(function(title) {
@@ -182,17 +168,14 @@ window.search = function() {
 				});
 			});
 		});
-
 		$('#search').removeClass('inProgress');
 		chrome.hideSpinner();
 		chrome.hideOverlays();
-
 		if(!chrome.isTwoColumnView()) {
 			$("#content").hide(); // Not chrome.hideContent() since we want the header
 		} else {
 			$("html").addClass('overlay-open');
 		}
-
 		chrome.doFocusHack();
 		$('#searchresults').localize().show();
 		chrome.doScrollHack('#searchresults .scroller');
