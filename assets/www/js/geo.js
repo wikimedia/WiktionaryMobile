@@ -114,10 +114,11 @@ window.geo = function() {
 			if(!item.summary) {
 				item.summary = "";
 			}
-			marker.bindPopup('<div onclick="app.navigateToPage(&quot;' + url + '&quot;);chrome.hideOverlays();">' +
-			                 '<strong>' + item.title + '</strong>' +
-			                 '<p>' + item.summary + '</p>' +
-			                 '</div>');
+
+			var popupContent = $("<div><strong>" + item.title + "</strong><p>" + item.summary + "</p></div>").click(function() {
+				app.navigateToPage(url);
+			})[0];
+			marker.bindPopup(popupContent);
 		});
 		geo.map.addLayer(geo.markers);
 	}
