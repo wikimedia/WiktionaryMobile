@@ -92,7 +92,7 @@ window.chrome = function() {
 			});
 			l10n.initLanguages();
 
-			updateMenuState();
+			toggleMoveActions();
 
 			$(".titlebarIcon").bind('touchstart', function() {
 				homePage();
@@ -178,13 +178,19 @@ window.chrome = function() {
 		alert(mw.message('error-offline-prompt'));
 	}
 
-	function toggleForward() {
-		// Length starts from 1, indexes don't.
+	function toggleMoveActions() {
 		if (currentHistoryIndex < (pageHistory.length - 1)) {
-			setMenuItemState('go-forward', true);
+			setMenuItemState('go-forward', true, true);
 		} else {
-			setMenuItemState('go-forward', false);
+			setMenuItemState('go-forward', false, true);
 		}
+
+		if(currentHistoryIndex <= 0) {
+			setMenuItemState('go-back', false, true);
+		} else {
+			setMenuItemState('go-back', true, true);
+		}
+		updateMenuState();
 	}
 
 	function goBack() {
@@ -222,7 +228,7 @@ window.chrome = function() {
 			});
 		} else {
 			chrome.hideSpinner();
-			toggleForward();
+			toggleMoveActions();
 		}
 	}
 
@@ -314,7 +320,7 @@ window.chrome = function() {
 		MobileFrontend.init();
 		window.scroll(0,0);
 		appHistory.addCurrentPage();
-		toggleForward();
+		toggleMoveActions();
 		geo.addShowNearbyLinks();
 		chrome.hideSpinner();
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
