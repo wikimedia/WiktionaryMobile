@@ -9,7 +9,7 @@ window.network = function() {
 			url: options.url,
 			data: options.data,
 			type: options.type || 'GET',
-			dataType: options.dataType,
+			dataType: options.dataType || 'text',
 			success: function(data, xhr) {
 				if(data == '') {
 					// Sometimes we get an empty response. Why? Not sure.

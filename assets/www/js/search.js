@@ -39,6 +39,7 @@ window.search = function() {
 					srinfo: 'suggestion',
 					format: 'json'
 				},
+				dataType: 'json',
 				success: function(data) {
 					var suggestion_results = data;
 					var suggestion = getSuggestionFromSuggestionResults(suggestion_results);
@@ -78,6 +79,7 @@ window.search = function() {
 					srprop: '',
 					format: 'json'
 				},
+				dataType: 'json',
 				success: function(data) {
 					var searchResults = [];
 					for(var i = 0; i < data.query.search.length; i++) {
@@ -105,6 +107,7 @@ window.search = function() {
 					search: term,
 					format: 'json',
 				},
+				dataType: 'json',
 				success: function(data) {
 					var results = data;
 					if(results[1].length === 0) { 
