@@ -21,7 +21,8 @@ function getAboutVersionString() {
 var menu_items = [
 	{
 		id: 'go-back',
-		action: chrome.goBack
+		action: chrome.goBack,
+		disabled: true
 	},
 	{
 		id: 'go-forward',
