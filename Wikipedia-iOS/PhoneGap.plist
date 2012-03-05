@@ -23,7 +23,7 @@
 	<key>ExternalHosts</key>
 	<array>
 		<string>ws.geonames.net</string>
-		<string>*.tile.openstreetmap.org</string>
+		<string>*.mqcdn.com</string>
 		<string>*.wikipedia.org</string>
 		<string>*.wikimedia.org</string>
 	</array>
