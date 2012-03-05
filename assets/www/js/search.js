@@ -5,8 +5,8 @@ window.search = function() {
 			chrome.hideSpinner();
 			return;
 		}
-		if (network.isConnected()) {
-			if (term == '') {
+		if(network.isConnected()) {
+			if(term == '') {
 				chrome.showContent();
 				return;
 			}
@@ -16,7 +16,7 @@ window.search = function() {
 				console.log('for term: ' + term);
 				getFullTextSearchResults(term);
 			} else {
-				getSearchResults( term );
+				getSearchResults(term);
 			}
 		} else {
 			if(!isSuggestion)
@@ -27,7 +27,7 @@ window.search = function() {
 
 	function getDidYouMeanResults(results) {
 		// perform did you mean search
-		console.log( "Performing 'did you mean' search for", results[0] );
+		console.log("Performing 'did you mean' search for", results[0]);
 		var requestUrl = app.baseURL + "/w/api.php";
 		var doRequest = function() {
 			network.makeRequest({
@@ -41,9 +41,9 @@ window.search = function() {
 				},
 				success: function(data) {
 					var suggestion_results = data;
-					var suggestion = getSuggestionFromSuggestionResults( suggestion_results );
-					if ( suggestion ) {
-						getSearchResults( suggestion, 'true' );
+					var suggestion = getSuggestionFromSuggestionResults(suggestion_results);
+					if(suggestion) {
+						getSearchResults(suggestion, 'true');
 					}
 				},
 				error: function(err) {
@@ -54,11 +54,11 @@ window.search = function() {
 		doRequest();
 	}
 
-	function getSuggestionFromSuggestionResults( suggestion_results ) {
-		console.log( "Suggestion results", suggestion_results );
-		if ( typeof suggestion_results.query.searchinfo != 'undefined' ) {
+	function getSuggestionFromSuggestionResults(suggestion_results) {
+		console.log("Suggestion results", suggestion_results);
+		if(typeof suggestion_results.query.searchinfo != 'undefined') {
 			var suggestion = suggestion_results.query.searchinfo.suggestion;
-			console.log( 'Suggestion found:', suggestion );
+			console.log('Suggestion found:', suggestion);
 			return suggestion;
 		} else {
 			return false;
@@ -95,7 +95,7 @@ window.search = function() {
 	}
 
 	function getSearchResults(term, didyoumean) {
-		console.log( 'Getting search results for term:', term );
+		console.log('Getting search results for term:', term);
 		var requestUrl = app.baseURL + "/w/api.php";
 		var doRequest = function() {
 			network.makeRequest({
@@ -107,16 +107,16 @@ window.search = function() {
 				},
 				success: function(data) {
 					var results = data;
-					if ( results[1].length === 0 ) { 
-						console.log( "No results for", term );
-						getDidYouMeanResults( results );
+					if(results[1].length === 0) { 
+						console.log("No results for", term);
+						getDidYouMeanResults(results);
 					} else {
-						if ( typeof didyoumean == 'undefined' ) {
+						if(typeof didyoumean == 'undefined') {
 							didyoumean = false;
 						}
-						console.log( 'Did you mean?', didyoumean );
+						console.log('Did you mean?', didyoumean);
 						renderResults(results, didyoumean);
-					}			
+					}
 				},
 				error: function(err) {
 					console.log("ERROR!" + JSON.stringify(err));
@@ -138,16 +138,16 @@ window.search = function() {
 
 	function renderResults(results, didyoumean) {
 		var template = templates.getTemplate('search-results-template');
-		if (results.length > 0) {
+		if(results.length > 0) {
 			var searchParam = results[0];
-			console.log( "searchParam", searchParam );
+			console.log("searchParam", searchParam);
 			var searchResults = results[1].map(function(title) {
 				return {
 					key: app.urlForTitle(title),
 					title: title
 				};
 			});
-			if ( didyoumean ) {
+			if(didyoumean) {
 				var didyoumean_link = {
 					key: app.urlForTitle(results[0]),
 					title: results[0]
