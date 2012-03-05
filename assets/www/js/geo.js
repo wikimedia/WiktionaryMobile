@@ -106,14 +106,14 @@ window.geo = function() {
 
 	function geoAddMarkers( data ) {
 		$.each(data.geonames, function(i, item) {
-			var url = item.wikipediaUrl.replace(/^([a-z0-9-]+)\.wikipedia\.org/, 'https://$1.m.wikipedia.org');
+			var summary, html,
+				url = item.wikipediaUrl.replace(/^([a-z0-9-]+)\.wikipedia\.org/, 'https://$1.m.wikipedia.org');
 			if($.inArray(url, shownURLs) === -1) {
 				var marker = new L.Marker(new L.LatLng(item.lat, item.lng));
-				if(!item.summary) {
-					item.summary = "";
-				}
+				summary = item.summary || '';
 
-				var popupContent = $("<div><strong>" + item.title + "</strong><p>" + item.summary + "</p></div>").click(function() {
+				html = "<div><strong>" + item.title + "</strong><p>" + summary + "</p></div>";
+				var popupContent = $(html).click(function() {
 					app.navigateToPage(url);
 				})[0];
 				marker.bindPopup(popupContent);
