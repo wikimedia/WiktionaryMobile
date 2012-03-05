@@ -6,47 +6,46 @@ html.badscroll {
 	overflow: auto;
 }
 
-body 
-{
+body  {
 	margin:0px;
 	padding:0px;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-/*	-webkit-focus-ring-color:  rgba(0, 0, 0, 0);*/
 }
 
 /* this prevents the search input field from "jumping" on the first search */
-input:focus
-{
-	outline:none;	
+input:focus {
+	outline:none;
 }
 
-img
-{
+img {
 	border:0px;
 }
 
-div 
-{
+div {
 	margin:0px;
 	padding:0px;
 }
 
-header 
-{
+header {
 	position:absolute;
 	top:0px;
 	left:0px;
 	width:100%;
 	height: 52px;
-}   
+}
 
 .badscroll header {
 	position:fixed;
 	z-index:30000;
 }
 
-#savedPages, #history, #settings, #searchresults, #langlinks, #about-page-overlay, #nearby-overlay
-{
+#savedPages,
+#history,
+#settings,
+#searchresults,
+#langlinks,
+#about-page-overlay,
+#nearby-overlay {
 	background-color:white;
 	width:100%;
 	height:100%;
@@ -54,8 +53,7 @@ header
 }
 
 /*#savedPagesList, #historyList, #resultList, #langList, #about-page-content*/
-.scroller
-{
+.scroller {
 	position:absolute;
 	top:52px;
 	width: 100%;
@@ -64,8 +62,7 @@ header
 	-webkit-overflow-scrolling: touch;
 }
 
-.badscroll .scroller
-{
+.badscroll .scroller {
 	position:relative;
 	top:52px;
 	width: 100%;
@@ -88,18 +85,7 @@ header
 	bottom: 0px; /* no toolbar */
 }
 
-/*
-#searchresults
-{
-	position:absolute;
-	top:52px;
-	width: 100%;
-	display:none;
-}
-*/
-
-#content
-{
+#content {
 	display:block;
 }
 
@@ -107,16 +93,13 @@ header
 	position:relative;
 }
 
-
-#main
-{
+#main {
 	padding: 8px;
 }
 
-.listItemContainer
-{
+.listItemContainer {
 	display: -webkit-box;
-    -webkit-box-orient: horizontal;
+	-webkit-box-orient: horizontal;
 	whitespace: no-wrap;
 	border-bottom:1px solid #ddd;
 	width:100%;
@@ -132,12 +115,14 @@ header
 	display: block;
 }
 
-.listItem.active, .deleteButton.active {
+.listItem.active,
+.deleteButton.active {
 	background-color: #aff6ff;
 }
 
-.iconSavedPage, .iconHistory, .iconSearchResult
-{
+.iconSavedPage,
+.iconHistory,
+.iconSearchResult {
 	background: url(image/spr.png) -49px -100px no-repeat;
 	background-size: 160px 240px;
 	height: 24px;
@@ -177,35 +162,33 @@ header
 	right: 0;
 	width: 44px;
 	border-left: 1px solid #ddd;
-	
 }
 
-#search
-{
+#search {
 	position: absolute;
 	top: 8px;
 	right: 8px;
-	background: url(image/spr.png) -43px 5px no-repeat, 
-		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
+	background: url(image/spr.png) -43px 5px no-repeat,
+	-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
 	background-size: 160px 240px;
 	height: 37px;
 	width: 40px;
 	border: 1px solid #333;
-	-webkit-border-radius: 0px 5px 5px 0px;	
+	-webkit-border-radius: 0px 5px 5px 0px;
 }
 
 #search.active {
-	background: url(image/spr.png) -43px 5px no-repeat, 
+	background: url(image/spr.png) -43px 5px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
 }
 
 #search.inProgress {
-	background: url(image/spr.png) -130px -131px no-repeat, 
+	background: url(image/spr.png) -130px -131px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
 }
 
 #search.inProgress.active {
-	background: url(image/spr.png) -130px -131px no-repeat, 
+	background: url(image/spr.png) -130px -131px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
 }
 
@@ -216,7 +199,8 @@ header
 	right: 45px;
 	top: 6px;
 	border: none;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), color-stop(0.2, #fff), color-stop(0.8, #fff), to(#eee));
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd),
+		color-stop(0.2, #fff), color-stop(0.8, #fff), to(#eee));
 	font-size: 18px;
 	padding: 4px 28px 2px 4px;
 	border: 1px solid #333;
@@ -225,12 +209,15 @@ header
 	border-radius: 0; /* override for iphone where default is curvy */
 }
 
-#searchParam:focus, #searchParam.active {
+#searchParam:focus,
+#searchParam.active {
 	margin: 0;
 	border: 3px solid #f86600;
 }
 
-#searchParam, #searchParam:focus, #searchParam.active {
+#searchParam,
+#searchParam:focus,
+#searchParam.active {
 	/* This overrides the default looks of type=search on Apple WebKit */
 	-webkit-appearance: none;
 	box-sizing: content-box;
@@ -269,7 +256,7 @@ header
 	top: 8px;
 	left: 8px;
 	background: url(image/button-light-wiki.png) no-repeat,
-				-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#444));
+		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#444));
 	background-size: 40px;
 	height: 37px;
 	width: 40px;
@@ -294,15 +281,15 @@ header
 }
 
 .titlebar {
-    display: -webkit-box;
-    -webkit-box-orient: horizontal;
-    background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
-    padding: 5px;
-    height: 42px;
+	display: -webkit-box;
+	-webkit-box-orient: horizontal;
+	background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
+	padding: 5px;
+	height: 42px;
 }
 
 .titlebar > div:first-child {
-    -webkit-box-flex: 1;
+	-webkit-box-flex: 1;
 	text-shadow: #222 1px 1px 1px;
 	font-size: 18px;
 	margin-left: 6px;
@@ -366,7 +353,8 @@ header
 	margin: 2px 0 0;
 }
 
-#settingsList .item input[type="checkbox"], #settingsList .item select {
+#settingsList .item input[type="checkbox"],
+#settingsList .item select {
 	position: absolute;
 	right: 12px;
 	top: 18px;
@@ -427,8 +415,6 @@ header
 	font-size: 10px;
 }
 
-
-
 /* Web, iOS menu */
 #menu {
 	position: absolute;
@@ -450,6 +436,7 @@ header
 	padding: 0px 2px;
 	margin: 0;
 }
+
 #menu button span {
 	display: inline-block;
 	width: 48px;
@@ -457,13 +444,13 @@ header
 	background-size: 48px 48px;
 	background-position: center;
 	background-repeat: no-repeat;
-
 	vertical-align: center;
 	text-align: center;
 }
 
 #menu button:active {
-	background-image: -webkit-gradient(radial, center center, 8, center center, 24, from(white), to(rgba(255,255,255,0)));
+	background-image: -webkit-gradient(radial, center center, 8, center center, 24,
+		from(white), to(rgba(255,255,255,0)));
 }
 
 /* iOS bottombar iCons */
@@ -491,7 +478,6 @@ header
 #view-settings span {
 	background: url(image/ios/toolbar-settings.png);
 }
-
 
 /* For web simulation of iOS action sheets */
 .actionsheet {
@@ -562,7 +548,11 @@ header
 	.goodscroll.overlay-open #content {
 		left: 320px;
 	}
-	.goodscroll #savedPages, .goodscroll #history, .goodscroll #settings, .goodscroll #searchresults, .goodscroll #langlinks, .goodscroll #about-page-overlay {
+	.goodscroll #savedPages,
+	.goodscroll #history,
+	.goodscroll #settings,
+	.goodscroll #searchresults,
+	.goodscroll #langlinks {
 		width: 320px;
 	}
 	.goodscroll .scroller {
