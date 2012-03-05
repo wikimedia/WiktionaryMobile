@@ -10,7 +10,6 @@ window.search = function() {
 				chrome.showContent();
 				return;
 			}
-
 			chrome.showSpinner();
 
 			if(!isSuggestion) {
@@ -30,24 +29,29 @@ window.search = function() {
 		// perform did you mean search
 		console.log( "Performing 'did you mean' search for", results[0] );
 		var requestUrl = app.baseURL + "/w/api.php";
-		$.ajax({
-			type: 'GET',
-			url: requestUrl,
-			data: {
-				action: 'query',
-				list: 'search',
-				srsearch: results[0],
-				srinfo: 'suggestion',
-				format: 'json'
-			},
-			success: function(data) {
-				var suggestion_results = data;
-				var suggestion = getSuggestionFromSuggestionResults( suggestion_results );
-				if ( suggestion ) {
-					getSearchResults( suggestion, 'true' );
+		var doRequest = function() {
+			network.makeRequest({
+				url: requestUrl,
+				data: {
+					action: 'query',
+					list: 'search',                
+					srsearch: results[0],
+					srinfo: 'suggestion',
+					format: 'json'
+				},
+				success: function(data) {
+					var suggestion_results = data;
+					var suggestion = getSuggestionFromSuggestionResults( suggestion_results );
+					if ( suggestion ) {
+						getSearchResults( suggestion, 'true' );
+					}
+				},
+				error: function(err) {
+					console.log("ERROR!" + JSON.stringify(err));
 				}
-			}
-		});
+			});
+		};
+		doRequest();
 	}
 
 	function getSuggestionFromSuggestionResults( suggestion_results ) {
@@ -62,57 +66,64 @@ window.search = function() {
 	}
 
 	function getFullTextSearchResults(term) {
-
 		var requestUrl = app.baseURL + "/w/api.php";
-		$.ajax({
-			type: 'GET',
-			url: requestUrl,
-			data: {
-				action: 'query',
-				list: 'search',
-				srsearch: term,
-				srinfo: '',
-				srprop: '',
-				format: 'json'
-			},
-			success: function(data) {
-				var searchResults = [];
-				for(var i = 0; i < data.query.search.length; i++) {
-					var result = data.query.search[i];
-					searchResults.push(result.title);
+		var doRequest = function() {
+			network.makeRequest({
+				url: requestUrl,
+				data: {
+					action: 'query',
+					list: 'search',
+					srsearch: term,
+					srinfo: '',
+					srprop: '',
+					format: 'json'
+				},
+				success: function(data) {
+					var searchResults = [];
+					for(var i = 0; i < data.query.search.length; i++) {
+						var result = data.query.search[i];
+						searchResults.push(result.title);
+					}
+					renderResults([term, searchResults], false);
+				}, 
+				error: function(err) {
+					console.log("ERROR!" + JSON.stringify(err));
 				}
-				renderResults([term, searchResults], false);
-			},
-			error: function(err) {
-				console.log("ERROR!" + JSON.stringify(err));
-			}
-		});
+			});
+		};
+		doRequest();
 	}
 
 	function getSearchResults(term, didyoumean) {
 		console.log( 'Getting search results for term:', term );
 		var requestUrl = app.baseURL + "/w/api.php";
-		$.ajax({
-			type: 'GET',
-			url: requestUrl,
-			data: {
-				action: 'opensearch',
-				search: term,
-				format: 'json'
-			},
-			success: function(results) {
-				if ( results[1].length === 0 ) {
-					console.log( "No results for", term );
-					getDidYouMeanResults( results );
-				} else {
-					if ( typeof didyoumean == 'undefined' ) {
-						didyoumean = false;
-					}
-					console.log( 'Did you mean?', didyoumean );
-					renderResults(results, didyoumean);
-				}			
-			}
-		});
+		var doRequest = function() {
+			network.makeRequest({
+				url: requestUrl,
+				data: {
+					action: 'opensearch',
+					search: term,
+					format: 'json',
+				},
+				success: function(data) {
+					var results = data;
+					if ( results[1].length === 0 ) { 
+						console.log( "No results for", term );
+						getDidYouMeanResults( results );
+					} else {
+						if ( typeof didyoumean == 'undefined' ) {
+							didyoumean = false;
+						}
+						console.log( 'Did you mean?', didyoumean );
+						renderResults(results, didyoumean);
+					}			
+				},
+				error: function(err) {
+					console.log("ERROR!" + JSON.stringify(err));
+				}
+			});
+		};
+		doRequest();
 	}
 
 	function onSearchResultClicked() {
@@ -128,7 +139,6 @@ window.search = function() {
 	function renderResults(results, didyoumean) {
 		var template = templates.getTemplate('search-results-template');
 		if (results.length > 0) {
-
 			var searchParam = results[0];
 			console.log( "searchParam", searchParam );
 			var searchResults = results[1].map(function(title) {
@@ -152,13 +162,11 @@ window.search = function() {
 		console.log($("#doFullSearch").html());
 		chrome.hideSpinner();
 		chrome.hideOverlays();
-
 		if(!chrome.isTwoColumnView()) {
 			$("#content").hide(); // Not chrome.hideContent() since we want the header
 		} else {
 			$("html").addClass('overlay-open');
 		}
-
 		chrome.doFocusHack();
 		$('#searchresults').localize().show();
 		chrome.doScrollHack('#searchresults .scroller');
