@@ -107,6 +107,7 @@ window.app = function() {
 		var d = $.Deferred();
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
 		$('#searchParam').val('');
+		chrome.showContent();
 		chrome.showSpinner();
 
 		if (options.updateHistory) {
@@ -124,7 +125,6 @@ window.app = function() {
 			console.log('enabling language');
 			setPageActionsState(true);;
 			setMenuItemState('read-in', true);
-			chrome.showContent();
 		});
 		return d;
 	}
