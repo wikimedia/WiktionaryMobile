@@ -179,17 +179,11 @@ window.chrome = function() {
 	}
 
 	function toggleMoveActions() {
-		if (currentHistoryIndex < (pageHistory.length - 1)) {
-			setMenuItemState('go-forward', true, true);
-		} else {
-			setMenuItemState('go-forward', false, true);
-		}
+		var canGoForward = currentHistoryIndex < (pageHistory.length -1);
+		var canGoBackward = currentHistoryIndex > 0;
 
-		if(currentHistoryIndex <= 0) {
-			setMenuItemState('go-back', false, true);
-		} else {
-			setMenuItemState('go-back', true, true);
-		}
+		setMenuItemState('go-forward', canGoForward, true);
+		setMenuItemState('go-back', canGoBackward, true);
 		updateMenuState();
 	}
 
