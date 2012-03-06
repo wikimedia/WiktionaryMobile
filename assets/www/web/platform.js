@@ -116,3 +116,25 @@ function popupMenu(items, callback, options) {
 		}
 	});
 }
+
+function setMenuItemState(action, state, noUpdate) {
+	if(state) {
+		$("command[action='" + action + "']").removeAttr("disabled");
+	} else {
+		$("command[action='" + action + "']").attr("disabled", "disabled");
+	}
+	if(!noUpdate) { 
+		updateMenuState();
+	}
+}
+
+function setPageActionsState(state) {
+	setMenuItemState("read-in", state, true);
+	setMenuItemState("save-page", state, true);
+	setMenuItemState("share-page", state, true);
+}
+
+function getAboutVersionString() {
+	return "1.1.web";
+}
+
