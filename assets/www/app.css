@@ -345,7 +345,7 @@ button#search
 #settingsList .item {
 	list-style: none;
 	border-bottom:1px solid #ddd;
-	padding: 12px 60px 12px 16px;
+	padding: 12px 16px 12px 16px;
 }
 #settingsList .item label {
 	font-size:16px;
@@ -371,9 +371,10 @@ button#search
 }
 
 #settingsList .item select {
-	background-position: 0 -200px;
-	padding-left: 32px;
+	background-position: 100% -200px;
 	top: 22px;
+	font-size: 14px;
+	padding-left: 0px;
 }
 
 #settingsList .item select:focus {
