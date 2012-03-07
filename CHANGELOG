@@ -58,3 +58,21 @@
 - Changed default zoom level
 - Upgraded Leaflet and PhoneGap libraries
 
+## Android v1.1beta3 & iOS v3.1beta2 ##
+
+### Common ###
+
+- Tap area in settings dialog much bigger
+- Switch to up-to-date styles from MobileFrontend, instead of using stale copy
+- Switch to up-to-date js for toggling from MobileFrontend
+- Fixed about screen's back button behaving inconsistently
+- Don't clear map markers when you move around in NearMe view
+- Show spinner when going from NearMe view to article
+
+### Android specific ###
+- Moved Share Page item to main menu
+
+### iOS specific ###
+
+- Scroll bug in about screen fixed
+- Map tiles actually show up
