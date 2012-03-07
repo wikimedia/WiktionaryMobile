@@ -58,7 +58,6 @@ window.appSettings = function() {
 				return;
 			}
 		});
-		$("#selectedLanguage").html(currentContentLanguage);	
 		$("#fontSizeSelector").val(preferencesDB.get("fontSize")).change(onFontSizeChanged);
 		$("#aboutPageLabel").click(function () {
 			aboutPage();
