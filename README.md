@@ -35,6 +35,15 @@ ANT CONFIGURATION
 
 Make sure to modify the sdk.dir variable in the local.properties file so that it points to the location where the android sdk is installed on your computer.
 
+BUILDING FOR PLAYBOOK
+
+- Grab the SDK from <a href="https://bdsc.webapps.blackberry.com/html5/download/sdk">here</a>.
+- Update the project.properties in the blackberry folder, you will need signing keys to load onto a device
+- run:
+
+    ant playbook load-device
+
+
 FAQ:
                     
 Q. I'm seeing an error that says "DroidGap cannot be resolved to a type", how do I fix it?
