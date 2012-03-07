@@ -40,5 +40,6 @@ function aboutPage() {
 			appSettings.showSettings();
 		});
 		chrome.doFocusHack();
+		chrome.doScrollHack('#about-page-overlay .scroller');
 	});
 }
