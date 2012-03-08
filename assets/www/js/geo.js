@@ -116,7 +116,7 @@ window.geo = function() {
 				var popupContent = $(html).click(function() {
 					app.navigateToPage(url);
 				})[0];
-				marker.bindPopup(popupContent);
+				marker.bindPopup(popupContent, {closeButton: false});
 				geo.map.addLayer(marker);
 				shownURLs.push(url);
 			}
