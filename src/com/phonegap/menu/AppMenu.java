@@ -100,10 +100,38 @@ public class AppMenu extends Plugin {
     {
       return this.refresh(args);
     }
+    else if(action.equals("setMenuState"))
+    {
+      return this.setMenuState(args);
+    }
     else
     {
       return new PluginResult(PluginResult.Status.INVALID_ACTION);
     }
+  }
+  
+  private PluginResult setMenuState(JSONArray args) {
+	try 
+	{
+	  String action = args.getString(0);
+	  Boolean state = args.getBoolean(1);	
+	  ListIterator<MenuInfo> iter = items.listIterator();     
+      while(iter.hasNext())
+      {
+        MenuInfo item = iter.next();
+        if(item.callback.equalsIgnoreCase(action)) 
+        {
+            item.disabled = !state;
+        	return new PluginResult(PluginResult.Status.OK);
+        }
+      }
+	} 
+	catch (JSONException ex)
+	{
+	   return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
+	}
+    
+    return new PluginResult(PluginResult.Status.OK);
   }
   
   private PluginResult refresh(JSONArray args) {
@@ -203,6 +231,7 @@ public class AppMenu extends Plugin {
      */
     public boolean buildMenu(Menu menu)
     {
+      MenuItem menuItem;
       appMenu = menu;
       if(appMenu.size() > 0)
         appMenu.clear();
@@ -211,16 +240,12 @@ public class AppMenu extends Plugin {
       {
         int itemId = iter.nextIndex();
         MenuInfo item = iter.next();
-        appMenu.add(Menu.NONE, itemId, Menu.NONE, item.label);
+        menuItem = appMenu.add(Menu.NONE, itemId, Menu.NONE, item.label);
         if(item.icon != null)
         {
-          MenuItem currentItem = menu.getItem(itemId);
-          currentItem.setIcon(item.icon);
+          menuItem.setIcon(item.icon);
         }
-        if(item.disabled == true) {
-          MenuItem currentItem = menu.getItem(itemId);
-          currentItem.setEnabled(false);
-        }
+        menuItem.setEnabled(!item.disabled);
       }
       menuChanged = false;      
       return true;

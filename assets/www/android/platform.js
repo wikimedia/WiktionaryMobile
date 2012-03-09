@@ -23,21 +23,21 @@ function getAboutVersionString() {
 	return "1.1beta3";
 }
 
-function setMenuItemState(action, state, noUpdate) {
-	if(state) {
-		$("command[action='" + action + "']").removeAttr("disabled");
-	} else {
-		$("command[action='" + action + "']").attr("disabled", "disabled");
-	}
-	if(!noUpdate) { 
-		updateMenuState();
-	}
+function setMenuItemState(action, state) {
+	window.plugins.SimpleMenu.setMenuState(action, state,
+			function(success) {
+				console.log("Successfully set menu item state");
+			},
+			function(fail) {
+				console.log("Failed to set menu item state");
+			}
+		);
 }
 
 function setPageActionsState(state) {
-	setMenuItemState("read-in", state, true);
-	setMenuItemState("save-page", state, true);
-	setMenuItemState("share-page", state, true);
+	setMenuItemState("read-in", state);
+	setMenuItemState("save-page", state);
+	setMenuItemState("share-page", state);
 }
 
 window.CREDITS = [

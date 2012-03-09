@@ -21,6 +21,17 @@ var SimpleMenu = function()
   });
 }
 
+SimpleMenu.prototype.setMenuState = function(action, state, win, fail) {
+	PhoneGap.exec(function(result) {
+		win(result);
+	},
+	function(ex)
+	{
+		fail(ex);
+	},
+	"SimpleMenu", "setMenuState", [action, state]);
+}
+
 SimpleMenu.prototype.loadMenu = function(menu, triggers, win, fail)
 {
   this.menu = [];

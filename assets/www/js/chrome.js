@@ -92,6 +92,7 @@ window.chrome = function() {
 			});
 			l10n.initLanguages();
 
+			updateMenuState();
 			toggleMoveActions();
 
 			$(".titlebarIcon").bind('touchstart', function() {
@@ -184,7 +185,6 @@ window.chrome = function() {
 
 		setMenuItemState('go-forward', canGoForward, true);
 		setMenuItemState('go-back', canGoBackward, true);
-		updateMenuState();
 	}
 
 	function goBack() {
