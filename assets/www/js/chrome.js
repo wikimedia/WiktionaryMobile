@@ -348,7 +348,6 @@ window.chrome = function() {
 		MobileFrontend.init();
 		window.scroll(0,0);
 		appHistory.addCurrentPage();
-		toggleForward();
 		chrome.hideSpinner();  
 		audioPlayer.getMediaList();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);

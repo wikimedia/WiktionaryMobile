@@ -575,15 +575,12 @@ button#search
 	.goodscroll.overlay-open #content {
 		left: 320px;
 	}
-<<<<<<< HEAD
 	.goodscroll #savedPages, .goodscroll #history, .goodscroll #settings, .goodscroll #searchresults, .goodscroll #langlinks, .goodscroll #about-page-overlay, .goodscroll #audiolinks {
-=======
 	.goodscroll #savedPages,
 	.goodscroll #history,
 	.goodscroll #settings,
 	.goodscroll #searchresults,
 	.goodscroll #langlinks {
->>>>>>> d615de3798317d341372d3a3beac4d09e3949bec
 		width: 320px;
 	}
 	.goodscroll .scroller {
