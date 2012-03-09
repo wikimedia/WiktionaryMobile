@@ -13,8 +13,7 @@ import com.phonegap.api.PluginResult.Status;
 public class CacheModePlugin extends Plugin {
 
 	@Override
-	public PluginResult execute(String action, JSONArray params,
-			String callbackId) {
+	public PluginResult execute(String action, JSONArray params, String callbackId) {
 		PluginResult result = null;
 		Log.d("PhoneGap", "Cache Mode entered!");
 
@@ -36,16 +35,17 @@ public class CacheModePlugin extends Plugin {
 	public boolean isSynch(String action) {
 		return true;
 	}
-	
+
 	public void setCacheMode(String mode) {
 		// Don't trigger this until after the PhoneGap app is all loaded!
 		//
-        // Note that this mode seems to sometimes break initialization; our deviceready
-        // event never gets called on some app initializations, very weird!
+		// Note that this mode seems to sometimes break initialization; our
+		// deviceready
+		// event never gets called on some app initializations, very weird!
 		int n = getModeValue(mode);
-        webView.getSettings().setCacheMode(n);
+		webView.getSettings().setCacheMode(n);
 	}
-	
+
 	private int getModeValue(String str) {
 		if (str.equals("LOAD_CACHE_ELSE_NETWORK"))
 			return WebSettings.LOAD_CACHE_ELSE_NETWORK;

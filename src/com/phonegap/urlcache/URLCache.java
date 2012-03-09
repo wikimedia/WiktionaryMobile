@@ -42,15 +42,15 @@ public final class URLCache extends Plugin {
 				String fileDir = ctx.getFilesDir().getAbsolutePath();
 				String filePath = fileDir + "/" + fileName;
 
-				//Log.d(TAG, "URI: " + uri + " filePath: " + filePath);
+				// Log.d(TAG, "URI: " + uri + " filePath: " + filePath);
 
 				File f = new File(filePath);
 				if (f.exists()) {
-					//Log.d(TAG, "EXISTS ! " + filePath);
+					// Log.d(TAG, "EXISTS ! " + filePath);
 					result.put("file", filePath);
 					result.put("status", 0);
 				} else {
-					//Log.d(TAG, "Fetching from server " + uri);
+					// Log.d(TAG, "Fetching from server " + uri);
 					URL u;
 					DataInputStream dis = null;
 					FileOutputStream out = null;
@@ -60,8 +60,10 @@ public final class URLCache extends Plugin {
 					try {
 						u = new URL(uri);
 						URLConnection urlConnection = u.openConnection();
-						dis = new DataInputStream(new BufferedInputStream(urlConnection.getInputStream()));
-						out = ctx.openFileOutput(fileName, Context.MODE_PRIVATE);
+						dis = new DataInputStream(new BufferedInputStream(
+								urlConnection.getInputStream()));
+						out = ctx
+								.openFileOutput(fileName, Context.MODE_PRIVATE);
 						while ((length = dis.read(buffer)) != -1) {
 							out.write(buffer, 0, length);
 						}
@@ -97,12 +99,12 @@ public final class URLCache extends Plugin {
 			try {
 				result.put("message", "JSONException");
 				result.put("status", status.ordinal());
-			} catch(JSONException e2) {
+			} catch (JSONException e2) {
 				// very bad if this happens
 				e2.printStackTrace();
 			}
 		}
-		//Log.d(TAG, result.toString());
+		// Log.d(TAG, result.toString());
 		return new PluginResult(status, result);
 
 	}

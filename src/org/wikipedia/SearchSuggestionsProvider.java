@@ -36,19 +36,19 @@ public class SearchSuggestionsProvider extends ContentProvider {
 			SharedPreferences settings = this.getContext().getSharedPreferences(PreferencesPlugin.PREFS_NAME, Context.MODE_PRIVATE);
 			String lang = settings.getString("language", "en");
 
-			String[] columnNames = {BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1, SearchManager.SUGGEST_COLUMN_INTENT_DATA};
+			String[] columnNames = { BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1, SearchManager.SUGGEST_COLUMN_INTENT_DATA };
 			MatrixCursor cursor = new MatrixCursor(columnNames);
 			String content = HttpApi.getContent("http://" + lang + ".wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=json&search=" + URLEncoder.encode(query, "UTF-8"));
 			JSONArray response = new JSONArray(content);
 			JSONArray suggestions = response.getJSONArray(1);
 			int lenght = suggestions.length();
-			for(int i = 0; i < lenght; i++) {
+			for (int i = 0; i < lenght; i++) {
 				String suggestion = suggestions.getString(i);
-				String[] row = {String.valueOf(i), suggestion, "http://" + lang + ".m.wikipedia.org/wiki/" + suggestion};
+				String[] row = { String.valueOf(i), suggestion, "http://" + lang + ".m.wikipedia.org/wiki/" + suggestion };
 				cursor.addRow(row);
 			}
 			return cursor;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Log.e("SearchSuggestionsProvider", e.getMessage());
 			return null;
 		}

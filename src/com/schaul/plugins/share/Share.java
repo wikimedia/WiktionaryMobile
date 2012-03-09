@@ -22,13 +22,13 @@ public class Share extends Plugin {
 	public PluginResult execute(String action, JSONArray args, String callbackId) {
 		try {
 			JSONObject jo = args.getJSONObject(0);
-			doSendIntent(jo.getString("subject"), jo.getString("text")); 
+			doSendIntent(jo.getString("subject"), jo.getString("text"));
 			return new PluginResult(PluginResult.Status.OK);
 		} catch (JSONException e) {
 			return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
 		}
 	}
-	
+
 	private void doSendIntent(String subject, String text) {
 		Intent sendIntent = new Intent(android.content.Intent.ACTION_SEND);
 		sendIntent.setType("text/plain");

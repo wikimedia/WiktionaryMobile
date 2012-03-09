@@ -21,7 +21,7 @@ public class ApplicationVersion extends Plugin {
 		} catch (JSONException e) {
 			LOG.d("error", e.getMessage());
 		}
-		
+
 		return info;
 	}
 

@@ -16,12 +16,12 @@ public class PreferencesPlugin extends Plugin {
 	@Override
 	public PluginResult execute(String action, JSONArray args, String callbackId) {
 		try {
-			if(args.length() != 1) {
+			if (args.length() != 1) {
 				return new PluginResult(PluginResult.Status.INVALID_ACTION);
 			}
 			JSONObject obj = args.getJSONObject(0);
 
-			if(!obj.has("id")) {
+			if (!obj.has("id")) {
 				return new PluginResult(PluginResult.Status.INVALID_ACTION);
 			}
 			String id = obj.getString("id");
@@ -29,7 +29,7 @@ public class PreferencesPlugin extends Plugin {
 			SharedPreferences settings = this.ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
 			if (action.equals("get")) {
-				if(!settings.contains(id)) {
+				if (!settings.contains(id)) {
 					return new PluginResult(PluginResult.Status.NO_RESULT);
 				}
 				try {

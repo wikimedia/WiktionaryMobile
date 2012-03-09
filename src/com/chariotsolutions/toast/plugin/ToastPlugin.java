@@ -25,11 +25,11 @@ public class ToastPlugin extends Plugin {
 			Log.e(TAG, "Required parameter 'Toast Message' missing");
 			return new PluginResult(Status.ERROR);
 		}
-		
+
 		if (action.equals(LONG_TOAST_ACTION)) {
-		  ctx.runOnUiThread(new RunnableToast(toastMessage, Toast.LENGTH_LONG));
+			ctx.runOnUiThread(new RunnableToast(toastMessage, Toast.LENGTH_LONG));
 		} else {
-		  ctx.runOnUiThread(new RunnableToast(toastMessage, Toast.LENGTH_SHORT));
+			ctx.runOnUiThread(new RunnableToast(toastMessage, Toast.LENGTH_SHORT));
 		}
 
 		return new PluginResult(Status.OK);
