@@ -15,13 +15,14 @@ function setPageActionsState(state) {
 }
 
 function getAboutVersionString() {
-	return "3.1beta1";
+	return "3.1beta2";
 }
 
 var menu_items = [
 	{
 		id: 'go-back',
-		action: chrome.goBack
+		action: chrome.goBack,
+		disabled: true
 	},
 	{
 		id: 'go-forward',

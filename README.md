@@ -4,6 +4,10 @@ GETTING STARTED:
 
 1. Setup your development environment
 2. Setup the project
+3. Pull down external dependencies via command line by running
+
+	make remotes
+
 
 ENVIRONMENT SETUP
 
@@ -14,6 +18,11 @@ CHECKING OUT THE SOURCE CODE
 1. Create your own fork of the <a href="https://github.com/wikimedia/WiktionaryMobile" target="_blank">Wiktionary</a> code.
 2. Clone your fork onto your computer.
                             
+SETTING UP THE PROJECT WITHOUT ECLIPSE
+
+There is a highly useful tutorial @
+http://www.mediawiki.org/wiki/Mobile/PhoneGap/Tutorial#Setup
+
 SETTING UP THE PROJECT IN ECLIPSE
 
 1. In Eclipse choose to import a project by going to File (in the menu bar) -> Import.
@@ -28,6 +37,15 @@ ANT CONFIGURATION
 
 Make sure to modify the sdk.dir variable in the local.properties file so that it points to the location where the android sdk is installed on your computer.
 
+BUILDING FOR PLAYBOOK
+
+- Grab the SDK from <a href="https://bdsc.webapps.blackberry.com/html5/download/sdk">here</a>.
+- Update the project.properties in the blackberry folder, you will need signing keys to load onto a device
+- run:
+
+    ant playbook load-device
+
+
 FAQ:
                     
 Q. I'm seeing an error that says "DroidGap cannot be resolved to a type", how do I fix it?
@@ -41,3 +59,5 @@ A. You will need to add the PhoneGap library to your project, by following these
 5. Select Java Build Path, click on the Libraries tab and then click the Add JARs button.
 6. Browse to libs/phonegap-1.1.0.jar and choose to add it.
 
+CONTRIBUTING
+Please ensure you read STYLE_GUIDELINES before making any contribution to this project!

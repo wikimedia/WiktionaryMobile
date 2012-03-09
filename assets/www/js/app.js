@@ -35,7 +35,8 @@ window.app = function() {
 		console.log('hideAndLoad origUrl ' + origUrl);
 		var doRequest = function() {
 			network.makeRequest({
-				url: url, 
+				url: url,
+				dataType: 'text',
 				success: function(data) {
 						chrome.renderHtml(data, origUrl);
 						chrome.onPageLoaded();
@@ -57,9 +58,9 @@ window.app = function() {
 		};
 		console.log("Apparently we are connected = " + network.isConnected());
 		if(!network.isConnected()) {
-			app.setCaching(true, function() { 
+			app.setCaching(true, function() {
 				console.log("HEYA!");
-				doRequest(); 
+				doRequest();
 				app.setCaching(false);
 			});
 		} else {
@@ -96,8 +97,8 @@ window.app = function() {
 		preferencesDB.set('fontSize', size);
 		$('#main').css('font-size', size);
 	}
-	
-	
+
+
 	function setCaching(enabled, success) {
 		// Do nothing by default
 		success();
@@ -108,12 +109,13 @@ window.app = function() {
 		var d = $.Deferred();
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
 		$('#searchParam').val('');
+		chrome.showContent();
 		chrome.showSpinner();
-		
+
 		if (options.updateHistory) {
 			currentHistoryIndex += 1;
 			pageHistory[currentHistoryIndex] = url;
-		} 
+		}
 		if (options.cache) {
 			d = app.loadCachedPage(url);
 		} else {
@@ -125,7 +127,6 @@ window.app = function() {
 			console.log('enabling language');
 			setPageActionsState(true);;
 			setMenuItemState('read-in', true);
-			chrome.showContent();
 		});
 		return d;
 	}

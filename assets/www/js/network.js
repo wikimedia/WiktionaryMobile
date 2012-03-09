@@ -7,7 +7,9 @@ window.network = function() {
 		// So in the interest of sanity, I'll include Zepto *just for this*
 		currentXhr = Zepto.ajax({
 			url: options.url,
-			dataType: 'text',
+			data: options.data,
+			type: options.type || 'GET',
+			dataType: options.dataType || 'text',
 			success: function(data, xhr) {
 				if(data == '') {
 					// Sometimes we get an empty response. Why? Not sure.
@@ -31,8 +33,7 @@ window.network = function() {
 		}
 	}
 
-	function isConnected() 
-	{
+	function isConnected() {
 		return window.navigator.onLine;
 	}
 

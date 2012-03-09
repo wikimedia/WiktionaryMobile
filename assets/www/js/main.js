@@ -17,6 +17,7 @@ window.CREDITS = [
 	];
 
 function init() {
+	$(document.body).addClass('jsEnabled');
 	document.addEventListener("deviceready", function() {chrome.initialize(); }, true);
 }
 
@@ -26,7 +27,7 @@ function homePage() {
 
 function aboutPage() {
 	chrome.hideOverlays();
-	$.get(ROOT_URL + 'AUTHORS').then(function(authors) { 
+	$.get(ROOT_URL + 'AUTHORS').then(function(authors) {
 		$("#about-version-string").text(getAboutVersionString());
 		$("#about-contributors").text($.trim(authors).split('\n').join(', '));
 		$("#about-credits").html(window.CREDITS.join('<br />'));
@@ -39,5 +40,6 @@ function aboutPage() {
 			appSettings.showSettings();
 		});
 		chrome.doFocusHack();
+		chrome.doScrollHack('#about-page-overlay .scroller');
 	});
 }

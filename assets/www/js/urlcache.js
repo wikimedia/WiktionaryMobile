@@ -41,7 +41,7 @@ window.urlCache = function() {
 					});
 				});
 			}
-			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
 					function(fs){
 						fs.root.getFile(filePath, {create: true}, saveFile, error);
 					});
@@ -49,7 +49,7 @@ window.urlCache = function() {
 		}
 
 		console.log("Trying to open " + filePath);
-		window.resolveLocalFileSystemURI(filePath, 
+		window.resolveLocalFileSystemURI(filePath,
 				function(fileEntry) {
 					console.log("Found!");
 					d.resolve(fileEntry.fullPath);
@@ -99,7 +99,7 @@ window.urlCache = function() {
 
 		console.log("Done mapping stuff");
 		console.log("Inside the when");
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
 			function(fs){
 				console.log(filePath);
 				console.log(JSON.stringify(fs));
@@ -125,7 +125,7 @@ window.urlCache = function() {
 			console.log('file path is ' + JSON.stringify(fileEntry));
 			fileEntry.file(function(file) {reader.readAsText(file); });
 		}
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
 				function(fs){
 					fs.root.getFile(filePath, {create: false}, readFile, error);
 				});

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Widget Configuration Reference:
+    http://docs.blackberry.com/en/developers/deliverables/15274/
+-->
+
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+	version="1.0.0.0">
+
+  <name>Wikipedia</name>
+
+  <description>
+      A Wikimedia foundation project
+  </description>
+
+  <license href="http://opensource.org/licenses/alphabetical">
+  </license>
+
+  <!-- PhoneGap API -->
+  <access subdomains="true" uri="file:///store/home" />
+  <access subdomains="true" uri="file:///SDCard" />
+
+  <!-- Expose access to all URIs, including the file and http protocols -->
+  <access subdomains="true" uri="*" />
+
+  <icon rim:hover="false" src="image/icon.png" />
+  <icon rim:hover="true" src="image/icon.png" />
+
+  <rim:loadingScreen backgroundColor="#FFFFFF"
+             foregroundImage="image/splash.png"
+		     onFirstLaunch="true">
+    <rim:transitionEffect type="fadeOut" />
+  </rim:loadingScreen>
+
+  <content src="index.html" />
+
+</widget>
