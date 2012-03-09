@@ -114,7 +114,7 @@ window.geo = function() {
 
 				html = "<div><strong>" + item.title + "</strong><p>" + summary + "</p></div>";
 				var popupContent = $(html).click(function() {
-					app.navigateToPage(url);
+					app.navigateToPage(url, {hideCurrent: true});
 				})[0];
 				marker.bindPopup(popupContent, {closeButton: false});
 				geo.map.addLayer(marker);

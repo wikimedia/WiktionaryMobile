@@ -108,6 +108,9 @@ window.app = function() {
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
 		$('#searchParam').val('');
 		chrome.showContent();
+		if(options.hideCurrent) {
+			$("#content").hide();
+		}
 		chrome.showSpinner();
 
 		if (options.updateHistory) {
@@ -125,6 +128,9 @@ window.app = function() {
 			console.log('enabling language');
 			setPageActionsState(true);;
 			setMenuItemState('read-in', true);
+			if(options.hideCurrent) {
+				$("#content").show();
+			}
 		});
 		return d;
 	}
