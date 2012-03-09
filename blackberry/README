@@ -1,0 +1,104 @@
+Blackberry & Playbook build instructions!
+
+
+== Prerequisites ==
+
+* Mac or Windows machine (only tested Mac)
+* Blackberry Tablet OS SDK
+* request debug/signing keys
+
+On Mac, SDK stuff will install into /Developer/SDKs/Research In Motion/*really long directory name*
+
+Most of the binaries are under:
+/Developer/SDKs/Research\ In\ Motion/BlackBerry\ WebWorks\ SDK\ for\ TabletOS\ 2.2.0.5/bbwp/blackberry-tablet-sdk/bin
+
+The 'bbwp' binary is under:
+/Developer/SDKs/Research\ In\ Motion/BlackBerry\ WebWorks\ SDK\ for\ TabletOS\ 2.2.0.5/bbwp
+
+The 'bbwp.properties' file which you must edit is under:
+/Developer/SDKs/Research\ In\ Motion/BlackBerry\ WebWorks\ SDK\ for\ TabletOS\ 2.2.0.5/bbwp/bin
+
+
+== How to set up debug key on the computer? ==
+
+Get the .csj files that were e-mailed to you and:
+
+blackberry-signer -register -csjpin <csj pin> 
+    -storepass <KeystorePassword> <client-RDK-xxxxxx.csj file> 
+    <client-PBDT-xxxxx.csj file>
+
+YOU CAN ONLY DO THIS ONCE. If you mess it up you may need to request more keys.
+Key files get stuffed into ~/Library/Research In Motion
+
+"csj pin" is the PIN (not a number, but alphanumeric) that you specified when requesting
+the key signing setup. "KeystorePassword" is a password you make up for the keystore.
+I'll be honest, I used the same for both and got it to work.
+
+
+== How to create debug token? ==
+
+blackberry-debugtokenrequest -storepass <KeystorePassword> 
+    -devicepin <PIN tablet> <debug_token_file_name.bar>
+
+The PIN is findable on the 'About' settings screen, under 'Hardware'; it's a hex number.
+
+
+== How to set up Playbook ==
+
+Set up development mode in settings
+* settings -> Security -> Development Mode
+
+If it doesn't have a password you'll have to set it. You'll use this on the command line
+when manipulating the device, as well as when logging into/unlocking the device itself.
+
+
+=== How to install debug token on device? ===
+
+blackberry-deploy -installDebugToken <path to debug token> 
+    -device <IP address of tablet> -password <tablet password>
+
+You can find the tablet's IP address from the development mode notification icon.
+Swipe out of an application, then pop in and it'll show you. Must be on the same
+network as your computer.
+
+
+== How to build ==
+
+Basic build:
+
+  cd blackberry
+  ant playbook build
+
+This produces build/Wikipedia.bar as an unsigned application.
+
+
+== How to sign with debug token? ==
+
+https://bdsc.webapps.blackberry.com/html5/documentation/ww_testing/loading_your_app_to_playbook_1866988_11.html
+
+Edit bbwp.properties in the SDK/bin directory and add the path to your debug token, eg:
+
+  <debug_token>/Users/brion/src/wiki/mobile/blackberry/debug.bar</debug_token>
+
+
+First run 'ant playbook build' to build, then re-build the final .bar with -d option:
+
+bbwp build/Wikipedia.zip -d -o build
+
+If you don't build with -d then it'll complain!
+
+
+== To install the app ==
+
+blackberry-deploy -installApp -password <tablet pass> -device <tablet ip> -package build/Wikipedia.bar 
+
+
+
+
+
+
+
+
+Additional notes:
+* to build WebWorks apps for handsets probably requires another SDK
+* actual key signing is done another way
