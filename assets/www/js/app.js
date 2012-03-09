@@ -48,9 +48,10 @@ window.app = function() {
 						loadLocalPage('error.html');
 					}
 					languageLinks.clearLanguages();
-					setMenuItemState('read-in', false);
-					setPageActionsState(false);
 					audioPlayer.clearMenuArray();
+					setMenuItemState('read-in', false);
+					setMenuItemState('listen-sound', false);
+					setPageActionsState(false);
 				}
 			});
 		};

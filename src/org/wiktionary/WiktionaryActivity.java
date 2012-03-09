@@ -9,7 +9,7 @@ import com.phonegap.DroidGap;
 
 public class WiktionaryActivity extends DroidGap {
     /** Called when the activity is first created. */
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +29,13 @@ public class WiktionaryActivity extends DroidGap {
             }
           }
         }
-		
+
         String startingUrl = "file:///android_asset/www/index.html";
         
         if (startedFromAnotherApp) { // Specify the word display on startup
           startingUrl += "?define=" + URLEncoder.encode(wordToShow);
         }
-		
+
         super.loadUrl(startingUrl);
         
         String currentUA = this.appView.getSettings().getUserAgentString();

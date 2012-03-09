@@ -38,6 +38,8 @@ function setPageActionsState(state) {
 	setMenuItemState("read-in", state, true);
 	setMenuItemState("save-page", state, true);
 	setMenuItemState("share-page", state, true);
+	setMenuItemState("listen-sound", state, true);
+	setMenuItemState("word-of-the-day", state, true);
 }
 
 window.CREDITS = [
@@ -143,6 +145,8 @@ function updateMenuState() {
 		'go-forward': function() { chrome.goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
+		'listen-sound': function() { audioPlayer.createMenuArray(); },
+        'word-of-the-day': function() { chrome.loadWordoftheDay(); },
 	};
 	$('#appMenu command').each(function() {
 		var $command = $(this),
