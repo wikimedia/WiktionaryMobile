@@ -3,6 +3,7 @@ window.audioPlayer = function() {
 	var availableMedia = [];
 	var availableUrl = [];
 	var menuArray = [];
+	var lastMenuStatus = null;
 	
 	/**
 	 * Function called with URL of file to be played.
@@ -35,6 +36,14 @@ window.audioPlayer = function() {
 		var term = app.getCurrentTitle();
 		var requestUrl = app.baseURL + "/w/api.php";
 		
+		if (lastMenuStatus){
+			setMenuItemState('listen-sound',false, false);
+			console.log("disabling menu");
+			lastMenuStatus = false;
+		}else{
+			console.log("menu already disabled");
+		}		
+		
 		var ending = ".*\.ogg";
 		
 		$.ajax({
@@ -50,6 +59,7 @@ window.audioPlayer = function() {
 				availableMedia = [];
 				availableUrl = [];
 				var audioIndex = 0;
+				
 				for(var id in data.query.pages){
 					for(var im in data.query.pages[id].images){
 					
@@ -80,6 +90,14 @@ window.audioPlayer = function() {
 		
 		//this get request using (app.baseURL + "/w/api.php") was handing back unusable "https" urls, should investigate getting a non https version of app.baseURL
 		var requestUrl = "http://en.m." + PROJECTNAME + ".org/w/api.php";
+		
+		if(!lastMenuStatus){
+			setMenuItemState('listen-sound', true, false);
+			console.log("enabling menu");
+			lastMenuStatus = true;		
+		}else{
+			console.log("menu already enabled");
+		}	
 		
 		$.ajax({
 			type: 'GET',
@@ -154,6 +172,10 @@ window.audioPlayer = function() {
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
 		audioPlayer.playAudio(url);
+	}
+	
+	function getMenuFilled() {
+		return menuFilled;
 	}
 	
 	return {

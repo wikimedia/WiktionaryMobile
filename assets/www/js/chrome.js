@@ -130,10 +130,6 @@ window.chrome = function() {
 		});
 
 	}
-	
-	function playSound() {
-		audioPlayer.createMenuArray();
-	}
 
     function loadWordoftheDay() {
         loadFirstPage(true);
@@ -351,6 +347,7 @@ window.chrome = function() {
 		chrome.hideSpinner();  
 		audioPlayer.getMediaList();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
+		console.log($("#soundCmd").attr("disabled"));
 	}
 
 	function doScrollHack(element, leaveInPlace) {
