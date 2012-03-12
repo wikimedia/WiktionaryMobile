@@ -36,6 +36,10 @@
 
   <content src="index.html" />
 
+  <rim:permissions>
+    <rim:permit>read_geolocation</rim:permit>
+  </rim:permissions>
+
   <feature id="blackberry.invoke" />
   <feature id="blackberry.invoke.BrowserArguments" />
   <feature id="blackberry.identity" />
