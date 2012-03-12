@@ -297,15 +297,11 @@ window.chrome = function() {
 				app.navigateToPage(url);
 			} else {
 				// ...and open it in parent context for reals.
-				//
-				// This seems to successfully launch the native browser, and works
-				// both with the stock browser and Firefox as user's default browser
-				//document.location = url;
-				window.open(url);
+				chrome.openExternalLink(url);
 			}
 		});
 	}
-
+	
 	function onPageLoaded() {
 		// TODO: next two lines temporary to deal with legacy mediawiki instances
 		$('.section_heading').removeAttr('onclick');
@@ -329,6 +325,13 @@ window.chrome = function() {
 		}
 	}
 
+	function openExternalLink(url) {
+		// This seems to successfully launch the native browser, and works
+		// both with the stock browser and Firefox as user's default browser
+		//document.location = url;
+		window.open(url);
+	}
+
 	return {
 		initialize: initialize,
 		renderHtml: renderHtml,
@@ -347,6 +350,7 @@ window.chrome = function() {
 		showNoConnectionMessage: showNoConnectionMessage,
 		doFocusHack: doFocusHack,
 		isTwoColumnView: isTwoColumnView,
-		doScrollHack: doScrollHack
+		doScrollHack: doScrollHack,
+		openExternalLink: openExternalLink
 	};
 }();

@@ -14,7 +14,7 @@ if (ua.match(/; Android /)) {
 } else if (ua.match(/\((iPhone|iPod|iPad)/)) {
 	// Mozilla/5.0 (iPhone Simulator; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Mobile/8H7
 	platform = 'ios';
-} else if (ua.match(/; PlayBook /)) {
+} else if (true || ua.match(/PlayBook; /)) {
     // Mozilla/5.0 (PlayBook; U; RIM Tablet OS 2.0.0; en-US) AppleWebKit/535.1+ (KHTML, like Gecko) Version/7.2.0.0 Safari/535.1+
     platform = 'playbook';
 } else if (ua.match(/BlackBerry/)) {

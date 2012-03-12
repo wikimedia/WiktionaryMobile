@@ -72,16 +72,16 @@
             <fileset dir="www" >
                 <exclude name="ext/**"/>
                 <exclude name="ext-air/**"/>
-                <exclude name="playbook/**"/>
+                <!--<exclude name="playbook/**"/>-->
             </fileset>
         </copy>
         
         <!-- Overwrite the phonegap js with the playbook specific phonegap js -->
-        <copy todir="${widget.dir}" overwrite="true">
+        <!--<copy todir="${widget.dir}" overwrite="true">
             <fileset dir="www/playbook">
                 <include name="*.js" />
             </fileset>
-        </copy>
+        </copy>-->
         
         <!-- Update WebWorks Packager with the AIR APIs -->
         <copy todir="${properties.playbook.bbwp.dir}\ext" overwrite="true">

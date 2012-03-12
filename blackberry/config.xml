@@ -36,4 +36,7 @@
 
   <content src="index.html" />
 
+  <feature id="blackberry.invoke" />
+  <feature id="blackberry.invoke.BrowserArguments" />
+  <feature id="blackberry.identity" />
 </widget>
