@@ -7,4 +7,4 @@ remotes:
 
 clean:
 	rm assets/www/js/toggle.js
-	rm assets/www/common.js
+	rm assets/www/common.css
