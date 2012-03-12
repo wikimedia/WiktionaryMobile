@@ -49,8 +49,6 @@ window.audioPlayer = function() {
 			success: function(data) {
 				availableMedia = [];
 				availableUrl = [];
-				$('#soundCmd').attr("disabled", "disabled");
-				updateMenuState();
 				var audioIndex = 0;
 				for(var id in data.query.pages){
 					for(var im in data.query.pages[id].images){
@@ -79,8 +77,7 @@ window.audioPlayer = function() {
 	 *
 	 */	
 	function getMediaUrl(filename, audioIndex) {
-		$('#soundCmd').removeAttr("disabled");
-		updateMenuState();
+		
 		//this get request using (app.baseURL + "/w/api.php") was handing back unusable "https" urls, should investigate getting a non https version of app.baseURL
 		var requestUrl = "http://en.m." + PROJECTNAME + ".org/w/api.php";
 		

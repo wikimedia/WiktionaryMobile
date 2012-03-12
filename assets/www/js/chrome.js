@@ -130,6 +130,10 @@ window.chrome = function() {
 		});
 
 	}
+	
+	function playSound() {
+		audioPlayer.createMenuArray();
+	}
 
     function loadWordoftheDay() {
         loadFirstPage(true);
