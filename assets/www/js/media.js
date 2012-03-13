@@ -3,6 +3,7 @@ window.audioPlayer = function() {
 	var availableMedia = [];
 	var availableUrl = [];
 	var menuArray = [];
+	var lastMenuStatus = false;
 	
 	/**
 	 * Function called with URL of file to be played.
@@ -35,6 +36,12 @@ window.audioPlayer = function() {
 		var term = app.getCurrentTitle();
 		var requestUrl = app.baseURL + "/w/api.php";
 		
+		if (lastMenuStatus){
+			setMenuItemState('listen-sound',false, false);
+			console.log("disabling listen-in menu");
+			lastMenuStatus = false;
+		}	
+		
 		var ending = ".*\.ogg";
 		
 		$.ajax({
@@ -50,6 +57,7 @@ window.audioPlayer = function() {
 				availableMedia = [];
 				availableUrl = [];
 				var audioIndex = 0;
+				
 				for(var id in data.query.pages){
 					for(var im in data.query.pages[id].images){
 					
@@ -93,6 +101,12 @@ window.audioPlayer = function() {
 			},
 			success: function(data) {
 				
+				if(!lastMenuStatus){
+					setMenuItemState('listen-sound', true, false);
+					console.log("enabling listen-in menu");
+					lastMenuStatus = true;		
+				}	
+		
 				for(var id in data.query.pages){
 					for (var im in data.query.pages[id].imageinfo){		
 						

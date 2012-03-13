@@ -38,7 +38,6 @@ function setPageActionsState(state) {
 	setMenuItemState("read-in", state, true);
 	setMenuItemState("save-page", state, true);
 	setMenuItemState("share-page", state, true);
-	setMenuItemState("listen-sound", state, true);
 	setMenuItemState("word-of-the-day", state, true);
 }
 
