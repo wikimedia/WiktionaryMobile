@@ -38,11 +38,9 @@ window.audioPlayer = function() {
 		
 		if (lastMenuStatus){
 			setMenuItemState('listen-sound',false, false);
-			console.log("disabling menu");
+			console.log("disabling listen-in menu");
 			lastMenuStatus = false;
-		}else{
-			console.log("menu already disabled");
-		}		
+		}	
 		
 		var ending = ".*\.ogg";
 		
@@ -93,10 +91,8 @@ window.audioPlayer = function() {
 		
 		if(!lastMenuStatus){
 			setMenuItemState('listen-sound', true, false);
-			console.log("enabling menu");
+			console.log("enabling listen-in menu");
 			lastMenuStatus = true;		
-		}else{
-			console.log("menu already enabled");
 		}	
 		
 		$.ajax({
@@ -172,10 +168,6 @@ window.audioPlayer = function() {
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
 		audioPlayer.playAudio(url);
-	}
-	
-	function getMenuFilled() {
-		return menuFilled;
 	}
 	
 	return {
