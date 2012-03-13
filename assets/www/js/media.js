@@ -3,7 +3,7 @@ window.audioPlayer = function() {
 	var availableMedia = [];
 	var availableUrl = [];
 	var menuArray = [];
-	var lastMenuStatus = null;
+	var lastMenuStatus = false;
 	
 	/**
 	 * Function called with URL of file to be played.
@@ -89,12 +89,6 @@ window.audioPlayer = function() {
 		//this get request using (app.baseURL + "/w/api.php") was handing back unusable "https" urls, should investigate getting a non https version of app.baseURL
 		var requestUrl = "http://en.m." + PROJECTNAME + ".org/w/api.php";
 		
-		if(!lastMenuStatus){
-			setMenuItemState('listen-sound', true, false);
-			console.log("enabling listen-in menu");
-			lastMenuStatus = true;		
-		}	
-		
 		$.ajax({
 			type: 'GET',
 			url: requestUrl,
@@ -107,6 +101,12 @@ window.audioPlayer = function() {
 			},
 			success: function(data) {
 				
+				if(!lastMenuStatus){
+					setMenuItemState('listen-sound', true, false);
+					console.log("enabling listen-in menu");
+					lastMenuStatus = true;		
+				}	
+		
 				for(var id in data.query.pages){
 					for (var im in data.query.pages[id].imageinfo){		
 						
