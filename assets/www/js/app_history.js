@@ -39,13 +39,14 @@ window.appHistory = function() {
 
 	// Removes all the elements from history
 	function onClearHistory() {
-		var answer = confirm(mw.message('clear-all-history-prompt').plain());
-		if (answer) {
-			var historyDB = new Lawnchair({name:"historyDB"}, function() {
-				this.nuke();
-				chrome.showContent();
-			});
-		}
+		chrome.confirm(mw.message('clear-all-history-prompt').plain()).done(function(answer) {
+			if (answer) {
+				var historyDB = new Lawnchair({name:"historyDB"}, function() {
+					this.nuke();
+					chrome.showContent();
+				});
+			}
+		});
 	}
 
 	function onHistoryItemClicked() {

@@ -62,6 +62,15 @@ window.chrome = function() {
 		alert(text);
 	}
 
+	function confirm(text) {
+		var d = $.Deferred();
+
+		navigator.notification.confirm(text, function(button) {
+			d.resolve(button === 1); //Assumes first button is OK
+		}, "");
+
+		return d;
+	}
 	function initialize() {
 		$.each(platform_initializers, function(index, fun) {
 			fun();
@@ -351,6 +360,7 @@ window.chrome = function() {
 		doFocusHack: doFocusHack,
 		isTwoColumnView: isTwoColumnView,
 		doScrollHack: doScrollHack,
-		openExternalLink: openExternalLink
+		openExternalLink: openExternalLink,
+		confirm: confirm
 	};
 }();

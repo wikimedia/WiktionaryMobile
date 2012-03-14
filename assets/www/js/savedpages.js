@@ -46,16 +46,16 @@ window.savedPages = function() {
 	}
 
 	function deleteSavedPage(title, url) {
-		var answer = confirm(mw.message('saved-page-remove-prompt', title).plain());
-
-		if (answer) {
-			var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
-				this.remove(url, function() {
-					chrome.showNotification(mw.message('saved-page-removed', title ).plain());
-					$(".listItemContainer[data-page-url=\'" + url + "\']").hide();
+		chrome.confirm(mw.message('saved-page-remove-prompt', title).plain()).done(function(answer) {
+			if (answer) {
+				var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
+					this.remove(url, function() {
+						chrome.showNotification(mw.message('saved-page-removed', title ).plain());
+						$(".listItemContainer[data-page-url=\'" + url + "\']").hide();
+					});
 				});
-			});
-		}
+			}
+		});
 	}
 
 	// Removes all the elements from saved pages

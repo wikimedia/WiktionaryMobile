@@ -54,6 +54,14 @@ function sharePage() {
 							  );
 }
 
+chrome.showNotification = function(message) {
+	var d = $.Deferred();
+	navigator.notification.alert(message, function() {
+		d.resolve();
+	}, "");
+	return d;
+};
+
 origDoScrollHack = chrome.doScrollHack;
 // @Override
 chrome.doScrollHack = function(element, leaveInPlace) {
