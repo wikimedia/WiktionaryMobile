@@ -25,11 +25,14 @@ window.geo = function() {
 			//var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			var tiles = new L.TileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
 				maxZoom: 18,
-				subdomains: '1234', // for MapQuest tiles
-				//attribution: 'Map data &copy; 2011 OpenStreetMap contributors'
-				attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data &copy; 2012 OpenStreetMap contributors'
+				subdomains: '1234' // for MapQuest tiles
 			});
 			geo.map.addLayer(tiles);
+
+			geo.map.attributionControl.setPrefix("");
+			geo.map.attributionControl.addAttribution("Tiles courtesy <a href='http://www.mapquest.com'>MapQuest</a>");
+			geo.map.attributionControl.addAttribution("<br />Map data (C) <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>");
+
 		}
 
 		// @fixme load last-seen coordinates
