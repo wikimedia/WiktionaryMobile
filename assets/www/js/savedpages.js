@@ -79,7 +79,7 @@ window.savedPages = function() {
 				$("#savedPages .cleanButton").unbind('click', onClearSavedPages).bind('click', onClearSavedPages);
 				$(".deleteSavedPage").click(onSavedPageDelete);
 				chrome.hideOverlays();
-				$('#savedPages').toggle();
+				$('#savedPages').localize().show();
 				chrome.hideContent();
 				chrome.doFocusHack();
 				chrome.doScrollHack('#savedPages .scroller');
