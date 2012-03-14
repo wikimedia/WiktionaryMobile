@@ -30,8 +30,8 @@ window.geo = function() {
 			geo.map.addLayer(tiles);
 
 			geo.map.attributionControl.setPrefix("");
-			geo.map.attributionControl.addAttribution("Tiles courtesy <a href='http://www.mapquest.com'>MapQuest</a>");
-			geo.map.attributionControl.addAttribution("<br />Map data (C) <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>");
+			geo.map.attributionControl.addAttribution(mw.message("attribution-mapquest"));
+			geo.map.attributionControl.addAttribution(mw.message("attribution-osm'));
 
 		}
 
