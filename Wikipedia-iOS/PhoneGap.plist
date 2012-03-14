@@ -26,6 +26,7 @@
 		<string>*.mqcdn.com</string>
 		<string>*.wikipedia.org</string>
 		<string>*.wikimedia.org</string>
+		<string>*</string>
 	</array>
 	<key>Plugins</key>
 	<dict>
