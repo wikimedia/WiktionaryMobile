@@ -10,7 +10,6 @@ window.PROJECTNAME = 'wiktionary';
 })()
 window.CREDITS = [
 	"<a href='http://jquery.com'>jQuery</a>, MIT License",
-	"<a href='http://leaflet.cloudmade.com/'>Leaflet.js</a>, 2-Clause BSD License",
 	"<a href='http://zeptojs.com'>Zepto</a>, MIT License",
 	"<a href='http://cubiq.org/iscroll-4'>iScroll</a>, MIT License",
 	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, Apache License 2.0"
