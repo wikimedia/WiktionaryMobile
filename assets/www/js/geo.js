@@ -31,7 +31,7 @@ window.geo = function() {
 
 			geo.map.attributionControl.setPrefix("");
 			geo.map.attributionControl.addAttribution(mw.message("attribution-mapquest"));
-			geo.map.attributionControl.addAttribution(mw.message("attribution-osm'));
+			geo.map.attributionControl.addAttribution("<br />" + mw.message("attribution-osm"));
 
 		}
 
