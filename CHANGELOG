@@ -76,3 +76,22 @@
 
 - Scroll bug in about screen fixed
 - Map tiles actually show up
+
+## Android v1.1beta4 & iOS v3.1beta3 ##
+
+### Common ###
+
+- Cleaner Attribution in Map Views
+- Fix missing localization strings
+- Remove close button from Map popups
+- Toggle Code and CSS now pinned to specific revisions. Less breakage!
+
+### Android specific ###
+
+- Fix race condition that sometimes jumbles up menus
+- Spinner now works across a lot more devices
+
+### iOS specific ###
+
+- Fix external links related bugs
+- Remove stray index.html titles in alert and confirm boxes
