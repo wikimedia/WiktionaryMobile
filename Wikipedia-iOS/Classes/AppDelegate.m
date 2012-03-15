@@ -36,10 +36,6 @@
 #import "PGURLProtocol.h"
 #endif
 
-#import "SHK.h"
-#import "SHKConfiguration.h"
-#import "WMSHKConfigurator.h"
-
 @implementation AppDelegate
 
 @synthesize invokeString, window, viewController;
@@ -73,10 +69,6 @@
  */
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {   
-    // Initialize ShareKit
-    DefaultSHKConfigurator *configurator = [[WMSHKConfigurator alloc] init];
-    [SHKConfiguration sharedInstanceWithConfigurator:configurator];    
-
     NSURL* url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     if (url && [url isKindOfClass:[NSURL class]]) {
         self.invokeString = [url absoluteString];
