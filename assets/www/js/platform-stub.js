@@ -40,8 +40,7 @@ if (platform == 'unknown') {
 			'preferences/preferences.js'
 		],
 		ios: [
-			'ActionSheet.js',
-			'ShareKitPlugin.js'
+			'ActionSheet.js'
 		],
 	};
 	if (platform in plugins) {

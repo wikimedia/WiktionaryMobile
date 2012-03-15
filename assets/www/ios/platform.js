@@ -42,18 +42,6 @@ function popupMenu(items, callback, options) {
 	window.plugins.actionSheet.create('', items, callback, options);
 }
 
-function sharePage() {
-	// @fixme if we don't have a page loaded, this menu item should be disabled...
-	var title = app.getCurrentTitle(),
-	url = app.getCurrentUrl().replace(/\.m\.wikipedia/, '.wikipedia');
-	window.plugins.shareKit.share(
-							  {
-								  message: title,
-								  url: url
-							  }
-							  );
-}
-
 chrome.showNotification = function(message) {
 	var d = $.Deferred();
 	navigator.notification.alert(message, function() {
