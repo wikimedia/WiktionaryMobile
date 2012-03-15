@@ -1,7 +1,7 @@
 // iOS+PhoneGap-specific setup
 
 function getAboutVersionString() {
-	return "3.1beta2";
+	return "3.1beta3";
 }
 
 // Save page supporting code
