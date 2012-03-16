@@ -16,7 +16,6 @@ app.loadCachedPage = function (url) {
 }
 
 savedPages.doSave = function(url, title) {
-
 	// Get the entire HTML again
 	// Hopefully this is in cache
 	// What we *really* should be doing is putting all this in an SQLite DataBase. FIXME
@@ -40,6 +39,17 @@ function popupMenu(items, callback, options) {
 		options.height = $origin.height();
 	}
 	window.plugins.actionSheet.create('', items, callback, options);
+}
+
+function shareTwitter() {
+	var url = app.getCurrentUrl().replace('.m.', '');
+	var title = app.getCurrentTitle();
+
+	window.plugins.twitter.composeTweet(function() {
+		console.log("Success!");
+	}, function() {
+		console.log("Failed :(");
+	}, title + " " + url);
 }
 
 chrome.showNotification = function(message) {

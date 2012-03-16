@@ -11,6 +11,8 @@
 		0719935914CDDBB400D60D9C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0719935814CDDBB400D60D9C /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		0719952D14CDEEF500D60D9C /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0719952C14CDEEF500D60D9C /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		07220CB114CE0A3400339B1F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07220CB014CE0A2A00339B1F /* CFNetwork.framework */; };
+		6108B4001512AF2900779B71 /* TwitterPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6108B3FF1512AF2900779B71 /* TwitterPlugin.m */; };
+		6108B4021512B0CA00779B71 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6108B4011512B0CA00779B71 /* Accounts.framework */; };
 		61992AAF14F6DAE1009FE7AC /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61992AAD14F6DAE1009FE7AC /* MainViewController.m */; };
 		61992AB014F6DAE1009FE7AC /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61992AAE14F6DAE1009FE7AC /* MainViewController.xib */; };
 		D458BF531517A93C00EF714B /* icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D458BF521517A93C00EF714B /* icon-72@2x.png */; };
@@ -51,6 +53,9 @@
 		0719935814CDDBB400D60D9C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0719952C14CDEEF500D60D9C /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		07220CB014CE0A2A00339B1F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6108B3FE1512AF2900779B71 /* TwitterPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterPlugin.h; sourceTree = "<group>"; };
+		6108B3FF1512AF2900779B71 /* TwitterPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterPlugin.m; sourceTree = "<group>"; };
+		6108B4011512B0CA00779B71 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		61992AAC14F6DAE1009FE7AC /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Classes/MainViewController.h; sourceTree = "<group>"; };
 		61992AAD14F6DAE1009FE7AC /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Classes/MainViewController.m; sourceTree = "<group>"; };
 		61992AAE14F6DAE1009FE7AC /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/MainViewController.xib; sourceTree = "<group>"; };
@@ -100,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6108B4021512B0CA00779B71 /* Accounts.framework in Frameworks */,
 				07220CB114CE0A3400339B1F /* CFNetwork.framework in Frameworks */,
 				0719952D14CDEEF500D60D9C /* Twitter.framework in Frameworks */,
 				0719935914CDDBB400D60D9C /* MessageUI.framework in Frameworks */,
@@ -131,6 +137,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6108B3FD1512AF0800779B71 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				6108B3FE1512AF2900779B71 /* TwitterPlugin.h */,
+				6108B3FF1512AF2900779B71 /* TwitterPlugin.m */,
+			);
+			name = Twitter;
+			sourceTree = "<group>";
+		};
 		D424DED514C0FAC30086FF61 /* ActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				D458BF521517A93C00EF714B /* icon-72@2x.png */,
+				6108B4011512B0CA00779B71 /* Accounts.framework */,
 				D481B95F145DFE5D00D9F872 /* www */,
 				D4BE9618145DFD2D0025EC00 /* Wikipedia-iOS */,
 				D4BE95FD145DFD2D0025EC00 /* Frameworks */,
@@ -273,6 +289,7 @@
 		D4BE9640145DFD2D0025EC00 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				6108B3FD1512AF0800779B71 /* Twitter */,
 				D424DED514C0FAC30086FF61 /* ActionSheet */,
 				D4BE9641145DFD2D0025EC00 /* README */,
 			);
@@ -380,6 +397,7 @@
 				D4E8A4B514D08ED400993351 /* ActionSheet.js in Sources */,
 				D4E8A4B614D08ED400993351 /* ActionSheet.m in Sources */,
 				61992AAF14F6DAE1009FE7AC /* MainViewController.m in Sources */,
+				6108B4001512AF2900779B71 /* TwitterPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,7 +512,7 @@
 					AVFoundation,
 					"-weak_framework",
 					CoreMedia,
-					"-weak_library",
+					"-weak-lSystem",
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -525,7 +543,7 @@
 					AVFoundation,
 					"-weak_framework",
 					CoreMedia,
-					"-weak_library",
+					"-weak-lSystem",
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

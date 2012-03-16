@@ -37,13 +37,13 @@ var menu_items = [
 		action: function() {
 			popupMenu([
 				mw.msg('menu-savePage'),
-				mw.msg('menu-sharePage'),
+				mw.msg('menu-share-twitter'),
 				mw.msg('menu-cancel')
 			], function(value, index) {
 				if (index == 0) {
 					savedPages.saveCurrentPage();
 				} else if (index == 1) {
-					sharePage();
+					shareTwitter();
 				}
 			}, {
 				cancelButtonIndex: 2,

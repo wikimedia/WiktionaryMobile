@@ -40,7 +40,8 @@ if (platform == 'unknown') {
 			'preferences/preferences.js'
 		],
 		ios: [
-			'ActionSheet.js'
+			'ActionSheet.js',
+			'TwitterPlugin.js'
 		],
 	};
 	if (platform in plugins) {
