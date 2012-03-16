@@ -45,11 +45,17 @@ function shareTwitter() {
 	var url = app.getCurrentUrl().replace('.m.', '');
 	var title = app.getCurrentTitle();
 
-	window.plugins.twitter.composeTweet(function() {
-		console.log("Success!");
-	}, function() {
-		console.log("Failed :(");
-	}, title + " " + url);
+	window.plugins.twitter.isTwitterAvailable(function(available) {
+		if(!available) {
+			chrome.showNotification(mw.message("twitter-not-available"));
+			return;
+		}
+		window.plugins.twitter.composeTweet(function() {
+			console.log("Success!");
+		}, function() {
+			console.log("Failed :(");
+		}, title + " " + url);
+	});
 }
 
 chrome.showNotification = function(message) {
