@@ -34,6 +34,8 @@
 		<string>ActionSheet</string>
 		<key>com.phonegap.twitter</key>
 		<string>TwitterPlugin</string>
+		<key>ReadItLaterPlugin</key>
+		<string>ReadItLaterPlugin</string>
 		<key>com.phonegap.accelerometer</key>
 		<string>PGAccelerometer</string>
 		<key>com.phonegap.camera</key>

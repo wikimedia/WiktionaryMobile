@@ -41,6 +41,18 @@ function popupMenu(items, callback, options) {
 	window.plugins.actionSheet.create('', items, callback, options);
 }
 
+function shareRIL() {
+	var url = app.getCurrentUrl().replace('.m.', '');
+	var title = app.getCurrentTitle();
+
+	window.plugins.readItLaterPlugin.saveToReadItLater(function() {
+		console.log("Successfully saved!");
+	}, {
+		url: url,
+		title: title
+	});
+}
+
 function shareTwitter() {
 	var url = app.getCurrentUrl().replace('.m.', '');
 	var title = app.getCurrentTitle();

@@ -38,15 +38,18 @@ var menu_items = [
 			popupMenu([
 				mw.msg('menu-savePage'),
 				mw.msg('menu-share-twitter'),
+				mw.msg('menu-share-ril'),
 				mw.msg('menu-cancel')
 			], function(value, index) {
 				if (index == 0) {
 					savedPages.saveCurrentPage();
 				} else if (index == 1) {
 					shareTwitter();
+				} else if (index == 2) {
+					shareRIL();
 				}
 			}, {
-				cancelButtonIndex: 2,
+				cancelButtonIndex: 3,
 				origin: this
 			});
 		}

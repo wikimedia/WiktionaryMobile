@@ -41,7 +41,8 @@ if (platform == 'unknown') {
 		],
 		ios: [
 			'ActionSheet.js',
-			'TwitterPlugin.js'
+			'TwitterPlugin.js',
+			'ReadItLaterPlugin.js'
 		],
 	};
 	if (platform in plugins) {
