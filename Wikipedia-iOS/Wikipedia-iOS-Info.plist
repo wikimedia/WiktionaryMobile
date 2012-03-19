@@ -15,7 +15,23 @@
 		<string>icon.png</string>
 		<string>icon@2x.png</string>
 		<string>icon-72.png</string>
+		<string>icon-72@2x.png</string>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>icon.png</string>
+				<string>icon@2x.png</string>
+				<string>icon-72.png</string>
+				<string>icon-72@2x.png</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>org.wikimedia.wikipedia</string>
 	<key>CFBundleInfoDictionaryVersion</key>
