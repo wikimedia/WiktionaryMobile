@@ -295,10 +295,10 @@ window.chrome = function() {
 
 			if (href.substr(0, 1) == '#') {
 				// A local hashlink; simulate?
-				var off = $(href).offset(),
-					y = off ? off.top : 52;
-				window.scrollTo(0, y - 52);
-				return;
+				// FIXME: Replace with Reference reveal
+				var offset = $(href).offset().top;
+				$("#content").scrollTop($("#content").scrollTop() + offset - $("#mainHeader").height());
+				return false;
 			}
 
 			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
