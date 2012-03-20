@@ -53,6 +53,26 @@ function shareRIL() {
 	});
 }
 
+chrome.addPlatformInitializer(function() {
+	console.log("Logging in!");
+	window.plugins.FB.init("yourownappid", function() {
+		console.log("failed FB init:(");
+	});
+	console.log("Logged in!");
+});
+
+function shareFB() {
+	var url = app.getCurrentUrl().replace('.m.', '');
+	var title = app.getCurrentTitle();
+
+	window.plugins.FB.dialog({
+		method: 'feed',
+		link: url,
+		caption: title
+		//FIXME: Also include exerpt?
+	});
+}
+
 function shareTwitter() {
 	var url = app.getCurrentUrl().replace('.m.', '');
 	var title = app.getCurrentTitle();

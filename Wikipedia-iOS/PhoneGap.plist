@@ -40,6 +40,8 @@
 		<string>PGAccelerometer</string>
 		<key>com.phonegap.camera</key>
 		<string>PGCamera</string>
+		<key>com.phonegap.facebook.Connect</key>
+		<string>FacebookConnectPlugin</string>
 		<key>com.phonegap.connection</key>
 		<string>PGConnection</string>
 		<key>com.phonegap.contacts</key>

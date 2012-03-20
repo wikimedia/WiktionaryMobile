@@ -42,6 +42,8 @@ if (platform == 'unknown') {
 		ios: [
 			'ActionSheet.js',
 			'TwitterPlugin.js',
+			'pg-plugin-fb-connect.js',
+			'facebook_js_sdk.js',
 			'ReadItLaterPlugin.js'
 		],
 	};

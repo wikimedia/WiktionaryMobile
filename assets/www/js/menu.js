@@ -39,6 +39,7 @@ var menu_items = [
 				mw.msg('menu-savePage'),
 				mw.msg('menu-share-twitter'),
 				mw.msg('menu-share-ril'),
+				mw.msg('menu-share-fb'),
 				mw.msg('menu-cancel')
 			], function(value, index) {
 				if (index == 0) {
@@ -47,9 +48,11 @@ var menu_items = [
 					shareTwitter();
 				} else if (index == 2) {
 					shareRIL();
+				} else if (index == 3) {
+					shareFB();
 				}
 			}, {
-				cancelButtonIndex: 3,
+				cancelButtonIndex: 4,
 				origin: this
 			});
 		}
