@@ -44,6 +44,8 @@ ActionSheet.prototype.create = function(title, items, fn, options) {
 };
 
 PhoneGap.addConstructor(function() {
-	if(!window.plugins) window.plugins = {};
+	if(!window.plugins) {
+		window.plugins = {};
+	};
 	window.plugins.actionSheet = new ActionSheet();
 });

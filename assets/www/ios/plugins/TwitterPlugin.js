@@ -23,6 +23,8 @@ Twitter.prototype.getMentions = function(success, failure){
 };
 
 PhoneGap.addConstructor(function() {
-    if(!window.plugins) window.plugins = {};
-    window.plugins.twitter = new Twitter();
+	if(!window.plugins) {
+		window.plugins = {};
+	};
+	window.plugins.twitter = new Twitter();
 });
