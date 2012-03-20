@@ -298,7 +298,7 @@ window.chrome = function() {
 				// FIXME: Replace with Reference reveal
 				var offset = $(href).offset().top;
 				$("#content").scrollTop($("#content").scrollTop() + offset - $("#mainHeader").height());
-				return false;
+				return;
 			}
 
 			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
