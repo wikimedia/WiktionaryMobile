@@ -245,17 +245,8 @@ button#search
 	position:fixed;
 }
 
-@-webkit-keyframes rotate {
-	  from {
-	      -webkit-transform: rotate(0deg);
-	  }
-	  to { 
-	      -webkit-transform: rotate(360deg);
-	  }
-}
-
 .spinner {
-	background: url(image/spinner.png) no-repeat;
+	background: url(image/spinner.gif) no-repeat;
 	width:24px;
 	height: 24px;
 	position: absolute;
@@ -263,10 +254,6 @@ button#search
 	right: 52px;
 	z-index: 3;
 	display: none;
-	-webkit-animation-name: rotate;
-	-webkit-animation-duration: 1.5s;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
 }
 
 .titlebarIcon {
