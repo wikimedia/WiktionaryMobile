@@ -21,7 +21,7 @@ window.preferencesDB = {
 		},
 		// The language. Only for content
 		'language': function(success) {
-			this.language = preferencesDB.get('locale').replace(/-.*?$/, '');
+			this.language = l10n.normalizeLanguageCode(preferencesDB.get('locale').replace(/-.*?$/, ''));
 			success();
 		}
 	},
