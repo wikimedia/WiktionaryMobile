@@ -91,7 +91,7 @@ window.chrome = function() {
 			var spe_arr = new Array("arc","ar","ckb","dv","fa","he","khw","ks","mzn","pnb","ps","sd","ug","ur","yi");
 			for(a=0;a < spe_arr.length;a++){
 				if(lan_arr_nor==spe_arr[a]){
-					$("body").attr('dir','rtl').addClass('rtl');
+					$("body").attr('dir','rtl');
 				}
 			}
 

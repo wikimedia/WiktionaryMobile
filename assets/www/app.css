@@ -355,10 +355,6 @@ button#search
 	font-size: 13px;
 }
 
-#settingsList .item input[type="checkbox"],
-#settingsList .item select {
-}
-
 #settingsList .item input[type="checkbox"]:checked {
 	background-position: 0px -160px;
 }
@@ -377,7 +373,7 @@ button#search
 	padding-left: 0px;
 }
 
-.rtl #settingsList .item select {
+body[dir=rtl] #settingsList .item select {
 	background-position: left;
 }
 
