@@ -61,8 +61,7 @@ header {
 	position:absolute;
 	top:52px;
 	width: 100%;
-	bottom: 0;
-	margin-bottom: 52px;
+	bottom: 52px;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
@@ -100,6 +99,7 @@ header {
 
 #main {
 	padding: 8px;
+	margin-bottom: 52px;
 }
 
 .listItemContainer {
@@ -407,6 +407,7 @@ body[dir=rtl] #settingsList .item select {
 
 #about-page-content {
 	text-align: center;	
+	margin-bottom: 52px;
 }
 
 #about-version {
