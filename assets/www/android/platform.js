@@ -20,8 +20,20 @@ l10n.navigatorLang = function(success) {
 }
 
 function getAboutVersionString() {
-	return "1.1beta4";
+	return "1.1RC1";
 }
+
+(function() {
+	var ANDROIDCREDITS = [
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/Android/Globalization'>PhoneGap Globalization Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/Android/Share'>PhoneGap Share Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/m00sey/PhoneGap-Toast'>PhoneGap Toast Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/Android/SoftKeyboard'>PhoneGap SoftKeyboard Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/Android/WebIntent'>PhoneGap WebIntent Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>"
+	];
+
+	window.CREDITS.push.apply(window.CREDITS, ANDROIDCREDITS);
+})();
 
 function setMenuItemState(action, state) {
 	window.plugins.SimpleMenu.setMenuState(action, state,
@@ -40,14 +52,6 @@ function setPageActionsState(state) {
 	setMenuItemState("share-page", state);
 }
 
-window.CREDITS = [
-	"<a href='http://phonegap.com'>PhoneGap</a>, <a href='http://www.apache.org/licenses/LICENSE-2.0.html'>Apache License 2.0</a>",
-	"<a href='http://jquery.com'>jQuery</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
-	"<a href='http://leaflet.cloudmade.com/'>Leaflet.js</a>, <a href='http://www.opensource.org/licenses/bsd-license.php'>2-Clause BSD License</a>",
-	"<a href='http://zeptojs.com'>Zepto</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
-	"<a href='http://cubiq.org/iscroll-4'>iScroll</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
-	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, <a href='http://www.apache.org/licenses/LICENSE-2.0.html'>Apache License 2.0</a>"
-	];
 
 chrome.addPlatformInitializer(function() {
 	$('html').addClass('android');
