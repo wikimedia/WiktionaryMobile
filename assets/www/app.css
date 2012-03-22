@@ -402,7 +402,10 @@ button#search
 	background: white;
 	color: DarkGrey;
 	font-family: "Droid Sans", "Helvetica", sans-serif;
-	text-align: center;
+}
+
+#about-page-content {
+	text-align: center;	
 }
 
 #about-version {
