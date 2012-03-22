@@ -31,6 +31,7 @@ function aboutPage() {
 		$("#about-version-string").text(getAboutVersionString());
 		$("#about-contributors").text($.trim(authors).split('\n').join(', '));
 		$("#about-credits").html(window.CREDITS.join('<br />'));
+		$("#about-license").html("<br />" + mw.message("about-license"));
 		chrome.hideOverlays();
 		chrome.hideContent();
 		$("#about-page-overlay").localize().show();
