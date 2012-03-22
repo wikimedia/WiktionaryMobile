@@ -330,9 +330,7 @@ window.chrome = function() {
 
 		// Reset scroll unless asked otherwise
 		if (!leaveInPlace) {
-			$(element).hide(); // HACK: for bug 35369
 			$(element).scrollTop(0);
-			$(element).show();
 		}
 	}
 

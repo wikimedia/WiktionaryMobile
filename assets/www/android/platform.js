@@ -52,6 +52,18 @@ function setPageActionsState(state) {
 	setMenuItemState("share-page", state);
 }
 
+(function() {
+	var origFun = chrome.doScrollHack;
+	chrome.doScrollHack = function(element, leaveInPlace) {
+		if (!leaveInPlace) {
+			$(element).hide(); // HACK: for bug 35369
+			$(element).scrollTop(0);
+			window.setTimeout(function() {
+				$(element).show();
+			}, 0);
+		}
+	};
+})();
 
 chrome.addPlatformInitializer(function() {
 	$('html').addClass('android');
