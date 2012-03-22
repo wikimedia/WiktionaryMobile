@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=100%; initial-scale=1; user-scalable=no" />
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<base><!-- used to process relative links in content -->
-	<title>Wikipedia</title>
+	<title>Wiktionary</title>
 
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/webkit-sqlite.js"></script>
@@ -19,13 +19,12 @@
 	<script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/iscroll.js"></script>
 
-	<script type="text/javascript" charset="utf-8" src="leaflet/leaflet.js"></script>
-
 	<script type="text/javascript" charset="utf-8" src="js/propertiesFileReader.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/preferences.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
 
 	<!-- app logic -->
+  <script type="text/javascript" charset="utf-8" src="js/wiktionary.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/network.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/templates.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
@@ -34,11 +33,11 @@
 	<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/app_history.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/search.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/geo.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/settings.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/langlinks.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/menu.js"></script>
-	
+	<script type="text/javascript" charset="utf-8" src="js/media.js"></script>
+
 	<!-- MobileFrontend -->
 	<script type="text/javascript" charset="utf-8" src="js/mobilefrontend.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/toggle.js"></script>
@@ -46,11 +45,9 @@
 	<!-- platform-specific setup and overrides -->
 	<script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
 
-	<link rel="stylesheet" href="leaflet/leaflet.css" />
-
 	<link rel="stylesheet" href="app.css" />  
 	<link rel="stylesheet" href="common.css" />
-
+  <link rel="stylesheet" href="wiktionary.css" />
 </head>
 
 <body onload="init();">
@@ -144,6 +141,16 @@
 				</a>
 			</div>
 			{{/languages}}
+		</script>
+		
+		<script type="text/html" id="audio-list-template">
+			{{#listen}}
+			<div class="listItemContainer" data-page-url="{{url}}">
+				<a class="listItem audioLink">
+					<span class="text">{{name}}</span>
+				</a>
+			</div>
+			{{/listen}}
 		</script>
 
 	</div>
@@ -241,31 +248,38 @@
 			<div id="langList"></div>
 		</div>
 	</div>
-
+	
 	<div id="content" class="scroller">
 		<div id="main"></div>
 	</div>
 
-	<div id="nearby-overlay">
+	<div id="audiolinks">
 		<header>
 			<div class="titlebar">
-				<div class="titlebarItem"><msg key="nearby-title">Nearby</msg></div>
-				<button class="titlebarItem closeButton" title-msg="nearby-close"></button>
+				<div class="titlebarItem"><msg key="audiolinks-title">Listen in...</msg></div>
+				<button class="titlebarItem closeButton" title-msg="audiolinks-close"></button>
 			</div>
 		</header>
-		<div id="map"></div>
+		<div class="scroller">
+			<div id="audioList"></div>
+		</div>
 	</div>
 
+	<div id="content" class="scroller">
+		<div id="main"></div>
+	</div>  
+
 	<menu id="appMenu" type="context">
-		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled action="read-in" />
-		<command type="command" id="nearbyCmd" icon="optionNearMe.png" action="near-me" />
-		<command type="command" id="sharePageCmd" action="share-page" icon="optionSharePage.png" />
-		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" action="save-page" />
-		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" action="view-saved-pages" />
-		<command type="command" id="historyCmd" icon="optionViewHistory.png"  action="view-history" />
-		<command type="command" id="forwardCmd" disabled icon="optionForward.png" action="go-forward" />
-		<command type="command" id="selectTextCmd"  action="select-text" />
-		<command type="command" id="settingsCmd" icon="optionSettings.png" action="view-settings" />
+		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="true" action="read-in" />
+		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="view-history" />
+		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="save-page" />
+		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="view-saved-pages" />
+		<command type="command" id="soundCmd" icon="optionListen.png" disabled="true" action="listen-sound" />
+		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="go-forward" />
+		<command type="command" id="selectTextCmd" disabled="false" action="select-text" />
+		<command type="command" id="settingsCmd" icon="optionSettings.png" disabled="false" action="view-settings" />
+		<command type="command" id="sharePageCmd" disabled="false" action="share-page" />
+		<command type="command" id="WOTDCmd" disabled="false" action="word-of-the-day" />
 	</menu>
 
 </body>

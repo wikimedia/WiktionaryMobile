@@ -1,4 +1,4 @@
-Wikipedia Mobile is a collaborative project released under the 
+Wiktionary Mobile is a collaborative project released under the 
 GNU General Public License v2. We would like to recognize the 
 following names for their contribution to the product. 
 
@@ -10,28 +10,43 @@ Arthur Richards
 awjrichards
 Brion Vibber
 Chris McKee
+Dale Lemieux
+Dante-101
 Dave Johnson
 Derk-Jan Hartman
+Gaurav
+Gord Tanner
 Herm Wong
+Jan Christiansen
 Jeroen De Dauw
 Joe Bowser
+Jon Robson
 jsoby
+Kshitij Deo
 Manfred Hund
 Niklas Laxström
+Patrick Hayes
 Patrick Reilly
 Sam Reed
+Shea Clare
+Shealen Clare
+Shravan Aras
+Soumya Deb
 Suyash Joshi
 Thomas PT
 Tim Kim
 Tomasz Finc
+Tony Cheng
 unknown
 Yohei Shimomae
 yoheishimomae
+Yuvi Panda
 YuviPanda
 
 
 == Included external works ==
-Wikipedia Mobile builds upon many Open Source works including:
+Wiktionary Mobile builds upon many Open Source works including:
+* Wikipedia Mobile, GNU General Public License v2, http://github.com/wikimedia/WikipediaMobile
 * PhoneGap, Apache License 2.0, http://phonegap.com
 * ShareKit, MIT License, https://github.com/shareKit/ShareKit
 ** ShareKit includes pre-compiled work from:

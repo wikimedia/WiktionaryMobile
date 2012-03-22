@@ -23,7 +23,7 @@ window.appSettings = function() {
 					var allLocales = results.sitematrix;
 
 					$.each(allLocales, function(key, value) {
-						// Because the JSON result from sitematrix is messed up
+						// Because the JSON result from the sitematrix is messed up
 						if(!isNaN(key)) {
 							if(value.site.some(function(site) { return site.code == "wiki"; })) {
 								locales.push({

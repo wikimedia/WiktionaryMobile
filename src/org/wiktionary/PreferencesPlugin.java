@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,7 +11,7 @@ import com.phonegap.api.Plugin;
 import com.phonegap.api.PluginResult;
 
 public class PreferencesPlugin extends Plugin {
-	public static final String PREFS_NAME = "WikipediaPrefs";
+	public static final String PREFS_NAME = "WiktionaryPrefs";
 
 	@Override
 	public PluginResult execute(String action, JSONArray args, String callbackId) {

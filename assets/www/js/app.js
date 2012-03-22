@@ -49,7 +49,9 @@ window.app = function() {
 						loadLocalPage('error.html');
 					}
 					languageLinks.clearLanguages();
+					audioPlayer.clearMenuArray();
 					setMenuItemState('read-in', false);
+					setMenuItemState('listen-sound', false);
 					setPageActionsState(false);
 				}
 			});

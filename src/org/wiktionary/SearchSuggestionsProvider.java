@@ -1,4 +1,4 @@
-package org.wikipedia;
+package org.wiktionary;
 
 import java.net.URLEncoder;
 
@@ -16,7 +16,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 public class SearchSuggestionsProvider extends ContentProvider {
-	private static final String AUTHORITY = "org.wikipedia.searchsuggestions";
+	private static final String AUTHORITY = "org.wiktionary.searchsuggestions";
 	public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
 	@Override
@@ -38,13 +38,13 @@ public class SearchSuggestionsProvider extends ContentProvider {
 
 			String[] columnNames = { BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1, SearchManager.SUGGEST_COLUMN_INTENT_DATA };
 			MatrixCursor cursor = new MatrixCursor(columnNames);
-			String content = HttpApi.getContent("http://" + lang + ".wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=json&search=" + URLEncoder.encode(query, "UTF-8"));
+			String content = HttpApi.getContent("http://" + lang + ".wiktionary.org/w/api.php?action=opensearch&limit=10&namespace=0&format=json&search=" + URLEncoder.encode(query, "UTF-8"));
 			JSONArray response = new JSONArray(content);
 			JSONArray suggestions = response.getJSONArray(1);
 			int lenght = suggestions.length();
 			for (int i = 0; i < lenght; i++) {
 				String suggestion = suggestions.getString(i);
-				String[] row = { String.valueOf(i), suggestion, "http://" + lang + ".m.wikipedia.org/wiki/" + suggestion };
+				String[] row = {String.valueOf(i), suggestion, "http://" + lang + ".m.wiktionary.org/wiki/" + suggestion};
 				cursor.addRow(row);
 			}
 			return cursor;

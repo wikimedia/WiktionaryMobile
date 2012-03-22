@@ -2,7 +2,7 @@ var currentHistoryIndex = -1;
 
 var pageHistory = [];
 
-window.PROJECTNAME = 'wikipedia';
+window.PROJECTNAME = 'wiktionary';
 (function() {
 	var url_parts = location.href.split('/');
 	delete url_parts[url_parts.length - 1];
@@ -10,7 +10,6 @@ window.PROJECTNAME = 'wikipedia';
 })()
 window.CREDITS = [
 	"<a href='http://jquery.com'>jQuery</a>, MIT License",
-	"<a href='http://leaflet.cloudmade.com/'>Leaflet.js</a>, 2-Clause BSD License",
 	"<a href='http://zeptojs.com'>Zepto</a>, MIT License",
 	"<a href='http://cubiq.org/iscroll-4'>iScroll</a>, MIT License",
 	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, Apache License 2.0"

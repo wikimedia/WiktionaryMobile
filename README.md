@@ -1,3 +1,5 @@
+This project has been forked from the <a href="https://github.com/wikimedia/WikipediaMobile">WikipediaMobile</a> project.
+
 GETTING STARTED:
 
 1. Setup your development environment
@@ -13,7 +15,7 @@ ENVIRONMENT SETUP
 
 CHECKING OUT THE SOURCE CODE
 
-1. Create your own fork of the <a href="https://github.com/wikimedia/WikipediaMobile" target="_blank">Wikipedia</a> code.
+1. Create your own fork of the <a href="https://github.com/wikimedia/WiktionaryMobile" target="_blank">Wiktionary</a> code.
 2. Clone your fork onto your computer.
                             
 SETTING UP THE PROJECT WITHOUT ECLIPSE

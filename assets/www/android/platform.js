@@ -38,12 +38,12 @@ function setPageActionsState(state) {
 	setMenuItemState("read-in", state);
 	setMenuItemState("save-page", state);
 	setMenuItemState("share-page", state);
+	setMenuItemState("word-of-the-day", state);
 }
 
 window.CREDITS = [
 	"<a href='http://phonegap.com'>PhoneGap</a>, <a href='http://www.apache.org/licenses/LICENSE-2.0.html'>Apache License 2.0</a>",
 	"<a href='http://jquery.com'>jQuery</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
-	"<a href='http://leaflet.cloudmade.com/'>Leaflet.js</a>, <a href='http://www.opensource.org/licenses/bsd-license.php'>2-Clause BSD License</a>",
 	"<a href='http://zeptojs.com'>Zepto</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
 	"<a href='http://cubiq.org/iscroll-4'>iScroll</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
 	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, <a href='http://www.apache.org/licenses/LICENSE-2.0.html'>Apache License 2.0</a>"
@@ -115,7 +115,7 @@ function selectText() {
 function sharePage() {
 	// @fixme if we don't have a page loaded, this menu item should be disabled...
 	var title = app.getCurrentTitle(),
-		url = app.getCurrentUrl().replace(/\.m\.wikipedia/, '.wikipedia');
+		url = app.getCurrentUrl().replace(/\.m\.wiktionary/, '.wiktionary');
 	window.plugins.share.show(
 		{
 			subject: title,
@@ -136,7 +136,6 @@ function updateMenuState() {
 
 	var menu_handlers = {
 		'read-in': function() { languageLinks.showAvailableLanguages(); },
-		'near-me': function() { geo.showNearbyArticles(); },
 		'view-history': function() { appHistory.showHistory(); } ,
 		'save-page': function() { savedPages.saveCurrentPage() },
 		'view-saved-pages': function() { savedPages.showSavedPages(); },
@@ -144,6 +143,8 @@ function updateMenuState() {
 		'go-forward': function() { chrome.goForward(); },
 		'select-text': function() { selectText(); },
 		'view-settings': function() { appSettings.showSettings(); },
+		'listen-sound': function() { audioPlayer.createMenuArray(); },
+        'word-of-the-day': function() { chrome.loadWordoftheDay(); },
 	};
 	$('#appMenu command').each(function() {
 		var $command = $(this),

@@ -51,11 +51,16 @@ window.chrome = function() {
 		$.each(selectors, function(i, sel) {
 			var con = $div.find(sel).remove();
 			con.appendTo($target);
+
 		});
 
 		languageLinks.parseAvailableLanguages($div);
-
+		audioPlayer.getMediaList();
 		chrome.doScrollHack('#content');
+
+		if (window.wiktionary) {
+			window.wiktionary.onPageLoad();
+		}
 	}
 
 	function showNotification(text) {
@@ -130,19 +135,44 @@ window.chrome = function() {
 			$(".closeButton").bind('click', showContent);
 
 			initContentLinkHandlers();
-			chrome.loadFirstPage();
+			loadFirstPage();
 			doFocusHack();
 		});
 
 	}
 
-	function loadFirstPage() {
-		chrome.showSpinner();
+    function loadWordoftheDay() {
+        loadFirstPage(true);
+    }
 
+	function loadFirstPage(disableReloadHist) {
+		chrome.showSpinner();
+		
+		// Check if the 'define' parameter is set
+		// 'define' indicates the word to display on startup
+		var word = '';
+		var getParams = window.location.search.substring(1);
+		var vars = getParams.split('&');
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=');
+			if (pair[0] === 'define') {
+				word = pair[1];
+				
+				if (word !== undefined && word !== null && word !== '') {
+					word = unescape(word);
+					word = word.replace(/\+/g, ' ');
+
+					var url = app.urlForTitle(word);
+					app.navigateToPage(url);
+					return;
+				}
+			}
+		}
+	   
 		// restore browsing to last visited page
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history){
-				if(history.length==0 || window.history.length > 1) {
+				if(history.length==0 || window.history.length > 1 || disableReloadHist) {
 					app.navigateToPage(app.baseURL);
 				} else {
 					app.navigateToPage(history[history.length-1].value);
@@ -165,7 +195,7 @@ window.chrome = function() {
 		$('#settings').hide();
 		$('#about-page-overlay').hide();
 		$('#langlinks').hide();
-		$('#nearby-overlay').hide();
+		$('#audiolinks').hide();
 		$('html').removeClass('overlay-open');
 	}
 
@@ -319,9 +349,8 @@ window.chrome = function() {
 		MobileFrontend.init();
 		window.scroll(0,0);
 		appHistory.addCurrentPage();
-		toggleMoveActions();
-		geo.addShowNearbyLinks();
-		chrome.hideSpinner();
+		chrome.hideSpinner();  
+		audioPlayer.getMediaList();  
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 	}
 
@@ -363,6 +392,7 @@ window.chrome = function() {
 		isTwoColumnView: isTwoColumnView,
 		doScrollHack: doScrollHack,
 		openExternalLink: openExternalLink,
-		confirm: confirm
+		confirm: confirm,
+        loadWordoftheDay: loadWordoftheDay
 	};
 }();
