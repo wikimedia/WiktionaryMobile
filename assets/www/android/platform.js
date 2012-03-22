@@ -41,13 +41,14 @@ function setPageActionsState(state) {
 }
 
 window.CREDITS = [
-	"<a href='http://phonegap.com'>PhoneGap</a>, Apache License 2.0",
-	"<a href='http://jquery.com'>jQuery</a>, MIT License",
-	"<a href='http://leaflet.cloudmade.com/'>Leaflet.js</a>, 2-Clause BSD License",
-	"<a href='http://zeptojs.com'>Zepto</a>, MIT License",
-	"<a href='http://cubiq.org/iscroll-4'>iScroll</a>, MIT License",
-	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, Apache License 2.0"
+	"<a href='http://phonegap.com'>PhoneGap</a>, <a href='http://www.apache.org/licenses/LICENSE-2.0.html'>Apache License 2.0</a>",
+	"<a href='http://jquery.com'>Query</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+	"<a href='http://leaflet.cloudmade.com/'>Leaflet.js</a>, <a href='http://www.opensource.org/licenses/bsd-license.php'>2-Clause BSD License</a>",
+	"<a href='http://zeptojs.com'>Zepto</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+	"<a href='http://cubiq.org/iscroll-4'>iScroll</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, <a href='http://www.apache.org/licenses/LICENSE-2.0.html'>Apache License 2.0</a>"
 	];
+
 
 chrome.addPlatformInitializer(function() {
 	$('html').addClass('android');
