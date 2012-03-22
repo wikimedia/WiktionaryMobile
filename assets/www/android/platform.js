@@ -49,7 +49,6 @@ window.CREDITS = [
 	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, <a href='http://www.apache.org/licenses/LICENSE-2.0.html'>Apache License 2.0</a>"
 	];
 
-
 chrome.addPlatformInitializer(function() {
 	$('html').addClass('android');
 	if (navigator.userAgent.match(/Android 2\./)) {
