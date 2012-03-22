@@ -1,0 +1,39 @@
+diff --git a/Wikipedia-iOS/Plugins/ReadItLater/ReadItLaterLite.m b/Wikipedia-iOS/Plugins/ReadItLater/ReadItLaterLite.m
+index 58d58fa..29b8723 100644
+--- a/Wikipedia-iOS/Plugins/ReadItLater/ReadItLaterLite.m
++++ b/Wikipedia-iOS/Plugins/ReadItLater/ReadItLaterLite.m
+@@ -12,7 +12,7 @@
+ 
+ @implementation ReadItLater
+ 
+-static NSString *apikey = @"";			//Enter your apikey here : get one at http://readitlaterlist.com/api/ 
++static NSString *apikey = @"[YOUR-READ-IT-LATER-API-KEY]";			//Enter your apikey here : get one at http://readitlaterlist.com/api/
+ static NSString *nameOfYourApp = @"Wikipedia";		//Enter the name of your application here (optional - for user-agent string)
+ 
+ 
+diff --git a/Wikipedia-iOS/Wikipedia-iOS-Info.plist b/Wikipedia-iOS/Wikipedia-iOS-Info.plist
+index c4686f5..7394dfd 100644
+--- a/Wikipedia-iOS/Wikipedia-iOS-Info.plist
++++ b/Wikipedia-iOS/Wikipedia-iOS-Info.plist
+@@ -74,7 +74,7 @@
+             <string>org.wikipedia.fb</string>
+             <key>CFBundleURLSchemes</key>
+             <array>
+-				<string>fbyour-own-app-id</string>
++				<string>fb[YOUR-FB-APP-ID]</string>
+             </array>
+         </dict>
+     </array>
+diff --git a/assets/www/ios/platform.js b/assets/www/ios/platform.js
+index 86abcd1..6c0bd93 100644
+--- a/assets/www/ios/platform.js
++++ b/assets/www/ios/platform.js
+@@ -55,7 +55,7 @@ function shareRIL() {
+ 
+ chrome.addPlatformInitializer(function() {
+ 	console.log("Logging in!");
+-	window.plugins.FB.init("yourownappid", function() {
++	window.plugins.FB.init("<FB-APP-KEY>", function() {
+ 		console.log("failed FB init:(");
+ 	});
+ 	console.log("Logged in!");
