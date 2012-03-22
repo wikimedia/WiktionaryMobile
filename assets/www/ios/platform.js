@@ -42,7 +42,7 @@ function popupMenu(items, callback, options) {
 }
 
 function shareRIL() {
-	var url = app.getCurrentUrl().replace('.m.', '');
+	var url = app.getCurrentUrl().replace('.m.', '.');
 	var title = app.getCurrentTitle();
 
 	window.plugins.readItLaterPlugin.saveToReadItLater(function() {
@@ -55,14 +55,14 @@ function shareRIL() {
 
 chrome.addPlatformInitializer(function() {
 	console.log("Logging in!");
-	window.plugins.FB.init("yourownappid", function() {
+	window.plugins.FB.init("371031009595383", function() {
 		console.log("failed FB init:(");
 	});
 	console.log("Logged in!");
 });
 
 function shareFB() {
-	var url = app.getCurrentUrl().replace('.m.', '');
+	var url = app.getCurrentUrl().replace('.m.', '.');
 	var title = app.getCurrentTitle();
 
 	window.plugins.FB.dialog({
@@ -74,7 +74,7 @@ function shareFB() {
 }
 
 function shareTwitter() {
-	var url = app.getCurrentUrl().replace('.m.', '');
+	var url = app.getCurrentUrl().replace('.m.', '.');
 	var title = app.getCurrentTitle();
 
 	window.plugins.twitter.isTwitterAvailable(function(available) {
