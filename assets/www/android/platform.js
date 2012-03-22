@@ -34,20 +34,24 @@ function setMenuItemState(action, state, noUpdate) {
 	}
 }
 
+(function() {
+	var ANDROIDCREDITS = [
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/Android/Globalization'>PhoneGap Globalization Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/Android/Share'>PhoneGap Share Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/m00sey/PhoneGap-Toast'>PhoneGap Toast Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/Android/SoftKeyboard'>PhoneGap SoftKeyboard Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/Android/WebIntent'>PhoneGap WebIntent Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>"
+	];
+
+	window.CREDITS.push.apply(window.CREDITS, ANDROIDCREDITS);
+})();
+
 function setPageActionsState(state) {
 	setMenuItemState("read-in", state, true);
 	setMenuItemState("save-page", state, true);
 	setMenuItemState("share-page", state, true);
 	setMenuItemState("word-of-the-day", state, true);
 }
-
-window.CREDITS = [
-	"<a href='http://phonegap.com'>PhoneGap</a>, Apache License 2.0",
-	"<a href='http://jquery.com'>jQuery</a>, MIT License",
-	"<a href='http://zeptojs.com'>Zepto</a>, MIT License",
-	"<a href='http://cubiq.org/iscroll-4'>iScroll</a>, MIT License",
-	"<a href='http://twitter.github.com/hogan.js/'>Hogan.js</a>, Apache License 2.0"
-	];
 
 chrome.addPlatformInitializer(function() {
 	$('html').addClass('android');
