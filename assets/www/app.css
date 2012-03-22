@@ -99,6 +99,7 @@ header {
 
 #main {
 	padding: 8px;
+	margin-bottom: 52px;
 }
 
 .listItemContainer {
@@ -439,7 +440,11 @@ button#search
 	background: white;
 	color: DarkGrey;
 	font-family: "Droid Sans", "Helvetica", sans-serif;
-	text-align: center;
+}
+
+#about-page-content {
+	text-align: center;	
+	margin-bottom: 52px;
 }
 
 #about-version {
