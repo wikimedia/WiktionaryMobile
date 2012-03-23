@@ -67,7 +67,7 @@ function shareRIL() {
 
 chrome.addPlatformInitializer(function() {
 	console.log("Logging in!");
-	window.plugins.FB.init("371031009595383", function() {
+	window.plugins.FB.init("[FB-APP-ID]", function() {
 		console.log("failed FB init:(");
 	});
 	console.log("Logged in!");

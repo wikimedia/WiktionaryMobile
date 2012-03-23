@@ -74,7 +74,7 @@
             <string>org.wikipedia.fb</string>
             <key>CFBundleURLSchemes</key>
             <array>
-				<string>fbyour-own-app-id</string>
+				<string>fb[FB-APP-ID]</string>
             </array>
         </dict>
     </array>
