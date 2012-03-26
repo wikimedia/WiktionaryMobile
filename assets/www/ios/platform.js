@@ -77,11 +77,21 @@ function shareFB() {
 	var url = app.getCurrentUrl().replace('.m.', '.');
 	var title = app.getCurrentTitle();
 
-	window.plugins.FB.dialog({
-		method: 'feed',
-		link: url,
-		caption: title
-		//FIXME: Also include exerpt?
+	var share = function() {
+		window.plugins.FB.dialog({
+			method: 'feed',
+			link: url,
+			caption: title
+		});
+	};
+
+	window.plugins.FB.getLoginStatus(function(status) {
+		console.log("status is " + JSON.stringify(status));
+		if(status.status === "connected") {
+			share();
+		} else {
+			window.plugins.FB.login({scope: ""}, share);
+		}
 	});
 }
 
