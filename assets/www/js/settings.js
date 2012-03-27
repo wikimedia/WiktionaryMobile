@@ -4,7 +4,7 @@ window.appSettings = function() {
 
 	function showSettings(callback) {
 		chrome.showSpinner();
-		var requestUrl = app.baseURL + "/w/api.php?action=sitematrix&format=json";
+		var requestUrl = ROOT_URL + "sitematrix.json";
 
 		if(fontSizes.length == 0) {
 			fontSizes = [
