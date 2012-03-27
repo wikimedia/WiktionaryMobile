@@ -1,8 +1,20 @@
 // iOS+PhoneGap-specific setup
 
 function getAboutVersionString() {
-	return "3.1beta3";
+	return "3.1";
 }
+
+(function() {
+	var iOSCREDITS = [
+		"<a href='https://github.com/phonegap/phonegap-plugins/tree/master/iPhone/ActionSheet'>PhoneGap ActionSheet plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/devgeeks/ReadItLaterPlugin'>PhoneGap ReadItLater Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/davejohnson/phonegap-plugin-facebook-connect'>PhoneGap Facebook Connect Plugin</a>, <a href='http://www.opensource.org/licenses/MIT'>MIT License</a>",
+		"<a href='https://github.com/facebook/facebook-ios-sdk'>Facebook iOS SDK</a>, <a href='http://www.apache.org/licenses/LICENSE-2.0.html'>Apache License 2.0</a>",
+		"<a href='http://stig.github.com/json-framework/'>SBJSON</a>, <a href='http://www.opensource.org/licenses/bsd-license.php'>New BSD License</a>"
+	];
+
+	window.CREDITS.push.apply(window.CREDITS, iOSCREDITS);
+})();
 
 // Save page supporting code
 app.loadCachedPage = function (url) {
@@ -55,7 +67,7 @@ function shareRIL() {
 
 chrome.addPlatformInitializer(function() {
 	console.log("Logging in!");
-	window.plugins.FB.init("371031009595383", function() {
+	window.plugins.FB.init("[FB-APP-ID]", function() {
 		console.log("failed FB init:(");
 	});
 	console.log("Logged in!");
@@ -65,11 +77,21 @@ function shareFB() {
 	var url = app.getCurrentUrl().replace('.m.', '.');
 	var title = app.getCurrentTitle();
 
-	window.plugins.FB.dialog({
-		method: 'feed',
-		link: url,
-		caption: title
-		//FIXME: Also include exerpt?
+	var share = function() {
+		window.plugins.FB.dialog({
+			method: 'feed',
+			link: url,
+			caption: title
+		});
+	};
+
+	window.plugins.FB.getLoginStatus(function(status) {
+		console.log("status is " + JSON.stringify(status));
+		if(status.status === "connected") {
+			share();
+		} else {
+			window.plugins.FB.login({scope: ""}, share);
+		}
 	});
 }
 

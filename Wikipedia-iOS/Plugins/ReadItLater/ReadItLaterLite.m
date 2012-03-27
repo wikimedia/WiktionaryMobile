@@ -12,7 +12,7 @@
 
 @implementation ReadItLater
 
-static NSString *apikey = @"";			//Enter your apikey here : get one at http://readitlaterlist.com/api/ 
+static NSString *apikey = @"[RIL-API-KEY]";			//Enter your apikey here : get one at http://readitlaterlist.com/api/ 
 static NSString *nameOfYourApp = @"Wikipedia";		//Enter the name of your application here (optional - for user-agent string)
 
 

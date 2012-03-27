@@ -5,7 +5,6 @@ window.urlCache = function() {
 
 	function dataUrlForImage(img) {
 		var d = $.Deferred();
-		console.log("Starting canvas!");	
 		// Create an empty canvas element
 		var canvas = document.createElement("canvas");
 		canvas.width = img.width;
@@ -75,7 +74,6 @@ window.urlCache = function() {
 		function saveFile(fileEntry) {
 			fileEntry.createWriter(function(writer) {
 				writer.write(html);
-				console.log('html is ' + html);
 				console.log("Writing stuff to " + fileEntry.fullPath);
 				writer.onwriteend = function() {
 					console.log("written stuff!");
@@ -98,11 +96,9 @@ window.urlCache = function() {
 		});
 
 		console.log("Done mapping stuff");
-		console.log("Inside the when");
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
 			function(fs){
 				console.log(filePath);
-				console.log(JSON.stringify(fs));
 				fs.root.getFile(filePath, {create: true}, saveFile, error);
 			});
 		console.log("Technically done");
@@ -119,7 +115,6 @@ window.urlCache = function() {
 		function readFile(fileEntry) {
 			var reader = new FileReader();
 			reader.onloadend = function(evt) {
-				console.log(JSON.stringify(evt));
 				d.resolve(evt.target.result);
 			};
 			console.log('file path is ' + JSON.stringify(fileEntry));

@@ -95,3 +95,35 @@
 
 - Fix external links related bugs
 - Remove stray index.html titles in alert and confirm boxes
+
+## Android v1.1RC1 & iOS v3.1RC1 ##
+
+## Common ##
+
+- Added CREDITS for all libraries used + appropriate licensing
+- Updated AUTHORS list
+- Fixed RTL bug in Settings Page
+- Fixed bug with confusion over Hebrew language code
+- Fix issue with scrolling when tapping references 
+
+## Android specific ##
+
+- Fixed clipping of text in About page
+- Fix scrolling bugs in ICS
+
+## iOS specific ##
+
+- Added Share via Twitter
+- Added Save to Read It Later
+- Added Share via Facebook
+- Added a few more Higher resolution icons
+
+## Android v1.1 & iOS v3.1 ##
+
+## Common ##
+
+- List of wikipedias now included locally
+
+## iOS specific ##
+
+- Fix inconsistent login behavior of Facebook sharing
