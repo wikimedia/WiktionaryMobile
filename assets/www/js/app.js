@@ -10,7 +10,7 @@ window.app = function() {
 				var gotLinkPath = function(linkPath) {
 					em.attr('src', 'file://' + linkPath.file);
 				}
-				var target = this.src.replace('file:', 'https:');
+				var target = this.src.replace('file:', 'http:');
 				window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 			});
 		};
@@ -85,7 +85,7 @@ window.app = function() {
 	}
 
 	function baseUrlForLanguage(lang) {
-		return 'https://' + lang + '.m.' + PROJECTNAME + '.org';
+		return 'http://' + lang + '.m.' + PROJECTNAME + '.org';
 	}
 
 	function setContentLanguage(language) {
@@ -137,7 +137,7 @@ window.app = function() {
 
 	function getCurrentTitle() {
 		var url = getCurrentUrl(),
-			page = url.replace(/^https?:\/\/[^\/]+\/wiki\//, ''),
+			page = url.replace(/^http?:\/\/[^\/]+\/wiki\//, ''),
 			unescaped = decodeURIComponent(page),
 			title = unescaped.replace(/_/g, ' ');
 		return title;

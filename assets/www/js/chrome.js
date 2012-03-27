@@ -322,7 +322,7 @@ window.chrome = function() {
 				return;
 			}
 
-			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
+			if (url.match(new RegExp("^http?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
 				// ...and load it through our intermediate cache layer.
 				app.navigateToPage(url);
 			} else {

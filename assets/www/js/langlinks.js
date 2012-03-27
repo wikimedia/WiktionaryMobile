@@ -7,11 +7,11 @@ window.languageLinks = function() {
 	}
 
 	/**
-	 * Helper function for converting protocol relative urls to https
+	 * Helper function for converting protocol relative urls to http
 	 */
 	function processLanguageUrl(url) {
 		if (url.substr(0, 2) == '//') {
-			url = 'https:' + url;
+			url = 'http:' + url;
 		}
 		return url;
 	}
@@ -20,7 +20,7 @@ window.languageLinks = function() {
 	 * Helper function for getting language codes from URLs
 	 */
 	function extractLanguage(url) {
-		var matches = url.match(new RegExp("^https?://([^/]+)\.m\." + PROJECTNAME + "\.org/wiki/"));
+		var matches = url.match(new RegExp("^http?://([^/]+)\.m\." + PROJECTNAME + "\.org/wiki/"));
 		if (matches) {
 			return matches[1];
 		} else {
