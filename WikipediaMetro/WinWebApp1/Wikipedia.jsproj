@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8f5f86cb-f786-4111-919c-a4b2532d5f1f}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+  <PropertyGroup>
+    <DefaultLanguage>en-US</DefaultLanguage>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Content Include="..\..\assets\www\app.css">
+      <Link>app.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\spinner.gif">
+      <Link>image\spinner.gif</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\spr.png">
+      <Link>image\spr.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\index.html">
+      <Link>index.html</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\2.5.3-crypto-md5.js">
+      <Link>js\2.5.3-crypto-md5.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\app.js">
+      <Link>js\app.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\app_history.js">
+      <Link>js\app_history.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\chrome.js">
+      <Link>js\chrome.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\geo.js">
+      <Link>js\geo.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\hogan.min.js">
+      <Link>js\hogan.min.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\iscroll.js">
+      <Link>js\iscroll.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\jquery-1.7.1.min.js">
+      <Link>js\jquery-1.7.1.min.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\jquery.localize.js">
+      <Link>js\jquery.localize.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\l10n-setup.js">
+      <Link>js\l10n-setup.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\langlinks.js">
+      <Link>js\langlinks.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\blackberry-persistent-storage.js">
+      <Link>js\lawnchair\adapters\blackberry-persistent-storage.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\dom.js">
+      <Link>js\lawnchair\adapters\dom.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\gears-sqlite.js">
+      <Link>js\lawnchair\adapters\gears-sqlite.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\ie-userdata.js">
+      <Link>js\lawnchair\adapters\ie-userdata.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\indexed-db.js">
+      <Link>js\lawnchair\adapters\indexed-db.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\memory.js">
+      <Link>js\lawnchair\adapters\memory.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\webkit-sqlite.js">
+      <Link>js\lawnchair\adapters\webkit-sqlite.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\window-name.js">
+      <Link>js\lawnchair\adapters\window-name.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\Lawnchair.js">
+      <Link>js\lawnchair\Lawnchair.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\plugins\aggregation.js">
+      <Link>js\lawnchair\plugins\aggregation.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\plugins\callbacks.js">
+      <Link>js\lawnchair\plugins\callbacks.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\plugins\pagination.js">
+      <Link>js\lawnchair\plugins\pagination.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\plugins\query.js">
+      <Link>js\lawnchair\plugins\query.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\main.js">
+      <Link>js\main.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\mediawiki.js">
+      <Link>js\mediawiki.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\menu.js">
+      <Link>js\menu.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\mobilefrontend.js">
+      <Link>js\mobilefrontend.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\network.js">
+      <Link>js\network.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\platform-stub.js">
+      <Link>js\platform-stub.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\preferences.js">
+      <Link>js\preferences.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\propertiesFileReader.js">
+      <Link>js\propertiesFileReader.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\savedpages.js">
+      <Link>js\savedpages.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\search.js">
+      <Link>js\search.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\settings.js">
+      <Link>js\settings.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\templates.js">
+      <Link>js\templates.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\urlcache.js">
+      <Link>js\urlcache.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\zepto.min.js">
+      <Link>js\zepto.min.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\leaflet.js">
+      <Link>leaflet\leaflet.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-en.properties">
+      <Link>messages\messages-en.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-qqq.properties">
+      <Link>messages\messages-qqq.properties</Link>
+    </Content>
+    <Content Include="default.html" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\smalllogo.png" />
+    <Content Include="images\splashscreen.png" />
+    <Content Include="images\storelogo.png" />
+    <Content Include="css\default.css" />
+    <Content Include="js\jquery-1.7.1.js" />
+    <Content Include="metro\platform.js" />
+    <Content Include="winjs\Css\ui-dark.css" />
+    <Content Include="winjs\Css\ui-light.css" />
+    <Content Include="winjs\js\animations.js" />
+    <Content Include="winjs\js\base.js" />
+    <Content Include="winjs\js\binding.js" />
+    <Content Include="winjs\js\controls.js" />
+    <Content Include="winjs\js\res.js" />
+    <Content Include="winjs\js\ui.js" />
+    <Content Include="winjs\js\uicollections.js" />
+    <Content Include="winjs\js\wwaapp.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="image\" />
+    <Folder Include="js\lawnchair\adapters\" />
+    <Folder Include="js\lawnchair\plugins\" />
+    <Folder Include="messages\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
