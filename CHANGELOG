@@ -117,3 +117,13 @@
 - Added Save to Read It Later
 - Added Share via Facebook
 - Added a few more Higher resolution icons
+
+## Android v1.1 & iOS v3.1 ##
+
+## Common ##
+
+- List of wikipedias now included locally
+
+## iOS specific ##
+
+- Fix inconsistent login behavior of Facebook sharing
