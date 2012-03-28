@@ -2,7 +2,7 @@
 //  ReadItLaterPlugin.h
 //  ReadItLaterPlugin
 //
-//  Created by Carlos Williams on 16/03/12.
+//  Created by Tommy-Carlos Williams (tommy@devgeeks.org) on 16/03/12.
 //  Copyright (c) 2012 Tommy-Carlos Williams. All rights reserved.
 //  MIT Licensed
 //
