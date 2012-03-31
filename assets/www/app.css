@@ -104,7 +104,8 @@ header {
 
 .listItemContainer {
 	display: -webkit-box;
-	-webkit-box-orient: horizontal;
+	display: -moz-box;
+	display: box;
 	whitespace: no-wrap;
 	border-bottom:1px solid #ddd;
 	width:100%;
@@ -176,26 +177,42 @@ button#search
 	right: 8px;
 	background: url(image/spr.png) -43px 5px no-repeat,
 	-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
+	background: url(image/spr.png) -43px 5px no-repeat,
+	-moz-linear-gradient(#777 0%, #333 25%);
+	background: url(image/spr.png) -43px 5px no-repeat,
+	-ms-linear-gradient(#777 0%, #333 25%);
 	background-size: 160px 240px;
 	height: 37px;
 	width: 40px;
 	border: 1px solid #333;
-	-webkit-border-radius: 0px 5px 5px 0px;
+	border-radius: 0px 5px 5px 0px;
 }
 
 #search.active {
 	background: url(image/spr.png) -43px 5px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
+	background: url(image/spr.png) -43px 5px no-repeat,
+		-moz-linear-gradient(#444 0%, #666 25%);
+	background: url(image/spr.png) -43px 5px no-repeat,
+		-ms-linear-gradient(#444 0%, #666 25%);
 }
 
 #search.inProgress {
 	background: url(image/spr.png) -130px -131px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
+	background: url(image/spr.png) -130px -131px no-repeat,
+		-moz-linear-gradient(#777 0%, #333 25%);
+	background: url(image/spr.png) -130px -131px no-repeat,
+		-ms-linear-gradient(#777 0%, #333 25%);
 }
 
 #search.inProgress.active {
 	background: url(image/spr.png) -130px -131px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
+	background: url(image/spr.png) -130px -131px no-repeat,
+		-moz-linear-gradient(#444 0%, #666 25%);
+	background: url(image/spr.png) -130px -131px no-repeat,
+		-ms-linear-gradient(#444 0%, #666 25%);
 }
 
 #searchParam {
@@ -207,6 +224,8 @@ button#search
 	border: none;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd),
 		color-stop(0.2, #fff), color-stop(0.8, #fff), to(#eee));
+	background: -moz-linear-gradient(#ddd 0%, #fff 20%, #fff 80%, #eee 100%);
+	background: -ms-linear-gradient(#ddd 0%, #fff 20%, #fff 80%, #eee 100%);
 	font-size: 18px;
 	padding: 4px 28px 2px 4px;
 	border: 1px solid #333;
@@ -263,16 +282,24 @@ button#search
 	left: 8px;
 	background: url(image/button-light-wiki.png) no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#444));
+	background: url(image/button-light-wiki.png) no-repeat,
+		-moz-linear-gradient(#777 0%, #444 100%);
+	background: url(image/button-light-wiki.png) no-repeat,
+		-ms-linear-gradient(#777 0%, #444 100%);
 	background-size: 40px;
 	height: 37px;
 	width: 40px;
 	border: 1px solid #333;
-	-webkit-border-radius: 5px 0px 0px 5px;	
+	border-radius: 5px 0px 0px 5px;	
 }
 
 .titlebarIcon.active {
 	background: url(image/button-light-wiki.png) no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), to(#777));
+	background: url(image/button-light-wiki.png) no-repeat,
+		-moz-linear-gradient(#444 0%, #777 100%);
+	background: url(image/button-light-wiki.png) no-repeat,
+		-ms-linear-gradient(#444 0%, #777 100%);
 }
 
 #wHolder {
@@ -288,14 +315,20 @@ button#search
 
 .titlebar {
 	display: -webkit-box;
-	-webkit-box-orient: horizontal;
+	display: -moz-box;
+	display: box;
+	width: 100%;
 	background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
+	background: -moz-linear-gradient(#5F5F5F 0%, #4F4F4F 100%);
+	background: -ms-linear-gradient(#5F5F5F 0%, #4F4F4F 100%);
 	padding: 5px;
 	height: 42px;
 }
 
 .titlebar > div:first-child {
 	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
 	text-shadow: #222 1px 1px 1px;
 	font-size: 18px;
 	margin-left: 6px;
@@ -443,6 +476,8 @@ body[dir=rtl] #settingsList .item select {
 	right: 0;
 	background: #888;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.75, #333));
+	background: -moz-linear-gradient(#777 0%, #333 75%);
+	background: -ms-linear-gradient(#777 0%, #333 75%);
 	padding: 0;
 	margin: 0;
 	text-align: center;
@@ -470,6 +505,7 @@ body[dir=rtl] #settingsList .item select {
 #menu button:active {
 	background-image: -webkit-gradient(radial, center center, 8, center center, 24,
 		from(white), to(rgba(255,255,255,0)));
+	background-image: -moz-radial-gradient(center, closest-side, white 25%, rgba(255,255,255,0) 100%);
 }
 
 /* iOS bottombar iCons */
@@ -559,6 +595,8 @@ body[dir=rtl] #settingsList .item select {
 		left: 320px;
 		text-align: right;
 		background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
+		background: -moz-linear-gradient(#5F5F5F 0%, #4F4F4F 100%);
+		background: -ms-linear-gradient(#5F5F5F 0%, #4F4F4F 100%);
 	}
 	.goodscroll #content {
 		position: absolute;

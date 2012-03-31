@@ -14,7 +14,7 @@ window.preferencesDB = {
 		'locale': function(success) {
 			var defaults = this;
 			l10n.navigatorLang(function(lang) {
-				defaults.locale = l10n.normalizeLanguageCode(lang);
+				defaults.locale = l10n.normalizeLanguageCode(lang || 'en');
 				console.log('done with navigate');
 				success();
 			});
