@@ -127,3 +127,7 @@
 ## iOS specific ##
 
 - Fix inconsistent login behavior of Facebook sharing
+
+## Android v1.1.1 ##
+
+- Added migration code for older Saved Pages
