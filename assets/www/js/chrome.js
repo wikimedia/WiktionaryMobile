@@ -57,10 +57,6 @@ window.chrome = function() {
 		languageLinks.parseAvailableLanguages($div);
 		audioPlayer.getMediaList();
 		chrome.doScrollHack('#content');
-
-		if (window.wiktionary) {
-			window.wiktionary.onPageLoad();
-		}
 	}
 
 	function showNotification(text) {
@@ -351,6 +347,12 @@ window.chrome = function() {
 		appHistory.addCurrentPage();
 		chrome.hideSpinner();   
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
+
+		if (window.wiktionary) {
+			window.wiktionary.onPageLoad();
+			// TODO(pfhayes): This is bad, make it call at the correct time
+			setTimeout(window.wiktionary.afterPageLoad, 1);
+		}
 	}
 
 	function doScrollHack(element, leaveInPlace) {
