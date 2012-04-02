@@ -345,8 +345,9 @@ window.chrome = function() {
 
 		if (window.wiktionary) {
 			window.wiktionary.onPageLoad();
-			// TODO(pfhayes): This is bad, make it call at the correct time
-			setTimeout(window.wiktionary.afterPageLoad, 1);
+			// This is hacky, but it appears that the response page doesn't
+			// get initialized right away
+			setTimeout(window.wiktionary.afterPageLoad, 5);
 		}
 	}
 
