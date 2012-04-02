@@ -14,7 +14,7 @@ public class WikipediaApp extends Application {
 
 	public static final String PREFS_NAME = "WikiPreferences";
 	
-	// Migrate the database from Android app v1.0.x to v1.1
+	// Migrate the database from Android app v1.0.x to v1.1 (version code 1 to 10)
 	// Caused due to Migration from PhoneGap 1.3 to 1.4.1
 	// Which changed the path Databases are stored in
 	private void migrateDatabaseFromvc1() {
@@ -22,13 +22,17 @@ public class WikipediaApp extends Application {
 		File v1File = new File("/data/data/org.wikipedia/databases/savedPagesDB.db");
 		File v10File = new File("/data/data/org.wikipedia/app_database:savedPagesDB.db");
 		if(!v1File.exists()) {
+			// New install - no v1 files to be removed
 			return;
 		}
 		if(!v10File.exists()) {
+			// Upgrade from v1 to v11 - No intermediate file created
+			// Just move the old database, all is well
 			v1File.renameTo(v10File);
 			return;
 		}
 		
+		// v1 -> v10 -> v11. We need to 'merge' the v1 and v10 databases together
 		SQLiteDatabase v1Db = SQLiteDatabase.openDatabase(v1File.getAbsolutePath(), null, SQLiteDatabase.OPEN_READONLY);
 		SQLiteDatabase v10Db = SQLiteDatabase.openDatabase(v10File.getAbsolutePath(), null, SQLiteDatabase.OPEN_READWRITE);
 
