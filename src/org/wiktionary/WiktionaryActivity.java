@@ -2,8 +2,10 @@ package org.wiktionary;
 
 import java.net.URLEncoder;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.phonegap.DroidGap;
 
@@ -20,20 +22,34 @@ public class WiktionaryActivity extends DroidGap {
         
         Intent startingIntent = this.getIntent();
         if (startingIntent != null) {
-          Bundle extraParams = startingIntent.getExtras();
-          if (extraParams != null) {
-            String value = extraParams.getString(Intent.EXTRA_TEXT);
-            if (value != null && !value.trim().equals("")) {
-              startedFromAnotherApp = true;
-              wordToShow = value;
-            }
-          }
+    		Bundle extraParams = startingIntent.getExtras();
+    		if (extraParams != null) {
+    			String value = extraParams.getString(Intent.EXTRA_TEXT);
+    			if (value != null && !value.trim().equals("")) {
+    				startedFromAnotherApp = true;
+    				wordToShow = value;
+    			}
+    		}
         }
 
         String startingUrl = "file:///android_asset/www/index.html";
         
         if (startedFromAnotherApp) { // Specify the word display on startup
-          startingUrl += "?define=" + URLEncoder.encode(wordToShow);
+
+          // See if we came from another wiki app (and thus have to parse a url)
+          String[] recognizedUrl = { "wiktionary.org/wiki/", "wikipedia.org/wiki/" };
+          for (String urlSubstring : recognizedUrl) {
+        	  int position = wordToShow.indexOf(urlSubstring);
+        	  if (position != -1) {
+        		  wordToShow = wordToShow.substring(position + urlSubstring.length());
+        		  break;
+        	  }
+          }
+
+          wordToShow = URLEncoder.encode(wordToShow);
+          startingUrl += "?define=" + wordToShow;
+
+          Log.d("WiktionaryActivity", "App opened with Intent. Word: " + wordToShow);
         }
 
         super.loadUrl(startingUrl);
