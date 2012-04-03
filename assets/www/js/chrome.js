@@ -28,7 +28,7 @@ window.chrome = function() {
 	 * @param string html
 	 * @param string url - base URL
 	 */
-	function renderHtml(html, url) {
+	function renderHtml(html, url, noScroll) {
 		$('base').attr('href', url);
 
 		// Horrible hack to grab the lang & dir attributes from
@@ -55,7 +55,8 @@ window.chrome = function() {
 
 		languageLinks.parseAvailableLanguages($div);
 
-		chrome.doScrollHack('#content');
+		if(noScroll != true)
+			chrome.doScrollHack('#content');
 	}
 
 	function showNotification(text) {
@@ -311,13 +312,14 @@ window.chrome = function() {
 		});
 	}
 	
-	function onPageLoaded() {
+	function onPageLoaded(noScroll) {
 		// TODO: next two lines temporary to deal with legacy mediawiki instances
 		$('.section_heading').removeAttr('onclick');
 		$('.section_heading button').remove();
 		// setup default MobileFrontend behaviour (including toggle)
 		MobileFrontend.init();
-		window.scroll(0,0);
+		if(noScroll != true)
+			window.scroll(0,0);
 		appHistory.addCurrentPage();
 		toggleMoveActions();
 		geo.addShowNearbyLinks();

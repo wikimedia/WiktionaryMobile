@@ -1,6 +1,6 @@
 window.app = function() {
 
-	function loadCachedPage (url) {
+	function loadCachedPage (url, noScroll) {
 		var d = $.Deferred();
 		var replaceRes = function() {
 
@@ -15,7 +15,7 @@ window.app = function() {
 			});
 		};
 		var gotPath = function(cachedPage) {
-			loadPage('file://' + cachedPage.file, url).then(function() {
+			loadPage('file://' + cachedPage.file, url, noScroll).then(function() {
 				replaceRes();
 				d.resolve();
 			});
@@ -28,7 +28,7 @@ window.app = function() {
 		return d;
 	}
 
-	function loadPage(url, origUrl) {
+	function loadPage(url, origUrl, noScroll) {
 		var d = $.Deferred();
 		origUrl = origUrl || url;
 		console.log('hideAndLoad url ' + url);
@@ -38,8 +38,8 @@ window.app = function() {
 				url: url,
 				dataType: 'text',
 				success: function(data) {
-						chrome.renderHtml(data, origUrl);
-						chrome.onPageLoaded();
+						chrome.renderHtml(data, origUrl, noScroll);
+						chrome.onPageLoaded(noScroll);
 						d.resolve();
 					},
 				error: function(xhr) {
@@ -105,7 +105,7 @@ window.app = function() {
 
 	function navigateToPage(url, options) {
 		var d = $.Deferred();
-		var options = $.extend({cache: false, updateHistory: true}, options || {});
+		var options = $.extend({cache: false, updateHistory: true, noScroll: false}, options || {});
 		$('#searchParam').val('');
 		chrome.showContent();
 		if(options.hideCurrent) {
@@ -118,9 +118,9 @@ window.app = function() {
 			pageHistory[currentHistoryIndex] = url;
 		}
 		if (options.cache) {
-			d = app.loadCachedPage(url);
+			d = app.loadCachedPage(url, options.noScroll);
 		} else {
-			d = app.loadPage(url);
+			d = app.loadPage(url, "", options.noScroll);
 		}
 		d.done(function() {
 			console.log("navigating to " + url);
@@ -130,7 +130,7 @@ window.app = function() {
 			setMenuItemState('read-in', true);
 			if(options.hideCurrent) {
 				$("#content").show();
-			}
+			}			
 		});
 		return d;
 	}
