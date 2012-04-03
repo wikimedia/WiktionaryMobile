@@ -300,7 +300,6 @@ window.chrome = function() {
 		$('.section_heading').removeAttr('onclick');
 		$('.section_heading button').remove();
 		// setup default MobileFrontend behaviour (including toggle)
-		MobileFrontend.init();
 		MobileFrontend.toggle.init();
 		window.scroll(0,0);
 		appHistory.addCurrentPage();
