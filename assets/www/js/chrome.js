@@ -31,29 +31,9 @@ window.chrome = function() {
 	function renderHtml(html, url, noScroll) {
 		$('base').attr('href', url);
 
-		// Horrible hack to grab the lang & dir attributes from
-		// the target page's <html> without parsing the rest
-		var stub = html.match(/<html ([^>]+)>/i, '$1')[1],
-			$stubdiv = $('<div ' + stub + '></div>'),
-			lang = $stubdiv.attr('lang'),
-			dir = $stubdiv.attr('dir');
-
-		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
-
-		var selectors = ['#content>*', '#copyright'],
-			$target = $('#main'),
-			$div = $(trimmed);
-
-		$target
-			.empty()
-			.attr('lang', lang)
-			.attr('dir', dir);
-		$.each(selectors, function(i, sel) {
-			var con = $div.find(sel).remove();
-			con.appendTo($target);
-		});
-
-		languageLinks.parseAvailableLanguages($div);
+		// FIXME: Do RTL and Lang
+		$("#main").html(html);
+		//languageLinks.parseAvailableLanguages($div);
 
 		if(!noScroll) {
 			chrome.doScrollHack('#content');
@@ -295,7 +275,6 @@ window.chrome = function() {
 				url = target.href,             // expanded from relative links for us
 				href = $(target).attr('href'); // unexpanded, may be relative
 
-			// Stop the link from opening in the iframe directly...
 			event.preventDefault();
 
 			if (href.substr(0, 1) == '#') {

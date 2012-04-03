@@ -31,30 +31,28 @@ window.app = function() {
 	function loadPage(url, origUrl, noScroll) {
 		var d = $.Deferred();
 		origUrl = origUrl || url;
-		console.log('hideAndLoad url ' + url);
-		console.log('hideAndLoad origUrl ' + origUrl);
-		var doRequest = function() {
-			network.makeRequest({
-				url: url,
-				dataType: 'text',
-				success: function(data) {
-						chrome.renderHtml(data, origUrl, noScroll);
-						chrome.onPageLoaded(noScroll);
-						d.resolve();
-					},
-				error: function(xhr) {
-					if(xhr.status == 404) {
-						loadLocalPage('404.html');
-					} else {
-						loadLocalPage('error.html');
-					}
-					languageLinks.clearLanguages();
-					setMenuItemState('read-in', false);
-					setPageActionsState(false);
+
+		var title = app.titleForUrl(url);
+		if(title === "") {
+			title = "Main_Page";
+		}
+		function doRequest() {
+			Page.requestFromTitle(title).done(function(page) {
+				chrome.renderHtml(page.toHtml(), origUrl);
+				chrome.onPageLoaded();
+				d.resolve(page);
+			}).fail(function(xhr) {
+				if(xhr.status == 404) {
+					loadLocalPage('404.html');
+				} else {
+					loadLocalPage('error.html');
 				}
+				languageLinks.clearLanguages();
+				setMenuItemState('read-in', false);
+				setPageActionsState(false);
 			});
-		};
-		console.log("Apparently we are connected = " + network.isConnected());
+		}
+
 		if(!network.isConnected()) {
 			app.setCaching(true, function() {
 				console.log("HEYA!");
@@ -139,12 +137,14 @@ window.app = function() {
 		return pageHistory[currentHistoryIndex];
 	}
 
-	function getCurrentTitle() {
-		var url = getCurrentUrl(),
-			page = url.replace(/^https?:\/\/[^\/]+\/wiki\//, ''),
+	function titleForUrl(url) {
+		var page = url.replace(/^https?:\/\/[^\/]+(\/wiki\/)?/, ''),
 			unescaped = decodeURIComponent(page),
 			title = unescaped.replace(/_/g, ' ');
 		return title;
+	}
+	function getCurrentTitle() {
+		return titleForUrl(getCurrentUrl());
 	}
 
 	var exports = {
@@ -154,6 +154,7 @@ window.app = function() {
 		getCurrentUrl: getCurrentUrl,
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
+		titleForUrl:titleForUrl,
 		baseUrlForLanguage: baseUrlForLanguage,
 		setCaching: setCaching,
 		loadPage: loadPage,

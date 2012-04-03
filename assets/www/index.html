@@ -26,6 +26,7 @@
 	<script type="text/javascript" charset="utf-8" src="js/l10n-setup.js"></script>
 
 	<!-- app logic -->
+	<script type="text/javascript" charset="utf-8" src="js/page.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/network.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/templates.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
@@ -120,6 +121,13 @@
 					</span>
 				</a>
 			</div>
+		</script>
+
+		<script type="text/html" id="content-template">
+			{{#sections}}
+				<h{{level}}>{{{line}}}</h{{level}}>
+				{{{text}}}
+			{{/sections}}
 		</script>
 
 		<script type="text/html" id="history-template">
