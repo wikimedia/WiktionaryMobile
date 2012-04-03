@@ -11,7 +11,7 @@ window.audioPlayer = function() {
 	 *
 	 */
 	function playAudio (AudioSource) {
-		currentMedia = new Media (AudioSource, releaseMedia);
+		currentMedia = new Media (AudioSource, releaseMedia, hidespinner);
 		currentMedia.play();	
 	}
 	
@@ -23,6 +23,11 @@ window.audioPlayer = function() {
 		if (currentMedia != null){
 			currentMedia.release();
 		}
+		hidespinner();
+	}
+	
+	function hidespinner () {
+		$(".scroller .listSpinner").css({display:'none'});	
 	}
 	
 	/**
@@ -165,6 +170,7 @@ window.audioPlayer = function() {
 	 *  
 	 */
 	function onAudioLinkClick() {
+		$('.scroller .listSpinner').css({display:'block'});
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
 		audioPlayer.playAudio(url);
