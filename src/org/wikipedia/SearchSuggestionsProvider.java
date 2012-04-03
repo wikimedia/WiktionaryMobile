@@ -1,6 +1,7 @@
 package org.wikipedia;
 
 import java.net.URLEncoder;
+import java.util.Locale;
 
 import org.json.JSONArray;
 
@@ -29,12 +30,23 @@ public class SearchSuggestionsProvider extends ContentProvider {
 		return true;
 	}
 
+	private String getDefaultLanguage() {
+		// Returns default language to be used. 
+		// Takes default system language, and does minor fixes so that they match the languages wikipedia uses
+		String locale = Locale.getDefault().getLanguage();
+		String language = locale.split("-")[0];
+		if(language == "iw") {
+			// Java (and Android) think Hebrew is iw, while it actually is he
+			language = "he";
+		}
+		return language;
+	}
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		String query = uri.getLastPathSegment();
 		try {
 			SharedPreferences settings = this.getContext().getSharedPreferences(PreferencesPlugin.PREFS_NAME, Context.MODE_PRIVATE);
-			String lang = settings.getString("language", "en");
+			String lang = settings.getString("language", getDefaultLanguage());
 
 			String[] columnNames = { BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1, SearchManager.SUGGEST_COLUMN_INTENT_DATA };
 			MatrixCursor cursor = new MatrixCursor(columnNames);
