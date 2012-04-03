@@ -36,6 +36,7 @@ public class SearchSuggestionsProvider extends ContentProvider {
 		String locale = Locale.getDefault().getLanguage();
 		String language = locale.split("-")[0];
 		if(language == "iw") {
+			// Java (and Android) think Hebrew is iw, while it actually is he
 			language = "he";
 		}
 		return language;
