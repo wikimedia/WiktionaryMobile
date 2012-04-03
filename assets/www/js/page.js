@@ -1,34 +1,12 @@
 (function() {
-	function parseSections(data) {
-		// Note: THIS CODE IS HORRIBLE and *wrong*. Need to figure out correct way to 'tree'ize the data
-		var sections = [];
-		var lastSection = {};
-		$.each(data.mobileview.sections, function(i, section) {
-			console.log(section);
-			if(section.id == 0) {
-				// Lead section
-				sections.push(section);
-				return;
-			}
-			if(section.level <= 2) {
-				curLevel = section.level;
-				if(lastSection) {
-					// for the first section
-					sections.push(lastSection);
-				}
-				lastSection = section;
-			} else {
-				if(lastSection.subSections) {
-					lastSection.subSections.push(section);
-				} else {
-					lastSection.subSections = [section];
-				}
-			}
-		});
-		return sections;
+	function parseSections(data, title) {
+		var sections = data.mobileview.sections;
+		sections[0].level = "1";
+		sections[0].line = title;
+		return sections; 
 	}
-	window.Page = function(data) { 
-		this.sections = parseSections(data);
+	window.Page = function(data, title) { 
+		this.sections = parseSections(data, title);
 	};
 
 	Page.requestFromTitle = function(title) {
@@ -44,7 +22,7 @@
 		});
 
 		request.done(function(data) {
-			var page = new Page(data);
+			var page = new Page(data, title);
 			d.resolve(page);
 		});
 
@@ -52,8 +30,8 @@
 	}
 
 	Page.prototype.toHtml = function() {
-		var template = templates.getTemplate('content-template');
-		return template.render(this);
+		var contentTemplate = templates.getTemplate('content-template');
+		return contentTemplate.render(this);
 	}
 
 	function makeAPIRequest(params) {
