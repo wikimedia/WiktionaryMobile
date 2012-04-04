@@ -57,6 +57,10 @@ window.chrome = function() {
 
 		if(noScroll != true)
 			chrome.doScrollHack('#content');
+		else {
+			$("#content").hide();
+			$("#content").show();
+		}
 	}
 
 	function showNotification(text) {
