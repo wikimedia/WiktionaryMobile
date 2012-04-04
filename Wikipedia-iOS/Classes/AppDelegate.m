@@ -36,15 +36,103 @@
 #import "PGURLProtocol.h"
 #endif
 
+/* 
+ Returns YES if it is at least version specified as NSString(X)
+ Usage: 
+ if (IsAtLeastiOSVersion(@"5.1")) {
+ // do something for iOS 5.1 or greater
+ }
+ */
+#define IsAtLeastiOSVersion(X) ([[[UIDevice currentDevice] systemVersion] compare:X options:NSNumericSearch] != NSOrderedAscending)
+
+
 @implementation AppDelegate
 
 @synthesize invokeString, window, viewController;
 
 - (id) init
 {	
-	/** If you need to do any extra app-specific initialization, you can do it here
-	 *  -jm
-	 **/
+	/* Fix problem with ios 5.0.1+ and Webkit databases described at the following urls:
+     *   https://issues.apache.org/jira/browse/CB-347
+     *   https://issues.apache.org/jira/browse/CB-330
+     * My strategy is to move any existing database from default paths
+     * to Documents/ and then changing app preferences accordingly
+     */
+    
+    NSString* library = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)objectAtIndex:0];
+    NSString* documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *localStorageSubdir = (IsAtLeastiOSVersion(@"5.1")) ? @"Caches" : @"WebKit/LocalStorage";
+    NSString *localStoragePath = [library stringByAppendingPathComponent:localStorageSubdir];
+    NSString *localStorageDb = [localStoragePath stringByAppendingPathComponent:@"file__0.localstorage"];
+    
+    NSString *WebSQLSubdir = (IsAtLeastiOSVersion(@"5.1")) ? @"Caches" : @"WebKit/Databases";
+    NSString *WebSQLPath = [library stringByAppendingPathComponent:WebSQLSubdir];
+    NSString *WebSQLIndex = [WebSQLPath stringByAppendingPathComponent:@"Databases.db"];
+    NSString *WebSQLDb = [WebSQLPath stringByAppendingPathComponent:@"file__0"];
+    
+    NSString *ourLocalStoragePath = [documents stringByAppendingPathComponent:@"LocalStorage"];;
+    NSString *ourLocalStorageDb = [ourLocalStoragePath stringByAppendingPathComponent:@"file__0.localstorage"];
+    
+    NSString *ourWebSQLPath = [documents stringByAppendingPathComponent:@"Databases"];
+    NSString *ourWebSQLIndex = [ourWebSQLPath stringByAppendingPathComponent:@"Databases.db"];
+    NSString *ourWebSQLDb = [ourWebSQLPath stringByAppendingPathComponent:@"file__0"];
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    BOOL copy;
+    NSError *err = nil; 
+    copy = [fileManager fileExistsAtPath:localStorageDb] && ![fileManager fileExistsAtPath:ourLocalStorageDb];
+    if (copy) {
+        [fileManager createDirectoryAtPath:ourLocalStoragePath withIntermediateDirectories:YES attributes:nil error:&err];
+        [fileManager copyItemAtPath:localStorageDb toPath:ourLocalStorageDb error:&err];
+        if (err == nil)
+            [fileManager removeItemAtPath:localStorageDb error:&err];
+    }
+    
+    err = nil;
+    copy = [fileManager fileExistsAtPath:WebSQLPath] && ![fileManager fileExistsAtPath:ourWebSQLPath];
+    if (copy) {
+        [fileManager createDirectoryAtPath:ourWebSQLPath withIntermediateDirectories:YES attributes:nil error:&err];
+        [fileManager copyItemAtPath:WebSQLIndex toPath:ourWebSQLIndex error:&err];
+        [fileManager copyItemAtPath:WebSQLDb toPath:ourWebSQLDb error:&err];
+        if (err == nil)
+            [fileManager removeItemAtPath:WebSQLPath error:&err];
+    }
+    
+    NSUserDefaults* appPreferences = [NSUserDefaults standardUserDefaults];
+    NSBundle* mainBundle = [NSBundle mainBundle];
+    
+    NSString *bundlePath = [[mainBundle bundlePath] stringByDeletingLastPathComponent];
+    NSString *bundleIdentifier = [[mainBundle infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    NSString* libraryPreferences = @"Library/Preferences";
+    
+    NSString* appPlistPath = [[bundlePath stringByAppendingPathComponent:libraryPreferences]    stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", bundleIdentifier]];
+    NSMutableDictionary* appPlistDict = [NSMutableDictionary dictionaryWithContentsOfFile:appPlistPath];
+    
+    BOOL dirty = NO;
+    
+    NSString *value;
+    NSString *key = @"WebKitLocalStorageDatabasePathPreferenceKey";
+    value = [appPlistDict objectForKey: key];
+    if (![value isEqual:ourLocalStoragePath]) {
+        [appPlistDict setValue:ourLocalStoragePath forKey:key];
+        dirty = YES;
+    }
+    
+    key = @"WebDatabaseDirectory";
+    value = [appPlistDict objectForKey: key];
+    if (![value isEqual:ourWebSQLPath]) {
+        [appPlistDict setValue:ourWebSQLPath forKey:key];
+        dirty = YES;
+    }
+    
+    if (dirty) 
+    {
+        BOOL ok = [appPlistDict writeToFile:appPlistPath atomically:YES];
+        NSLog(@"Fix applied for database locations?: %@", ok? @"YES":@"NO");
+        [appPreferences synchronize];
+    }
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     NSString *currentUserAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
