@@ -124,12 +124,20 @@
 		</script>
 
 		<script type="text/html" id="content-template">
+            <h1>{{lead.line}}</h1>
+            <div class="lead">
+                {{{lead.text}}}
+            </div>
 			{{#sections}}
 			<div class="section">
 				<h{{level}} class="section_heading" id="section_{{id}}">{{{line}}}</h{{level}}>
 				<div class="content_block" id="content_{{id}}">
-				{{{text}}} 
-			</div>
+                    {{{text}}} 
+                        {{#subSections}} 
+                            <h{{level}} class="section_heading" id="section_{{id}}">{{{line}}}</h{{level}}>
+                            {{{text}}} 
+                        {{/subSections}}
+                </div>
 			</div>
 			{{/sections}}
 		</script>

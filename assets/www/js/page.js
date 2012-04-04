@@ -1,12 +1,32 @@
 (function() {
-	function parseSections(data, title) {
-		var sections = data.mobileview.sections;
-		sections[0].level = "1";
-		sections[0].line = title;
-		return sections; 
-	}
-	window.Page = function(data, title) { 
-		this.sections = parseSections(data, title);
+	window.Page = function(title, sections) { 
+        var lastCollapsibleSection = {subSections: []};
+        this.sections = [];
+        var that = this;
+        $.each(sections, function(index, section) {
+            console.log(section);
+            if(section.id === 0) {
+                // Lead Section
+                // We should also make sure that if there is a lead followed by
+                // h3, h4, etc they all fold into the lead
+                // Not sure why a page would do this though
+                section.subSections = [];
+                that.lead = section;
+                lastCollapsibleSection = section;
+                return;
+            } 
+            // Only consider leve 2 sections as 'sections'
+            // Group *all* subsections under them, no matter which level they are at
+            if(section.level == 2) {
+                section.subSections = [];
+                lastCollapsibleSection = section;
+                that.sections.push(section);
+            } else {
+                lastCollapsibleSection.subSections.push(section);
+            }
+
+        });
+        console.log(this);
 	};
 
 	Page.requestFromTitle = function(title) {
@@ -22,7 +42,7 @@
 		});
 
 		request.done(function(data) {
-			var page = new Page(data, title);
+			var page = new Page(title, data.mobileview.sections);
 			d.resolve(page);
 		});
 
