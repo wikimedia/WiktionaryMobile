@@ -55,9 +55,9 @@ window.chrome = function() {
 
 		languageLinks.parseAvailableLanguages($div);
 
-		if(noScroll != true)
+		if(!noScroll) {
 			chrome.doScrollHack('#content');
-		else {
+		} else {
 			$("#content").hide();
 			$("#content").show();
 		}
@@ -322,7 +322,7 @@ window.chrome = function() {
 		$('.section_heading button').remove();
 		// setup default MobileFrontend behaviour (including toggle)
 		MobileFrontend.init();
-		if(noScroll != true)
+		if(!noScroll)
 			window.scroll(0,0);
 		appHistory.addCurrentPage();
 		toggleMoveActions();
