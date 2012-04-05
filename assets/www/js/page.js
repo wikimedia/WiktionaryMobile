@@ -26,7 +26,7 @@
             }
 
         });
-        console.log(this);
+		this.title = title;
 	};
 
 	Page.requestFromTitle = function(title) {
