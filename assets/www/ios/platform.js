@@ -1,7 +1,7 @@
 // iOS+PhoneGap-specific setup
 
 function getAboutVersionString() {
-	return "3.1";
+	return "3.1.1";
 }
 
 (function() {
