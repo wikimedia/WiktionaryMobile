@@ -37,6 +37,12 @@ function aboutPage() {
 		chrome.hideOverlays();
 		chrome.hideContent();
 		$("#about-page-overlay").localize().show();
+		$("#about-page-overlay a").bind('click', function(event) {
+			// Force web links to open in external browser
+			// instead of the app, where navigation will be broken.
+			chrome.openExternalLink(this.href);
+			event.preventDefault();
+		});
 		$("#aboutclose").unbind('click');
 		$("#aboutclose").bind('click', function(){
 			$("#about-page-overlay").hide();
