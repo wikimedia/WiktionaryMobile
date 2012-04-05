@@ -16,6 +16,8 @@
 		<string>icon@2x.png</string>
 		<string>icon-72.png</string>
 		<string>icon-72@2x.png</string>
+		<string>Default-Landscape@2x~ipad.png</string>
+		<string>Default-Portrait@2x~ipad.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -27,6 +29,8 @@
 				<string>icon@2x.png</string>
 				<string>icon-72.png</string>
 				<string>icon-72@2x.png</string>
+				<string>Default-Landscape@2x~ipad.png</string>
+				<string>Default-Portrait@2x~ipad.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
@@ -78,16 +82,5 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>org.wikipedia.fb</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-				<string>fb[FB-APP-ID]</string>
-            </array>
-        </dict>
-    </array>
 </dict>
 </plist>
