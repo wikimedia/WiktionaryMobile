@@ -17,6 +17,14 @@ window.chrome = function() {
 		$('.titlebar .spinner').css({display:'none'});	
 		$('#clearSearch').css({height:30});
 	}
+	
+	function showListSpinner(){
+		$('.scroller .listSpinner').css({display:'block'});
+	}
+	
+	function hideListSpinner() {
+		$(".scroller .listSpinner").css({display:'none'});	
+	}
 
 	function isSpinning() {
 		$('#search').hasClass('inProgress');
@@ -28,7 +36,7 @@ window.chrome = function() {
 	 * @param string html
 	 * @param string url - base URL
 	 */
-	function renderHtml(html, url) {
+	function renderHtml(html, url, noScroll) {
 		$('base').attr('href', url);
 
 		// Horrible hack to grab the lang & dir attributes from
@@ -56,10 +64,12 @@ window.chrome = function() {
 
 		languageLinks.parseAvailableLanguages($div);
 		audioPlayer.getMediaList();
-		chrome.doScrollHack('#content');
 
-		if (window.wiktionary) {
-			window.wiktionary.onPageLoad();
+		if(!noScroll) {
+			chrome.doScrollHack('#content');
+		} else {
+			$("#content").hide();
+			$("#content").show();
 		}
 	}
 
@@ -341,16 +351,24 @@ window.chrome = function() {
 		});
 	}
 	
-	function onPageLoaded() {
+	function onPageLoaded(noScroll) {
 		// TODO: next two lines temporary to deal with legacy mediawiki instances
 		$('.section_heading').removeAttr('onclick');
 		$('.section_heading button').remove();
 		// setup default MobileFrontend behaviour (including toggle)
 		MobileFrontend.init();
-		window.scroll(0,0);
+		if(!noScroll)
+			window.scroll(0,0);
 		appHistory.addCurrentPage();
 		chrome.hideSpinner();   
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
+
+		if (window.wiktionary) {
+			window.wiktionary.onPageLoad();
+			// Hacky use of setTimeout. We have to do this so that we don't get
+			// JS errors. Changing this might break the use of Show/Hide buttons
+			setTimeout(window.wiktionary.afterPageLoad, 5);
+		}
 	}
 
 	function doScrollHack(element, leaveInPlace) {
@@ -375,6 +393,8 @@ window.chrome = function() {
 		loadFirstPage: loadFirstPage,
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
+		showListSpinner: showListSpinner,
+		hideListSpinner: hideListSpinner,
 		isSpinning: isSpinning,
 		showNotification: showNotification,
 		goBack: goBack,

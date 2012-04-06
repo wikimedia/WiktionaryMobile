@@ -3,7 +3,8 @@ window.savedPages = function() {
 	function doSave(url, title) {
 		app.navigateToPage(url, {
 			cache: true,
-			updateHistory: false
+			updateHistory: false,
+			noScroll: true
 		}).then(function() {
 			chrome.showNotification(mw.message('page-saved', title).plain());
 		});
