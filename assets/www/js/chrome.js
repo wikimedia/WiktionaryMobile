@@ -350,8 +350,8 @@ window.chrome = function() {
 
 		if (window.wiktionary) {
 			window.wiktionary.onPageLoad();
-			// This is hacky, but it appears that the response page doesn't
-			// get initialized right away
+			// Hacky use of setTimeout. We have to do this so that we don't get
+			// JS errors. Changing this might break the use of Show/Hide buttons
 			setTimeout(window.wiktionary.afterPageLoad, 5);
 		}
 	}
