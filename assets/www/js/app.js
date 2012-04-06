@@ -37,7 +37,7 @@ window.app = function() {
 			title = "Main_Page";
 		}
 		function doRequest() {
-			Page.requestFromTitle(title).done(function(page) {
+			Page.requestFromTitle(title, preferencesDB.get("language")).done(function(page) {
 				app.curPage = page;
 				chrome.renderHtml(page.toHtml(), origUrl);
 				chrome.onPageLoaded();
