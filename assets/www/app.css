@@ -271,14 +271,14 @@ button#search
 
 .listSpinner {
 	background: url(image/spinner.gif) no-repeat;
-    display: none;
-    width:24px;
+	display: none;
+	width:24px;
 	height:24px;
 	position:absolute;
 	top:50%;
 	margin-top:-12px;
-    right:50%;
-    margin-right:-12px;
+	right:50%;
+	margin-right:-12px;
 }
 
 .titlebarIcon {

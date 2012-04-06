@@ -17,6 +17,14 @@ window.chrome = function() {
 		$('.titlebar .spinner').css({display:'none'});	
 		$('#clearSearch').css({height:30});
 	}
+	
+	function showListSpinner(){
+		$('.scroller .listSpinner').css({display:'block'});
+	}
+	
+	function hideListSpinner() {
+		$(".scroller .listSpinner").css({display:'none'});	
+	}
 
 	function isSpinning() {
 		$('#search').hasClass('inProgress');
@@ -366,6 +374,8 @@ window.chrome = function() {
 		loadFirstPage: loadFirstPage,
 		showSpinner: showSpinner,
 		hideSpinner: hideSpinner,
+		showListSpinner: showListSpinner,
+		hideListSpinner: hideListSpinner,
 		isSpinning: isSpinning,
 		showNotification: showNotification,
 		goBack: goBack,

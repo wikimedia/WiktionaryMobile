@@ -11,7 +11,7 @@ window.audioPlayer = function() {
 	 *
 	 */
 	function playAudio (AudioSource) {
-		currentMedia = new Media (AudioSource, releaseMedia, hidespinner);
+		currentMedia = new Media (AudioSource, releaseMedia, chrome.hideListSpinner);
 		currentMedia.play();	
 	}
 	
@@ -23,13 +23,9 @@ window.audioPlayer = function() {
 		if (currentMedia != null){
 			currentMedia.release();
 		}
-		hidespinner();
+		chrome.hideListSpinner();
 	}
-	
-	function hidespinner () {
-		$(".scroller .listSpinner").css({display:'none'});	
-	}
-	
+
 	/**
 	 * Function gets the title of the current page, and makes call to retrieve names
 	 * and URLs of all .ogg files associated with that page, placing names into availableMedia.
@@ -170,7 +166,7 @@ window.audioPlayer = function() {
 	 *  
 	 */
 	function onAudioLinkClick() {
-		$('.scroller .listSpinner').css({display:'block'});
+		chrome.showListSpinner();
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
 		audioPlayer.playAudio(url);
