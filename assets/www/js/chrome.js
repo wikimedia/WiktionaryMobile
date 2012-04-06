@@ -65,10 +65,6 @@ window.chrome = function() {
 		languageLinks.parseAvailableLanguages($div);
 		audioPlayer.getMediaList();
 		chrome.doScrollHack('#content');
-
-		if (window.wiktionary) {
-			window.wiktionary.onPageLoad();
-		}
 	}
 
 	function showNotification(text) {
@@ -359,6 +355,13 @@ window.chrome = function() {
 		appHistory.addCurrentPage();
 		chrome.hideSpinner();   
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
+
+		if (window.wiktionary) {
+			window.wiktionary.onPageLoad();
+			// Hacky use of setTimeout. We have to do this so that we don't get
+			// JS errors. Changing this might break the use of Show/Hide buttons
+			setTimeout(window.wiktionary.afterPageLoad, 5);
+		}
 	}
 
 	function doScrollHack(element, leaveInPlace) {
