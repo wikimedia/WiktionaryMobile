@@ -1,13 +1,29 @@
 window.savedPages = function() {
 
-	function doSave(url, title) {
-		app.navigateToPage(url, {
-			cache: true,
-			updateHistory: false,
-			noScroll: true
-		}).then(function() {
-			chrome.showNotification(mw.message('page-saved', title).plain());
-		});
+	function doSave() {
+		var page = app.curPage;
+		var d = $.Deferred();
+		var replaceRes = function() {
+			// images
+			$('#main img').each(function() {
+				var em = $(this);
+				var gotLinkPath = function(linkPath) {
+					em.attr('src', 'file://' + linkPath.file);
+				}
+				var target = this.src.replace('file:', 'https:');
+				window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
+			});
+		};
+		var gotPath = function(cachedPage) {
+				replaceRes();
+				d.resolve();
+		}
+		var gotError = function(error) {
+			console.log('Error: ' + error);
+			chrome.hideSpinner();
+		}
+		window.plugins.urlCache.getCachedPathForURI(page.getAPIUrl(), gotPath, gotError);
+		return d;
 	}
 
 	function saveCurrentPage() {
@@ -25,8 +41,8 @@ window.savedPages = function() {
 						// @todo this is probably not great, remove this :)
 						alert(mw.message("saved-pages-max-warning").plain());
 					}else{
-						savedPagesDB.save({key: url, title: title});
-						savedPages.doSave(url, title);
+						savedPagesDB.save({key: app.curPage.getAPIUrl(), title: title, lang: app.curPage.lang});
+						savedPages.doSave(app.curPage.getAPIUrl(), title);
 					}
 				}
 			});
@@ -36,7 +52,10 @@ window.savedPages = function() {
 	function onSavedPageClick() {
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
-		app.navigateToPage(url, {cache: true});
+		var lang = parent.attr("data-page-lang");
+		var title = parent.attr("data-page-title");
+		chrome.showContent();
+		app.loadCachedPage(url, title, lang);
 	}
 
 	function onSavedPageDelete() {

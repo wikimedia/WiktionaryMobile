@@ -22,17 +22,12 @@ window.chrome = function() {
 		$('#search').hasClass('inProgress');
 	}
 
-	/**
-	 * Import page components from HTML string and display them in #main
-	 *
-	 * @param string html
-	 * @param string url - base URL
-	 */
-	function renderHtml(html, url, noScroll) {
-		$('base').attr('href', url);
+	function renderHtml(page) {
+
+		$('base').attr('href', page.getCanonicalUrl());
 
 		// FIXME: Do RTL and Lang
-		$("#main").html(html);
+		$("#main").html(page.toHtml());
 		//languageLinks.parseAvailableLanguages($div);
 
 		if(!noScroll) {
@@ -295,19 +290,6 @@ window.chrome = function() {
 		});
 	}
 	
-	function onPageLoaded(noScroll) {
-		// TODO: next two lines temporary to deal with legacy mediawiki instances
-		$('.section_heading').removeAttr('onclick');
-		$('.section_heading button').remove();
-		MobileFrontend.init();
-		window.scroll(0,0);
-		appHistory.addCurrentPage();
-		toggleMoveActions();
-		geo.addShowNearbyLinks();
-		chrome.hideSpinner();
-		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
-	}
-
 	function doScrollHack(element, leaveInPlace) {
 		// placeholder for iScroll etc where needed
 
@@ -334,7 +316,6 @@ window.chrome = function() {
 		showNotification: showNotification,
 		goBack: goBack,
 		goForward: goForward,
-		onPageLoaded: onPageLoaded,
 		hideOverlays: hideOverlays,
 		showContent: showContent,
 		hideContent: hideContent,
@@ -344,6 +325,7 @@ window.chrome = function() {
 		isTwoColumnView: isTwoColumnView,
 		doScrollHack: doScrollHack,
 		openExternalLink: openExternalLink,
+		toggleMoveActions: toggleMoveActions,
 		confirm: confirm
 	};
 }();

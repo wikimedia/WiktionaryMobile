@@ -14,6 +14,7 @@
 		var lead = {};
 		var sections = [];
 		var lastCollapsibleSection = {subSections: []};
+		console.log("doing for " + title);
 		$.each(rawJSON.mobileview.sections, function(index, section) {
 			if(section.id === 0) {
 				// Lead Section
@@ -53,6 +54,7 @@
 
 		request.done(function(data) {
 			var page = Page.fromRawJSON(title, data, lang);
+			p = page;
 			d.resolve(page);
 		});
 
@@ -67,6 +69,16 @@
 	Page.prototype.serialize = function() {
 		// Be more specific later on, but for now this does :)
 		return JSON.stringify(this);
+	}
+
+	// Returns an API URL that makes a request that retreives this page
+	// Should mimic params from Page.requestFromTitle
+	Page.prototype.getAPIUrl = function() {
+		return app.baseUrlForLanguage(this.lang) + '/w/api.php?format=json&action=mobileview&page=' + this.title + '&redirects=1&prop=sections&sections=all&sectionprop=level|line';
+	}
+
+	Page.prototype.getCanonicalUrl = function() {
+		return app.makeCanonicalUrl(this.lang, this.title);
 	}
 
 	function makeAPIRequest(lang, params) {

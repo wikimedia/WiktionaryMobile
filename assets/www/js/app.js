@@ -1,6 +1,7 @@
 window.app = function() {
 
-	function loadCachedPage (url, noScroll) {
+	function loadCachedPage (url, title, lang) {
+		chrome.showSpinner();
 		var d = $.Deferred();
 		var replaceRes = function() {
 
@@ -15,8 +16,11 @@ window.app = function() {
 			});
 		};
 		var gotPath = function(cachedPage) {
-			loadPage('file://' + cachedPage.file, url, noScroll).then(function() {
+			
+			$.get('file://' + cachedPage.file).then(function(data) {
+				var page = Page.fromRawJSON(title, JSON.parse(data), lang);
 				replaceRes();
+				setCurrentPage(page);
 				d.resolve();
 			});
 		}
@@ -28,30 +32,46 @@ window.app = function() {
 		return d;
 	}
 
-	function loadPage(url, origUrl, noScroll) {
+	function setCurrentPage(page) {
+		app.curPage = page;
+		chrome.renderHtml(page);
+
+		setPageActionsState(true);
+		setMenuItemState('read-in', true);
+		MobileFrontend.init();
+		window.scroll(0,0);
+		appHistory.addCurrentPage();
+		chrome.toggleMoveActions();
+		geo.addShowNearbyLinks();
+		chrome.hideSpinner();
+	}
+
+	function setErrorPage(type) {
+		if(type == 404) {
+			loadLocalPage('404.html');
+		} else {
+			loadLocalPage('error.html');
+		}
+		languageLinks.clearLanguages();
+		setMenuItemState('read-in', false);
+		setPageActionsState(false);
+		app.curPage = null;
+	}
+
+	function loadPage(url, origUrl) {
 		var d = $.Deferred();
 		origUrl = origUrl || url;
 
 		var title = app.titleForUrl(url);
 		if(title === "") {
-			title = "Main_Page";
+			title = "Main_Page"; // FIXME
 		}
 		function doRequest() {
 			Page.requestFromTitle(title, preferencesDB.get("language")).done(function(page) {
-				app.curPage = page;
-				chrome.renderHtml(page.toHtml(), origUrl);
-				chrome.onPageLoaded();
+				setCurrentPage(page);
 				d.resolve(page);
 			}).fail(function(xhr) {
-				if(xhr.status == 404) {
-					loadLocalPage('404.html');
-				} else {
-					loadLocalPage('error.html');
-				}
-				languageLinks.clearLanguages();
-				setMenuItemState('read-in', false);
-				setPageActionsState(false);
-				app.curPage = null;
+				setErrorPage(xhr.status);	
 			});
 		}
 
@@ -72,7 +92,6 @@ window.app = function() {
 		$('base').attr('href', ROOT_URL);
 		$('#main').load(page, function() {
 			$('#main').localize();
-			chrome.onPageLoaded();
 			d.resolve();
 		});
 		return d;
@@ -84,6 +103,10 @@ window.app = function() {
 
 	function baseUrlForLanguage(lang) {
 		return 'https://' + lang + '.' + PROJECTNAME + '.org';
+	}
+
+	function makeCanonicalUrl(lang, title) {
+		return baseUrlForLanguage(lang) + '/wiki/' + encodeURIComponent(title.replace(/ /g, '_'));
 	}
 
 	function setContentLanguage(language) {
@@ -126,8 +149,6 @@ window.app = function() {
 			console.log("navigating to " + url);
 			// Enable change language - might've been disabled in a prior error page
 			console.log('enabling language');
-			setPageActionsState(true);;
-			setMenuItemState('read-in', true);
 			if(options.hideCurrent) {
 				$("#content").show();
 			}			
@@ -169,6 +190,7 @@ window.app = function() {
 		setCaching: setCaching,
 		loadPage: loadPage,
 		loadCachedPage: loadCachedPage, 
+		makeCanonicalUrl: makeCanonicalUrl,
 		curPage: null
 	};
 

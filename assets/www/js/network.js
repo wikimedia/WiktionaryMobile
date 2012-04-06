@@ -5,7 +5,7 @@ window.network = function() {
 		// For some reason I'm unable to figure out after ~2 days of debugging
 		// Using jQuery ajax instead of Zepto ajax here segfaults and force closes our app
 		// So in the interest of sanity, I'll include Zepto *just for this*
-		currentXhr = Zepto.ajax({
+		currentXhr = $.ajax({
 			url: options.url,
 			data: options.data,
 			type: options.type || 'GET',
