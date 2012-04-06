@@ -35,8 +35,10 @@ var menu_items = [
 	{
 		id: 'page-actions',
 		action: function() {
+			// @fixme these are iOS-specific options and should be replaced on other platforms
 			popupMenu([
 				mw.msg('menu-savePage'),
+				mw.msg('menu-ios-open-safari'),
 				mw.msg('menu-share-twitter'),
 				mw.msg('menu-share-ril'),
 				mw.msg('menu-share-fb'),
@@ -45,14 +47,16 @@ var menu_items = [
 				if (index == 0) {
 					savedPages.saveCurrentPage();
 				} else if (index == 1) {
-					shareTwitter();
+					shareSafari();
 				} else if (index == 2) {
-					shareRIL();
+					shareTwitter();
 				} else if (index == 3) {
+					shareRIL();
+				} else if (index == 4) {
 					shareFB();
 				}
 			}, {
-				cancelButtonIndex: 4,
+				cancelButtonIndex: 5,
 				origin: this
 			});
 		}

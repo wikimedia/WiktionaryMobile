@@ -1,7 +1,7 @@
 // iOS+PhoneGap-specific setup
 
 function getAboutVersionString() {
-	return "3.1";
+	return "3.1.1";
 }
 
 (function() {
@@ -110,6 +110,13 @@ function shareTwitter() {
 			console.log("Failed :(");
 		}, title + " " + url);
 	});
+}
+
+function shareSafari() {
+	// Use the full URL; on phones we'll autodetect mobile on the other end...
+	// on iPad we'll want to actually show the desktop version through.
+	var url = app.getCurrentUrl().replace('.m.', '.');
+	chrome.openExternalLink(url);
 }
 
 chrome.showNotification = function(message) {
