@@ -190,6 +190,14 @@ window.app = function() {
 		}
 	}
 
+	function track(eventId) {
+		makeAPIRequest({
+			eventid: eventId,
+			namespacenumber: 0,
+			token: '+/', // Anonymous token
+			additional: 'android' // System info
+		}, preferencesDB.get('language'));
+	}
 	var exports = {
 		setFontSize: setFontSize,
 		setContentLanguage: setContentLanguage,
@@ -205,6 +213,7 @@ window.app = function() {
 		makeCanonicalUrl: makeCanonicalUrl,
 		makeAPIRequest: makeAPIRequest,
 		setCurrentPage: setCurrentPage,
+		track: track,
 		curPage: null
 	};
 

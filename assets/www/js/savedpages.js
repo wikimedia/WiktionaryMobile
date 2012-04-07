@@ -22,6 +22,7 @@ window.savedPages = function() {
 			console.log('Error: ' + error);
 			chrome.hideSpinner();
 		}
+		app.track('mobile.app.wikipedia.save-page');
 		window.plugins.urlCache.getCachedPathForURI(page.getAPIUrl(), gotPath, gotError);
 		return d;
 	}
