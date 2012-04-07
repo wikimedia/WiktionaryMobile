@@ -280,12 +280,10 @@ button#search
 	background: url(image/spinner.gif) no-repeat;
 	display: none;
 	width:24px;
-	height:24px;
-	position:absolute;
-	top:50%;
-	margin-top:-12px;
-	right:50%;
-	margin-right:-12px;
+	height: 24px;
+	position: absolute;
+	top: 12px;
+	right: 25px;
 }
 
 .titlebarIcon {
