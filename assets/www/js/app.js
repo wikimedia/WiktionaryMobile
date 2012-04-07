@@ -43,6 +43,7 @@ window.app = function() {
 		appHistory.addCurrentPage();
 		chrome.toggleMoveActions();
 		geo.addShowNearbyLinks();
+		chrome.showContent();
 		chrome.hideSpinner();
 	}
 
@@ -178,6 +179,17 @@ window.app = function() {
 		}
 	}
 
+	function makeAPIRequest(params, lang, method) {
+		// Force JSON
+		params.format = 'json';
+		var url = app.baseUrlForLanguage(lang) + '/w/api.php';
+		if(method === 'POST') {
+			return $.post(url, params);
+		} else {
+			return $.get(url, params);
+		}
+	}
+
 	var exports = {
 		setFontSize: setFontSize,
 		setContentLanguage: setContentLanguage,
@@ -191,6 +203,8 @@ window.app = function() {
 		loadPage: loadPage,
 		loadCachedPage: loadCachedPage, 
 		makeCanonicalUrl: makeCanonicalUrl,
+		makeAPIRequest: makeAPIRequest,
+		setCurrentPage: setCurrentPage,
 		curPage: null
 	};
 

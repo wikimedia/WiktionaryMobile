@@ -157,13 +157,13 @@
 		</script>
 
 		<script type="text/html" id="language-links-template">
-			{{#languages}}
-			<div class="listItemContainer" data-page-url="{{url}}">
+			{{#langLinks}}
+			<div class="listItemContainer" data-title="{{title}}" data-lang="{{lang}}">
 				<a class="listItem languageLink" lang="{{lang}}">
-					<span class="text">{{name}}</span>
+					<span class="text">{{title}} ({{lang}})</span>
 				</a>
 			</div>
-			{{/languages}}
+			{{/langLinks}}
 		</script>
 
 	</div>

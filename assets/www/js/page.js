@@ -14,7 +14,6 @@
 		var lead = {};
 		var sections = [];
 		var lastCollapsibleSection = {subSections: []};
-		console.log("doing for " + title);
 		$.each(rawJSON.mobileview.sections, function(index, section) {
 			if(section.id === 0) {
 				// Lead Section
@@ -43,14 +42,14 @@
 	Page.requestFromTitle = function(title, lang) {
 		var d = $.Deferred();
 
-		var request = makeAPIRequest(lang, {
+		var request = app.makeAPIRequest({
 			action: 'mobileview',
 			page: title,
 			redirects: '1',
 			prop: 'sections',
 			sections: 'all',
 			sectionprop: "level|line"
-		});
+		}, lang);
 
 		request.done(function(data) {
 			var page = Page.fromRawJSON(title, data, lang);
@@ -58,6 +57,30 @@
 			d.resolve(page);
 		});
 
+		return d;
+	}
+
+	Page.prototype.requestLangLinks = function() {
+		var d = $.Deferred();
+		if(this.langLinks) {
+			d.resolve(this.langLinks);
+			return d;
+		}
+		var that = this;
+		app.makeAPIRequest({
+			action: 'parse',
+			page: this.title,
+			prop: 'langlinks'
+		}, this.lang).done(function(data) {
+			var langLinks = [];
+			$.each(data.parse.langlinks, function(i, langLink) {
+				langLinks.push({lang: langLink.lang, title: langLink['*']});
+			});
+			that.langLinks = langLinks;
+			d.resolve(langLinks);
+		}).fail(function(data) {
+			d.reject(data);
+		});
 		return d;
 	}
 
@@ -81,10 +104,4 @@
 		return app.makeCanonicalUrl(this.lang, this.title);
 	}
 
-	function makeAPIRequest(lang, params) {
-		// Force JSON
-		params.format = 'json';
-		// FIXME: Decouple page.js from app.baseURL
-		return $.get(app.baseUrlForLanguage(lang) + '/w/api.php', params);
-	}
 })();

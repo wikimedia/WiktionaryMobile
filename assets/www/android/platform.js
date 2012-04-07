@@ -151,7 +151,7 @@ function updateMenuState() {
 	var d = $.Deferred();
 
 	var menu_handlers = {
-		'read-in': function() { languageLinks.showAvailableLanguages(); },
+		'read-in': function() { languageLinks.showLangLinks(app.curPage); },
 		'near-me': function() { geo.showNearbyArticles(); },
 		'view-history': function() { appHistory.showHistory(); } ,
 		'save-page': function() { savedPages.saveCurrentPage() },
