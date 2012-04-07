@@ -2,6 +2,7 @@ var currentHistoryIndex = -1;
 
 var pageHistory = [];
 
+window.PROTOCOL = 'https';
 window.PROJECTNAME = 'wikipedia';
 (function() {
 	var url_parts = location.href.split('/');

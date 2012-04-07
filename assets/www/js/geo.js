@@ -110,7 +110,7 @@ window.geo = function() {
 	function geoAddMarkers( data ) {
 		$.each(data.geonames, function(i, item) {
 			var summary, html,
-				url = item.wikipediaUrl.replace(/^([a-z0-9-]+)\.wikipedia\.org/, 'https://$1.m.wikipedia.org');
+				url = item.wikipediaUrl.replace(/^([a-z0-9-]+)\.wikipedia\.org/, window.PROTOCOL + '://$1.m.wikipedia.org');
 			if($.inArray(url, shownURLs) === -1) {
 				var marker = new L.Marker(new L.LatLng(item.lat, item.lng));
 				summary = item.summary || '';

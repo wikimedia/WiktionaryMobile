@@ -11,7 +11,7 @@ window.app = function() {
 				var gotLinkPath = function(linkPath) {
 					em.attr('src', 'file://' + linkPath.file);
 				}
-				var target = this.src.replace('file:', 'https:');
+				var target = this.src.replace('file:', window.PROTOCOL + ':');
 				window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 			});
 		};
@@ -103,7 +103,7 @@ window.app = function() {
 	}
 
 	function baseUrlForLanguage(lang) {
-		return 'https://' + lang + '.' + PROJECTNAME + '.org';
+		return window.PROTOCOL + '://' + lang + '.' + PROJECTNAME + '.org';
 	}
 
 	function makeCanonicalUrl(lang, title) {

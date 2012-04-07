@@ -1,5 +1,10 @@
 // iOS+PhoneGap-specific setup
 
+// set iOS 4.2 to be HTTP not HTTPS
+if(navigator.userAgent.match(/OS 4_2/g)) {
+	window.PROTOCOL = 'HTTP';
+}
+
 function getAboutVersionString() {
 	return "3.1.1";
 }
@@ -158,7 +163,7 @@ origDoScrollHack = chrome.doScrollHack;
 // @Override
 chrome.doScrollHack = function(element, leaveInPlace) {
 	// @fixme only use on iOS 4.2?
-	if (navigator.userAgent.match(/iPhone OS [34]/)) {
+	if (navigator.userAgent.match(/OS 4/)) {
 		var $el = $(element),
 			scroller = $el[0].scroller;
 		if (scroller) {
