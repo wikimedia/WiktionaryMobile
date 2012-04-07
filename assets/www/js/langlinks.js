@@ -4,6 +4,8 @@ window.languageLinks = function() {
 		var parent = $(this).parents(".listItemContainer");
 		var title = parent.attr("data-title");
 		var lang = parent.attr("data-lang");
+		chrome.hideContent();
+		chrome.showSpinner();
 		Page.requestFromTitle(title, lang).done(function(page) {
 			app.setCurrentPage(page);
 		});
