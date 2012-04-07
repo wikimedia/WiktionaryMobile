@@ -19,11 +19,11 @@ window.chrome = function() {
 	}
 	
 	function showListSpinner(){
-		$('.scroller .listSpinner').css({display:'block'});
+		$('.listSpinner').css({display:'block'});
 	}
 	
 	function hideListSpinner() {
-		$(".scroller .listSpinner").css({display:'none'});	
+		$(".listSpinner").remove();
 	}
 
 	function isSpinning() {
