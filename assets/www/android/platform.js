@@ -54,10 +54,10 @@ function setPageActionsState(state) {
 
 (function() {
 	var origFun = chrome.doScrollHack;
-	chrome.doScrollHack = function(element, leaveInPlace) {
+	chrome.doScrollHack = function(element, leaveInPlace, offset) {
 		if (!leaveInPlace) {
 			$(element).hide(); // HACK: for bug 35369
-			$(element).scrollTop(0);
+			$(element).scrollTop(offset || 0);
 			window.setTimeout(function() {
 				$(element).show();
 			}, 0);

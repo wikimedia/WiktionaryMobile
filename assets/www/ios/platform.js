@@ -161,7 +161,7 @@ chrome.showNotification = function(message) {
 
 origDoScrollHack = chrome.doScrollHack;
 // @Override
-chrome.doScrollHack = function(element, leaveInPlace) {
+chrome.doScrollHack = function(element, leaveInPlace, offset) {
 	// @fixme only use on iOS 4.2?
 	if (navigator.userAgent.match(/OS 4/)) {
 		var $el = $(element),
@@ -175,9 +175,12 @@ chrome.doScrollHack = function(element, leaveInPlace) {
 			$el[0].scroller = scroller;
 		}
 		if (!leaveInPlace) {
-			scroller.scrollTo(0, 0);
+			if(offset) {
+				offset = offset - $("#menu").height();
+			}
+			scroller.scrollTo(0, offset || 0, 200, true);
 		}
 	} else {
-		origDoScrollHack(element, leaveInPlace);
+		origDoScrollHack(element, leaveInPlace, offset);
 	}
 }
