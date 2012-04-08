@@ -2,7 +2,7 @@
 
 // set iOS 4.2 to be HTTP not HTTPS
 if(navigator.userAgent.match(/OS 4_2/g)) {
-	window.PROTOCOL = 'HTTP';
+	window.PROTOCOL = 'http';
 }
 
 function getAboutVersionString() {
