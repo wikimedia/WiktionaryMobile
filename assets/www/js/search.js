@@ -132,6 +132,7 @@ window.search = function() {
 	function onSearchResultClicked() {
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
+		$("#search").focus(); // Hides the keyboard
 		app.navigateToPage(url);
 	}
 
