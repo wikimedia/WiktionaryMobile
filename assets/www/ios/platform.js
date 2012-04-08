@@ -175,10 +175,12 @@ chrome.doScrollHack = function(element, leaveInPlace, offset) {
 			$el[0].scroller = scroller;
 		}
 		if (!leaveInPlace) {
-			if(offset) {
+			if(typeof(offset) !== 'undefined') {
 				offset = offset - $("#menu").height();
+				scroller.scrollTo(0, offset || 0, 200, true);
+			} else {
+				scroller.scrollTo(0, 0);
 			}
-			scroller.scrollTo(0, offset || 0, 200, true);
 		}
 	} else {
 		origDoScrollHack(element, leaveInPlace, offset);
