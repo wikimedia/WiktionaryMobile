@@ -258,7 +258,7 @@ window.chrome = function() {
 				$(this).bind('touchend', onTouchEnd);
 				$(this).addClass('activeEnabled');
 			});
-		}, 500);
+		}, 5);
 	}
 
 	function initContentLinkHandlers() {
