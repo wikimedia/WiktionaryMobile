@@ -62,8 +62,7 @@ window.chrome = function() {
 		// the style needs to be explicitly set for logic used in the backButton handler
 		$('#content').css('display', 'block');
 
-		// this has to be set for the window.history API to work properly
-		//PhoneGap.UsePolling = true;
+		var lastSearchTimeout = null; // Handle for timeout last time a key was pressed
 
 		preferencesDB.initializeDefaults(function() {
 			app.baseURL = app.baseUrlForLanguage(preferencesDB.get('language'));
@@ -94,10 +93,11 @@ window.chrome = function() {
 				{
 					$("#searchParam").blur();
 				}else{
-					// Needed because .val doesn't seem to update instantly
-					setTimeout(function() {
+					// Wait 750ms with no keypress before starting request
+					window.clearTimeout(lastSearchTimeout);
+					lastSearchTimeout = setTimeout(function() {
 						window.search.performSearch($("#searchParam").val(), true);
-					}, 5);
+					}, 750);
 				}
 			});
 			$("#clearSearch").bind('touchstart', function() {
