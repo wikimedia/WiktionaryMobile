@@ -61,7 +61,7 @@ header {
 	position:absolute;
 	top:52px;
 	width: 100%;
-	bottom: 52px;
+	bottom: 0px;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
@@ -80,7 +80,7 @@ header {
 #map {
 	position: absolute;
 	top: 52px;
-	bottom: 52px;
+	bottom: 0px;
 	left: 0px;
 	right: 0px;
 }
