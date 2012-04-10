@@ -80,28 +80,32 @@ chrome.addPlatformInitializer(function() {
 
 // @Override
 function showPageActions(origin) {
-	popupMenu([
+	var pageActions = [
 		mw.msg('menu-savePage'),
-		mw.msg('menu-ios-open-safari'),
-		mw.msg('menu-share-twitter'),
 		mw.msg('menu-share-ril'),
 		mw.msg('menu-share-fb'),
 		mw.msg('menu-cancel')
-	], function(value, index) {
+	];
+	// iOS less than 5 does not have Twitter. 
+	// FIXME: Refactor menu.js to be not platform specific
+	var cancelIndex = 3;
+	if(navigator.userAgent.match(/OS 5/g)) {
+		pageActions.splice(pageActions.length - 1, 0, mw.msg('menu-share-twitter'));
+		cancelIndex = 4
+	}
+	popupMenu(pageActions, function(value, index) {
 		if (index == 0) {
 			savedPages.saveCurrentPage();
 		} else if (index == 1) {
-			shareSafari();
-		} else if (index == 2) {
-			shareTwitter();
-		} else if (index == 3) {
 			shareRIL();
-		} else if (index == 4) {
+		} else if (index == 2) {
 			shareFB();
+		} else if (index == 3 && cancelIndex != 3) {
+			shareTwitter();
 		}
 	}, {
-		cancelButtonIndex: 5,
-		origin: origin
+		cancelButtonIndex: cancelIndex,
+		origin: this
 	});
 }
 
