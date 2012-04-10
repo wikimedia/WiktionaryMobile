@@ -36,10 +36,12 @@ savedPages.doSave = function(url, title) {
 	// Get the entire HTML again
 	// Hopefully this is in cache
 	// What we *really* should be doing is putting all this in an SQLite DataBase. FIXME
+	chrome.showSpinner();
 	$.get(url,
 			function(data) {
 				urlCache.saveCompleteHtml(url, data).then(function() {;
 					chrome.showNotification(mw.message('page-saved', title).plain());
+					chrome.hideSpinner();
 				});
 			}
 		 );
