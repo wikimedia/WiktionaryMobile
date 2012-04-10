@@ -97,6 +97,10 @@ header {
 	position:relative;
 }
 
+#content.scroller {
+	bottom: 52px;
+}
+
 #main {
 	padding: 8px;
 	margin-bottom: 52px;
