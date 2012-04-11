@@ -336,10 +336,6 @@ button.show {
 	display: none;
 }
 
-button.hide {
-	display: none;
-}
-
 @media screen and (-webkit-device-pixel-ratio: 2.0) {
   button.show,
   button.hide {
