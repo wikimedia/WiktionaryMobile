@@ -629,6 +629,9 @@ body[dir=rtl] #settingsList .item select {
 		background: -moz-linear-gradient(#5F5F5F 0%, #4F4F4F 100%);
 		background: -ms-linear-gradient(#5F5F5F 0%, #4F4F4F 100%);
 	}
+	#content.scroller {
+		bottom: 0px;
+	}
 	.goodscroll #content {
 		position: absolute;
 		width: auto;
