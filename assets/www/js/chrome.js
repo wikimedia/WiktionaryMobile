@@ -19,11 +19,11 @@ window.chrome = function() {
 	}
 	
 	function showListSpinner(){
-		$('.scroller .listSpinner').css({display:'block'});
+		$('.listSpinner').css({display:'block'});
 	}
 	
 	function hideListSpinner() {
-		$(".scroller .listSpinner").css({display:'none'});	
+		$(".listSpinner").remove();
 	}
 
 	function isSpinning() {
@@ -360,6 +360,7 @@ window.chrome = function() {
 		if(!noScroll)
 			window.scroll(0,0);
 		appHistory.addCurrentPage();
+		toggleMoveActions();
 		chrome.hideSpinner();   
 		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
 

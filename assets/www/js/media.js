@@ -166,7 +166,11 @@ window.audioPlayer = function() {
 	 *  
 	 */
 	function onAudioLinkClick() {
+		
+		chrome.hideListSpinner();
+		$(this).append("<div class=\"listSpinner\"></div>");
 		chrome.showListSpinner();
+		
 		var parent = $(this).parents(".listItemContainer");
 		var url = parent.attr("data-page-url");
 		audioPlayer.playAudio(url);
