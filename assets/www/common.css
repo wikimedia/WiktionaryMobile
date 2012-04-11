@@ -336,6 +336,7 @@ button.show {
 	display: none;
 }
 
+/* HACK to fix disappearing buttons on Galaxy Nexus */
 @media screen and (-webkit-device-pixel-ratio: 2.0) {
   button.show,
   button.hide {
