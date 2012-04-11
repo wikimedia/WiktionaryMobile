@@ -32,12 +32,24 @@ window.chrome = function() {
 		$("#main").html(page.toHtml());
 		//languageLinks.parseAvailableLanguages($div);
 
-		if(!noScroll) {
-			chrome.doScrollHack('#content');
-		} else {
-			$("#content").hide();
-			$("#content").show();
-		}
+		handleSectionExpansion();
+	}
+
+	function handleSectionExpansion() {
+		$(".section_heading").click(function() {
+			var sectionID = $(this).attr('data-section-id');
+			var $contentBlock = $("#content_" + sectionID);
+			if($contentBlock.attr('data-populated') != 'true') {
+				var sectionHtml = app.curPage.getSectionHtml(sectionID);
+				$contentBlock.html(sectionHtml).attr('data-populated', 'true').slideDown();
+			} else {
+				if($contentBlock.is(':visible')) {
+					$contentBlock.slideUp();
+				} else {
+					$contentBlock.slideDown();
+				}
+			}
+		});
 	}
 
 	function showNotification(text) {

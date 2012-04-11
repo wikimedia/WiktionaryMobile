@@ -130,17 +130,20 @@
             </div>
 			{{#sections}}
 			<div class="section">
-				<h{{level}} class="section_heading" id="section_{{id}}">{{{line}}}</h{{level}}>
-				<div class="content_block" id="content_{{id}}">
-                    {{{text}}} 
-                        {{#subSections}} 
-                            <h{{level}} class="section_heading" id="section_{{id}}">{{{line}}}</h{{level}}>
-                            {{{text}}} 
-                        {{/subSections}}
-                </div>
+				<h{{level}} class="section_heading" data-section-id="{{id}}">{{{line}}}</h{{level}}>
+				<div class="content_block" id="content_{{id}}"></div>
 			</div>
 			{{/sections}}
 		</script>
+
+		<script type="text/html" id="section-template">
+			{{{text}}} 
+				{{#subSections}} 
+					<h{{level}} class="section_heading" id="section_{{id}}">{{{line}}}</h{{level}}>
+					{{{text}}} 
+				{{/subSections}}
+		</script>
+
 
 		<script type="text/html" id="history-template">
 			{{#pages}}

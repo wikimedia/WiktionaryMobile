@@ -85,6 +85,18 @@
 		return d;
 	}
 
+	Page.prototype.getSectionHtml = function(id) {
+		var sectionTemplate = templates.getTemplate('section-template');
+		var foundSection = null;
+		$.each(this.sections, function(i, section) {
+			if(section.id == id) {
+				foundSection = section;
+				return;
+			}
+		});
+		return sectionTemplate.render(foundSection);
+	}
+
 	Page.prototype.toHtml = function() {
 		var contentTemplate = templates.getTemplate('content-template');
 		return contentTemplate.render(this);
