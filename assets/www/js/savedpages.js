@@ -81,13 +81,14 @@ window.savedPages = function() {
 
 	// Removes all the elements from saved pages
 	function onClearSavedPages() {
-		var answer = confirm(mw.message('clear-all-saved-pages-prompt').plain());
-		if (answer) {
-			var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
-				this.nuke();
-				chrome.showContent();
-			});
-		}
+		chrome.confirm(mw.message('clear-all-saved-pages-prompt').plain()).done(function(answer) {
+			if (answer) {
+				var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
+					this.nuke();
+					chrome.showContent();
+				});
+			}
+		});
 	}
 
 
