@@ -265,6 +265,10 @@ button#search
 	visibility: hidden;
 }
 
+#searchresults .scroller {
+	margin-bottom: 52px;
+}
+
 .badscroll #clearSearch {
 	position:fixed;
 }
