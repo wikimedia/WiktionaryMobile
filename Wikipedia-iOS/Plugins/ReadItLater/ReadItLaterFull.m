@@ -661,9 +661,15 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return( interfaceOrientation == UIInterfaceOrientationLandscapeLeft
-           || interfaceOrientation == UIInterfaceOrientationLandscapeRight
-           || interfaceOrientation == UIInterfaceOrientationPortrait);
+    // We support everything on iPads and 3 on iPhones
+    // FIXME: Read from the plist our supported interfaces, do not hardcode
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return( interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+               || interfaceOrientation == UIInterfaceOrientationLandscapeRight
+               || interfaceOrientation == UIInterfaceOrientationPortrait);
+    }
 }
 
 @end
