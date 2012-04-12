@@ -63,14 +63,11 @@ window.appSettings = function() {
 			aboutPage();
 		});
 
-		// Unbind and rebind close. Fixes 'back' next to overlay title occassionaly
-		// not working. FIXME: Find the *real* cause
-		$(".closeButton").unbind('click').bind('click', chrome.showContent);
-
 		chrome.hideOverlays();
 		chrome.hideContent();
 		$('#settings').localize().show();
 		chrome.doFocusHack();
+		chrome.doScrollHack("#settings");
 	}
 
 	function onContentLanguageChanged() {
