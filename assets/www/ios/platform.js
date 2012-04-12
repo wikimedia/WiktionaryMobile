@@ -78,6 +78,10 @@ chrome.addPlatformInitializer(function() {
 		console.log("failed FB init:(");
 	});
 	console.log("Logged in!");
+	// Fix scrolling on iOS 4.x after orient change
+	window.addEventListener('resize', function() {
+		chrome.doScrollHack('#content', true);
+	});
 });
 
 // @Override
