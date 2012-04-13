@@ -93,11 +93,11 @@ window.chrome = function() {
 				{
 					$("#searchParam").blur();
 				}else{
-					// Wait 250ms with no keypress before starting request
+					// Wait 300ms with no keypress before starting request
 					window.clearTimeout(lastSearchTimeout);
 					lastSearchTimeout = setTimeout(function() {
 						window.search.performSearch($("#searchParam").val(), true);
-					}, 250);
+					}, 300);
 				}
 			});
 			$("#clearSearch").bind('touchstart', function() {
