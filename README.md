@@ -4,7 +4,7 @@
 
 1. Setup your development environment
 2. Setup the project
-3. Pull down external dependencies via command line by running `make remotes`
+3. Run `git submodules update --init` to grab our submodule dependencies (MobileFrontend)
 
 ## Environment setup
 
@@ -44,16 +44,11 @@ Make sure to modify the sdk.dir variable in the local.properties file so that it
 
 ## FAQ
                     
-Q. I'm seeing an error that says "DroidGap cannot be resolved to a type", how do I fix it?
+Q. I can't seem to find PhoneGap 1.4.1! Where can I download it?
 
-A. You will need to add the PhoneGap library to your project, by following these steps to get the file.
-
-1. Download <a href="https://github.com/phonegap/phonegap" target="_blank">PhoneGap</a>
-2. Unzip the PhoneGap files.  
-3. Copy Android/phonegap-1.1.0.jar into the libs folder of your project.
-4. To add the phonegap-1.1.0.jar into your project, right click your Eclipse project and select Properties. 
-5. Select Java Build Path, click on the Libraries tab and then click the Add JARs button.
-6. Browse to libs/phonegap-1.1.0.jar and choose to add it.
+A: Right [here][phonegap-1-4-1-download]
 
 ## Contributing
 Please ensure you read STYLE_GUIDELINES before making any contribution to this project!
+
+[phonegap-1-4-1-download]: https://nodeload.github.com/phonegap/phonegap/zipball/1.4.1
