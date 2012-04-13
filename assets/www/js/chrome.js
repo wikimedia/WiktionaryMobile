@@ -41,13 +41,13 @@ window.chrome = function() {
 			var $contentBlock = $("#content_" + sectionID);
 			if($contentBlock.attr('data-populated') != 'true') {
 				var sectionHtml = app.curPage.getSectionHtml(sectionID);
-				$contentBlock.html(sectionHtml).attr('data-populated', 'true');
+				$contentBlock.append($(sectionHtml)).attr('data-populated', 'true');
 			} 
 
 			if($contentBlock.hasClass('openSection')) {
-				$contentBlock.hide().removeClass('openSection');
+				$contentBlock.removeClass('openSection').hide();
 			} else {
-				$contentBlock.show().addClass('openSection');
+				$contentBlock.addClass('openSection').show();
 			}
 			chrome.doScrollHack("#content", true);
 		});

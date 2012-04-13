@@ -64,6 +64,8 @@ header {
 	bottom: 0px;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
+	/* See http://stackoverflow.com/questions/7808110/css3-property-webkit-overflow-scrollingtouch-error */
+	-webkit-transform: translate3d(0, 0, 0); 
 }
 
 .badscroll .scroller {
