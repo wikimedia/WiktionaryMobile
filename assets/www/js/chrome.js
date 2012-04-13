@@ -37,11 +37,11 @@ window.chrome = function() {
 
 	function handleSectionExpansion() {
 		$(".section_heading").click(function() {
-			var sectionID = $(this).attr('data-section-id');
+			var sectionID = $(this).data('section-id');
 			var $contentBlock = $("#content_" + sectionID);
-			if($contentBlock.attr('data-populated') != 'true') {
+			if(!$contentBlock.data('populated')) {
 				var sectionHtml = app.curPage.getSectionHtml(sectionID);
-				$contentBlock.append($(sectionHtml)).attr('data-populated', 'true');
+				$contentBlock.append($(sectionHtml)).data('populated', true);
 			} 
 
 			if($contentBlock.hasClass('openSection')) {

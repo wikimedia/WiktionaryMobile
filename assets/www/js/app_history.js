@@ -51,7 +51,7 @@ window.appHistory = function() {
 
 	function onHistoryItemClicked() {
 		var parent = $(this).parents(".listItemContainer");
-		var url = parent.attr("data-page-url");
+		var url = parent.data("page-url");
 		app.navigateToPage(url);
 	}
 

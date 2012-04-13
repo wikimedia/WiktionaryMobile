@@ -2,8 +2,8 @@ window.languageLinks = function() {
 	var langs = [];
 	function onLanguageLinkClick() {
 		var parent = $(this).parents(".listItemContainer");
-		var title = parent.attr("data-title");
-		var lang = parent.attr("data-lang");
+		var title = parent.data("title");
+		var lang = parent.data("lang");
 		chrome.hideContent();
 		chrome.showSpinner();
 		Page.requestFromTitle(title, lang).done(function(page) {

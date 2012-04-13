@@ -52,17 +52,17 @@ window.savedPages = function() {
 
 	function onSavedPageClick() {
 		var parent = $(this).parents(".listItemContainer");
-		var url = parent.attr("data-page-url");
-		var lang = parent.attr("data-page-lang");
-		var title = parent.attr("data-page-title");
+		var url = parent.data("page-url");
+		var lang = parent.data("page-lang");
+		var title = parent.data("page-title");
 		chrome.showContent();
 		app.loadCachedPage(url, title, lang);
 	}
 
 	function onSavedPageDelete() {
 		var parent = $(this).parents(".listItemContainer");
-		var url = parent.attr("data-page-url");
-		var title = parent.attr("data-page-title");
+		var url = parent.data("page-url");
+		var title = parent.data("page-title");
 		deleteSavedPage(title, url);
 	}
 
