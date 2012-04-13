@@ -37,14 +37,11 @@ public class WiktionaryActivity extends DroidGap {
         if (startedFromAnotherApp) { // Specify the word display on startup
 
           // See if we came from another wiki app (and thus have to parse a url)
-          String[] recognizedUrl = { "wiktionary.org/wiki/", "wikipedia.org/wiki/" };
-          for (String urlSubstring : recognizedUrl) {
-        	  int position = wordToShow.indexOf(urlSubstring);
-        	  if (position != -1) {
-        		  wordToShow = wordToShow.substring(position + urlSubstring.length());
-        		  break;
-        	  }
-          }
+          String wikiUrl = "/wiki/";
+    	  int position = wordToShow.indexOf(wikiUrl);
+    	  if (position != -1) {
+    		  wordToShow = wordToShow.substring(position + wikiUrl.length());
+    	  }
 
           wordToShow = URLEncoder.encode(wordToShow);
           startingUrl += "?define=" + wordToShow;
