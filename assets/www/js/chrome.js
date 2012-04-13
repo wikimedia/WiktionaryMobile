@@ -45,10 +45,11 @@ window.chrome = function() {
 			} 
 
 			if($contentBlock.hasClass('openSection')) {
-				$contentBlock.slideUp().removeClass('openSection');
+				$contentBlock.hide().removeClass('openSection');
 			} else {
-				$contentBlock.slideDown().addClass('openSection');
+				$contentBlock.show().addClass('openSection');
 			}
+			chrome.doScrollHack("#content", true);
 		});
 	}
 
