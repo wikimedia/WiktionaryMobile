@@ -68,6 +68,11 @@ header {
 	-webkit-transform: translate3d(0, 0, 0); 
 }
 
+.scroller > * {
+	/* See http://stackoverflow.com/questions/7808110/css3-property-webkit-overflow-scrollingtouch-error */
+    -webkit-transform: translateZ(0px);
+}
+
 .badscroll .scroller {
 	position:relative;
 	top:52px;
