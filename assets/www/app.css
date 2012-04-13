@@ -662,8 +662,3 @@ body[dir=rtl] #settingsList .item select {
 .disabled {
 	opacity: 0.1;
 }
-
-/* FIXME: Get rid of once Max removes our Headings */
-.mw-headline {
-	display: none;
-}

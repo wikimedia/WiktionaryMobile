@@ -45,10 +45,11 @@
 		var request = app.makeAPIRequest({
 			action: 'mobileview',
 			page: title,
-			redirects: '1',
+			redirects: 'yes',
 			prop: 'sections',
 			sections: 'all',
-			sectionprop: "level|line"
+			sectionprop: 'level|line',
+			noheadings: 'yes'
 		}, lang);
 
 		request.done(function(data) {
