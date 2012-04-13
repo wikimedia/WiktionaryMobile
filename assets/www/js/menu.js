@@ -30,7 +30,7 @@ var menu_items = [
 	},
 	{
 		id: 'read-in',
-		action:  languageLinks.showAvailableLanguages
+		action:  function() { languageLinks.showLangLinks(app.curPage); }
 	},
 	{
 		id: 'page-actions',
