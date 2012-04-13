@@ -157,28 +157,13 @@ window.chrome = function() {
 
 	function loadFirstPage(disableReloadHist) {
 		chrome.showSpinner();
-		
-		// Check if the 'define' parameter is set
-		// 'define' indicates the word to display on startup
-		var word = '';
-		var getParams = window.location.search.substring(1);
-		var vars = getParams.split('&');
-		for (var i = 0; i < vars.length; i++) {
-			var pair = vars[i].split('=');
-			if (pair[0] === 'define') {
-				word = pair[1];
-				
-				if (word !== undefined && word !== null && word !== '') {
-					word = unescape(word);
-					word = word.replace(/\+/g, ' ');
 
-					var url = app.urlForTitle(word);
-					app.navigateToPage(url);
-					return;
-				}
-			}
+		var startingWord = startingWordAccessor.getStartingWord();
+		if (startingWord) {
+			app.navigateToPage(app.urlForTitle(startingWord));
+			return;
 		}
-	   
+		
 		// restore browsing to last visited page
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history){
