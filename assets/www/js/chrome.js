@@ -309,7 +309,7 @@ window.chrome = function() {
 		// Reset scroll unless asked otherwise
 		if (!leaveInPlace) {
 			// offset is relative, make it absolute
-			if(typeof(offset) !== 'undefined') {
+			if(typeof offset !== 'undefined') {
 				var absoluteOffset = $(element).scrollTop() + offset - $("#menu").height();
 				$(element).scrollTop(absoluteOffset);
 			} else {
