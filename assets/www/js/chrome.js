@@ -41,13 +41,13 @@ window.chrome = function() {
 			var $contentBlock = $("#content_" + sectionID);
 			if($contentBlock.attr('data-populated') != 'true') {
 				var sectionHtml = app.curPage.getSectionHtml(sectionID);
-				$contentBlock.html(sectionHtml).attr('data-populated', 'true').slideDown();
+				$contentBlock.html(sectionHtml).attr('data-populated', 'true');
+			} 
+
+			if($contentBlock.hasClass('openSection')) {
+				$contentBlock.slideUp().removeClass('openSection');
 			} else {
-				if($contentBlock.is(':visible')) {
-					$contentBlock.slideUp();
-				} else {
-					$contentBlock.slideDown();
-				}
+				$contentBlock.slideDown().addClass('openSection');
 			}
 		});
 	}

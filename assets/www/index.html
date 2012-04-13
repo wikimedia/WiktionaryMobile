@@ -42,7 +42,6 @@
 	
 	<!-- MobileFrontend -->
 	<script type="text/javascript" charset="utf-8" src="js/mobilefrontend.js"></script>
-	<script type="text/javascript" charset="utf-8" src="MobileFrontend/javascripts/toggle.js"></script>
 
 	<!-- platform-specific setup and overrides -->
 	<script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
@@ -51,10 +50,11 @@
 
 	<link rel="stylesheet" href="app.css" />  
 	<link rel="stylesheet" href="MobileFrontend/stylesheets/beta_common.css" />
+	<link rel="stylesheet" href="MobileFrontend/stylesheets/sections.css" />
 
 </head>
 
-<body onload="init();">
+<body onload="init();" class="togglingEnabled">
 
 	<div id="templates">
 		<script type="text/html" id="settings-page-template">
@@ -130,8 +130,8 @@
             </div>
 			{{#sections}}
 			<div class="section">
-				<h{{level}} class="section_heading" data-section-id="{{id}}">{{{line}}}</h{{level}}>
-				<div class="content_block" id="content_{{id}}"></div>
+				<h{{level}} class="section_heading" data-section-id="{{id}}">{{{line}}} <button class='show'>Blah</button></h{{level}}>
+				<div class="content_block" id="content_{{id}}"> </div>
 			</div>
 			{{/sections}}
 		</script>
