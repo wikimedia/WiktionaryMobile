@@ -52,7 +52,31 @@
 
 - (id) init
 {	
-	/* Fix problem with ios 5.0.1+ and Webkit databases described at the following urls:
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSString *currentUserAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    
+    NSDictionary *userAgentDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@%@",@"WikipediaMobile/3.1 ",currentUserAgent], @"UserAgent", nil];
+    [webView release];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:userAgentDictionary];    
+    [userAgentDictionary release];
+    
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage]; 
+    [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    [PGURLProtocol registerPGHttpURLProtocol];
+    
+    return [super init];
+}
+
+#pragma UIApplicationDelegate implementation
+
+/**
+ * This is main kick off after the app inits, the views and Settings are setup here. (preferred - iOS4 and up)
+ */
+- (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
+{   
+    /* Fix problem with ios 5.0.1+ and Webkit databases described at the following urls:
      *   https://issues.apache.org/jira/browse/CB-347
      *   https://issues.apache.org/jira/browse/CB-330
      * My strategy is to move any existing database from default paths
@@ -133,30 +157,8 @@
         NSLog(@"Fix applied for database locations?: %@", ok? @"YES":@"NO");
         [appPreferences synchronize];
     }
-    
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-    NSString *currentUserAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    
-    NSDictionary *userAgentDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@%@",@"WikipediaMobile/3.1 ",currentUserAgent], @"UserAgent", nil];
-    [webView release];
-    
-    [[NSUserDefaults standardUserDefaults] registerDefaults:userAgentDictionary];    
-    [userAgentDictionary release];
-    
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage]; 
-    [cookieStorage setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-    [PGURLProtocol registerPGHttpURLProtocol];
-    
-    return [super init];
-}
 
-#pragma UIApplicationDelegate implementation
-
-/**
- * This is main kick off after the app inits, the views and Settings are setup here. (preferred - iOS4 and up)
- */
-- (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
-{   
+    
     NSURL* url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     if (url && [url isKindOfClass:[NSURL class]]) {
         self.invokeString = [url absoluteString];
