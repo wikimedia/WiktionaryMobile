@@ -145,7 +145,7 @@ window.chrome = function() {
 			$(".closeButton").bind('click', showContent);
 
 			initContentLinkHandlers();
-			loadFirstPage();
+			chrome.loadFirstPage();
 			doFocusHack();
 		});
 
