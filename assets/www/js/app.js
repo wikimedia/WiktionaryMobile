@@ -88,6 +88,18 @@ window.app = function() {
 		return 'https://' + lang + '.m.' + PROJECTNAME + '.org';
 	}
 
+	function mobileUrlForUrl(url) {
+		if (url.indexOf(PROJECTNAME) < 0) {
+			// Invalid url, leave unchanged
+			return url;
+		}
+		if (url.indexOf('.m.' + PROJECTNAME) < 0) {
+			return (url.substring(0, url.indexOf(PROJECTNAME)) +
+				'm.' + url.substring(url.indexOf(PROJECTNAME)));
+		}
+		return url;
+	}
+
 	function setContentLanguage(language) {
 		preferencesDB.set('language', language);
 		app.baseURL = app.baseUrlForLanguage(language);
@@ -114,6 +126,9 @@ window.app = function() {
 			$("#content").hide();
 		}
 		chrome.showSpinner();
+
+		// Make sure the url is a valid mobile url
+		url = mobileUrlForUrl(url);
 
 		if (options.updateHistory) {
 			currentHistoryIndex += 1;
