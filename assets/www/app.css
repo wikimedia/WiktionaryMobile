@@ -82,7 +82,7 @@ header {
 	top: 52px;
 	bottom: 52px;
 	left: 0px;
-	right: 0px
+	right: 0px;
 }
 
 .android #map {
@@ -296,7 +296,7 @@ button#search
 		-moz-linear-gradient(#777 0%, #444 100%);
 	background: url(image/button-light-wiki.png) no-repeat,
 		-ms-linear-gradient(#777 0%, #444 100%);
-	background-size: 40px;
+	background-size: 39px 35px;
 	height: 37px;
 	width: 40px;
 	border: 1px solid #333;
