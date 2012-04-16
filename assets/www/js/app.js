@@ -76,7 +76,7 @@ window.app = function() {
 			});
 		}
 
-		if(!network.isConnected()) {
+		if(!navigator.onLine) {
 			app.setCaching(true, function() {
 				console.log("HEYA!");
 				doRequest();
@@ -182,6 +182,8 @@ window.app = function() {
 	function makeAPIRequest(params, lang, method) {
 		// Force JSON
 		params.format = 'json';
+		lang = lang || preferencesDB.get('language');
+		method = method || "GET";
 		var url = app.baseUrlForLanguage(lang) + '/w/api.php';
 		if(method === 'POST') {
 			return $.post(url, params);

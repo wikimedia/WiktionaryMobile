@@ -1,27 +1,24 @@
 window.search = function() {
+	var curReq = null; // Current search request
+	function stopCurrentRequest() {
+		if(curReq !== null) {
+			curReq.abort();
+			curReq = null;
+		}
+	}
+
 	function performSearch(term, isSuggestion) {
-		if(chrome.isSpinning()) {
-			network.stopCurrentRequest();
-			chrome.hideSpinner();
+		if(term == '') {
+			chrome.showContent();
 			return;
 		}
-		if(network.isConnected()) {
-			if(term == '') {
-				chrome.showContent();
-				return;
-			}
-			chrome.showSpinner();
+		chrome.showSpinner();
 
-			if(!isSuggestion) {
-				console.log('for term: ' + term);
-				getFullTextSearchResults(term);
-			} else {
-				getSearchResults(term);
-			}
+		if(!isSuggestion) {
+			console.log('for term: ' + term);
+			getFullTextSearchResults(term);
 		} else {
-			if(!isSuggestion)
-				chrome.showNoConnectionMessage();
-			chrome.showContent();
+			getSearchResults(term);
 		}
 	}
 
@@ -29,30 +26,22 @@ window.search = function() {
 		// perform did you mean search
 		console.log("Performing 'did you mean' search for", results[0]);
 		var requestUrl = app.baseURL + "/w/api.php";
-		var doRequest = function() {
-			network.makeRequest({
-				url: requestUrl,
-				data: {
-					action: 'query',
-					list: 'search',                
-					srsearch: results[0],
-					srinfo: 'suggestion',
-					format: 'json'
-				},
-				dataType: 'json',
-				success: function(data) {
-					var suggestion_results = data;
-					var suggestion = getSuggestionFromSuggestionResults(suggestion_results);
-					if(suggestion) {
-						getSearchResults(suggestion, 'true');
-					}
-				},
-				error: function(err) {
-					console.log("ERROR!" + JSON.stringify(err));
-				}
-			});
-		};
-		doRequest();
+		stopCurrentRequest();
+		curReq = app.makeAPIRequest({
+			action: 'query',
+			list: 'search',
+			srsearch: results[0],
+			srinfo: 'suggestion',
+			format: 'json'
+		}).done(function(data) {
+			var suggestion_results = data;
+			var suggestion = getSuggestionFromSuggestionResults(suggestion_results);
+			if(suggestion) {
+				getSearchResults(suggestion, 'true');
+			}
+		}).fail(function(err) {
+			console.log("ERROR!" + JSON.stringify(err));
+		});
 	}
 
 	function getSuggestionFromSuggestionResults(suggestion_results) {
@@ -68,65 +57,45 @@ window.search = function() {
 
 	function getFullTextSearchResults(term) {
 		var requestUrl = app.baseURL + "/w/api.php";
-		var doRequest = function() {
-			network.makeRequest({
-				url: requestUrl,
-				data: {
-					action: 'query',
-					list: 'search',
-					srsearch: term,
-					srinfo: '',
-					srprop: '',
-					format: 'json'
-				},
-				dataType: 'json',
-				success: function(data) {
-					var searchResults = [];
-					for(var i = 0; i < data.query.search.length; i++) {
-						var result = data.query.search[i];
-						searchResults.push(result.title);
-					}
-					renderResults([term, searchResults], false);
-				}, 
-				error: function(err) {
-					console.log("ERROR!" + JSON.stringify(err));
-				}
-			});
-		};
-		doRequest();
+		stopCurrentRequest();
+		var curReq = app.makeAPIRequest({
+			action: 'query',
+			list: 'search',
+			srsearch: term,
+			srinfo: '',
+			srprop: ''
+		}).done(function(data) {
+			var searchResults = [];
+			for(var i = 0; i < data.query.search.length; i++) {
+				var result = data.query.search[i];
+				searchResults.push(result.title);
+			}
+			renderResults([term, searchResults], false);
+		}).fail(function(err) { 
+			console.log("ERROR!" + JSON.stringify(err));
+		});
 	}
 
 	function getSearchResults(term, didyoumean) {
-		console.log('Getting search results for term:', term);
-		var requestUrl = app.baseURL + "/w/api.php";
-		var doRequest = function() {
-			network.makeRequest({
-				url: requestUrl,
-				data: {
-					action: 'opensearch',
-					search: term,
-					format: 'json',
-				},
-				dataType: 'json',
-				success: function(data) {
-					var results = data;
-					if(results[1].length === 0) { 
-						console.log("No results for", term);
-						getDidYouMeanResults(results);
-					} else {
-						if(typeof didyoumean == 'undefined') {
-							didyoumean = false;
-						}
-						console.log('Did you mean?', didyoumean);
-						renderResults(results, didyoumean);
-					}
-				},
-				error: function(err) {
-					console.log("ERROR!" + JSON.stringify(err));
+		stopCurrentRequest();
+		var curReq = app.makeAPIRequest({
+			action: 'opensearch',
+			search: term
+		}).done(function(data) {
+			var results = data;
+			if(results[1].length === 0) { 
+				console.log("No results for", term);
+				getDidYouMeanResults(results);
+			} else {
+				if(typeof didyoumean == 'undefined') {
+					didyoumean = false;
 				}
-			});
-		};
-		doRequest();
+				console.log('Did you mean?', didyoumean);
+				renderResults(results, didyoumean);
+			}
+		}).fail(function(err) {
+			console.log("ERROR!" + JSON.stringify(err));
+		});
 	}
 
 	function onSearchResultClicked() {
