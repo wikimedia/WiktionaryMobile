@@ -158,10 +158,14 @@ window.chrome = function() {
 	function loadFirstPage(disableReloadHist) {
 		chrome.showSpinner();
 
-		var startingWord = startingWordAccessor.getStartingWord();
-		if (startingWord) {
-			app.navigateToPage(app.urlForTitle(startingWord));
-			return;
+		// Need to guard against an NPE when we call this from outside of Android
+		// TODO: Make this extensible to other platforms. We may need a plugin
+		if (startingWordAccessor && startingWordAccessor.getStartingWord) {
+			var startingWord = startingWordAccessor.getStartingWord();
+			if (startingWord) {
+				app.navigateToPage(app.urlForTitle(startingWord));
+				return;
+			}
 		}
 		
 		// restore browsing to last visited page
