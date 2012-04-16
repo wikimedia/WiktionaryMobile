@@ -182,10 +182,6 @@ function updateMenuState() {
 	return d;
 };
 
-network.isConnected = function()  {
-	return navigator.network.connection.type == Connection.NONE ? false : true;
-}
-
 //@Override
 app.setCaching = function(enabled, success) {
 	console.log('setting cache to ' + enabled);
