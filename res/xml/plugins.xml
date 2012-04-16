@@ -18,6 +18,7 @@
     <plugin name="Capture" value="com.phonegap.Capture"/>
     <plugin name="SimpleMenu" value="com.phonegap.menu.AppMenu"/> 
     <plugin name="SelectTextPlugin" value="org.wiktionary.SelectTextPlugin" />
+	<plugin name="AndroidVersionPlugin" value="org.wiktionary.AndroidVersionPlugin" />
     <plugin name="SoftKeyBoard" value="com.phonegap.softkeyboard.SoftKeyBoard" />
     <plugin name="ToastPlugin" value="com.chariotsolutions.toast.plugin.ToastPlugin" />
     <plugin name="Share" value="com.schaul.plugins.share.Share"/>
