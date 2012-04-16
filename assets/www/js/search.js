@@ -1,5 +1,6 @@
 window.search = function() {
 	var curReq = null; // Current search request
+
 	function stopCurrentRequest() {
 		if(curReq !== null) {
 			curReq.abort();
@@ -25,7 +26,6 @@ window.search = function() {
 	function getDidYouMeanResults(results) {
 		// perform did you mean search
 		console.log("Performing 'did you mean' search for", results[0]);
-		var requestUrl = app.baseURL + "/w/api.php";
 		stopCurrentRequest();
 		curReq = app.makeAPIRequest({
 			action: 'query',
@@ -56,9 +56,8 @@ window.search = function() {
 	}
 
 	function getFullTextSearchResults(term) {
-		var requestUrl = app.baseURL + "/w/api.php";
 		stopCurrentRequest();
-		var curReq = app.makeAPIRequest({
+		curReq = app.makeAPIRequest({
 			action: 'query',
 			list: 'search',
 			srsearch: term,
@@ -78,7 +77,7 @@ window.search = function() {
 
 	function getSearchResults(term, didyoumean) {
 		stopCurrentRequest();
-		var curReq = app.makeAPIRequest({
+		curReq = app.makeAPIRequest({
 			action: 'opensearch',
 			search: term
 		}).done(function(data) {
@@ -132,7 +131,6 @@ window.search = function() {
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
 		$("#doFullSearch").click(onDoFullSearch);
-		console.log($("#doFullSearch").html());
 		chrome.hideSpinner();
 		chrome.hideOverlays();
 		if(!chrome.isTwoColumnView()) {
