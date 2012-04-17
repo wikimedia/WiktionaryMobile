@@ -39,7 +39,8 @@ window.app = function() {
 		setPageActionsState(true);
 		setMenuItemState('read-in', true);
 		MobileFrontend.init();
-		chrome.doScrollHack("#content");
+		chrome.setupScrolling("#content");
+		chrome.scrollTo("#content", 0);
 		appHistory.addCurrentPage();
 		chrome.toggleMoveActions();
 		geo.addShowNearbyLinks();

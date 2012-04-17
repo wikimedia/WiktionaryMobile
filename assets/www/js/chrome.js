@@ -321,6 +321,15 @@ window.chrome = function() {
 		}
 	}
 
+	function setupScrolling(selector) {
+		// Setup iScroll4 in iOS 4.x. 
+		// NOOP otherwise
+	}
+
+	function scrollTo(selector, posY) {
+		$(selector).scrollTop(posY);
+	}
+
 	function openExternalLink(url) {
 		// This seems to successfully launch the native browser, and works
 		// both with the stock browser and Firefox as user's default browser
@@ -348,6 +357,8 @@ window.chrome = function() {
 		doScrollHack: doScrollHack,
 		openExternalLink: openExternalLink,
 		toggleMoveActions: toggleMoveActions,
-		confirm: confirm
+		confirm: confirm,
+		setupScrolling: setupScrolling,
+		scrollTo: scrollTo
 	};
 }();
