@@ -73,6 +73,33 @@ chrome.addPlatformInitializer(function() {
 	console.log("Logged in!");
 });
 
+// @Override
+function showPageActions(origin) {
+	popupMenu([
+		mw.msg('menu-savePage'),
+		mw.msg('menu-ios-open-safari'),
+		mw.msg('menu-share-twitter'),
+		mw.msg('menu-share-ril'),
+		mw.msg('menu-share-fb'),
+		mw.msg('menu-cancel')
+	], function(value, index) {
+		if (index == 0) {
+			savedPages.saveCurrentPage();
+		} else if (index == 1) {
+			shareSafari();
+		} else if (index == 2) {
+			shareTwitter();
+		} else if (index == 3) {
+			shareRIL();
+		} else if (index == 4) {
+			shareFB();
+		}
+	}, {
+		cancelButtonIndex: 5,
+		origin: origin
+	});
+}
+
 function shareFB() {
 	var url = app.getCurrentUrl().replace('.m.', '.');
 	var title = app.getCurrentTitle();
