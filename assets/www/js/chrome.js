@@ -44,10 +44,13 @@ window.chrome = function() {
 				$contentBlock.append($(sectionHtml)).data('populated', true);
 			} 
 
+			// TODO: this should use the same code as MFE
 			if($contentBlock.hasClass('openSection')) {
 				$contentBlock.removeClass('openSection').hide();
+				$contentBlock.prev('.section_heading').removeClass('openSection');
 			} else {
 				$contentBlock.addClass('openSection').show();
+				$contentBlock.prev('.section_heading').addClass('openSection');
 			}
 			chrome.doScrollHack("#content", true);
 		});
