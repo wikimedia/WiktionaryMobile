@@ -58,6 +58,15 @@ function setPageActionsState(state) {
 	};
 })();
 
+chrome.scrollTo = function(selector, posY) {
+	console.log("MODIFIED!");
+	var $el = $(selector);
+	$el.hide().scrollTop(posY);
+	window.setTimeout(function() {
+		$el.show();
+	}, 0);
+}
+
 chrome.addPlatformInitializer(function() {
 	$('html').addClass('android');
 	if (navigator.userAgent.match(/Android 2\./)) {
