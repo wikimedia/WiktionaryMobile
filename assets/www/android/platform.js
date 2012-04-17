@@ -129,6 +129,18 @@ function selectText() {
     PhoneGap.exec(null, null, 'SelectTextPlugin', 'selectText', []);
 }
 
+function setSelectTextHidden(){
+	
+	if (androidVersion){
+		if (parseInt(androidVersion) > 10){
+			console.log("hiding select text");
+			$("#selectTextCmd").remove();
+		}
+	}
+	
+}
+
+
 function sharePage() {
 	// @fixme if we don't have a page loaded, this menu item should be disabled...
 	var title = app.getCurrentTitle(),
