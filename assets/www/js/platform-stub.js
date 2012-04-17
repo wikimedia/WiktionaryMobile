@@ -43,7 +43,7 @@ if(platform === 'android') {
 	}
 }
 
-document.documentElement.className += ' ' + detectorClasses.join(' ');
+$('html').addClass(detectorClasses.join(' '));
 
 if (platform == 'unknown') {
 	// Assume we're a generic web browser.
