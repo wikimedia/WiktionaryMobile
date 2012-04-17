@@ -108,9 +108,12 @@ header {
 	bottom: 52px;
 }
 
+.nativeMenu #content.scroller {
+	bottom: 0;
+}
+
 #main {
 	padding: 8px;
-	margin-bottom: 52px;
 }
 
 .listItemContainer {
@@ -272,8 +275,16 @@ button#search
 	visibility: hidden;
 }
 
+#about-page-content,
+#main,
 #searchresults .scroller {
 	margin-bottom: 52px;
+}
+
+.nativeMenu #main,
+.nativeMenu #about-page-content,
+.nativeMenu #searchresults .scroller {
+	margin-bottom: 0;
 }
 
 .badscroll #clearSearch {
@@ -455,7 +466,6 @@ body[dir=rtl] #settingsList .item select {
 
 #about-page-content {
 	text-align: center;	
-	margin-bottom: 52px;
 }
 
 #about-version {
@@ -642,6 +652,11 @@ body[dir=rtl] #settingsList .item select {
 	}
 	#content.scroller {
 		bottom: 0px;
+	}
+	#about-page-content,
+	#main,
+	#searchresults .scroller {
+		margin-bottom: 0;
 	}
 	.goodscroll #content {
 		position: absolute;
