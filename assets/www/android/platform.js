@@ -118,7 +118,7 @@ function selectText() {
 
 function setSelectTextHidden(){
 	
-	if (androidVersion != null){
+	if (androidVersion){
 		if (parseInt(androidVersion) > 10){
 			console.log("hiding select text");
 			$("#selectTextCmd").remove();
