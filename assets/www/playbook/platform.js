@@ -51,3 +51,31 @@ function showListActions(origin) {
 		origin: origin
 	});
 }
+
+// Default emulation, override with platform-specific menu popups
+function popupMenu(items, callback, options) {
+	options = $.extend({destructiveButtonIndex: null, cancelButtonIndex: null}, options || {});
+
+	var $bg = $('<div class="playbook-menu-bg"></div>').appendTo('body'),
+		$sheet = $('<div class="playbook-menu"></div>').appendTo('body');
+	$bg.click(function() {
+		$sheet.remove();
+		$bg.remove();
+	});
+	$.each(items, function(index, label) {
+		if (index === options.cancelButtonIndex) {
+			return;
+		}
+		var $button = $('<button>')
+			.text(label)
+			.appendTo($sheet)
+			.click(function() {
+				$sheet.remove();
+				$bg.remove();
+				callback(label, index);
+			});
+		if (index === options.destructiveButtonIndex) {
+			$button.addClass('destructive');
+		}
+	});
+}
