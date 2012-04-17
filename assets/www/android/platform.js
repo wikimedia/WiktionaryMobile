@@ -36,14 +36,7 @@ function getAboutVersionString() {
 })();
 
 function setMenuItemState(action, state) {
-	window.plugins.SimpleMenu.setMenuState(action, state,
-			function(success) {
-				console.log("Successfully set menu item state");
-			},
-			function(fail) {
-				console.log("Failed to set menu item state");
-			}
-		);
+	window.plugins.SimpleMenu.setMenuState(action, state, function() {}, function() {});
 }
 
 function setPageActionsState(state) {
