@@ -52,7 +52,7 @@ window.chrome = function() {
 				$contentBlock.addClass('openSection').show();
 				$contentBlock.prev('.section_heading').addClass('openSection');
 			}
-			chrome.doScrollHack("#content", true);
+			chrome.setupScrolling("#content");
 		});
 	}
 
