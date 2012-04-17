@@ -100,7 +100,7 @@ window.chrome = function() {
 				$('#mainHeader, #menu').localize();
 			});
 			l10n.initLanguages();
-
+			
 			setSelectTextHidden();
 			toggleMoveActions();
 

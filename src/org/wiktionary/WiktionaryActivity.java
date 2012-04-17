@@ -36,6 +36,8 @@ public class WiktionaryActivity extends DroidGap {
           startingUrl += "?define=" + URLEncoder.encode(wordToShow);
         }
 
+        appView.addJavascriptInterface(android.os.Build.VERSION.SDK_INT,
+                "androidVersion");
         super.loadUrl(startingUrl);
         
         String currentUA = this.appView.getSettings().getUserAgentString();
