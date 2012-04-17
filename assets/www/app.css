@@ -684,3 +684,13 @@ body[dir=rtl] #settingsList .item select {
 .disabled {
 	opacity: 0.1;
 }
+
+.android .scroller > * {
+	-webkit-transform: none; /* in ICS this causes lots of problems with scrolling */
+}
+
+/* in ICS it is not possible to scroll vertically across tables so undo rule in beta_common.css */
+.android table {
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: none;
+}
