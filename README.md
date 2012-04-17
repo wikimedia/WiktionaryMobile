@@ -18,11 +18,9 @@
 ### Setting up the project
 
 #### in web browser
-You can run the app within your desktop browser under certain situations. Safari works out of the box
-Before doing so you must initialise all submodules
+You can run the app within your desktop browser under certain situations. Safari works out of the box. You can also use Google Chrome by passing it the `--disable-web-security` flag. Navigate to `index.html` to start the app. 
 
-	git submodule init
-	git submodule update
+Note: Running in the web browser is currently not a supported environment. Things might break
 
 #### without Eclipse
 
