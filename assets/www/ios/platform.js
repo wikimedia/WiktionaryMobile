@@ -80,7 +80,7 @@ chrome.addPlatformInitializer(function() {
 	console.log("Logged in!");
 	// Fix scrolling on iOS 4.x after orient change
 	window.addEventListener('resize', function() {
-		chrome.doScrollHack('#content', true);
+		chrome.setupScrolling('#content');
 	});
 });
 

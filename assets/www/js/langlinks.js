@@ -24,7 +24,8 @@ window.languageLinks = function() {
 			$('#langlinks').localize().show();
 
 			chrome.doFocusHack();
-			chrome.doScrollHack('#langlinks .scroller');
+			chrome.setupScrolling('#langlinks .scroller');
+			chrome.scrollTo('#langlinks .scroller', 0);
 		});
 	}
 

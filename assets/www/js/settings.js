@@ -71,7 +71,8 @@ window.appSettings = function() {
 		// work consistently on iOS. According to warnings by brion in index.html, 
 		// doing this line will break things in Android. Need to test before merge.
 		// Also, I've no clue why this fixes the back button not working, but it does
-		chrome.doScrollHack("#settings");
+		chrome.setupScrolling("#settings");
+		chrome.scrollTo("#settings", 0);
 	}
 
 	function onContentLanguageChanged() {

@@ -289,11 +289,7 @@ window.chrome = function() {
 			event.preventDefault();
 
 			if (href.substr(0, 1) == '#') {
-				// A local hashlink; simulate?
 				// FIXME: Replace with Reference reveal
-				var offset = $(href).offset().top;
-				chrome.doScrollHack("#content", false, offset); // $("#content").scrollTop() + offset - $("#mainHeader").height());
-				return false;
 			}
 
 			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {

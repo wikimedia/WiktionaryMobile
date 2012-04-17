@@ -66,7 +66,8 @@ window.appHistory = function() {
 				chrome.hideContent();
 				$('#history').localize().show();
 				chrome.doFocusHack();
-				chrome.doScrollHack('#history .scroller');
+				chrome.setupScrolling('#history .scroller');
+				chrome.scrollTo('#history .scroller', 0);
 			});
 		});
 
