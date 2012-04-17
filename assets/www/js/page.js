@@ -8,7 +8,7 @@
 
 	Page.deserialize = function(data) {
 		return new Page(data.title, data.lead, data.sections);
-	}
+	};
 
 	Page.fromRawJSON = function(title, rawJSON, lang) {
 		var lead = {};
@@ -37,7 +37,7 @@
 
 		});
 		return new Page(title, lead, sections, lang);
-	}
+	};
 
 	Page.requestFromTitle = function(title, lang) {
 		var d = $.Deferred();
@@ -59,7 +59,7 @@
 		});
 
 		return d;
-	}
+	};
 
 	Page.prototype.requestLangLinks = function() {
 		var d = $.Deferred();
@@ -83,7 +83,7 @@
 			d.reject(data);
 		});
 		return d;
-	}
+	};
 
 	Page.prototype.getSectionHtml = function(id) {
 		var sectionTemplate = templates.getTemplate('section-template');
@@ -95,26 +95,26 @@
 			}
 		});
 		return sectionTemplate.render(foundSection);
-	}
+	};
 
 	Page.prototype.toHtml = function() {
 		var contentTemplate = templates.getTemplate('content-template');
 		return contentTemplate.render(this);
-	}
+	};
 
 	Page.prototype.serialize = function() {
 		// Be more specific later on, but for now this does :)
 		return JSON.stringify(this);
-	}
+	};
 
 	// Returns an API URL that makes a request that retreives this page
 	// Should mimic params from Page.requestFromTitle
 	Page.prototype.getAPIUrl = function() {
 		return app.baseUrlForLanguage(this.lang) + '/w/api.php?format=json&action=mobileview&page=' + this.title + '&redirects=1&prop=sections&sections=all&sectionprop=level|line';
-	}
+	};
 
 	Page.prototype.getCanonicalUrl = function() {
 		return app.makeCanonicalUrl(this.lang, this.title);
-	}
+	};
 
 })();
