@@ -17,6 +17,13 @@
                             
 ### Setting up the project
 
+#### in web browser
+You can run the app within your desktop browser under certain situations. Safari works out of the box
+Before doing so you must initialise all submodules
+
+	git submodule init
+	git submodule update
+
 #### without Eclipse
 
 There is a highly useful tutorial @
