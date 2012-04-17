@@ -276,7 +276,8 @@ button#search
 }
 
 #about-page-content,
-#main,
+.android-2 .nativeMenu #main,
+.android-2 .nativeMenu #searchresults .scroller,
 #searchresults .scroller {
 	margin-bottom: 52px;
 }
