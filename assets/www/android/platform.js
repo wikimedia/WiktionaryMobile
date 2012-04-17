@@ -59,12 +59,13 @@ function setPageActionsState(state) {
 })();
 
 chrome.scrollTo = function(selector, posY) {
-	console.log("MODIFIED!");
-	var $el = $(selector);
-	$el.hide().scrollTop(posY);
-	window.setTimeout(function() {
-		$el.show();
-	}, 0);
+	// scrollTop seems completely useless on Android 2.x, unable to test so far on 4.x
+	// This is the exact opposite of what we noticed on 2.x in the previous release
+	// I've no idea why this is happening, neither does jon
+	// This gives us what we want for now, but now for non-zero scroll positions the
+	// behavior of scrollTo might be different across platforms. 
+	// Ugh. Will bite us when we try to do hashlinks.
+	window.scrollTo(0, posY);
 }
 
 chrome.addPlatformInitializer(function() {
