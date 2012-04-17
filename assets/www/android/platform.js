@@ -45,19 +45,6 @@ function setPageActionsState(state) {
 	setMenuItemState("share-page", state);
 }
 
-(function() {
-	var origFun = chrome.doScrollHack;
-	chrome.doScrollHack = function(element, leaveInPlace, offset) {
-		if (!leaveInPlace) {
-			$(element).hide(); // HACK: for bug 35369
-			$(element).scrollTop(offset || 0);
-			window.setTimeout(function() {
-				$(element).show();
-			}, 0);
-		}
-	};
-})();
-
 chrome.scrollTo = function(selector, posY) {
 	// scrollTop seems completely useless on Android 2.x, unable to test so far on 4.x
 	// This is the exact opposite of what we noticed on 2.x in the previous release

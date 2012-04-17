@@ -302,21 +302,6 @@ window.chrome = function() {
 		});
 	}
 	
-	function doScrollHack(element, leaveInPlace, offset) {
-		// placeholder for iScroll etc where needed
-
-		// Reset scroll unless asked otherwise
-		if (!leaveInPlace) {
-			// offset is relative, make it absolute
-			if(typeof offset !== 'undefined') {
-				var absoluteOffset = $(element).scrollTop() + offset - $("#menu").height();
-				$(element).scrollTop(absoluteOffset);
-			} else {
-				$(element).scrollTop(0);
-			}
-		}
-	}
-
 	function setupScrolling(selector) {
 		// Setup iScroll4 in iOS 4.x. 
 		// NOOP otherwise
@@ -350,7 +335,6 @@ window.chrome = function() {
 		showNoConnectionMessage: showNoConnectionMessage,
 		doFocusHack: doFocusHack,
 		isTwoColumnView: isTwoColumnView,
-		doScrollHack: doScrollHack,
 		openExternalLink: openExternalLink,
 		toggleMoveActions: toggleMoveActions,
 		confirm: confirm,

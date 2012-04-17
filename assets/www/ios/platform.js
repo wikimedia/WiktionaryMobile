@@ -195,31 +195,3 @@ if(navigator.userAgent.match(/OS 4/)) {
 		}
 	};
 }
-
-origDoScrollHack = chrome.doScrollHack;
-// @Override
-chrome.doScrollHack = function(element, leaveInPlace, offset) {
-	// @fixme only use on iOS 4.2?
-	if (navigator.userAgent.match(/OS 4/)) {
-		var $el = $(element),
-			scroller = $el[0].scroller;
-		if (scroller) {
-			window.setTimeout(function() {
-				scroller.refresh();
-			}, 0);
-		} else {
-			scroller = new iScroll($el[0]);
-			$el[0].scroller = scroller;
-		}
-		if (!leaveInPlace) {
-			if(typeof offset !== 'undefined') {
-				offset = offset - $("#menu").height();
-				scroller.scrollTo(0, offset || 0, 200, true);
-			} else {
-				scroller.scrollTo(0, 0);
-			}
-		}
-	} else {
-		origDoScrollHack(element, leaveInPlace, offset);
-	}
-}
