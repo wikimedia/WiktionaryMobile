@@ -46,10 +46,10 @@ window.chrome = function() {
 
 			// TODO: this should use the same code as MFE
 			if($contentBlock.hasClass('openSection')) {
-				$contentBlock.removeClass('openSection').hide();
+				$contentBlock.removeClass('openSection');
 				$contentBlock.prev('.section_heading').removeClass('openSection');
 			} else {
-				$contentBlock.addClass('openSection').show();
+				$contentBlock.addClass('openSection');
 				$contentBlock.prev('.section_heading').addClass('openSection');
 			}
 			chrome.setupScrolling("#content");
