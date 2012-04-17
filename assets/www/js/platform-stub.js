@@ -44,7 +44,6 @@ if(platform === 'android') {
 }
 
 document.documentElement.className += ' ' + detectorClasses.join(' ');
-alert(document.documentElement.className);
 
 if (platform == 'unknown') {
 	// Assume we're a generic web browser.
