@@ -130,15 +130,14 @@ function selectText() {
 }
 
 function setSelectTextHidden(){
-	PhoneGap.exec(
-		function (result){
-			if (result > 10){
-				console.log("hiding select text");
-				//I want to hide, not just disable
-				setMenuItemState("select-text", false); 
-			}
-		}, 
-		null, 'AndroidVersionPlugin', 'getVersion', []);
+	
+	if (androidVersion != null){
+		if (parseInt(androidVersion) > 10){
+			console.log("hiding select text");
+			$("#selectTextCmd").remove();
+		}
+	}
+	
 }
 
 
