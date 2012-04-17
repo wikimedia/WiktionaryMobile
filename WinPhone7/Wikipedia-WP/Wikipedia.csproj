@@ -87,17 +87,47 @@
     <Content Include="..\..\assets\www\image\spr.png">
       <Link>www\image\spr.png</Link>
     </Content>
+    <Content Include="..\..\assets\www\index.html">
+      <Link>www\index.html</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\chrome.js">
+      <Link>www\js\chrome.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\hogan.min.js">
+      <Link>www\js\hogan.min.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\iscroll.js">
+      <Link>www\js\iscroll.js</Link>
+    </Content>
     <Content Include="..\..\assets\www\js\jquery-1.7.1.min.js">
       <Link>www\js\jquery-1.7.1.min.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\langlinks.js">
+      <Link>www\js\langlinks.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\menu.js">
+      <Link>www\js\menu.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\mobilefrontend.js">
+      <Link>www\js\mobilefrontend.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\network.js">
+      <Link>www\js\network.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\preferences.js">
+      <Link>www\js\preferences.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\savedpages.js">
+      <Link>www\js\savedpages.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\templates.js">
+      <Link>www\js\templates.js</Link>
     </Content>
     <Content Include="..\..\assets\www\messages\messages-en.properties">
       <Link>www\messages\messages-en.properties</Link>
     </Content>
     <Content Include="..\..\assets\www\js\app_history.js">
       <Link>www\js\app_history.js</Link>
-    </Content>
-    <Content Include="..\..\assets\www\js\bookmarks.js">
-      <Link>www\js\bookmarks.js</Link>
     </Content>
     <Content Include="..\..\assets\www\js\app.js">
       <Link>www\js\app.js</Link>
@@ -141,9 +171,6 @@
     <Content Include="GapLib\WP7GapClassLib.dll" />
     <Content Include="GapSourceDictionary.xml" />
     <Content Include="ManifestProcessor.js" />
-    <Content Include="www\index.html">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="..\..\assets\www\winphone\phonegap-1.2.0.js">
       <Link>www\winphone\phonegap-1.2.0.js</Link>
     </Content>

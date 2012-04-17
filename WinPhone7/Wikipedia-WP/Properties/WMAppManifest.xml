@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{4cef72e1-1956-4a7a-b50f-85c1dd96903d}" Title="GapAppStarter1" 
-       RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  
-       Author="GapAppStarter1 author" 
-       Description="PhoneGap for Windows Phone 7" 
-       Publisher="GapAppStarter1">
-    
+  <App xmlns="" ProductID="{4cef72e1-1956-4a7a-b50f-85c1dd96903d}" Title="Wikipedia" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GapAppStarter1 author" Description="PhoneGap for Windows Phone 7" Publisher="GapAppStarter1">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />
@@ -19,10 +14,9 @@
       <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
-      <Capability Name="ID_CAP_CONTACTS"/>
-      <Capability Name="ID_CAP_ISV_CAMERA"/>
+      <Capability Name="ID_CAP_CONTACTS" />
+      <Capability Name="ID_CAP_ISV_CAMERA" />
     </Capabilities>
-    
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
     </Tasks>
@@ -31,7 +25,7 @@
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>GapAppStarter1</Title>
+          <Title>Wikipedia</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>
