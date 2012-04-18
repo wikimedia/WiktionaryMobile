@@ -67,7 +67,7 @@ header {
 }
 
 /* fix for cleaner scrolling on non-android see commit f130a3e3c823309d3e5d8cc57d202e67f3631fce */
-.ios .scroller {
+.iOS .scroller {
 	-webkit-overflow-scrolling: touch;
 	overflow-y: auto;
 }
