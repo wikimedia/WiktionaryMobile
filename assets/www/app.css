@@ -686,6 +686,7 @@ body[dir=rtl] #settingsList .item select {
 	opacity: 0.1;
 }
 
+.android .scroller, /* without this content not visible until a scroll event */
 .android .scroller > * {
 	-webkit-transform: none; /* in ICS this causes lots of problems with scrolling */
 }
