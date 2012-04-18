@@ -118,11 +118,25 @@ function selectText() {
 
 function setSelectTextHidden(){
 	
-	if (androidVersion){
-		if (parseInt(androidVersion) > 10){
-			console.log("hiding select text");
-			$("#selectTextCmd").remove();
+	//OS and device-specific modifications to the menu 
+	var oVersion = parseFloat(device.version.substr(0,3)); //we only need the first 3 chars of the OS version code
+	
+	console.log(device.version.substr(0,3) + " " + oVersion);
+	
+	if (device.platform == "Android"){
+		//remove select text on android 3.0 and newer
+		if (oVersion >= 3.0){
+			console.log("removing select text");
+			$('#selectTextCmd').remove();
+
 		}
+		//removes listen-in on android 2.2 and older
+		//replaces with history for now
+		else if (oVersion <= 2.2){
+			console.log("removing listen in");
+			$('#soundCmd').replaceWith($('#historyCmd'));
+		}
+
 	}
 	
 }
