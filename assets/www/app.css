@@ -62,7 +62,6 @@ header {
 	top:52px;
 	width: 100%;
 	bottom: 0px;
-	overflow-y: auto;
 	/* See http://stackoverflow.com/questions/7808110/css3-property-webkit-overflow-scrollingtouch-error */
 	-webkit-transform: translate3d(0, 0, 0); 
 }
@@ -70,6 +69,7 @@ header {
 /* fix for cleaner scrolling on non-android see commit f130a3e3c823309d3e5d8cc57d202e67f3631fce */
 .ios .scroller {
 	-webkit-overflow-scrolling: touch;
+	overflow-y: auto;
 }
 
 .scroller > * {
@@ -698,4 +698,12 @@ body[dir=rtl] #settingsList .item select {
 .android table {
 	overflow-x: hidden;
 	-webkit-overflow-scrolling: none;
+}
+
+/* on ios lets no rely on scrollable divs and instead make use of position fixed which is supported
+the scrollable divs seem to be giving us lots of bugs
+*/
+.android-4 header {
+	position: fixed;
+	z-index: 2;
 }
