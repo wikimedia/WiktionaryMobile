@@ -51,7 +51,7 @@ window.appHistory = function() {
 
 	function onHistoryItemClicked() {
 		var parent = $(this).parents(".listItemContainer");
-		var url = parent.attr("data-page-url");
+		var url = parent.data("page-url");
 		app.navigateToPage(url);
 	}
 
@@ -66,7 +66,8 @@ window.appHistory = function() {
 				chrome.hideContent();
 				$('#history').localize().show();
 				chrome.doFocusHack();
-				chrome.doScrollHack('#history .scroller');
+				chrome.setupScrolling('#history .scroller');
+				chrome.scrollTo('#history .scroller', 0);
 			});
 		});
 

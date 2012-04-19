@@ -30,57 +30,18 @@ var menu_items = [
 	},
 	{
 		id: 'read-in',
-		action:  languageLinks.showAvailableLanguages
+		action:  function() { languageLinks.showLangLinks(app.curPage); }
 	},
 	{
 		id: 'page-actions',
 		action: function() {
-			// @fixme these are iOS-specific options and should be replaced on other platforms
-			popupMenu([
-				mw.msg('menu-savePage'),
-				mw.msg('menu-ios-open-safari'),
-				mw.msg('menu-share-twitter'),
-				mw.msg('menu-share-ril'),
-				mw.msg('menu-share-fb'),
-				mw.msg('menu-cancel')
-			], function(value, index) {
-				if (index == 0) {
-					savedPages.saveCurrentPage();
-				} else if (index == 1) {
-					shareSafari();
-				} else if (index == 2) {
-					shareTwitter();
-				} else if (index == 3) {
-					shareRIL();
-				} else if (index == 4) {
-					shareFB();
-				}
-			}, {
-				cancelButtonIndex: 5,
-				origin: this
-			});
+			showPageActions(this);
 		}
 	},
 	{
 		id: 'list-actions',
 		action: function() {
-			popupMenu([
-				mw.msg('menu-nearby'),
-				mw.msg('menu-savedPages'),
-				mw.msg('menu-history'),
-				mw.msg('menu-cancel')
-			], function(val, index) {
-				if (index == 0) {
-					geo.showNearbyArticles();
-				} else if (index == 1) {
-					savedPages.showSavedPages();
-				} else if (index == 2) {
-					appHistory.showHistory();
-				}
-			}, {
-				cancelButtonIndex: 3,
-				origin: this
-			});
+			showListActions(this);
 		}
 	},
 	{
@@ -90,6 +51,7 @@ var menu_items = [
 ];
 
 function updateMenuState() {
+	$('body').removeClass('nativeMenu');
 	$('#menu').remove();
 	var $menu = $('<div>');
 	$menu
@@ -137,3 +99,36 @@ function popupMenu(items, callback, options) {
 	});
 }
 
+function showPageActions(origin) {
+	popupMenu([
+		mw.msg('menu-savePage'),
+		mw.msg('menu-open-browser'),
+		mw.msg('menu-cancel')
+	], function(value, index) {
+		if (index == 0) {
+			savedPages.saveCurrentPage();
+		} else if (index == 1) {
+			shareBrowser();
+		}
+	}, {
+		cancelButtonIndex: 5,
+		origin: origin
+	});
+}
+
+function showListActions(origin) {
+	popupMenu([
+		mw.msg('menu-savedPages'),
+		mw.msg('menu-history'),
+		mw.msg('menu-cancel')
+	], function(val, index) {
+		if (index == 0) {
+			savedPages.showSavedPages();
+		} else if (index == 1) {
+			appHistory.showHistory();
+		}
+	}, {
+		cancelButtonIndex: 2,
+		origin: origin
+	});
+}

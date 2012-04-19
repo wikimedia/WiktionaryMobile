@@ -23,12 +23,18 @@ window.preferencesDB = {
 		'language': function(success) {
 			this.language = l10n.normalizeLanguageCode(preferencesDB.get('locale').replace(/-.*?$/, ''));
 			success();
+		},
+		// UI Language. Only for UI. Not replaced, unlike language
+		'uiLanguage': function(success) {
+			this.uiLanguage = l10n.normalizeLanguageCode(preferencesDB.get('locale').replace(/-.*?$/, ''));
+			success();
 		}
 	},
 	// Ordering of default initializer functions to call
 	defaultFunctions: [
 		'locale',
-		'language'
+		'language',
+		'uiLanguage'
 		],
 	// Serializes default function calls
 	initializeDefaults: function(success) {

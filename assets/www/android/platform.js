@@ -36,14 +36,7 @@ function getAboutVersionString() {
 })();
 
 function setMenuItemState(action, state) {
-	window.plugins.SimpleMenu.setMenuState(action, state,
-			function(success) {
-				console.log("Successfully set menu item state");
-			},
-			function(fail) {
-				console.log("Failed to set menu item state");
-			}
-		);
+	window.plugins.SimpleMenu.setMenuState(action, state, function() {}, function() {});
 }
 
 function setPageActionsState(state) {
@@ -53,18 +46,15 @@ function setPageActionsState(state) {
 	setMenuItemState("word-of-the-day", state);
 }
 
-(function() {
-	var origFun = chrome.doScrollHack;
-	chrome.doScrollHack = function(element, leaveInPlace) {
-		if (!leaveInPlace) {
-			$(element).hide(); // HACK: for bug 35369
-			$(element).scrollTop(0);
-			window.setTimeout(function() {
-				$(element).show();
-			}, 0);
-		}
-	};
-})();
+chrome.scrollTo = function(selector, posY) {
+	// scrollTop seems completely useless on Android 2.x, unable to test so far on 4.x
+	// This is the exact opposite of what we noticed on 2.x in the previous release
+	// I've no idea why this is happening, neither does jon
+	// This gives us what we want for now, but now for non-zero scroll positions the
+	// behavior of scrollTo might be different across platforms. 
+	// Ugh. Will bite us when we try to do hashlinks.
+	window.scrollTo(0, posY);
+}
 
 chrome.addPlatformInitializer(function() {
 	$('html').addClass('android');
@@ -164,7 +154,7 @@ function updateMenuState() {
 	var d = $.Deferred();
 
 	var menu_handlers = {
-		'read-in': function() { languageLinks.showAvailableLanguages(); },
+		'read-in': function() { languageLinks.showLangLinks(app.curPage); },
 		'view-history': function() { appHistory.showHistory(); } ,
 		'save-page': function() { savedPages.saveCurrentPage() },
 		'view-saved-pages': function() { savedPages.showSavedPages(); },
@@ -195,10 +185,6 @@ function updateMenuState() {
 									   });
 	return d;
 };
-
-network.isConnected = function()  {
-	return navigator.network.connection.type == Connection.NONE ? false : true;
-}
 
 //@Override
 app.setCaching = function(enabled, success) {

@@ -1,0 +1,3 @@
+[submodule "assets/www/MobileFrontend"]
+	path = assets/www/MobileFrontend
+	url = https://gerrit.wikimedia.org/r/p/mediawiki/extensions/MobileFrontend.git

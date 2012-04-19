@@ -30,47 +30,39 @@ window.chrome = function() {
 		$('#search').hasClass('inProgress');
 	}
 
-	/**
-	 * Import page components from HTML string and display them in #main
-	 *
-	 * @param string html
-	 * @param string url - base URL
-	 */
-	function renderHtml(html, url, noScroll) {
-		$('base').attr('href', url);
+	function renderHtml(page) {
 
-		// Horrible hack to grab the lang & dir attributes from
-		// the target page's <html> without parsing the rest
-		var stub = html.match(/<html ([^>]+)>/i, '$1')[1],
-			$stubdiv = $('<div ' + stub + '></div>'),
-			lang = $stubdiv.attr('lang'),
-			dir = $stubdiv.attr('dir');
+		$('base').attr('href', page.getCanonicalUrl());
 
-		var trimmed = html.replace(/<body[^>]+>(.*)<\/body/i, '$1');
-
-		var selectors = ['#content>*', '#copyright'],
-			$target = $('#main'),
-			$div = $(trimmed);
-
-		$target
-			.empty()
-			.attr('lang', lang)
-			.attr('dir', dir);
-		$.each(selectors, function(i, sel) {
-			var con = $div.find(sel).remove();
-			con.appendTo($target);
-
-		});
-
-		languageLinks.parseAvailableLanguages($div);
+		if(l10n.isLangRTL(page.lang)) {
+			$("#main").attr('dir', 'rtl');
+		}
+		$("#main").html(page.toHtml());
+		//languageLinks.parseAvailableLanguages($div);
 		audioPlayer.getMediaList();
 
-		if(!noScroll) {
-			chrome.doScrollHack('#content');
-		} else {
-			$("#content").hide();
-			$("#content").show();
-		}
+		handleSectionExpansion();
+	}
+
+	function handleSectionExpansion() {
+		$(".section_heading").click(function() {
+			var sectionID = $(this).data('section-id');
+			var $contentBlock = $("#content_" + sectionID);
+			if(!$contentBlock.data('populated')) {
+				var sectionHtml = app.curPage.getSectionHtml(sectionID);
+				$contentBlock.append($(sectionHtml)).data('populated', true);
+			} 
+
+			// TODO: this should use the same code as MFE
+			if($contentBlock.hasClass('openSection')) {
+				$contentBlock.removeClass('openSection');
+				$contentBlock.prev('.section_heading').removeClass('openSection');
+			} else {
+				$contentBlock.addClass('openSection');
+				$contentBlock.prev('.section_heading').addClass('openSection');
+			}
+			chrome.setupScrolling("#content");
+		});
 	}
 
 	function showNotification(text) {
@@ -95,19 +87,14 @@ window.chrome = function() {
 		// the style needs to be explicitly set for logic used in the backButton handler
 		$('#content').css('display', 'block');
 
-		// this has to be set for the window.history API to work properly
-		//PhoneGap.UsePolling = true;
+		var lastSearchTimeout = null; // Handle for timeout last time a key was pressed
 
 		preferencesDB.initializeDefaults(function() {
 			app.baseURL = app.baseUrlForLanguage(preferencesDB.get('language'));
 			/* Split language string about '-' */
-			var lan_arr = (preferencesDB.get('locale')).split('-');
-			var lan_arr_nor = l10n.normalizeLanguageCode(lan_arr[0]);
-			var spe_arr = new Array("arc","ar","ckb","dv","fa","he","khw","ks","mzn","pnb","ps","sd","ug","ur","yi");
-			for(a=0;a < spe_arr.length;a++){
-				if(lan_arr_nor==spe_arr[a]){
-					$("body").attr('dir','rtl');
-				}
+			console.log('language is ' + preferencesDB.get('uiLanguage'));
+			if(l10n.isLangRTL(preferencesDB.get('uiLanguage'))) {
+				$("body").attr('dir', 'rtl');
 			}
 
 			// Do localization of the initial interface
@@ -132,10 +119,11 @@ window.chrome = function() {
 				{
 					$("#searchParam").blur();
 				}else{
-					// Needed because .val doesn't seem to update instantly
-					setTimeout(function() {
+					// Wait 300ms with no keypress before starting request
+					window.clearTimeout(lastSearchTimeout);
+					lastSearchTimeout = setTimeout(function() {
 						window.search.performSearch($("#searchParam").val(), true);
-					}, 5);
+					}, 300);
 				}
 			});
 			$("#clearSearch").bind('touchstart', function() {
@@ -203,12 +191,14 @@ window.chrome = function() {
 		hideOverlays();
 		$('#mainHeader').show();
 		$('#content').show();
+		$("#menu").show();
 	}
 
 	function hideContent() {
 		$('#mainHeader').hide();
 		if(!isTwoColumnView()) {
 			$('#content').hide();
+			$("#menu").hide();
 		} else {
 			$('html').addClass('overlay-open');
 		}
@@ -310,7 +300,7 @@ window.chrome = function() {
 				$(this).bind('touchend', onTouchEnd);
 				$(this).addClass('activeEnabled');
 			});
-		}, 500);
+		}, 5);
 	}
 
 	function initContentLinkHandlers() {
@@ -320,15 +310,10 @@ window.chrome = function() {
 				url = target.href,             // expanded from relative links for us
 				href = $(target).attr('href'); // unexpanded, may be relative
 
-			// Stop the link from opening in the iframe directly...
 			event.preventDefault();
 
 			if (href.substr(0, 1) == '#') {
-				// A local hashlink; simulate?
 				// FIXME: Replace with Reference reveal
-				var offset = $(href).offset().top;
-				$("#content").scrollTop($("#content").scrollTop() + offset - $("#mainHeader").height());
-				return;
 			}
 
 			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
@@ -341,34 +326,13 @@ window.chrome = function() {
 		});
 	}
 	
-	function onPageLoaded(noScroll) {
-		// TODO: next two lines temporary to deal with legacy mediawiki instances
-		$('.section_heading').removeAttr('onclick');
-		$('.section_heading button').remove();
-		// setup default MobileFrontend behaviour (including toggle)
-		MobileFrontend.init();
-		if(!noScroll)
-			window.scroll(0,0);
-		appHistory.addCurrentPage();
-		toggleMoveActions();
-		chrome.hideSpinner();   
-		console.log('currentHistoryIndex '+currentHistoryIndex + ' history length '+pageHistory.length);
-
-		if (window.wiktionary) {
-			window.wiktionary.onPageLoad();
-			// Hacky use of setTimeout. We have to do this so that we don't get
-			// JS errors. Changing this might break the use of Show/Hide buttons
-			setTimeout(window.wiktionary.afterPageLoad, 5);
-		}
+	function setupScrolling(selector) {
+		// Setup iScroll4 in iOS 4.x. 
+		// NOOP otherwise
 	}
 
-	function doScrollHack(element, leaveInPlace) {
-		// placeholder for iScroll etc where needed
-
-		// Reset scroll unless asked otherwise
-		if (!leaveInPlace) {
-			$(element).scrollTop(0);
-		}
+	function scrollTo(selector, posY) {
+		$(selector).scrollTop(posY);
 	}
 
 	function openExternalLink(url) {
@@ -390,7 +354,6 @@ window.chrome = function() {
 		showNotification: showNotification,
 		goBack: goBack,
 		goForward: goForward,
-		onPageLoaded: onPageLoaded,
 		hideOverlays: hideOverlays,
 		showContent: showContent,
 		hideContent: hideContent,
@@ -398,9 +361,11 @@ window.chrome = function() {
 		showNoConnectionMessage: showNoConnectionMessage,
 		doFocusHack: doFocusHack,
 		isTwoColumnView: isTwoColumnView,
-		doScrollHack: doScrollHack,
 		openExternalLink: openExternalLink,
+		toggleMoveActions: toggleMoveActions,
 		confirm: confirm,
         loadWordoftheDay: loadWordoftheDay
+		setupScrolling: setupScrolling,
+		scrollTo: scrollTo
 	};
 }();

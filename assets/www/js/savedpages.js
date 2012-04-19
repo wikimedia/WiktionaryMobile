@@ -1,13 +1,30 @@
 window.savedPages = function() {
 
-	function doSave(url, title) {
-		app.navigateToPage(url, {
-			cache: true,
-			updateHistory: false,
-			noScroll: true
-		}).then(function() {
-			chrome.showNotification(mw.message('page-saved', title).plain());
-		});
+	function doSave() {
+		var page = app.curPage;
+		var d = $.Deferred();
+		var replaceRes = function() {
+			// images
+			$('#main img').each(function() {
+				var em = $(this);
+				var gotLinkPath = function(linkPath) {
+					em.attr('src', 'file://' + linkPath.file);
+				}
+				var target = this.src.replace('file:', 'https:');
+				window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
+			});
+		};
+		var gotPath = function(cachedPage) {
+				replaceRes();
+				d.resolve();
+		}
+		var gotError = function(error) {
+			console.log('Error: ' + error);
+			chrome.hideSpinner();
+		}
+		app.track('mobile.app.wikipedia.save-page');
+		window.plugins.urlCache.getCachedPathForURI(page.getAPIUrl(), gotPath, gotError);
+		return d;
 	}
 
 	function saveCurrentPage() {
@@ -25,8 +42,8 @@ window.savedPages = function() {
 						// @todo this is probably not great, remove this :)
 						alert(mw.message("saved-pages-max-warning").plain());
 					}else{
-						savedPagesDB.save({key: url, title: title});
-						savedPages.doSave(url, title);
+						savedPagesDB.save({key: app.curPage.getAPIUrl(), title: title, lang: app.curPage.lang});
+						savedPages.doSave(app.curPage.getAPIUrl(), title);
 					}
 				}
 			});
@@ -35,14 +52,17 @@ window.savedPages = function() {
 
 	function onSavedPageClick() {
 		var parent = $(this).parents(".listItemContainer");
-		var url = parent.attr("data-page-url");
-		app.navigateToPage(url, {cache: true});
+		var url = parent.data("page-url");
+		var lang = parent.data("page-lang");
+		var title = parent.data("page-title");
+		chrome.showContent();
+		app.loadCachedPage(url, title, lang);
 	}
 
 	function onSavedPageDelete() {
 		var parent = $(this).parents(".listItemContainer");
-		var url = parent.attr("data-page-url");
-		var title = parent.attr("data-page-title");
+		var url = parent.data("page-url");
+		var title = parent.data("page-title");
 		deleteSavedPage(title, url);
 	}
 
@@ -61,13 +81,14 @@ window.savedPages = function() {
 
 	// Removes all the elements from saved pages
 	function onClearSavedPages() {
-		var answer = confirm(mw.message('clear-all-saved-pages-prompt').plain());
-		if (answer) {
-			var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
-				this.nuke();
-				chrome.showContent();
-			});
-		}
+		chrome.confirm(mw.message('clear-all-saved-pages-prompt').plain()).done(function(answer) {
+			if (answer) {
+				var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
+					this.nuke();
+					chrome.showContent();
+				});
+			}
+		});
 	}
 
 
@@ -83,7 +104,8 @@ window.savedPages = function() {
 				$('#savedPages').localize().show();
 				chrome.hideContent();
 				chrome.doFocusHack();
-				chrome.doScrollHack('#savedPages .scroller');
+				chrome.setupScrolling('#savedPages .scroller');
+				chrome.scrollTo('#savedPages .scroller', 0);
 			});
 		});
 

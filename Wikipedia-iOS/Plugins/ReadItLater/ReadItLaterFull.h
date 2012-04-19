@@ -78,80 +78,53 @@
 @property (nonatomic) BOOL releaseAfterSpinnerCancel;	
 
 
-	// METHODS FOR SAVING A LINK TO READ IT LATER
-	// for documentation, screenshots, examples, see http://readitlaterlist.com/api_iphone/
-	// Additional methods are available in the ReadItLaterLite class (see the note at the top of this file for more)
-	
-	// SIMPLEST:	Let RIL do all of the work for you
-	// REQUIRES: ReadItLaterViews.h
-	// --------------------------------------------
-	// Save a link to Read It Later, RIL will show displays over your UI notifying user of progress/result
-	
-	// Arguments:
-	// url - NSURL - link to the page to save
-	// title - NSString - (optional nil) - title of the page you are saving.  For the best user experience please provide a unique way of identifying the link.  
-	//									If you have the page loaded in a UIWebView, you can retrieve the title with: 
-	//									NSString *title = [yourWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
-	// username - NSString - (optional) - if not provided, this needs to be stored in NSUserDefaults in the key 'ReadItLaterUsername'
-	// password - NSString - (optional) - if not provided, this needs to be stored in NSUserDefaults in the key 'ReadItLaterPassword'
-	
-	// Example of use: [ReadItLater save:[NSURL urlWithString:@"http://google.com"] title:@"Google"]
-	
-	+(void)save:(NSURL *)url title:(NSString *)title;
-	+(void)save:(NSURL *)url title:(NSString *)title username:(NSString *)username password:(NSString *)password;
-	
-	
-	
-	
-	/* ----------------------------------- */
-	
-	// METHODS FOR HANDLING LOGINS/SIGNUPS
-	// for documentation, screenshots, examples, see http://readitlaterlist.com/api_iphone/
-	// Additional methods are available in the ReadItLaterLite class (see the note at the top of this file for more)
-	
-	
-	// SIMPLIEST:	A screen will popup over your application (without leaving it) and allow the user to signup or login.  
-	// REQUIRES: ReadItLaterViews.h
-	// ------------------------
-	// Allow RIL signups and logins with one single line of code without leaving your app!
-	// After the user successfully logs in (or signs up), their username and password will be stored in NSUserDefaults with the following keys:
-	// NSUserDefault key: @"ReadItLaterUsername" - user's username
-	// NSUserDefault key: @"ReadItLaterPassword" - user's password
-	
-	// Arguments: none
-	
-	+(void)showUserSetup;
-	
-	
-	
-	// you shouldn't need to call this function directly
-	+(void)showUserSetupSaveWhenDone:(NSURL *)url title:(NSString *)title;
+// METHODS FOR SAVING A LINK TO READ IT LATER
+// for documentation, screenshots, examples, see http://readitlaterlist.com/api_iphone/
+// Additional methods are available in the ReadItLaterLite class (see the note at the top of this file for more)
+
+// SIMPLEST:	Let RIL do all of the work for you
+// REQUIRES: ReadItLaterViews.h
+// --------------------------------------------
+// Save a link to Read It Later, RIL will show displays over your UI notifying user of progress/result
+
+// Arguments:
+// url - NSURL - link to the page to save
+// title - NSString - (optional nil) - title of the page you are saving.  For the best user experience please provide a unique way of identifying the link.  
+//									If you have the page loaded in a UIWebView, you can retrieve the title with: 
+//									NSString *title = [yourWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
+// username - NSString - (optional) - if not provided, this needs to be stored in NSUserDefaults in the key 'ReadItLaterUsername'
+// password - NSString - (optional) - if not provided, this needs to be stored in NSUserDefaults in the key 'ReadItLaterPassword'
+
+// Example of use: [ReadItLater save:[NSURL urlWithString:@"http://google.com"] title:@"Google"]
+
++(void)save:(NSURL *)url title:(NSString *)title;
++(void)save:(NSURL *)url title:(NSString *)title username:(NSString *)username password:(NSString *)password;
+
+
+
+
+/* ----------------------------------- */
+
+// METHODS FOR HANDLING LOGINS/SIGNUPS
+// for documentation, screenshots, examples, see http://readitlaterlist.com/api_iphone/
+// Additional methods are available in the ReadItLaterLite class (see the note at the top of this file for more)
+
+
+// SIMPLIEST:	A screen will popup over your application (without leaving it) and allow the user to signup or login.  
+// REQUIRES: ReadItLaterViews.h
+// ------------------------
+// Allow RIL signups and logins with one single line of code without leaving your app!
+// After the user successfully logs in (or signs up), their username and password will be stored in NSUserDefaults with the following keys:
+// NSUserDefault key: @"ReadItLaterUsername" - user's username
+// NSUserDefault key: @"ReadItLaterPassword" - user's password
+
+// Arguments: none
+
++(void)showUserSetup;
+
+
+
+// you shouldn't need to call this function directly
++(void)showUserSetupSaveWhenDone:(NSURL *)url title:(NSString *)title;
 
 @end
-
-
-
-
-// -- These are base methods that build the interface and probably should not be implemented directly -- //
-
-@interface ReadItLaterFull (Private)
-
--(id)openSetup:(NSURL *)url title:(NSString *)title;
--(void)showMessage:(NSString *)message loading:(BOOL)loading;
--(BOOL)handleError:(NSString *)error;
--(void)hideMessageAndReleaseWhenDone:(BOOL)release;
--(void)showSpinnerCancelButton;
--(void)done;
-
-@end
-
-
-
-@interface ReadItLaterFullView (Private)
-
--(void)changeToSignupFinishedScreen;
--(UITextField *)createFormField;
-
-@end
-
-
