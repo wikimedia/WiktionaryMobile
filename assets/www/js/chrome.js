@@ -364,7 +364,7 @@ window.chrome = function() {
 		openExternalLink: openExternalLink,
 		toggleMoveActions: toggleMoveActions,
 		confirm: confirm,
-        loadWordoftheDay: loadWordoftheDay
+        loadWordoftheDay: loadWordoftheDay,
 		setupScrolling: setupScrolling,
 		scrollTo: scrollTo
 	};
