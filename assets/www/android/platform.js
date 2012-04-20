@@ -140,6 +140,8 @@ function setSelectTextHidden(){
 		//remove select text on android 3.0 and newer
 		if (oVersion >= 3.0){
 			console.log("removing select text");
+			$('<command type=\"command\" id=\"soundCmd\" icon=\"optionListen.png\" disabled=\"true\" action=\"listen-sound\" />').insertBefore($('#sharePageCmd'));
+			$('<command type=\"command\" id=\"WOTDCmd\" disabled=\"false\" action=\"word-of-the-day\" />').insertAfter($('#settingsCmd'));
 			$('#selectTextCmd').remove();
 
 		}
@@ -147,7 +149,7 @@ function setSelectTextHidden(){
 		//replaces with history for now
 		else if (oVersion <= 2.2){
 			console.log("removing listen in");
-			$('#soundCmd').replaceWith($('#historyCmd'));
+			$('<command type=\"command\" id=\"historyCmd\" icon=\"optionViewHistory.png\" disabled=\"false\" action=\"view-history\" />').insertBefore($('#sharePageCmd'));
 		}
 
 	}
