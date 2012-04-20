@@ -14,28 +14,8 @@ public class WiktionaryActivity extends DroidGap {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
           
-        // Check if we were started by another app's Intent
-        boolean startedFromAnotherApp = false;
-        String wordToShow = null;
-        
-        Intent startingIntent = this.getIntent();
-        if (startingIntent != null) {
-          Bundle extraParams = startingIntent.getExtras();
-          if (extraParams != null) {
-            String value = extraParams.getString(Intent.EXTRA_TEXT);
-            if (value != null && !value.trim().equals("")) {
-              startedFromAnotherApp = true;
-              wordToShow = value;
-            }
-          }
-        }
-
         String startingUrl = "file:///android_asset/www/index.html";
         
-        if (startedFromAnotherApp) { // Specify the word display on startup
-          startingUrl += "?define=" + URLEncoder.encode(wordToShow);
-        }
-
         appView.addJavascriptInterface(android.os.Build.VERSION.SDK_INT,
                 "androidVersion");
         super.loadUrl(startingUrl);
