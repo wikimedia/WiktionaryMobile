@@ -124,9 +124,9 @@ window.search = function() {
 					key: app.urlForTitle(results[0]),
 					title: results[0]
 				};
-				$("#resultList").html(template.render({'pages': searchResults, 'didyoumean': didyoumean_link}));
+				$("#resultList").empty().html(template.render({'pages': searchResults, 'didyoumean': didyoumean_link}));
 			} else {
-				$("#resultList").html(template.render({'pages': searchResults}));
+				$("#resultList").empty().html(template.render({'pages': searchResults}));
 			}
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
@@ -141,7 +141,6 @@ window.search = function() {
 		chrome.doFocusHack();
 		$('#searchresults').localize().show();
 		chrome.setupScrolling('#searchresults .scroller');
-		chrome.scrollTo('#searchresults .scroller', 0);
 	}
 
 	return {

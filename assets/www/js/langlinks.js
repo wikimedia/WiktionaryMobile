@@ -16,7 +16,7 @@ window.languageLinks = function() {
 		page.requestLangLinks().done(function(langLinks) {
 			console.log(langLinks);
 			var template = templates.getTemplate("language-links-template");
-			$("#langList").html(template.render({langLinks: langLinks}));
+			$("#langList").empty().html(template.render({langLinks: langLinks}));
 			$(".languageLink").click(onLanguageLinkClick);
 			chrome.hideOverlays();
 			chrome.hideContent();
@@ -25,7 +25,6 @@ window.languageLinks = function() {
 
 			chrome.doFocusHack();
 			chrome.setupScrolling('#langlinks .scroller');
-			chrome.scrollTo('#langlinks .scroller', 0);
 		});
 	}
 

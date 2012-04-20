@@ -59,7 +59,7 @@ window.appHistory = function() {
 		var template = templates.getTemplate('history-template');
 		var historyDB = new Lawnchair({name:"historyDB"}, function() {
 			this.all(function(history) {
-				$('#historyList').html(template.render({'pages': history.reverse()}));
+				$('#historyList').empty().html(template.render({'pages': history.reverse()}));
 				$(".historyItem").click(onHistoryItemClicked);
 				$("#history .cleanButton").unbind('click', onClearHistory).bind('click', onClearHistory);
 				chrome.hideOverlays();
@@ -67,7 +67,6 @@ window.appHistory = function() {
 				$('#history').localize().show();
 				chrome.doFocusHack();
 				chrome.setupScrolling('#history .scroller');
-				chrome.scrollTo('#history .scroller', 0);
 			});
 		});
 
