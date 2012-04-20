@@ -130,16 +130,14 @@ function selectText() {
 }
 
 function setSelectTextHidden(){
-	
 	//OS and device-specific modifications to the menu 
-	var oVersion = parseFloat(device.version.substr(0,3)); //we only need the first 3 chars of the OS version code
-	
-	console.log(device.version.substr(0,3) + " " + oVersion);
 	
 	if (device.platform == "Android"){
+		var oVersion = parseFloat(device.version.substr(0,3)); //we only need the first 3 chars of the OS version code
+		
 		//remove select text on android 3.0 and newer
 		if (oVersion >= 3.0){
-			console.log("removing select text");
+			console.log("over Android 3.0: removing select text");
 			$('#selectTextCmd').remove();
 
 		}
@@ -148,11 +146,7 @@ function setSelectTextHidden(){
 		//replaces with history for now
 		if (oVersion <= 2.2){
 			console.log("under Android 2.2: replacing listen in");
-			$('<command type=\"command\" id=\"historyCmd\" icon=\"optionViewHistory.png\" disabled=\"false\" action=\"view-history\" />').insertBefore($('#sharePageCmd'));
-		}else{
-			console.log("over Android 2.2: inserting listen in");
-			$('<command type=\"command\" id=\"soundCmd\" icon=\"optionListen.png\" disabled=\"true\" action=\"listen-sound\" />').insertBefore($('#sharePageCmd'));
-			$('<command type=\"command\" id=\"historyCmd\" icon=\"optionViewHistory.png\" disabled=\"false\" action=\"view-history\" />').insertAfter($('#forwardCmd'));
+			$('#soundCmd').replaceWith($('#historyCmd'));
 		}
 
 	}
