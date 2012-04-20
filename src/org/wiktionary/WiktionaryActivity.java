@@ -15,9 +15,7 @@ public class WiktionaryActivity extends DroidGap {
         super.onCreate(savedInstanceState);
           
         String startingUrl = "file:///android_asset/www/index.html";
-        
-        appView.addJavascriptInterface(android.os.Build.VERSION.SDK_INT,
-                "androidVersion");
+
         super.loadUrl(startingUrl);
         
         String currentUA = this.appView.getSettings().getUserAgentString();
