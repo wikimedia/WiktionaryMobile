@@ -116,7 +116,7 @@ window.chrome = function() {
 			});
 			l10n.initLanguages();
 			
-			setSelectTextHidden();
+			setMenuVersion();
 			updateMenuState();
 			toggleMoveActions();
 
