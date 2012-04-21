@@ -116,7 +116,7 @@ function selectText() {
     PhoneGap.exec(null, null, 'SelectTextPlugin', 'selectText', []);
 }
 
-function setSelectTextHidden(){
+function setMenuVersion(){
 	//OS and device-specific modifications to the menu 
 	
 	if (device.platform == "Android"){

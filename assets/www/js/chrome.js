@@ -101,7 +101,7 @@ window.chrome = function() {
 			});
 			l10n.initLanguages();
 			
-			setSelectTextHidden();
+			setMenuVersion();
 			toggleMoveActions();
 
 			$(".titlebarIcon").bind('touchstart', function() {
