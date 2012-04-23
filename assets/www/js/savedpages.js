@@ -103,7 +103,6 @@ window.savedPages = function() {
 				chrome.hideOverlays();
 				$('#savedPages').localize().show();
 				chrome.hideContent();
-				chrome.doFocusHack();
 				chrome.setupScrolling('#savedPages .scroller');
 			});
 		});

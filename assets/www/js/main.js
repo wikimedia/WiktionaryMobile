@@ -49,7 +49,6 @@ function aboutPage() {
 			$("#about-page-overlay").hide();
 			appSettings.showSettings();
 		});
-		chrome.doFocusHack();
 		chrome.setupScrolling('#about-page-overlay .scroller');
 	});
 }

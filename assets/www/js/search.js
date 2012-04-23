@@ -138,9 +138,8 @@ window.search = function() {
 		} else {
 			$("html").addClass('overlay-open');
 		}
-		chrome.doFocusHack();
 		$('#searchresults').localize().show();
-		chrome.setupScrolling('#searchresults .scroller');
+		chrome.setupScrolling('#resultList');
 	}
 
 	return {
