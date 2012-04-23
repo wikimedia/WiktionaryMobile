@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 
 
-namespace GapAppStarter1
+namespace CordovaStarter1
 {
     public partial class MainPage : PhoneApplicationPage
     {
