@@ -96,7 +96,7 @@ window.savedPages = function() {
 		var template = templates.getTemplate('saved-pages-template');
 		var savedPagesDB = new Lawnchair({name:"savedPagesDB"}, function() {
 			this.all(function(savedpages) {	
-				$('#savedPagesList').empty().html(template.render({'pages': savedpages}));
+				$('#savedPagesList').html(template.render({'pages': savedpages}));
 				$(".savedPage").click(onSavedPageClick);
 				$("#savedPages .cleanButton").unbind('click', onClearSavedPages).bind('click', onClearSavedPages);
 				$(".deleteSavedPage").click(onSavedPageDelete);

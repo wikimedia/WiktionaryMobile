@@ -124,9 +124,9 @@ window.search = function() {
 					key: app.urlForTitle(results[0]),
 					title: results[0]
 				};
-				$("#resultList").empty().html(template.render({'pages': searchResults, 'didyoumean': didyoumean_link}));
+				$("#resultList").html(template.render({'pages': searchResults, 'didyoumean': didyoumean_link}));
 			} else {
-				$("#resultList").empty().html(template.render({'pages': searchResults}));
+				$("#resultList").html(template.render({'pages': searchResults}));
 			}
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}

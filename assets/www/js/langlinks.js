@@ -16,7 +16,7 @@ window.languageLinks = function() {
 		page.requestLangLinks().done(function(langLinks) {
 			console.log(langLinks);
 			var template = templates.getTemplate("language-links-template");
-			$("#langList").empty().html(template.render({langLinks: langLinks}));
+			$("#langList").html(template.render({langLinks: langLinks}));
 			$(".languageLink").click(onLanguageLinkClick);
 			chrome.hideOverlays();
 			chrome.hideContent();
