@@ -71,6 +71,11 @@
     <FilePath Value="www\leaflet\leaflet.css"/>
     <FilePath Value="www\leaflet\leaflet.ie.css"/>
     <FilePath Value="www\leaflet\leaflet.js"/>
+    <FilePath Value="www\MobileFrontend\stylesheets\beta_common.css"/>
+    <FilePath Value="www\MobileFrontend\stylesheets\hacks.css"/>
+    <FilePath Value="www\MobileFrontend\stylesheets\images\hide.png"/>
+    <FilePath Value="www\MobileFrontend\stylesheets\images\show.png"/>
+    <FilePath Value="www\MobileFrontend\stylesheets\sections.css"/>
     <FilePath Value="www\winphone\cordova-1.6.1.js"/>
     <FilePath Value="www\winphone\platform.js"/>
     <FilePath Value="www\cordova-1.6.1.js"/>

@@ -288,6 +288,21 @@
     <Content Include="..\..\assets\www\leaflet\leaflet.js">
       <Link>www\leaflet\leaflet.js</Link>
     </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\beta_common.css">
+      <Link>www\MobileFrontend\stylesheets\beta_common.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\hacks.css">
+      <Link>www\MobileFrontend\stylesheets\hacks.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\images\hide.png">
+      <Link>www\MobileFrontend\stylesheets\images\hide.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\images\show.png">
+      <Link>www\MobileFrontend\stylesheets\images\show.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\sections.css">
+      <Link>www\MobileFrontend\stylesheets\sections.css</Link>
+    </Content>
     <Content Include="..\..\assets\www\winphone\cordova-1.6.1.js">
       <Link>www\winphone\cordova-1.6.1.js</Link>
     </Content>
