@@ -113,7 +113,7 @@ function showPageActions(origin) {
 		}
 	}, {
 		cancelButtonIndex: cancelIndex,
-		origin: this
+		origin: origin
 	});
 }
 
