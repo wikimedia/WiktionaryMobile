@@ -310,381 +310,381 @@
       <Link>www\winphone\platform.js</Link>
     </Content>
     <Content Include="CordovaSourceDictionary.xml" />
-    <None Include="..\..\assets\www\AUTHORS">
+    <Content Include="..\..\assets\www\AUTHORS">
       <Link>www\AUTHORS</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ady-cyrl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ady-cyrl.properties">
       <Link>www\messages\messages-ady-cyrl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-aeb.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-aeb.properties">
       <Link>www\messages\messages-aeb.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-af.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-af.properties">
       <Link>www\messages\messages-af.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ar.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ar.properties">
       <Link>www\messages\messages-ar.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-arc.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-arc.properties">
       <Link>www\messages\messages-arc.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-arn.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-arn.properties">
       <Link>www\messages\messages-arn.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-as.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-as.properties">
       <Link>www\messages\messages-as.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ast.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ast.properties">
       <Link>www\messages\messages-ast.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-avk.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-avk.properties">
       <Link>www\messages\messages-avk.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ba.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ba.properties">
       <Link>www\messages\messages-ba.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-bar.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bar.properties">
       <Link>www\messages\messages-bar.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-be-tarask.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-be-tarask.properties">
       <Link>www\messages\messages-be-tarask.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-bg.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bg.properties">
       <Link>www\messages\messages-bg.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-bjn.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bjn.properties">
       <Link>www\messages\messages-bjn.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-bn.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bn.properties">
       <Link>www\messages\messages-bn.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-br.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-br.properties">
       <Link>www\messages\messages-br.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-bs.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bs.properties">
       <Link>www\messages\messages-bs.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ca.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ca.properties">
       <Link>www\messages\messages-ca.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ckb.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ckb.properties">
       <Link>www\messages\messages-ckb.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-cs.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-cs.properties">
       <Link>www\messages\messages-cs.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-cy.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-cy.properties">
       <Link>www\messages\messages-cy.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-da.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-da.properties">
       <Link>www\messages\messages-da.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-de.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-de.properties">
       <Link>www\messages\messages-de.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-diq.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-diq.properties">
       <Link>www\messages\messages-diq.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-dsb.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-dsb.properties">
       <Link>www\messages\messages-dsb.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-el.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-el.properties">
       <Link>www\messages\messages-el.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-en.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-en.properties">
       <Link>www\messages\messages-en.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-eo.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-eo.properties">
       <Link>www\messages\messages-eo.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-es-formal.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-es-formal.properties">
       <Link>www\messages\messages-es-formal.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-es.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-es.properties">
       <Link>www\messages\messages-es.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-et.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-et.properties">
       <Link>www\messages\messages-et.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-eu.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-eu.properties">
       <Link>www\messages\messages-eu.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-fa.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fa.properties">
       <Link>www\messages\messages-fa.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-fi.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fi.properties">
       <Link>www\messages\messages-fi.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-fo.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fo.properties">
       <Link>www\messages\messages-fo.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-fr.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fr.properties">
       <Link>www\messages\messages-fr.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-frp.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-frp.properties">
       <Link>www\messages\messages-frp.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-fur.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fur.properties">
       <Link>www\messages\messages-fur.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-gd.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-gd.properties">
       <Link>www\messages\messages-gd.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-gl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-gl.properties">
       <Link>www\messages\messages-gl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-gu.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-gu.properties">
       <Link>www\messages\messages-gu.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-he.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-he.properties">
       <Link>www\messages\messages-he.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-hi.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-hi.properties">
       <Link>www\messages\messages-hi.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-hr.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-hr.properties">
       <Link>www\messages\messages-hr.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-hsb.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-hsb.properties">
       <Link>www\messages\messages-hsb.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-hu.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-hu.properties">
       <Link>www\messages\messages-hu.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ia.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ia.properties">
       <Link>www\messages\messages-ia.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-id.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-id.properties">
       <Link>www\messages\messages-id.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ilo.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ilo.properties">
       <Link>www\messages\messages-ilo.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-is.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-is.properties">
       <Link>www\messages\messages-is.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-it.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-it.properties">
       <Link>www\messages\messages-it.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ja.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ja.properties">
       <Link>www\messages\messages-ja.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ka.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ka.properties">
       <Link>www\messages\messages-ka.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-khw.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-khw.properties">
       <Link>www\messages\messages-khw.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-kk-cyrl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-kk-cyrl.properties">
       <Link>www\messages\messages-kk-cyrl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-km.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-km.properties">
       <Link>www\messages\messages-km.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-kn.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-kn.properties">
       <Link>www\messages\messages-kn.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ko.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ko.properties">
       <Link>www\messages\messages-ko.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ksh.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ksh.properties">
       <Link>www\messages\messages-ksh.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ky.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ky.properties">
       <Link>www\messages\messages-ky.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-lad.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lad.properties">
       <Link>www\messages\messages-lad.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-lb.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lb.properties">
       <Link>www\messages\messages-lb.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-li.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-li.properties">
       <Link>www\messages\messages-li.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ln.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ln.properties">
       <Link>www\messages\messages-ln.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-lt.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lt.properties">
       <Link>www\messages\messages-lt.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-lus.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lus.properties">
       <Link>www\messages\messages-lus.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-lv.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lv.properties">
       <Link>www\messages\messages-lv.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-map-bms.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-map-bms.properties">
       <Link>www\messages\messages-map-bms.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-mk.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-mk.properties">
       <Link>www\messages\messages-mk.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ml.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ml.properties">
       <Link>www\messages\messages-ml.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-mr.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-mr.properties">
       <Link>www\messages\messages-mr.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ms.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ms.properties">
       <Link>www\messages\messages-ms.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-mt.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-mt.properties">
       <Link>www\messages\messages-mt.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-nan.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-nan.properties">
       <Link>www\messages\messages-nan.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-nds-nl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-nds-nl.properties">
       <Link>www\messages\messages-nds-nl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ne.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ne.properties">
       <Link>www\messages\messages-ne.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-nl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-nl.properties">
       <Link>www\messages\messages-nl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-nn.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-nn.properties">
       <Link>www\messages\messages-nn.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-no.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-no.properties">
       <Link>www\messages\messages-no.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-or.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-or.properties">
       <Link>www\messages\messages-or.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-os.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-os.properties">
       <Link>www\messages\messages-os.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-pa.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pa.properties">
       <Link>www\messages\messages-pa.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-pl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pl.properties">
       <Link>www\messages\messages-pl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-pms.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pms.properties">
       <Link>www\messages\messages-pms.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ps.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ps.properties">
       <Link>www\messages\messages-ps.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-pt-br.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pt-br.properties">
       <Link>www\messages\messages-pt-br.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-pt.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pt.properties">
       <Link>www\messages\messages-pt.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-qqq.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-qqq.properties">
       <Link>www\messages\messages-qqq.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-qu.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-qu.properties">
       <Link>www\messages\messages-qu.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-rm.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-rm.properties">
       <Link>www\messages\messages-rm.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ro.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ro.properties">
       <Link>www\messages\messages-ro.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ru.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ru.properties">
       <Link>www\messages\messages-ru.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-rue.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-rue.properties">
       <Link>www\messages\messages-rue.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sa.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sa.properties">
       <Link>www\messages\messages-sa.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sah.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sah.properties">
       <Link>www\messages\messages-sah.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sat.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sat.properties">
       <Link>www\messages\messages-sat.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-scn.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-scn.properties">
       <Link>www\messages\messages-scn.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-si.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-si.properties">
       <Link>www\messages\messages-si.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sk.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sk.properties">
       <Link>www\messages\messages-sk.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sl.properties">
       <Link>www\messages\messages-sl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sq.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sq.properties">
       <Link>www\messages\messages-sq.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sr-ec.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sr-ec.properties">
       <Link>www\messages\messages-sr-ec.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sr-el.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sr-el.properties">
       <Link>www\messages\messages-sr-el.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sv.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sv.properties">
       <Link>www\messages\messages-sv.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-sw.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sw.properties">
       <Link>www\messages\messages-sw.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-ta.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ta.properties">
       <Link>www\messages\messages-ta.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-te.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-te.properties">
       <Link>www\messages\messages-te.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-th.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-th.properties">
       <Link>www\messages\messages-th.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-tl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-tl.properties">
       <Link>www\messages\messages-tl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-tly.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-tly.properties">
       <Link>www\messages\messages-tly.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-tr.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-tr.properties">
       <Link>www\messages\messages-tr.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-tt-cyrl.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-tt-cyrl.properties">
       <Link>www\messages\messages-tt-cyrl.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-uk.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-uk.properties">
       <Link>www\messages\messages-uk.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-uz.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-uz.properties">
       <Link>www\messages\messages-uz.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-vec.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-vec.properties">
       <Link>www\messages\messages-vec.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-vep.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-vep.properties">
       <Link>www\messages\messages-vep.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-vi.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-vi.properties">
       <Link>www\messages\messages-vi.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-yi.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-yi.properties">
       <Link>www\messages\messages-yi.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-yo.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-yo.properties">
       <Link>www\messages\messages-yo.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-zh-hans.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-zh-hans.properties">
       <Link>www\messages\messages-zh-hans.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-zh-hant.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-zh-hant.properties">
       <Link>www\messages\messages-zh-hant.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-zh-hk.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-zh-hk.properties">
       <Link>www\messages\messages-zh-hk.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\messages\messages-zh-tw.properties">
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-zh-tw.properties">
       <Link>www\messages\messages-zh-tw.properties</Link>
-    </None>
-    <None Include="..\..\assets\www\sitematrix.json">
+    </Content>
+    <Content Include="..\..\assets\www\sitematrix.json">
       <Link>www\sitematrix.json</Link>
-    </None>
+    </Content>
     <None Include="BuildManifestProcessor.js" />
     <Content Include="GapLib\WP7CordovaClassLib.dll" />
     <Content Include="www\cordova-1.6.1.js" />

@@ -15,13 +15,24 @@ window.appSettings = function() {
 		}
 
 		if(locales.length == 0) {
+			var dataType = 'json';
+			if ($('html').hasClass('winphone')) {
+				// Not sure why, but on Windows Phone if we ask for text we get JSON.
+				// MYSTERIOUS
+				dataType = 'text';
+			}
 			$.ajax({
 				type:'GET',
 				url:requestUrl,
-				dataType: 'json',
+				dataType: dataType,
 				success:function(results) {
-					var allLocales = results.sitematrix;
-
+					console.log('sitematrix got: ' + results);
+					var allLocales;
+					if (results) {
+						allLocales = results.sitematrix;
+					} else {
+						allLocales = []; // hack
+					}
 					$.each(allLocales, function(key, value) {
 						// Because the JSON result from sitematrix is messed up
 						if(!isNaN(key)) {
