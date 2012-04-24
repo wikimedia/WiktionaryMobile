@@ -119,13 +119,26 @@ function selectText() {
     PhoneGap.exec(null, null, 'SelectTextPlugin', 'selectText', []);
 }
 
-function setSelectTextHidden(){
+function setMenuVersion(){
+	//OS and device-specific modifications to the menu 
 	
-	if (androidVersion){
-		if (parseInt(androidVersion) > 10){
-			console.log("hiding select text");
-			$("#selectTextCmd").remove();
+	if (device.platform == "Android"){
+		var oVersion = parseFloat(device.version.substr(0,3)); //we only need the first 3 chars of the OS version code
+		
+		//remove select text on android 3.0 and newer
+		if (oVersion >= 3.0){
+			console.log("over Android 3.0: removing select text");
+			$('#selectTextCmd').remove();
+
 		}
+		
+		//removes listen-in on android 2.2 and older
+		//replaces with history for now
+		if (oVersion <= 2.2){
+			console.log("under Android 2.2: replacing listen in");
+			$('#soundCmd').replaceWith($('#historyCmd'));
+		}
+
 	}
 	
 }
