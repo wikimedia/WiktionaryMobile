@@ -197,6 +197,7 @@ button#search
 	position: absolute;
 	top: 8px;
 	right: 8px;
+	background: url(image/spr.png) -43px 5px no-repeat;
 	background: url(image/spr.png) -43px 5px no-repeat,
 	-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
 	background: url(image/spr.png) -43px 5px no-repeat,
@@ -211,24 +212,29 @@ button#search
 }
 
 #search.active {
+	background: url(image/spr.png) -43px 5px no-repeat;
 	background: url(image/spr.png) -43px 5px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
 	background: url(image/spr.png) -43px 5px no-repeat,
 		-moz-linear-gradient(#444 0%, #666 25%);
 	background: url(image/spr.png) -43px 5px no-repeat,
 		-ms-linear-gradient(#444 0%, #666 25%);
+	background-size: 160px 240px;
 }
 
 #search.inProgress {
+	background: url(image/spr.png) -130px -131px no-repeat;
 	background: url(image/spr.png) -130px -131px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.25, #333));
 	background: url(image/spr.png) -130px -131px no-repeat,
 		-moz-linear-gradient(#777 0%, #333 25%);
 	background: url(image/spr.png) -130px -131px no-repeat,
 		-ms-linear-gradient(#777 0%, #333 25%);
+	background-size: 160px 240px;
 }
 
 #search.inProgress.active {
+	background: url(image/spr.png) -130px -131px no-repeat;
 	background: url(image/spr.png) -130px -131px no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), color-stop(0.25, #666));
 	background: url(image/spr.png) -130px -131px no-repeat,
@@ -315,6 +321,7 @@ button#search
 	position: absolute;
 	top: 8px;
 	left: 8px;
+	background: url(image/button-light-wiki.png) no-repeat;
 	background: url(image/button-light-wiki.png) no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#444));
 	background: url(image/button-light-wiki.png) no-repeat,
@@ -329,6 +336,7 @@ button#search
 }
 
 .titlebarIcon.active {
+	background: url(image/button-light-wiki.png) no-repeat;
 	background: url(image/button-light-wiki.png) no-repeat,
 		-webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), to(#777));
 	background: url(image/button-light-wiki.png) no-repeat,
@@ -352,6 +360,7 @@ button#search
 	display: -webkit-box;
 	display: -moz-box;
 	display: box;
+	background: #4f4f4f;
 	background: -webkit-gradient(linear, left top, left bottom, from(#5F5F5F), to(#4F4F4F));
 	background: -moz-linear-gradient(#5F5F5F 0%, #4F4F4F 100%);
 	background: -ms-linear-gradient(#5F5F5F 0%, #4F4F4F 100%);
@@ -493,7 +502,7 @@ body[dir=rtl] #settingsList .item select {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: #888;
+	background: #4f4f4f;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), color-stop(0.75, #333));
 	background: -moz-linear-gradient(#777 0%, #333 75%);
 	background: -ms-linear-gradient(#777 0%, #333 75%);
