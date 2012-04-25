@@ -73,7 +73,12 @@ window.appSettings = function() {
 		$("#aboutPageLabel").click(function () {
 			aboutPage();
 		});
-
+		$(".externallink").click(function() {
+			var link = $(this).attr('data-link');
+			var url = app.baseURL + link;
+			chrome.openExternalLink(url);
+			return false;
+		});
 		chrome.hideOverlays();
 		chrome.hideContent();
 		$('#settings').localize().show();
