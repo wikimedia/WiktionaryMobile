@@ -725,4 +725,5 @@ the scrollable divs seem to be giving us lots of bugs
 	border-top: 1px #ccc solid;
 	padding: 10px;
 	text-align: center;
+	display: none; /* Initially hidden */
 }

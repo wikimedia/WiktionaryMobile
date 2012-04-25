@@ -44,6 +44,7 @@ window.app = function() {
 		appHistory.addCurrentPage();
 		chrome.toggleMoveActions();
 		geo.addShowNearbyLinks();
+		$("#page-footer").show();
 		chrome.showContent();
 		chrome.hideSpinner();
 	}
@@ -57,6 +58,7 @@ window.app = function() {
 		languageLinks.clearLanguages();
 		setMenuItemState('read-in', false);
 		setPageActionsState(false);
+		$("#page-footer").hide();
 		app.curPage = null;
 	}
 
