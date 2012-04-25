@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{5dc715dd-65f7-45a4-af9e-65e0a16c7076}" Title="CordovaStarter1" 
+  <App xmlns="" ProductID="{5dc715dd-65f7-45a4-af9e-65e0a16c7076}" Title="Wikipedia" 
        RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  
-       Author="CordovaStarter1 author" 
-       Description="PhoneGap for Windows Phone 7" 
-       Publisher="CordovaStarter1">
+       Author="Wikimedia Foundation, Inc." 
+       Description="Wikipedia for Windows Phone 7.5" 
+       Publisher="Wikimedia Foundation, Inc.">
     
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
@@ -33,7 +33,7 @@
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>CordovaStarter1</Title>
+          <Title>Wikipedia</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>
