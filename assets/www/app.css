@@ -727,3 +727,8 @@ the scrollable divs seem to be giving us lots of bugs
 	text-align: center;
 	display: none; /* Initially hidden */
 }
+
+#page-footer span {
+	display: block;
+	margin-bottom: 5px;
+}

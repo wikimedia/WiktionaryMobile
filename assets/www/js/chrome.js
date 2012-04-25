@@ -93,7 +93,8 @@ window.chrome = function() {
 			// Do localization of the initial interface
 			$(document).bind("mw-messages-ready", function() {
 				$('#mainHeader, #menu').localize();
-				$("#page-footer").html(mw.message('page-license-text').plain());
+				$("#page-footer-contributors").html(mw.message('page-contributors').plain());
+				$("#page-footer-license").html(mw.message('page-license').plain());
 				$("#show-page-history").click(function() {
 					if(app.curPage) {
 						chrome.openExternalLink(app.curPage.getHistoryUrl());
