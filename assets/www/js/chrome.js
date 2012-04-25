@@ -119,6 +119,10 @@ window.chrome = function() {
 					}, 300);
 				}
 			});
+			$("#searchParam").click(function() {
+				$(this).focus(); // Seems to be needed to actually focus on the search bar
+				// Caused by the FastClick implementation
+			});
 			$("#clearSearch").bind('touchstart', function() {
 				clearSearch();
 				return false;
