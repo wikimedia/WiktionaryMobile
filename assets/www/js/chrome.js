@@ -30,7 +30,6 @@ window.chrome = function() {
 			$("#main").attr('dir', 'rtl');
 		}
 		$("#main").html(page.toHtml());
-		//languageLinks.parseAvailableLanguages($div);
 
 		handleSectionExpansion();
 	}
@@ -94,6 +93,17 @@ window.chrome = function() {
 			// Do localization of the initial interface
 			$(document).bind("mw-messages-ready", function() {
 				$('#mainHeader, #menu').localize();
+				$("#page-footer").html(mw.message('page-license-text').plain());
+				$("#show-page-history").click(function() {
+					if(app.curPage) {
+						chrome.openExternalLink(app.curPage.getHistoryUrl());
+					}
+					return false;
+				});
+				$("#show-license-page").click(function() {
+					app.navigateTo(window.LICENSEPAGE, "en");
+					return false;
+				});
 			});
 			l10n.initLanguages();
 
