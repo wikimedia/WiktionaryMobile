@@ -88,6 +88,10 @@ header {
 	bottom: 0px;
 }
 
+.winphone .scroller {
+	overflow-y: auto;
+}
+
 #map {
 	position: absolute;
 	top: 52px;
