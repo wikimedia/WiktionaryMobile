@@ -54,6 +54,7 @@
 	
 	<!-- MobileFrontend -->
 	<script type="text/javascript" charset="utf-8" src="js/mobilefrontend.js"></script>
+	<script type="text/javascript" charset="utf-8" src="MobileFrontend/javascripts/toggle.js"></script>
 
 	<!-- platform-specific setup and overrides -->
   <script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
@@ -147,7 +148,7 @@
             </div>
 			{{#sections}}
 			<div class="section">
-				<h{{level}} class="section_heading" data-section-id="{{id}}">{{{line}}} <button></button></h{{level}}>
+				<h{{level}} class="section_heading" id="section_{{id}}" data-section-id="{{id}}">{{{line}}} <button></button></h{{level}}>
 				<div class="content_block" id="content_{{id}}"> </div>
 			</div>
 			{{/sections}}

@@ -44,16 +44,7 @@ window.chrome = function() {
 				$contentBlock.append($(sectionHtml)).data('populated', true);
 			} 
 
-			// TODO: this should use the same code as MFE
-			if($contentBlock.hasClass('openSection')) {
-				$contentBlock.removeClass('openSection');
-				$btn.removeClass('openSection');
-				$contentBlock.prev('.section_heading').removeClass('openSection');
-			} else {
-				$contentBlock.addClass('openSection');
-				$btn.addClass('openSection');
-				$contentBlock.prev('.section_heading').addClass('openSection');
-			}
+			MobileFrontend.toggle.wm_toggle_section(sectionID);
 			chrome.setupScrolling("#content");
 		});
 	}
