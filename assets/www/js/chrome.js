@@ -39,6 +39,7 @@ window.chrome = function() {
 		$(".section_heading").click(function() {
 			var sectionID = $(this).data('section-id');
 			var $contentBlock = $("#content_" + sectionID);
+			var $btn = $("button", this); 
 			if(!$contentBlock.data('populated')) {
 				var sectionHtml = app.curPage.getSectionHtml(sectionID);
 				$contentBlock.append($(sectionHtml)).data('populated', true);
@@ -47,9 +48,11 @@ window.chrome = function() {
 			// TODO: this should use the same code as MFE
 			if($contentBlock.hasClass('openSection')) {
 				$contentBlock.removeClass('openSection');
+				$btn.removeClass('openSection');
 				$contentBlock.prev('.section_heading').removeClass('openSection');
 			} else {
 				$contentBlock.addClass('openSection');
+				$btn.addClass('openSection');
 				$contentBlock.prev('.section_heading').addClass('openSection');
 			}
 			chrome.setupScrolling("#content");
