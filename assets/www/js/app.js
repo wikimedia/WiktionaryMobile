@@ -38,7 +38,6 @@ window.app = function() {
 
 		setPageActionsState(true);
 		setMenuItemState('read-in', true);
-		MobileFrontend.init();
 		chrome.setupScrolling("#content");
 		chrome.scrollTo("#content", 0);
 		appHistory.addCurrentPage();
