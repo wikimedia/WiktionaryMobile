@@ -51,7 +51,7 @@ window.chrome = function() {
 				$btn.removeClass('openSection');
 				$contentBlock.prev('.section_heading').removeClass('openSection');
 			} else {
-				$contentBlock.addClass('openSection');
+				$contentBlock.addClass('openSection togglefix');
 				$btn.addClass('openSection');
 				$contentBlock.prev('.section_heading').addClass('openSection');
 			}
