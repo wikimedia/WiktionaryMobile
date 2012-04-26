@@ -141,7 +141,6 @@ window.search = function() {
 		chrome.doFocusHack();
 		$('#searchresults').localize().show();
 		chrome.setupScrolling('#searchresults .scroller');
-		chrome.scrollTo('#searchresults .scroller', 0);
 	}
 
 	return {

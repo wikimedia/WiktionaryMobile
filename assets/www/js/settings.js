@@ -83,7 +83,6 @@ window.appSettings = function() {
 		// doing this line will break things in Android. Need to test before merge.
 		// Also, I've no clue why this fixes the back button not working, but it does
 		chrome.setupScrolling("#settings");
-		chrome.scrollTo("#settings", 0);
 	}
 
 	function onContentLanguageChanged() {

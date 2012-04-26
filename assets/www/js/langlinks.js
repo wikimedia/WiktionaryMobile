@@ -25,7 +25,6 @@ window.languageLinks = function() {
 
 			chrome.doFocusHack();
 			chrome.setupScrolling('#langlinks .scroller');
-			chrome.scrollTo('#langlinks .scroller', 0);
 		});
 	}
 

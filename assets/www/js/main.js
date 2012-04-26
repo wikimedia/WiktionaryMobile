@@ -51,6 +51,5 @@ function aboutPage() {
 		});
 		chrome.doFocusHack();
 		chrome.setupScrolling('#about-page-overlay .scroller');
-		chrome.scrollTo('#about-page-overlay .scroller', 0);
 	});
 }

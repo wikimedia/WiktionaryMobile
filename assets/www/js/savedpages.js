@@ -105,7 +105,6 @@ window.savedPages = function() {
 				chrome.hideContent();
 				chrome.doFocusHack();
 				chrome.setupScrolling('#savedPages .scroller');
-				chrome.scrollTo('#savedPages .scroller', 0);
 			});
 		});
 
