@@ -25,6 +25,9 @@
 				lastCollapsibleSection = section;
 				return;
 			} 
+			if(typeof section.references !== "undefined") {
+				section.references = true;
+			}
 			// Only consider leve 2 sections as 'sections'
 			// Group *all* subsections under them, no matter which level they are at
 			if(section.level == 2) {

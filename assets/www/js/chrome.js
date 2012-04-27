@@ -31,6 +31,7 @@ window.chrome = function() {
 		}
 		$("#main").html(page.toHtml());
 
+		MobileFrontend.references.init($("#main")[0], true); 
 		handleSectionExpansion();
 	}
 
@@ -42,6 +43,7 @@ window.chrome = function() {
 			if(!$contentBlock.data('populated')) {
 				var sectionHtml = app.curPage.getSectionHtml(sectionID);
 				$contentBlock.append($(sectionHtml)).data('populated', true);
+				MobileFrontend.references.init($contentBlock[0], false); 
 			} 
 
 			MobileFrontend.toggle.wm_toggle_section(sectionID);
