@@ -107,6 +107,14 @@
 		return JSON.stringify(this);
 	};
 
+	Page.prototype.getHistoryUrl = function() {
+		return this.getCanonicalUrl() + "?action=history";
+	}
+
+	Page.prototype.getCanonicalUrl = function() {
+		return app.baseUrlForLanguage(this.lang) + "/wiki/" + encodeURIComponent(this.title.replace(/ /g, '_'));
+	}
+
 	// Returns an API URL that makes a request that retreives this page
 	// Should mimic params from Page.requestFromTitle
 	Page.prototype.getAPIUrl = function() {

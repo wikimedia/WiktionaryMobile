@@ -720,3 +720,15 @@ the scrollable divs seem to be giving us lots of bugs
 	position: fixed;
 	z-index: 2;
 }
+
+#page-footer {
+	border-top: 1px #ccc solid;
+	padding: 10px;
+	text-align: center;
+	display: none; /* Initially hidden */
+}
+
+#page-footer span {
+	display: block;
+	margin-bottom: 5px;
+}

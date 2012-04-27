@@ -44,6 +44,7 @@ window.app = function() {
 		appHistory.addCurrentPage();
 		chrome.toggleMoveActions();
 		geo.addShowNearbyLinks();
+		$("#page-footer").show();
 		chrome.showContent();
 		chrome.hideSpinner();
 	}
@@ -57,17 +58,13 @@ window.app = function() {
 		languageLinks.clearLanguages();
 		setMenuItemState('read-in', false);
 		setPageActionsState(false);
+		$("#page-footer").hide();
 		app.curPage = null;
 	}
 
-	function loadPage(url, origUrl) {
+	function loadPage(title, language) {
 		var d = $.Deferred();
-		origUrl = origUrl || url;
 
-		var title = app.titleForUrl(url);
-		if(title === "") {
-			title = "Main_Page"; // FIXME
-		}
 		function doRequest() {
 			Page.requestFromTitle(title, preferencesDB.get("language")).done(function(page) {
 				setCurrentPage(page);
@@ -99,8 +96,11 @@ window.app = function() {
 		return d;
 	}
 
-	function urlForTitle(title) {
-		return app.baseURL + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
+	function urlForTitle(title, lang) {
+		if(typeof lang === 'undefined') {
+			lang = preferencesDB.get("language");
+		}
+		return app.baseUrlForLanguage(lang) + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
 	}
 
 	function baseUrlForLanguage(lang) {
@@ -121,16 +121,15 @@ window.app = function() {
 		$('#main').css('font-size', size);
 	}
 
-
 	function setCaching(enabled, success) {
 		// Do nothing by default
 		success();
 	}
 
-
-	function navigateToPage(url, options) {
+	function navigateTo(title, lang, options) {
 		var d = $.Deferred();
-		var options = $.extend({cache: false, updateHistory: true, noScroll: false}, options || {});
+		var options = $.extend({cache: false, updateHistory: true}, options || {});
+		var url = app.urlForTitle(title, lang);
 		$('#searchParam').val('');
 		chrome.showContent();
 		if(options.hideCurrent) {
@@ -145,17 +144,24 @@ window.app = function() {
 		if (options.cache) {
 			d = app.loadCachedPage(url, options.noScroll);
 		} else {
-			d = app.loadPage(url, "", options.noScroll);
+			if(title === "") {
+				title = "Main_Page"; // FIXME
+			}
+			d = app.loadPage(title, preferencesDB.get("language"));
 		}
 		d.done(function() {
-			console.log("navigating to " + url);
-			// Enable change language - might've been disabled in a prior error page
-			console.log('enabling language');
+			console.log("Navigating to " + title);
 			if(options.hideCurrent) {
 				$("#content").show();
 			}			
 		});
 		return d;
+	}
+
+	function navigateToPage(url, options) {
+		var title = app.titleForUrl(url);
+		var lang = preferencesDB.get('language');
+		return app.navigateTo(title, lang, options);
 	}
 
 	function getCurrentUrl() {
@@ -217,7 +223,8 @@ window.app = function() {
 		makeAPIRequest: makeAPIRequest,
 		setCurrentPage: setCurrentPage,
 		track: track,
-		curPage: null
+		curPage: null,
+		navigateTo: navigateTo
 	};
 
 	return exports;
