@@ -6,10 +6,6 @@
 		this.lang = lang;
 	};
 
-	Page.deserialize = function(data) {
-		return new Page(data.title, data.lead, data.sections);
-	};
-
 	Page.fromRawJSON = function(title, rawJSON, lang) {
 		var lead = {};
 		var sections = [];
