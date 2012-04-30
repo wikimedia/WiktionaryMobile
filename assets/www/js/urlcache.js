@@ -60,7 +60,7 @@ window.urlCache = function() {
 		return d;
 	}
 
-	function saveCompleteHtml(url, html) {
+	function saveCompleteHtml(url, data, domParent) {
 		// Converts images to Data URIs
 		var d = $.Deferred();
 
@@ -68,12 +68,11 @@ window.urlCache = function() {
 		var filePath = fileName;
 
 		console.log("Starting to save");
-		var element = $(html);
 		var replacements = {};
 		console.log("HTML Parsed");
 		function saveFile(fileEntry) {
 			fileEntry.createWriter(function(writer) {
-				writer.write(html);
+				writer.write(data);
 				console.log("Writing stuff to " + fileEntry.fullPath);
 				writer.onwriteend = function() {
 					console.log("written stuff!");
@@ -83,16 +82,12 @@ window.urlCache = function() {
 		}
 		console.log("About to map stuff");
 
-		// Incredibly wasteful hack going to happen. I'm sorry
-		// I am parsing the entire HTML again, *and* doing string replacement
-		// FIXME: Do only one stupid thing, not two
-		// TODO: Check if Images are actually loaded
-		element.find("img").each(function(i, img) {
+		domParent.find("img").each(function(i, img) {
 			replacements[$(img).attr("src")] =  urlCache.dataUrlForImage(img);
 		});
 
-		$.each(replacements, function(href, data) {
-			html = html.replace(href, data);
+		$.each(replacements, function(href, dataURI) {
+			data = data.replace(href, dataURI);
 		});
 
 		console.log("Done mapping stuff");

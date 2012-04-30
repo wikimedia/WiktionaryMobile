@@ -35,17 +35,19 @@ window.chrome = function() {
 		handleSectionExpansion();
 	}
 
+	function populateSection(sectionID) {
+		var $contentBlock = $("#content_" + sectionID);
+		if(!$contentBlock.data('populated')) {
+			var sectionHtml = app.curPage.getSectionHtml(sectionID);
+			$contentBlock.append($(sectionHtml)).data('populated', true);
+			MobileFrontend.references.init($contentBlock[0], false); 
+		} 
+	}
+
 	function handleSectionExpansion() {
 		$(".section_heading").click(function() {
 			var sectionID = $(this).data('section-id');
-			var $contentBlock = $("#content_" + sectionID);
-			var $btn = $("button", this); 
-			if(!$contentBlock.data('populated')) {
-				var sectionHtml = app.curPage.getSectionHtml(sectionID);
-				$contentBlock.append($(sectionHtml)).data('populated', true);
-				MobileFrontend.references.init($contentBlock[0], false); 
-			} 
-
+			chrome.populateSection(sectionID);
 			MobileFrontend.toggle.wm_toggle_section(sectionID);
 			chrome.setupScrolling("#content");
 		});
@@ -304,6 +306,7 @@ window.chrome = function() {
 		toggleMoveActions: toggleMoveActions,
 		confirm: confirm,
 		setupScrolling: setupScrolling,
-		scrollTo: scrollTo
+		scrollTo: scrollTo,
+		populateSection: populateSection
 	};
 }();
