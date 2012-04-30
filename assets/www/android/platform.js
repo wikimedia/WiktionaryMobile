@@ -185,3 +185,36 @@ app.setCaching = function(enabled, success) {
 window.preferencesDB.addOnSet(function(id, value) {
 	window.plugins.preferences.set(id, value, function(){}, function(){});
 });
+
+savedPages.doSave = function() {
+	console.log("Saving page");
+	chrome.showSpinner();
+	var page = app.curPage;
+	var d = $.Deferred();
+	var gotPath = function(cachedPage) {
+		$('#main img').each(function() {
+			var em = $(this);
+			var target = this.src.replace('file:', 'https:');
+			window.plugins.urlCache.getCachedPathForURI(target,
+				function(imageFile) {
+					em.attr('src', 'file://' + imageFile.file);
+				},
+				function() {
+					console.log("Error in image saving");
+				}
+			);
+		});
+		app.track('mobile.app.wikipedia.save-page');
+		chrome.hideSpinner();
+		d.resolve();
+	}
+	var gotError = function(uri, error) {
+		console.log('Error: ' + JSON.stringify(error));
+		chrome.hideSpinner();
+	}
+	$.each(app.curPage.sections, function(i, section) {
+		chrome.populateSection(section.id);
+	});
+	window.plugins.urlCache.getCachedPathForURI(page.getAPIUrl(), gotPath, gotError);
+	return d;
+}

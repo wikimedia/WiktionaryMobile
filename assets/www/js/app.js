@@ -155,14 +155,10 @@ window.app = function() {
 			currentHistoryIndex += 1;
 			pageHistory[currentHistoryIndex] = url;
 		}
-		if (options.cache) {
-			d = app.loadCachedPage(url, options.noScroll);
-		} else {
-			if(title === "") {
-				title = "Main_Page"; // FIXME
-			}
-			d = app.loadPage(title, preferencesDB.get("language"));
+		if(title === "") {
+			title = "Main_Page"; // FIXME
 		}
+		d = app.loadPage(title, preferencesDB.get("language"));
 		d.done(function() {
 			console.log("Navigating to " + title);
 			if(options.hideCurrent) {
