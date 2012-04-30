@@ -158,7 +158,7 @@ window.app = function() {
 		if(title === "") {
 			title = "Main_Page"; // FIXME
 		}
-		d = app.loadPage(title, preferencesDB.get("language"));
+		d = app.loadPage(title, lang);
 		d.done(function() {
 			console.log("Navigating to " + title);
 			if(options.hideCurrent) {

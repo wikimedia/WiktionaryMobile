@@ -6,9 +6,7 @@ window.languageLinks = function() {
 		var lang = parent.data("lang");
 		chrome.hideContent();
 		chrome.showSpinner();
-		Page.requestFromTitle(title, lang).done(function(page) {
-			app.setCurrentPage(page);
-		});
+		app.navigateTo(title, lang);
 	}
 
 	function showLangLinks(page) {
