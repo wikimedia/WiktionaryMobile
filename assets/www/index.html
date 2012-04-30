@@ -78,7 +78,7 @@
 				<label for="contentLanguageSelector"><msg key="settings-language-label"></msg></label>
 				<select id='contentLanguageSelector'>
 					{{#languages}}
-					<option value="{{code}}">{{name}}</option>
+						<option value="{{code}}">{{name}} {{#localName}}({{localName}}){{/localName}}</option>
 					{{/languages}}
 				</select>
 			</div>

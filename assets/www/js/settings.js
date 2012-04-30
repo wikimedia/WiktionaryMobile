@@ -14,45 +14,25 @@ window.appSettings = function() {
 			];
 		}
 
-		if(locales.length == 0) {
-			var dataType = 'json';
-			if ($('html').hasClass('winphone')) {
-				// Not sure why, but on Windows Phone if we ask for text we get JSON.
-				// MYSTERIOUS
-				dataType = 'text';
-			}
-			$.ajax({
-				type:'GET',
-				url:requestUrl,
-				dataType: dataType,
-				success:function(results) {
-					console.log('sitematrix got: ' + results);
-					var allLocales;
-					if (results) {
-						allLocales = results.sitematrix;
-					} else {
-						allLocales = []; // hack
+		if(locales.length === 0) {
+			app.getWikiMetadata().done(function(wikis) { 
+				$.each(wikis, function(lang, wikiData) {
+					var locale = {
+						code: lang,
+						name: wikiData.name
+					};
+					if(wikiData.name !== wikiData.localName) {
+						locale.localName = wikiData.localName;
 					}
-					$.each(allLocales, function(key, value) {
-						// Because the JSON result from sitematrix is messed up
-						if(!isNaN(key)) {
-							if(value.site.some(function(site) { return site.code == "wiki"; })) {
-								locales.push({
-									code: value.code,
-									name: value.name
-								});
-							}
-						}
-					});
-					chrome.hideSpinner();
-					renderSettings();
-				}
+					locales.push(locale);
+				});
+				renderSettings();
+				chrome.hideSpinner();
 			});
 		} else {
-			chrome.hideSpinner();
 			renderSettings();
+			chrome.hideSpinner();
 		}
-
 	}
 
 	function renderSettings() {

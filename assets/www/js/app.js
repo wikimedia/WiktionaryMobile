@@ -1,5 +1,20 @@
 window.app = function() {
 
+	var wikis = [];
+
+	function getWikiMetadata() {
+		var d = $.Deferred();
+		if(wikis.length === 0) {
+			$.get(ROOT_URL + 'wikis.json').done(function(data) {
+				wikis = JSON.parse(data);
+				d.resolve(wikis);
+			});
+		} else {
+			d.resolve(wikis);
+		}
+		return d;
+	}
+
 	function loadCachedPage (url, title, lang) {
 		chrome.showSpinner();
 		var d = $.Deferred();
@@ -223,7 +238,8 @@ window.app = function() {
 		setCurrentPage: setCurrentPage,
 		track: track,
 		curPage: null,
-		navigateTo: navigateTo
+		navigateTo: navigateTo,
+		getWikiMetadata: getWikiMetadata
 	};
 
 	return exports;
