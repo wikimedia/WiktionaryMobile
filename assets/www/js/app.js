@@ -80,7 +80,7 @@ window.app = function() {
 		var d = $.Deferred();
 
 		function doRequest() {
-			Page.requestFromTitle(title, preferencesDB.get("language")).done(function(page) {
+			Page.requestFromTitle(title, language).done(function(page) {
 				setCurrentPage(page);
 				d.resolve(page);
 			}).fail(function(xhr) {
