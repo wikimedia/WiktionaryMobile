@@ -131,6 +131,9 @@ window.search = function() {
 			$("#resultList .searchItem").click(onSearchResultClicked);
 		}
 		$("#doFullSearch").click(onDoFullSearch);
+		$("#resultList .searchItem").bind('touchstart', function() {
+			$("#searchParam").blur();
+		});
 		chrome.hideSpinner();
 		chrome.hideOverlays();
 		if(!chrome.isTwoColumnView()) {
