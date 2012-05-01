@@ -98,7 +98,7 @@
 
 ## Android v1.1RC1 & iOS v3.1RC1 ##
 
-## Common ##
+### Common ###
 
 - Added CREDITS for all libraries used + appropriate licensing
 - Updated AUTHORS list
@@ -106,12 +106,12 @@
 - Fixed bug with confusion over Hebrew language code
 - Fix issue with scrolling when tapping references 
 
-## Android specific ##
+### Android specific ###
 
 - Fixed clipping of text in About page
 - Fix scrolling bugs in ICS
 
-## iOS specific ##
+### iOS specific ###
 
 - Added Share via Twitter
 - Added Save to Read It Later
@@ -120,14 +120,14 @@
 
 ## Android v1.1 & iOS v3.1 ##
 
-## Common ##
+### Common ###
 
 - List of wikipedias now included locally
 
-## iOS specific ##
+### iOS specific ###
 
 - Fix inconsistent login behavior of Facebook sharing
 
-## Android v1.1.1 ##
+### Android v1.1.1 ###
 
 - Added migration code for older Saved Pages
