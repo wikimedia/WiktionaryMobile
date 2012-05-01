@@ -86,6 +86,7 @@ window.chrome = function() {
 			// Do localization of the initial interface
 			$(document).bind("mw-messages-ready", function() {
 				$('#mainHeader, #menu').localize();
+				updateMenuState();
 				$("#page-footer-contributors").html(mw.message('page-contributors').plain());
 				$("#page-footer-license").html(mw.message('page-license').plain());
 				$("#show-page-history").click(function() {
@@ -101,7 +102,6 @@ window.chrome = function() {
 			});
 			l10n.initLanguages();
 
-			updateMenuState();
 			toggleMoveActions();
 
 			$(".titlebarIcon").bind('click', function() {
