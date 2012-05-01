@@ -251,8 +251,10 @@ window.chrome = function() {
 
 			event.preventDefault();
 
-			if (href.substr(0, 1) == '#') {
-				// FIXME: Replace with Reference reveal
+			// Handle File: and Image: pages for enwiki
+			// FIXME: Handle it for other languages. Should be gone before release
+			if(url.match(/\/wiki\/(File|Image):/)) {
+				chrome.openExternalLink(url);
 			}
 
 			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
