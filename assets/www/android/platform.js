@@ -205,6 +205,7 @@ savedPages.doSave = function() {
 			);
 		});
 		app.track('mobile.app.wikipedia.save-page');
+		chrome.showNotification(mw.message('page-saved', app.curPage.title).plain());
 		chrome.hideSpinner();
 		d.resolve();
 	}
