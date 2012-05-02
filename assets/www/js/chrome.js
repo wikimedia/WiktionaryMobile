@@ -31,7 +31,7 @@ window.chrome = function() {
 		}
 		$("#main").html(page.toHtml());
 
-		MobileFrontend.references.init($("#main")[0], true); 
+		MobileFrontend.references.init($("#main")[0], false);
 		handleSectionExpansion();
 	}
 
@@ -136,6 +136,8 @@ window.chrome = function() {
 			});
 
 			$(".closeButton").bind('click', showContent);
+			// Initialize Reference reveal with empty content
+			MobileFrontend.references.init($("#content")[0], true);
 
 			initContentLinkHandlers();
 			chrome.loadFirstPage();
