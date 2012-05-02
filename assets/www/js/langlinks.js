@@ -13,14 +13,23 @@ window.languageLinks = function() {
 		chrome.showSpinner();
 		page.requestLangLinks().done(function(langLinks) {
 			var template = templates.getTemplate("language-links-template");
-			$("#langList").html(template.render({langLinks: langLinks}));
-			$(".languageLink").click(onLanguageLinkClick);
-			chrome.hideOverlays();
-			chrome.hideContent();
-			chrome.hideSpinner();
-			$('#langlinks').localize().show();
+			app.getWikiMetadata().done(function(wikis) {
+				$.each(langLinks, function(i, link) {
+					link.dir = l10n.isLangRTL(link.lang) ? "rtl" : "ltr";
+					link.langName = wikis[link.lang].name;
+				});
+				langLinks.sort(function(l1, l2) {
+					return l1.langName.localeCompare(l2.langName);
+				});
+				$("#langList").html(template.render({langLinks: langLinks}));
+				$(".languageLink").click(onLanguageLinkClick);
+				chrome.hideOverlays();
+				chrome.hideContent();
+				chrome.hideSpinner();
+				$('#langlinks').localize().show();
 
-			chrome.setupScrolling('#langList');
+				chrome.setupScrolling('#langList');
+			});
 		});
 	}
 
