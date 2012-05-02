@@ -26,6 +26,9 @@ window.appSettings = function() {
 					}
 					locales.push(locale);
 				});
+				locales.sort(function(l1, l2) {
+					return l1.name.localeCompare(l2.name);
+				});
 				renderSettings();
 				chrome.hideSpinner();
 			});
