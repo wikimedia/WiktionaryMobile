@@ -78,12 +78,13 @@ window.chrome = function() {
 		var lastSearchTimeout = null; // Handle for timeout last time a key was pressed
 
 		preferencesDB.initializeDefaults(function() {
-			app.baseURL = app.baseUrlForLanguage(preferencesDB.get('language'));
 			/* Split language string about '-' */
 			console.log('language is ' + preferencesDB.get('uiLanguage'));
 			if(l10n.isLangRTL(preferencesDB.get('uiLanguage'))) {
 				$("body").attr('dir', 'rtl');
 			}
+
+			app.setContentLanguage(preferencesDB.get('language'));
 
 			// Do localization of the initial interface
 			$(document).bind("mw-messages-ready", function() {
