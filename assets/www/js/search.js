@@ -142,7 +142,7 @@ window.search = function() {
 			$("html").addClass('overlay-open');
 		}
 		$('#searchresults').localize().show();
-		chrome.setupScrolling('#resultList');
+		chrome.setupScrolling('#searchresults .scroller');
 	}
 
 	return {

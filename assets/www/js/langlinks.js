@@ -28,7 +28,7 @@ window.languageLinks = function() {
 				chrome.hideSpinner();
 				$('#langlinks').localize().show();
 
-				chrome.setupScrolling('#langList');
+				chrome.setupScrolling('#langlinks .scroller');
 			});
 		});
 	}

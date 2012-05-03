@@ -65,7 +65,7 @@ window.appHistory = function() {
 				chrome.hideOverlays();
 				chrome.hideContent();
 				$('#history').localize().show();
-				chrome.setupScrolling('#historyList');
+				chrome.setupScrolling('#history .scroller');
 			});
 		});
 
