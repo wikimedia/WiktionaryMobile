@@ -53,7 +53,6 @@
 
 		request.done(function(data) {
 			var page = Page.fromRawJSON(title, data, lang);
-			p = page;
 			d.resolve(page);
 		});
 
