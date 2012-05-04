@@ -10,6 +10,12 @@
 		var lead = {};
 		var sections = [];
 		var lastCollapsibleSection = {subSections: []};
+
+		if(typeof rawJSON.mobileview.redirected !== "undefined") {
+			// If we're redirected, use the final page name
+			title = rawJSON.mobileview.redirected;
+		}
+
 		$.each(rawJSON.mobileview.sections, function(index, section) {
 			if(section.id === 0) {
 				// Lead Section
