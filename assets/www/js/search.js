@@ -8,6 +8,14 @@ window.search = function() {
 		}
 	}
 
+	function handleNetworkFailure(err) {
+		// We abort previous requests before making a new one
+		// So we don't need to be showing error messages when the error is an abort
+		if(err.statusText !== "abort") {
+			chrome.showNoConnectionMessage();
+		}
+	}
+
 	function performSearch(term, isSuggestion) {
 		if(term == '') {
 			chrome.showContent();
@@ -39,9 +47,7 @@ window.search = function() {
 			if(suggestion) {
 				getSearchResults(suggestion, 'true');
 			}
-		}).fail(function(err) {
-			console.log("ERROR!" + JSON.stringify(err));
-		});
+		}).fail(handleNetworkFailure);
 	}
 
 	function getSuggestionFromSuggestionResults(suggestion_results) {
@@ -70,9 +76,7 @@ window.search = function() {
 				searchResults.push(result.title);
 			}
 			renderResults([term, searchResults], false);
-		}).fail(function(err) { 
-			console.log("ERROR!" + JSON.stringify(err));
-		});
+		}).fail(handleNetworkFailure);
 	}
 
 	function getSearchResults(term, didyoumean) {
@@ -92,9 +96,7 @@ window.search = function() {
 				console.log('Did you mean?', didyoumean);
 				renderResults(results, didyoumean);
 			}
-		}).fail(function(err) {
-			console.log("ERROR!" + JSON.stringify(err));
-		});
+		}).fail(handleNetworkFailure);
 	}
 
 	function onSearchResultClicked() {

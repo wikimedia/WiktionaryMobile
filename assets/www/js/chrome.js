@@ -188,7 +188,7 @@ window.chrome = function() {
 	}
 
 	function showNoConnectionMessage() {
-		alert(mw.message('error-offline-prompt'));
+		navigator.notification.alert(mw.message('error-offline-prompt').plain());
 	}
 
 	function toggleMoveActions() {
