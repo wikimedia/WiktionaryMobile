@@ -24,7 +24,6 @@ window.search = function() {
 		chrome.showSpinner();
 
 		if(!isSuggestion) {
-			console.log('for term: ' + term);
 			getFullTextSearchResults(term);
 		} else {
 			getSearchResults(term);
@@ -33,7 +32,6 @@ window.search = function() {
 
 	function getDidYouMeanResults(results) {
 		// perform did you mean search
-		console.log("Performing 'did you mean' search for", results[0]);
 		stopCurrentRequest();
 		curReq = app.makeAPIRequest({
 			action: 'query',
@@ -51,10 +49,8 @@ window.search = function() {
 	}
 
 	function getSuggestionFromSuggestionResults(suggestion_results) {
-		console.log("Suggestion results", suggestion_results);
 		if(typeof suggestion_results.query.searchinfo != 'undefined') {
 			var suggestion = suggestion_results.query.searchinfo.suggestion;
-			console.log('Suggestion found:', suggestion);
 			return suggestion;
 		} else {
 			return false;
@@ -87,13 +83,11 @@ window.search = function() {
 		}).done(function(data) {
 			var results = data;
 			if(results[1].length === 0) { 
-				console.log("No results for", term);
 				getDidYouMeanResults(results);
 			} else {
 				if(typeof didyoumean == 'undefined') {
 					didyoumean = false;
 				}
-				console.log('Did you mean?', didyoumean);
 				renderResults(results, didyoumean);
 			}
 		}).fail(handleNetworkFailure);
@@ -114,7 +108,6 @@ window.search = function() {
 		var template = templates.getTemplate('search-results-template');
 		if(results.length > 0) {
 			var searchParam = results[0];
-			console.log("searchParam", searchParam);
 			var searchResults = results[1].map(function(title) {
 				return {
 					key: app.urlForTitle(title),
