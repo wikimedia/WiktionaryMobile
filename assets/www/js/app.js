@@ -85,9 +85,9 @@ window.app = function() {
 		} else {
 			loadLocalPage('error.html');
 		}
-		languageLinks.clearLanguages();
 		setMenuItemState('read-in', false);
 		setPageActionsState(false);
+		chrome.hideSpinner();
 		$("#page-footer").hide();
 		app.curPage = null;
 	}
@@ -104,6 +104,7 @@ window.app = function() {
 				d.resolve(page);
 			}).fail(function(xhr) {
 				setErrorPage(xhr.status);	
+				d.reject(xhr);
 			});
 		}
 

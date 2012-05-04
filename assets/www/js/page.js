@@ -69,6 +69,8 @@
 		request.done(function(data) {
 			var page = Page.fromRawJSON(title, data, lang);
 			d.resolve(page);
+		}).fail(function(err) {
+			d.reject(err);
 		});
 
 		return d;
