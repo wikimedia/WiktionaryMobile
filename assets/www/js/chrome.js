@@ -27,7 +27,9 @@ window.chrome = function() {
 		$('base').attr('href', page.getCanonicalUrl());
 
 		if(l10n.isLangRTL(page.lang)) {
-			$("#main").attr('dir', 'rtl');
+			$("#content").attr('dir', 'rtl');
+		} else {
+			$("#content").attr('dir', 'ltr');
 		}
 		$("#main").html(page.toHtml());
 

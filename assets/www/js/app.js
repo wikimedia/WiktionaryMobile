@@ -128,11 +128,6 @@ window.app = function() {
 	function setContentLanguage(language) {
 		preferencesDB.set('language', language);
 		app.baseURL = app.baseUrlForLanguage(language);
-		if(l10n.isLangRTL(language)) {
-			$("#content").attr('dir', 'rtl');
-		} else {
-			$("#content").attr('dir', 'ltr');
-		}
 	}
 
 	function setFontSize(size) {
