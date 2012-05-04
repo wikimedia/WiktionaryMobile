@@ -732,3 +732,7 @@ the scrollable divs seem to be giving us lots of bugs
 	display: block;
 	margin-bottom: 5px;
 }
+
+.mw-cite-backlink {
+	display: none;
+}
