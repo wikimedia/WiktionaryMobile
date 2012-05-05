@@ -175,7 +175,7 @@ window.app = function() {
 
 	function navigateToPage(url, options) {
 		var title = app.titleForUrl(url);
-		var lang = preferencesDB.get('language');
+		var lang = app.languageForUrl(url);
 		return app.navigateTo(title, lang, options);
 	}
 
@@ -185,6 +185,12 @@ window.app = function() {
 		} else {
 			return null;
 		}
+	}
+
+	function languageForUrl(url) {
+		// Use the least significant part of the hostname as language
+		// So en.wikipedia.org would be 'en', and so would en.wiktionary.org
+		return url.match(/^https?:\/\/([^.]+)./)[1];	
 	}
 
 	function titleForUrl(url) {
@@ -230,6 +236,7 @@ window.app = function() {
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
 		titleForUrl:titleForUrl,
+		languageForUrl: languageForUrl,
 		baseUrlForLanguage: baseUrlForLanguage,
 		setCaching: setCaching,
 		loadPage: loadPage,
