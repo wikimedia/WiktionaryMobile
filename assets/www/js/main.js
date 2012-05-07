@@ -26,10 +26,6 @@ function init() {
 	document.addEventListener("deviceready", function() {chrome.initialize(); }, true);
 }
 
-function homePage() {
-	app.navigateToPage(app.baseURL);
-}
-
 function aboutPage() {
 	chrome.hideOverlays();
 	$.get(ROOT_URL + 'AUTHORS').then(function(authors) {

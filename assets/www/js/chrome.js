@@ -110,7 +110,7 @@ window.chrome = function() {
 			toggleMoveActions();
 
 			$(".titlebarIcon").bind('click', function() {
-				homePage();
+				app.loadMainPage();
 				return false;
 			});
 			$("#searchForm").bind('submit', function() {

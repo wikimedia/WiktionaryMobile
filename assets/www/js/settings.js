@@ -75,7 +75,7 @@ window.appSettings = function() {
 	function onContentLanguageChanged() {
 		var selectedLanguage = $(this).val();
 		app.setContentLanguage(selectedLanguage);
-		homePage();
+		app.loadMainPage();
 	}
 
 	function onFontSizeChanged() {
