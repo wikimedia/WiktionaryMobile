@@ -16,6 +16,15 @@
 			title = rawJSON.mobileview.redirected;
 		}
 
+		if(typeof rawJSON.mobileview.error !== "undefined") {
+			// Only two types of errors possible when the mobileview api returns
+			// One is a 404 (missingtitle), other is an invalid title (usually empty title)
+			// We're redirecting empty title to main page in app.navigateTo
+			if(rawJSON.mobileview.error.code === "missingtitle") {
+				return null;
+			}
+		}
+
 		$.each(rawJSON.mobileview.sections, function(index, section) {
 			if(section.id === 0) {
 				// Lead Section

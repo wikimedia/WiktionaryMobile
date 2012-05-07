@@ -22,7 +22,8 @@ window.app = function() {
 		}
 
 		app.getWikiMetadata().done(function(wikis) {
-			app.navigateTo(wikis[lang].mainPage, lang).done(function(data) {
+			var mainPage = wikis[lang].mainPage;
+			app.navigateTo(mainPage, lang).done(function(data) {
 				d.resolve(data);
 			}).fail(function(err) {
 				d.reject(err);
@@ -96,6 +97,9 @@ window.app = function() {
 
 		function doRequest() {
 			Page.requestFromTitle(title, language).done(function(page) {
+				if(page === null) {
+					setErrorPage(404);
+				}
 				setCurrentPage(page);
 				d.resolve(page);
 			}).fail(function(xhr) {
@@ -159,6 +163,11 @@ window.app = function() {
 		var d = $.Deferred();
 		var options = $.extend({cache: false, updateHistory: true}, options || {});
 		var url = app.urlForTitle(title, lang);
+
+		if(title === "") {
+			return app.loadMainPage(lang);
+		}
+
 		$('#searchParam').val('');
 		chrome.showContent();
 		if(options.hideCurrent) {
