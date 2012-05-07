@@ -256,12 +256,6 @@ window.chrome = function() {
 
 			event.preventDefault();
 
-			// Handle File: and Image: pages for enwiki
-			// FIXME: Handle it for other languages. Should be gone before release
-			if(url.match(/\/wiki\/(File|Image):/)) {
-				chrome.openExternalLink(url);
-			}
-
 			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
 				// ...and load it through our intermediate cache layer.
 				app.navigateToPage(url);
