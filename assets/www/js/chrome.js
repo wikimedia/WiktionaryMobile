@@ -187,8 +187,12 @@ window.chrome = function() {
 		}
 	}
 
-	function showNoConnectionMessage() {
-		navigator.notification.alert(mw.message('error-offline-prompt').plain());
+	function popupErrorMessage(xhr) {
+		if(xhr === "error") {
+			navigator.notification.alert(mw.message('error-offline-prompt').plain());
+		} else {
+			navigator.notification.alert(mw.message('error-server-issue-prompt').plain());
+		}
 	}
 
 	function toggleMoveActions() {
@@ -298,7 +302,7 @@ window.chrome = function() {
 		showContent: showContent,
 		hideContent: hideContent,
 		addPlatformInitializer: addPlatformInitializer,
-		showNoConnectionMessage: showNoConnectionMessage,
+		popupErrorMessage: popupErrorMessage,
 		setupFastClick: setupFastClick,
 		isTwoColumnView: isTwoColumnView,
 		openExternalLink: openExternalLink,

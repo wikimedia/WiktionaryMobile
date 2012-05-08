@@ -30,9 +30,9 @@ window.languageLinks = function() {
 
 				chrome.setupScrolling('#langlinks .scroller');
 			});
-		}).fail(function() {
+		}).fail(function(err, xhr) {
 			chrome.hideSpinner();
-			chrome.showNoConnectionMessage();
+			chrome.popupErrorMessage(xhr);
 		});
 	}
 

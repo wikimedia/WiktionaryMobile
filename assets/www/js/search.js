@@ -8,11 +8,12 @@ window.search = function() {
 		}
 	}
 
-	function handleNetworkFailure(err) {
+	function handleNetworkFailure(err, xhr) {
 		// We abort previous requests before making a new one
 		// So we don't need to be showing error messages when the error is an abort
 		if(err.statusText !== "abort") {
-			chrome.showNoConnectionMessage();
+			chrome.popupErrorMessage(xhr);
+			chrome.hideSpinner();
 		}
 	}
 
