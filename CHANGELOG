@@ -155,3 +155,19 @@
 
 - Tapping on images works only on English wikipedia - opens external browser
 - Main page does not show Mobile Main page
+
+## Android v1.2beta2 & iOS v3.2beta2 ##
+
+### Common ###
+
+- Improved error handling of network issues
+- Show mobile formatted Main page
+- Handle File: pages properly
+- Navigating to URLs in languages other than the default works properly
+- RTL is now handled properly - separate for page contents and the UI
+- 'Read In' links now actually work
+
+### iOS specific ###
+
+- Scrolling in search, saved pages and history overlays works on iOS 4.x
+- Article scrolling should be much better on iOS 4.x
