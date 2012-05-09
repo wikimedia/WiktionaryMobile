@@ -7,7 +7,21 @@
 //
 
 #import "ReadItLaterFull.h"
+#import "AppDelegate.h"
 
+#pragma mark Coordinator / VC delegate
+
+// JY 4/12/12 Private class extension moved from 'private' category in header
+@interface ReadItLaterFull ()
+
+-(id)openSetup:(NSURL *)url title:(NSString *)title;
+-(void)showMessage:(NSString *)message loading:(BOOL)loading;
+-(BOOL)handleError:(NSString *)error;
+-(void)hideMessageAndReleaseWhenDone:(BOOL)release;
+-(void)showSpinnerCancelButton;
+-(void)done;
+
+@end
 
 @implementation ReadItLaterFull
 
@@ -111,25 +125,23 @@
 
 
 -(id)openSetup:(NSURL *)url title:(NSString *)title {
-
+    
 	self = [super init];
-
-	// Create and add base viewController to window	
-	self.baseViewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-	baseViewController.view.opaque = YES;
-	baseViewController.view.backgroundColor = [UIColor clearColor];
-	
-	[[[UIApplication sharedApplication] keyWindow] addSubview:baseViewController.view];
-	[[[UIApplication sharedApplication] keyWindow] makeKeyAndVisible];
-	
-	
-	// Create the fullView
+    
+    // JY 4/12/12 Now presents from the base AppDelegate view controller instead of creating a new stack.
+    // This allows rotation events to propagate along properly, but only works without further thought
+    // because the base view controller conveniently happens to be the one we want to present from.
+    // If other view controllers are being used, this might cause problems. For PhoneGap it's fine for now.
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;	
+    self.baseViewController = appDelegate.viewController;
+    
+    // Create the fullView
 	self.fullView = [[ReadItLaterFullView alloc] initWithNibName:nil bundle:nil];
 	fullView.delegate = self;
 	
-	self.navController = [[UINavigationController alloc] initWithRootViewController:fullView];
-	
-	[baseViewController presentModalViewController:navController animated:YES];
+	self.navController = [[UINavigationController alloc] initWithRootViewController:self.fullView];
+    
+    [self.baseViewController presentModalViewController:self.navController animated:YES];
 	
 	
 	if (url != nil) {
@@ -142,12 +154,12 @@
 }
 
 -(void)remove {
-	[baseViewController dismissModalViewControllerAnimated:YES];
+	[self.baseViewController dismissModalViewControllerAnimated:YES];
 }
 
--(void)removeTheController {
-	[baseViewController.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.01];	
-}
+/*-(void)removeTheController {
+ [baseViewController.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.01];	
+ }*/
 
 - (void)dealloc {
 	[baseViewController release];
@@ -254,6 +266,18 @@
 @end
 
 
+#pragma mark - View Controller
+
+
+// JY 4/12/12 Private class extension moved from 'private' category in header
+
+@interface ReadItLaterFullView ()
+
+-(void)changeToSignupFinishedScreen;
+-(UITextField *)createFormField;
+
+@end
+
 
 @implementation ReadItLaterFullView
 
@@ -283,8 +307,7 @@
 			[ReadItLaterFull save:pendingUrl title:pendingTitle];
 		}
 		
-		[self.navigationController dismissModalViewControllerAnimated:YES];
-		[self.navigationController.parentViewController.view removeFromSuperview];
+        [delegate remove];
 		[self release];
 	}
 	
@@ -314,7 +337,7 @@
 	
 	UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
 	[self setView:view];
-
+    
 	
 	// -- Fill Navigation Bar
 	UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelSetup)];
@@ -332,9 +355,9 @@
 	
 	[self.navigationItem setTitleView:viewTypeControl];
 	[viewTypeControl release];
-
+    
 }
-	
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -623,11 +646,11 @@
 
 //
 
-
--(void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-	[delegate removeTheController];
-}
+/*
+ -(void)viewDidDisappear:(BOOL)animated {
+ [super viewDidDisappear:animated];
+ [delegate removeTheController];
+ } */
 
 
 
@@ -635,13 +658,19 @@
     [super dealloc];
 }
 
-
-
-
-
-
-
-
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    // We support everything on iPads and 3 on iPhones
+    // FIXME: Read from the plist our supported interfaces, do not hardcode
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return( interfaceOrientation == UIInterfaceOrientationLandscapeLeft
+               || interfaceOrientation == UIInterfaceOrientationLandscapeRight
+               || interfaceOrientation == UIInterfaceOrientationPortrait);
+    }
+}
 
 @end
 

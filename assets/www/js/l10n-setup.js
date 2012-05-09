@@ -111,9 +111,14 @@ window.l10n = function() {
 		step();
 	}
 
+	function isLangRTL(lang) {
+		var rtl_langs = ["arc","ar","ckb","dv","fa","he","khw","ks","mzn","pnb","ps","sd","ug","ur","yi"];
+		return $.inArray(lang, rtl_langs) !== -1;
+	}
 	return {
 		initLanguages: initLanguages,
 		navigatorLang: navigatorLang,
-		normalizeLanguageCode: normalizeLanguageCode
+		normalizeLanguageCode: normalizeLanguageCode,
+		isLangRTL: isLangRTL
 	};
 }();

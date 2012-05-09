@@ -2,6 +2,7 @@ var currentHistoryIndex = -1;
 
 var pageHistory = [];
 
+window.PROTOCOL = 'https';
 window.PROJECTNAME = 'wiktionary';
 (function() {
 	var url_parts = location.href.split('/');
@@ -48,6 +49,7 @@ function aboutPage() {
 			appSettings.showSettings();
 		});
 		chrome.doFocusHack();
-		chrome.doScrollHack('#about-page-overlay .scroller');
+		chrome.setupScrolling('#about-page-overlay .scroller');
+		chrome.scrollTo('#about-page-overlay .scroller', 0);
 	});
 }

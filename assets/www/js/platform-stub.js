@@ -21,6 +21,29 @@ if (ua.match(/; Android /)) {
     //Mozilla/5.0 (BlackBerry; U; BlackBerry AAAA; en-US) AppleWebKit/534.11+ (KHTML, like Gecko) Version/X.X.X.X Mobile Safari/534.11+
     platform = 'blackberry'
 }
+var detectorClasses = [];
+
+if(platform === 'ios') {
+	detectorClasses.push('iOS');
+	if(ua.match(/OS 4/)) {
+		detectorClasses.push('iOS-4');
+	} else if(ua.match(/OS 5/)) {
+		detectorClasses.push('iOS-5');
+	}
+}
+
+if(platform === 'android') {
+	detectorClasses.push('android');
+	if(ua.match(/Android 2/)) { 
+		detectorClasses.push('android-2');
+	} else if(ua.match(/Android 3/)) {
+		detectorClasses.push('android-3');
+	} else if(ua.match(/Android 4/)) {
+		detectorClasses.push('android-4');
+	}
+}
+
+$('html').addClass(detectorClasses.join(' '));
 
 if (platform == 'unknown') {
 	// Assume we're a generic web browser.

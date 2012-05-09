@@ -1,5 +1,10 @@
 // iOS+PhoneGap-specific setup
 
+// set iOS 4.2 to be HTTP not HTTPS
+if(navigator.userAgent.match(/OS 4_2/g)) {
+	window.PROTOCOL = 'http';
+}
+
 function getAboutVersionString() {
 	return "3.1.1";
 }
@@ -31,10 +36,12 @@ savedPages.doSave = function(url, title) {
 	// Get the entire HTML again
 	// Hopefully this is in cache
 	// What we *really* should be doing is putting all this in an SQLite DataBase. FIXME
+	chrome.showSpinner();
 	$.get(url,
 			function(data) {
 				urlCache.saveCompleteHtml(url, data).then(function() {;
 					chrome.showNotification(mw.message('page-saved', title).plain());
+					chrome.hideSpinner();
 				});
 			}
 		 );
@@ -71,7 +78,44 @@ chrome.addPlatformInitializer(function() {
 		console.log("failed FB init:(");
 	});
 	console.log("Logged in!");
+	// Fix scrolling on iOS 4.x after orient change
+	window.addEventListener('resize', function() {
+		chrome.setupScrolling('#content');
+	});
 });
+
+// @Override
+function showPageActions(origin) {
+	var pageActions = [
+		mw.msg('menu-savePage'),
+		mw.msg('menu-ios-open-safari'),
+		mw.msg('menu-share-ril'),
+		mw.msg('menu-share-fb'),
+		mw.msg('menu-cancel')
+	];
+	// iOS less than 5 does not have Twitter. 
+	var cancelIndex = 4;
+	if(navigator.userAgent.match(/OS 5/g)) {
+		pageActions.splice(pageActions.length - 1, 0, mw.msg('menu-share-twitter'));
+		cancelIndex = 5;
+	}
+	popupMenu(pageActions, function(value, index) {
+		if (index == 0) {
+			savedPages.saveCurrentPage();
+		} else if (index == 1) {
+			shareSafari();
+		} else if (index == 2) {
+			shareRIL();
+		} else if (index == 3) {
+			shareFB();
+		} else if (index == 4 && cancelIndex != 4) {
+			shareTwitter();
+		}
+	}, {
+		cancelButtonIndex: cancelIndex,
+		origin: this
+	});
+}
 
 function shareFB() {
 	var url = app.getCurrentUrl().replace('.m.', '.');
@@ -126,26 +170,28 @@ chrome.showNotification = function(message) {
 	}, "");
 	return d;
 };
-
-origDoScrollHack = chrome.doScrollHack;
-// @Override
-chrome.doScrollHack = function(element, leaveInPlace) {
-	// @fixme only use on iOS 4.2?
-	if (navigator.userAgent.match(/iPhone OS [34]/)) {
-		var $el = $(element),
-			scroller = $el[0].scroller;
+if(navigator.userAgent.match(/OS 4/)) {
+	chrome.setupScrolling = function(selector) {
+		console.log("MODIFIED!");
+		var $el = $(selector);
+		var scroller = $el[0].scroller;
 		if (scroller) {
 			window.setTimeout(function() {
 				scroller.refresh();
-			}, 0);
+				console.log("Refreshing!");
+			}, 200); // HACK: Making this zero does do the refresh properly
+			// Quite possibly that the DOM takes a while to actually settle down
 		} else {
 			scroller = new iScroll($el[0]);
 			$el[0].scroller = scroller;
 		}
-		if (!leaveInPlace) {
-			scroller.scrollTo(0, 0);
-		}
-	} else {
-		origDoScrollHack(element, leaveInPlace);
 	}
+
+	chrome.scrollTo = function(selector, offsetY) {
+		var $el = $(selector);
+		var scroller = $el[0].scroller;
+		if(scroller) {
+			scroller.scrollTo(0, offsetY, 200);
+		}
+	};
 }

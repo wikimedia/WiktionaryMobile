@@ -67,6 +67,12 @@ window.appSettings = function() {
 		chrome.hideContent();
 		$('#settings').localize().show();
 		chrome.doFocusHack();
+		// WTFL: The following line of code is necessary to make the 'back' button
+		// work consistently on iOS. According to warnings by brion in index.html, 
+		// doing this line will break things in Android. Need to test before merge.
+		// Also, I've no clue why this fixes the back button not working, but it does
+		chrome.setupScrolling("#settings");
+		chrome.scrollTo("#settings", 0);
 	}
 
 	function onContentLanguageChanged() {

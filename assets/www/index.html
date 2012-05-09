@@ -11,13 +11,12 @@
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/webkit-sqlite.js"></script>
 
 	<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/zepto.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/hogan.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/2.5.3-crypto-md5.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/urlcache.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.localize.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/iscroll.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/iscroll-lite.js"></script>
 
 	<script type="text/javascript" charset="utf-8" src="js/propertiesFileReader.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/preferences.js"></script>
@@ -25,7 +24,7 @@
 
 	<!-- app logic -->
   <script type="text/javascript" charset="utf-8" src="js/wiktionary.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/network.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/page.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/templates.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/main.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/savedpages.js"></script>
@@ -40,17 +39,18 @@
 
 	<!-- MobileFrontend -->
 	<script type="text/javascript" charset="utf-8" src="js/mobilefrontend.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/toggle.js"></script>
 
 	<!-- platform-specific setup and overrides -->
 	<script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
 
-	<link rel="stylesheet" href="app.css" />  
-	<link rel="stylesheet" href="common.css" />
+	<link rel="stylesheet" href="MobileFrontend/stylesheets/beta_common.css" />
+	<link rel="stylesheet" href="MobileFrontend/stylesheets/hacks.css" />
+	<link rel="stylesheet" href="MobileFrontend/stylesheets/sections.css" />
+	<link rel="stylesheet" href="app.css" />
   <link rel="stylesheet" href="wiktionary.css" />
 </head>
 
-<body onload="init();">
+<body onload="init();" class="togglingEnabled nativeMenu">
 
 	<div id="templates">
 		<script type="text/html" id="settings-page-template">
@@ -78,7 +78,7 @@
 		</script>
 		<script type="text/html" id="saved-pages-template">
 			{{#pages}}
-				<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}">
+			<div class="listItemContainer" data-page-url="{{key}}" data-page-title="{{title}}" data-page-lang="{{lang}}">
 					<a class="listItem savedPage">
 						<span class="iconSavedPage"></span>
 						<span class="text deleteEnabled">{{title}}</span>
@@ -119,6 +119,28 @@
 			</div>
 		</script>
 
+		<script type="text/html" id="content-template">
+            <h1>{{title}}</h1>
+            <div class="lead">
+                {{{lead.text}}}
+            </div>
+			{{#sections}}
+			<div class="section">
+				<h{{level}} class="section_heading" data-section-id="{{id}}">{{{line}}} <button class='show'></button><button class="hide"></button></h{{level}}>
+				<div class="content_block" id="content_{{id}}"> </div>
+			</div>
+			{{/sections}}
+		</script>
+
+		<script type="text/html" id="section-template">
+			{{{text}}} 
+				{{#subSections}} 
+					<h{{level}} class="section_heading" id="section_{{id}}">{{{line}}}</h{{level}}>
+					{{{text}}} 
+				{{/subSections}}
+		</script>
+
+
 		<script type="text/html" id="history-template">
 			{{#pages}}
 				<div class="listItemContainer" data-page-url="{{value}}" data-page-title="{{title}}">
@@ -134,13 +156,13 @@
 		</script>
 
 		<script type="text/html" id="language-links-template">
-			{{#languages}}
-			<div class="listItemContainer" data-page-url="{{url}}">
+			{{#langLinks}}
+			<div class="listItemContainer" data-title="{{title}}" data-lang="{{lang}}">
 				<a class="listItem languageLink" lang="{{lang}}">
-					<span class="text">{{name}}</span>
+					<span class="text">{{title}} ({{lang}})</span>
 				</a>
 			</div>
-			{{/languages}}
+			{{/langLinks}}
 		</script>
 		
 		<script type="text/html" id="audio-list-template">
@@ -266,16 +288,16 @@
 	</div>  
 
 	<menu id="appMenu" type="context">
-		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="true" action="read-in" />
-		<command type="command" id="soundCmd" icon="optionListen.png" disabled="true" action="listen-sound" />
-		<command type="command" id="sharePageCmd" icon="optionSharePage.png" disabled="false" action="share-page" />
-		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="save-page" />
-		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="view-saved-pages" />
-		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="view-history" />
-		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="go-forward" />
-		<command type="command" id="selectTextCmd" disabled="false" action="select-text" />
-		<command type="command" id="settingsCmd" icon="optionSettings.png" disabled="false" action="view-settings" />
-		<command type="command" id="WOTDCmd" disabled="false" action="word-of-the-day" />
+		<command type="command" id="languageCmd" icon="optionLanguage.png" disabled="true" action="read-in"></command>
+		<command type="command" id="soundCmd" icon="optionListen.png" disabled="true" action="listen-sound"></command>
+		<command type="command" id="sharePageCmd" icon="optionSharePage.png" disabled="false" action="share-page"></command>
+		<command type="command" id="savePageCmd" icon="optionAddBookmark.png" disabled="false" action="save-page"></command>
+		<command type="command" id="savedPagesCmd" icon="optionReadLater.png" disabled="false" action="view-saved-pages"></command>
+		<command type="command" id="historyCmd" icon="optionViewHistory.png" disabled="false" action="view-history"></command>
+		<command type="command" id="forwardCmd" icon="optionForward.png" disabled="true" action="go-forward"></command>
+		<command type="command" id="selectTextCmd" disabled="false" action="select-text"></command>
+		<command type="command" id="settingsCmd" icon="optionSettings.png" disabled="false" action="view-settings"></command>
+		<command type="command" id="WOTDCmd" disabled="false" action="word-of-the-day"></command>
 	</menu>
 
 </body>

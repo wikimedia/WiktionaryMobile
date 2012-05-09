@@ -1,6 +1,7 @@
 window.app = function() {
 
-	function loadCachedPage (url, noScroll) {
+	function loadCachedPage (url, title, lang) {
+		chrome.showSpinner();
 		var d = $.Deferred();
 		var replaceRes = function() {
 
@@ -10,13 +11,16 @@ window.app = function() {
 				var gotLinkPath = function(linkPath) {
 					em.attr('src', 'file://' + linkPath.file);
 				}
-				var target = this.src.replace('file:', 'https:');
+				var target = this.src.replace('file:', window.PROTOCOL + ':');
 				window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
 			});
 		};
 		var gotPath = function(cachedPage) {
-			loadPage('file://' + cachedPage.file, url, noScroll).then(function() {
+			
+			$.get('file://' + cachedPage.file).then(function(data) {
+				var page = Page.fromRawJSON(title, JSON.parse(data), lang);
 				replaceRes();
+				setCurrentPage(page);
 				d.resolve();
 			});
 		}
@@ -28,36 +32,60 @@ window.app = function() {
 		return d;
 	}
 
-	function loadPage(url, origUrl, noScroll) {
+	function setCurrentPage(page) {
+		app.curPage = page;
+		chrome.renderHtml(page);
+
+		setPageActionsState(true);
+		setMenuItemState('read-in', true);
+		MobileFrontend.init();
+		chrome.setupScrolling("#content");
+		chrome.scrollTo("#content", 0);
+		appHistory.addCurrentPage();
+		chrome.toggleMoveActions();
+		chrome.showContent();
+		chrome.hideSpinner();
+
+		if (window.wiktionary) {
+			window.wiktionary.onPageLoad();
+			// Hacky use of setTimeout. We have to do this so that we don't get
+			// JS errors. Changing this might break the use of Show/Hide buttons
+			setTimeout(window.wiktionary.afterPageLoad, 5);
+		}
+	}
+
+	function setErrorPage(type) {
+		if(type == 404) {
+			loadLocalPage('404.html');
+		} else {
+			loadLocalPage('error.html');
+		}
+		languageLinks.clearLanguages();
+		audioPlayer.clearMenuArray();
+		setMenuItemState('read-in', false);
+		setMenuItemState('listen-sound', false);
+		setPageActionsState(false);
+		app.curPage = null;
+	}
+
+	function loadPage(url, origUrl) {
 		var d = $.Deferred();
 		origUrl = origUrl || url;
-		console.log('hideAndLoad url ' + url);
-		console.log('hideAndLoad origUrl ' + origUrl);
-		var doRequest = function() {
-			network.makeRequest({
-				url: url,
-				dataType: 'text',
-				success: function(data) {
-						chrome.renderHtml(data, origUrl, noScroll);
-						chrome.onPageLoaded(noScroll);
-						d.resolve();
-					},
-				error: function(xhr) {
-					if(xhr.status == 404) {
-						loadLocalPage('404.html');
-					} else {
-						loadLocalPage('error.html');
-					}
-					languageLinks.clearLanguages();
-					audioPlayer.clearMenuArray();
-					setMenuItemState('read-in', false);
-					setMenuItemState('listen-sound', false);
-					setPageActionsState(false);
-				}
+
+		var title = app.titleForUrl(url);
+		if(title === "") {
+			title = "Main_Page"; // FIXME
+		}
+		function doRequest() {
+			Page.requestFromTitle(title, preferencesDB.get("language")).done(function(page) {
+				setCurrentPage(page);
+				d.resolve(page);
+			}).fail(function(xhr) {
+				setErrorPage(xhr.status);	
 			});
-		};
-		console.log("Apparently we are connected = " + network.isConnected());
-		if(!network.isConnected()) {
+		}
+
+		if(!navigator.onLine) {
 			app.setCaching(true, function() {
 				console.log("HEYA!");
 				doRequest();
@@ -74,7 +102,6 @@ window.app = function() {
 		$('base').attr('href', ROOT_URL);
 		$('#main').load(page, function() {
 			$('#main').localize();
-			chrome.onPageLoaded();
 			d.resolve();
 		});
 		return d;
@@ -85,7 +112,11 @@ window.app = function() {
 	}
 
 	function baseUrlForLanguage(lang) {
-		return 'https://' + lang + '.m.' + PROJECTNAME + '.org';
+		return window.PROTOCOL + '://' + lang + '.' + PROJECTNAME + '.org';
+	}
+
+	function makeCanonicalUrl(lang, title) {
+		return baseUrlForLanguage(lang) + '/wiki/' + encodeURIComponent(title.replace(/ /g, '_'));
 	}
 
 	function mobileUrlForUrl(url) {
@@ -143,8 +174,6 @@ window.app = function() {
 			console.log("navigating to " + url);
 			// Enable change language - might've been disabled in a prior error page
 			console.log('enabling language');
-			setPageActionsState(true);;
-			setMenuItemState('read-in', true);
 			if(options.hideCurrent) {
 				$("#content").show();
 			}			
@@ -153,17 +182,48 @@ window.app = function() {
 	}
 
 	function getCurrentUrl() {
-		return pageHistory[currentHistoryIndex];
+		if(app.curPage) {
+			return app.urlForTitle(app.curPage.title);
+		} else {
+			return null;
+		}
 	}
 
-	function getCurrentTitle() {
-		var url = getCurrentUrl(),
-			page = url.replace(/^https?:\/\/[^\/]+\/wiki\//, ''),
+	function titleForUrl(url) {
+		var page = url.replace(/^https?:\/\/[^\/]+(\/wiki\/)?/, ''),
 			unescaped = decodeURIComponent(page),
 			title = unescaped.replace(/_/g, ' ');
 		return title;
 	}
+	function getCurrentTitle() {
+		if(app.curPage) {
+			return app.curPage.title;
+		} else {
+			return null;
+		}
+	}
 
+	function makeAPIRequest(params, lang, method) {
+		// Force JSON
+		params.format = 'json';
+		lang = lang || preferencesDB.get('language');
+		method = method || "GET";
+		var url = app.baseUrlForLanguage(lang) + '/w/api.php';
+		if(method === 'POST') {
+			return $.post(url, params);
+		} else {
+			return $.get(url, params);
+		}
+	}
+
+	function track(eventId) {
+		makeAPIRequest({
+			eventid: eventId,
+			namespacenumber: 0,
+			token: '+/', // Anonymous token
+			additional: 'android' // System info
+		}, preferencesDB.get('language'));
+	}
 	var exports = {
 		setFontSize: setFontSize,
 		setContentLanguage: setContentLanguage,
@@ -171,10 +231,16 @@ window.app = function() {
 		getCurrentUrl: getCurrentUrl,
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
+		titleForUrl:titleForUrl,
 		baseUrlForLanguage: baseUrlForLanguage,
 		setCaching: setCaching,
 		loadPage: loadPage,
-		loadCachedPage: loadCachedPage
+		loadCachedPage: loadCachedPage, 
+		makeCanonicalUrl: makeCanonicalUrl,
+		makeAPIRequest: makeAPIRequest,
+		setCurrentPage: setCurrentPage,
+		track: track,
+		curPage: null
 	};
 
 	return exports;
