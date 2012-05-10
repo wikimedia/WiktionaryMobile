@@ -149,8 +149,7 @@ window.chrome = function() {
 	}
 
 	function loadFirstPage() {
-		// NOP
-		// Overriden in Android for loading URLs from intents
+		app.loadMainPage();
 	}
 
 	function isTwoColumnView() {
