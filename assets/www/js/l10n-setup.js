@@ -115,7 +115,10 @@ window.l10n = function() {
 	}
 
 	function isLangRTL(lang) {
-		var rtl_langs = ["arc","ar","ckb","dv","fa","he","khw","ks","mzn","pnb","ps","sd","ug","ur","yi"];
+		var rtl_langs = [
+			"arc", "arz", "ar", "bcc", "bqi", "ckb", "dv", "fa", "glk", "ha", "he",
+			"khw", "ks", "mzn", "pnb", "ps", "sd", "ug", "ur", "yi"
+		];
 		return $.inArray(lang, rtl_langs) !== -1;
 	}
 	return {
