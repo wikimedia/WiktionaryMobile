@@ -20,7 +20,7 @@ l10n.navigatorLang = function(success) {
 }
 
 function getAboutVersionString() {
-	return "1.0.1b";
+	return "1.0.1rc";
 }
 
 function setMenuItemState(action, state, noUpdate) {
