@@ -31,6 +31,8 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 				<data android:host="*.wiktionary.org" android:pathPrefix="/wiki" android:scheme="http" />
 				<data android:host="*.wiktionary.org" android:pathPrefix="/wiki" android:scheme="https" />
+				<data android:host="*.wiktionary.org" android:path="/" android:scheme="http" />
+				<data android:host="*.wiktionary.org" android:path="/" android:scheme="https" />
 			</intent-filter>
 			<intent-filter>
 				<action android:name="android.intent.action.SEARCH" />
