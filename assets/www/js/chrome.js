@@ -143,7 +143,7 @@ window.chrome = function() {
 
 			initContentLinkHandlers();
 			chrome.loadFirstPage();
-			chrome.setupFastClick("header, .titlebar");
+			chrome.setupFastClick(".titlebar");
 		});
 
 	}
