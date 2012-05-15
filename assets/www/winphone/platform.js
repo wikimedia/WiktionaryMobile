@@ -1,25 +1,22 @@
-// Web platform
-//
-// Works in Chrome with --disable-web-security
-// But, uh, never use that mode for real huh? :)
+// ...
+console.log('WinPhone platform.js');
 
-// @todo need menus!
 
-window.addEventListener('load', function() {
-	$(window).resize(fixFrameSize);
-	$('body').css('overflow', 'hidden');
-	fixFrameSize();
+//$('<script>').attr('src', 'winphone/cordova-1.6.1.js').appendTo('html');
+document.write('<script src="winphone/cordova-1.6.1.js"></script>');
 
-    loadContent();
-    chrome.doFocusHack();
-}, true);
+// http://bugs.jquery.com/ticket/10660
+$.support.cors = true;
 
-// Hack for sizing the iframe...
-function fixFrameSize() {
-	var $iframe = $('#main'),
-		pos = $iframe.offset(),
-		h = window.innerHeight - pos.top;
-	
-	console.log('h', h);
-	$iframe.height(h);
-}
+chrome.addPlatformInitializer(function() {
+	$('html').addClass('winphone');
+
+	// Attempt to disable whole-document scrolling
+	$(document).bind('touchstart', function(event) {
+		event.preventDefault();
+	});
+
+	document.addEventListener('backbutton', function(event) {
+		chrome.goBack();
+	});
+});

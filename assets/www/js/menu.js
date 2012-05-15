@@ -73,6 +73,7 @@ function updateMenuState() {
 		$button.append('<span>')
 			.appendTo($menu);
 	});
+	new NoClickDelay($("#menu")[0]);
 };
 
 // Default emulation, override with platform-specific menu popups

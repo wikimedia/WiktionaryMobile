@@ -6,26 +6,33 @@ window.languageLinks = function() {
 		var lang = parent.data("lang");
 		chrome.hideContent();
 		chrome.showSpinner();
-		Page.requestFromTitle(title, lang).done(function(page) {
-			app.setCurrentPage(page);
-		});
+		app.navigateTo(title, lang);
 	}
 
 	function showLangLinks(page) {
 		chrome.showSpinner();
 		page.requestLangLinks().done(function(langLinks) {
-			console.log(langLinks);
 			var template = templates.getTemplate("language-links-template");
-			$("#langList").html(template.render({langLinks: langLinks}));
-			$(".languageLink").click(onLanguageLinkClick);
-			chrome.hideOverlays();
-			chrome.hideContent();
-			chrome.hideSpinner();
-			$('#langlinks').localize().show();
+			app.getWikiMetadata().done(function(wikis) {
+				$.each(langLinks, function(i, link) {
+					link.dir = l10n.isLangRTL(link.lang) ? "rtl" : "ltr";
+					link.langName = wikis[link.lang].name;
+				});
+				langLinks.sort(function(l1, l2) {
+					return l1.langName.localeCompare(l2.langName);
+				});
+				$("#langList").html(template.render({langLinks: langLinks}));
+				$(".languageLink").click(onLanguageLinkClick);
+				chrome.hideOverlays();
+				chrome.hideContent();
+				chrome.hideSpinner();
+				$('#langlinks').localize().show();
 
-			chrome.doFocusHack();
-			chrome.setupScrolling('#langlinks .scroller');
-			chrome.scrollTo('#langlinks .scroller', 0);
+				chrome.setupScrolling('#langlinks .scroller');
+			});
+		}).fail(function(err, xhr) {
+			chrome.hideSpinner();
+			chrome.popupErrorMessage(xhr);
 		});
 	}
 

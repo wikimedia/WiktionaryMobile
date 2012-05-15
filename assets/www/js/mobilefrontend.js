@@ -1,7 +1,8 @@
 MobileFrontend = (function() {
 	return {
 		init: function() {
-			//MobileFrontend.toggle.init();
+		},
+		registerModule: function() {
 		},
 		message: function(name) {
 			return mw.message(name).plain();

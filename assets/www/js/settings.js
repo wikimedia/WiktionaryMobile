@@ -14,34 +14,28 @@ window.appSettings = function() {
 			];
 		}
 
-		if(locales.length == 0) {
-			$.ajax({
-				type:'GET',
-				url:requestUrl,
-				dataType: 'json',
-				success:function(results) {
-					var allLocales = results.sitematrix;
-
-					$.each(allLocales, function(key, value) {
-						// Because the JSON result from the sitematrix is messed up
-						if(!isNaN(key)) {
-							if(value.site.some(function(site) { return site.code == "wiki"; })) {
-								locales.push({
-									code: value.code,
-									name: value.name
-								});
-							}
-						}
-					});
-					chrome.hideSpinner();
-					renderSettings();
-				}
+		if(locales.length === 0) {
+			app.getWikiMetadata().done(function(wikis) { 
+				$.each(wikis, function(lang, wikiData) {
+					var locale = {
+						code: lang,
+						name: wikiData.name
+					};
+					if(wikiData.name !== wikiData.localName) {
+						locale.localName = wikiData.localName;
+					}
+					locales.push(locale);
+				});
+				locales.sort(function(l1, l2) {
+					return l1.name.localeCompare(l2.name);
+				});
+				renderSettings();
+				chrome.hideSpinner();
 			});
 		} else {
-			chrome.hideSpinner();
 			renderSettings();
+			chrome.hideSpinner();
 		}
-
 	}
 
 	function renderSettings() {
@@ -62,23 +56,26 @@ window.appSettings = function() {
 		$("#aboutPageLabel").click(function () {
 			aboutPage();
 		});
-
+		$(".externallink").click(function() {
+			var link = $(this).attr('data-link');
+			var url = app.baseURL + link;
+			chrome.openExternalLink(url);
+			return false;
+		});
 		chrome.hideOverlays();
 		chrome.hideContent();
 		$('#settings').localize().show();
-		chrome.doFocusHack();
 		// WTFL: The following line of code is necessary to make the 'back' button
 		// work consistently on iOS. According to warnings by brion in index.html, 
 		// doing this line will break things in Android. Need to test before merge.
 		// Also, I've no clue why this fixes the back button not working, but it does
 		chrome.setupScrolling("#settings");
-		chrome.scrollTo("#settings", 0);
 	}
 
 	function onContentLanguageChanged() {
 		var selectedLanguage = $(this).val();
 		app.setContentLanguage(selectedLanguage);
-		homePage();
+		app.loadMainPage();
 	}
 
 	function onFontSizeChanged() {

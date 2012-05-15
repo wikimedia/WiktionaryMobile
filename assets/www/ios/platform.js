@@ -6,7 +6,7 @@ if(navigator.userAgent.match(/OS 4_2/g)) {
 }
 
 function getAboutVersionString() {
-	return "3.1.1";
+	return "3.2beta2";
 }
 
 (function() {
@@ -24,27 +24,27 @@ function getAboutVersionString() {
 // Save page supporting code
 app.loadCachedPage = function (url) {
 	return urlCache.getCachedData(url).then(function(data) {
-		chrome.renderHtml(data, url);
-		chrome.onPageLoaded();
+		var pageData = JSON.parse(data);
+		var page = new Page(pageData.title, pageData.lead, pageData.sections, pageData.lang);
+		app.setCurrentPage(page);
 	}).fail(function(error) {
 		console.log('Error: ' + error);
 		chrome.hideSpinner();
 	});
 }
 
-savedPages.doSave = function(url, title) {
-	// Get the entire HTML again
-	// Hopefully this is in cache
-	// What we *really* should be doing is putting all this in an SQLite DataBase. FIXME
+savedPages.doSave = function() {
+	var url = app.curPage.getAPIUrl();
+	var data = JSON.stringify(app.curPage);
 	chrome.showSpinner();
-	$.get(url,
-			function(data) {
-				urlCache.saveCompleteHtml(url, data).then(function() {;
-					chrome.showNotification(mw.message('page-saved', title).plain());
-					chrome.hideSpinner();
-				});
-			}
-		 );
+	$.each(app.curPage.sections, function(i, section) {
+		chrome.populateSection(section.id);
+	});
+	urlCache.saveCompleteHtml(url, data, $("#main")).then(function() {
+		chrome.showNotification(mw.message('page-saved', app.curPage.title).plain());
+		app.track('mobile.app.wikipedia.save-page');
+		chrome.hideSpinner();
+	});
 }
 
 // @Override
@@ -113,7 +113,7 @@ function showPageActions(origin) {
 		}
 	}, {
 		cancelButtonIndex: cancelIndex,
-		origin: this
+		origin: origin
 	});
 }
 

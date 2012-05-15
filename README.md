@@ -6,7 +6,7 @@ This project has been forked from the <a href="https://github.com/wikimedia/Wiki
 
 1. Setup your development environment
 2. Setup the project
-3. Run `git submodules update --init` to grab our submodule dependencies (MobileFrontend)
+3. Run `git submodule update --init` to grab our submodule dependencies (MobileFrontend)
 
 ## Environment setup
 

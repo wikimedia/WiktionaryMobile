@@ -6,14 +6,25 @@
 		this.lang = lang;
 	};
 
-	Page.deserialize = function(data) {
-		return new Page(data.title, data.lead, data.sections);
-	};
-
 	Page.fromRawJSON = function(title, rawJSON, lang) {
 		var lead = {};
 		var sections = [];
 		var lastCollapsibleSection = {subSections: []};
+
+		if(typeof rawJSON.mobileview.redirected !== "undefined") {
+			// If we're redirected, use the final page name
+			title = rawJSON.mobileview.redirected;
+		}
+
+		if(typeof rawJSON.mobileview.error !== "undefined") {
+			// Only two types of errors possible when the mobileview api returns
+			// One is a 404 (missingtitle), other is an invalid title (usually empty title)
+			// We're redirecting empty title to main page in app.navigateTo
+			if(rawJSON.mobileview.error.code === "missingtitle") {
+				return null;
+			}
+		}
+
 		$.each(rawJSON.mobileview.sections, function(index, section) {
 			if(section.id === 0) {
 				// Lead Section
@@ -25,6 +36,9 @@
 				lastCollapsibleSection = section;
 				return;
 			} 
+			if(typeof section.references !== "undefined") {
+				section.references = true;
+			}
 			// Only consider leve 2 sections as 'sections'
 			// Group *all* subsections under them, no matter which level they are at
 			if(section.level == 2) {
@@ -54,8 +68,9 @@
 
 		request.done(function(data) {
 			var page = Page.fromRawJSON(title, data, lang);
-			p = page;
 			d.resolve(page);
+		}).fail(function(err) {
+			d.reject(err);
 		});
 
 		return d;
@@ -107,10 +122,18 @@
 		return JSON.stringify(this);
 	};
 
+	Page.prototype.getHistoryUrl = function() {
+		return this.getCanonicalUrl() + "?action=history";
+	}
+
+	Page.prototype.getCanonicalUrl = function() {
+		return app.baseUrlForLanguage(this.lang) + "/wiki/" + encodeURIComponent(this.title.replace(/ /g, '_'));
+	}
+
 	// Returns an API URL that makes a request that retreives this page
 	// Should mimic params from Page.requestFromTitle
 	Page.prototype.getAPIUrl = function() {
-		return app.baseUrlForLanguage(this.lang) + '/w/api.php?format=json&action=mobileview&page=' + this.title + '&redirects=1&prop=sections&sections=all&sectionprop=level|line';
+		return app.baseUrlForLanguage(this.lang) + '/w/api.php?format=json&action=mobileview&page=' + this.title + '&redirects=1&prop=sections&sections=all&sectionprop=level|line&noheadings=true';
 	};
 
 	Page.prototype.getCanonicalUrl = function() {

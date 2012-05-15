@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5488DCEC-480D-4A2C-BB16-DBE9F90ACAD5}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CordovaStarter1</RootNamespace>
+    <AssemblyName>CordovaStarter1</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>CordovaStarter1.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>CordovaStarter1.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WP7CordovaClassLib, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\assets\www\404.html">
+      <Link>www\404.html</Link>
+    </Content>
+    <Content Include="..\..\assets\www\app.css">
+      <Link>www\app.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\error.html">
+      <Link>www\error.html</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\button-dark-back.png">
+      <Link>www\image\button-dark-back.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\button-light-close.png">
+      <Link>www\image\button-light-close.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\button-light-wiki.png">
+      <Link>www\image\button-light-wiki.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\globe-bg.jpg">
+      <Link>www\image\globe-bg.jpg</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\icon.png">
+      <Link>www\image\icon.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\logo.png">
+      <Link>www\image\logo.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\select.png">
+      <Link>www\image\select.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\spinner.gif">
+      <Link>www\image\spinner.gif</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\splash.png">
+      <Link>www\image\splash.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\spr.png">
+      <Link>www\image\spr.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\wmf.png">
+      <Link>www\image\wmf.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\ios\toolbar-back.png">
+      <Link>www\image\ios\toolbar-back.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\ios\toolbar-forward.png">
+      <Link>www\image\ios\toolbar-forward.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\ios\toolbar-language.png">
+      <Link>www\image\ios\toolbar-language.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\ios\toolbar-nearby.png">
+      <Link>www\image\ios\toolbar-nearby.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\ios\toolbar-output.png">
+      <Link>www\image\ios\toolbar-output.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\ios\toolbar-settings.png">
+      <Link>www\image\ios\toolbar-settings.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\image\ios\toolbar-sources.png">
+      <Link>www\image\ios\toolbar-sources.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\index.html">
+      <Link>www\index.html</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\2.5.3-crypto-md5.js">
+      <Link>www\js\2.5.3-crypto-md5.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\app.js">
+      <Link>www\js\app.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\app_history.js">
+      <Link>www\js\app_history.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\chrome.js">
+      <Link>www\js\chrome.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\geo.js">
+      <Link>www\js\geo.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\hogan.min.js">
+      <Link>www\js\hogan.min.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\iscroll-lite.js">
+      <Link>www\js\iscroll-lite.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\iscroll.js">
+      <Link>www\js\iscroll.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\jquery-1.7.1.min.js">
+      <Link>www\js\jquery-1.7.1.min.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\jquery.localize.js">
+      <Link>www\js\jquery.localize.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\l10n-setup.js">
+      <Link>www\js\l10n-setup.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\langlinks.js">
+      <Link>www\js\langlinks.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\blackberry-persistent-storage.js">
+      <Link>www\js\lawnchair\adapters\blackberry-persistent-storage.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\dom.js">
+      <Link>www\js\lawnchair\adapters\dom.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\gears-sqlite.js">
+      <Link>www\js\lawnchair\adapters\gears-sqlite.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\ie-userdata.js">
+      <Link>www\js\lawnchair\adapters\ie-userdata.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\indexed-db.js">
+      <Link>www\js\lawnchair\adapters\indexed-db.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\memory.js">
+      <Link>www\js\lawnchair\adapters\memory.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\webkit-sqlite.js">
+      <Link>www\js\lawnchair\adapters\webkit-sqlite.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\adapters\window-name.js">
+      <Link>www\js\lawnchair\adapters\window-name.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\Lawnchair.js">
+      <Link>www\js\lawnchair\Lawnchair.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\plugins\aggregation.js">
+      <Link>www\js\lawnchair\plugins\aggregation.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\plugins\callbacks.js">
+      <Link>www\js\lawnchair\plugins\callbacks.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\plugins\pagination.js">
+      <Link>www\js\lawnchair\plugins\pagination.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\lawnchair\plugins\query.js">
+      <Link>www\js\lawnchair\plugins\query.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\main.js">
+      <Link>www\js\main.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\mediawiki.js">
+      <Link>www\js\mediawiki.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\menu.js">
+      <Link>www\js\menu.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\mobilefrontend.js">
+      <Link>www\js\mobilefrontend.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\page.js">
+      <Link>www\js\page.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\platform-stub.js">
+      <Link>www\js\platform-stub.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\preferences.js">
+      <Link>www\js\preferences.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\propertiesFileReader.js">
+      <Link>www\js\propertiesFileReader.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\savedpages.js">
+      <Link>www\js\savedpages.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\search.js">
+      <Link>www\js\search.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\settings.js">
+      <Link>www\js\settings.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\templates.js">
+      <Link>www\js\templates.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\js\urlcache.js">
+      <Link>www\js\urlcache.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\images\layers.png">
+      <Link>www\leaflet\images\layers.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\images\marker-shadow.png">
+      <Link>www\leaflet\images\marker-shadow.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\images\marker.png">
+      <Link>www\leaflet\images\marker.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\images\popup-close.png">
+      <Link>www\leaflet\images\popup-close.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\images\zoom-in.png">
+      <Link>www\leaflet\images\zoom-in.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\images\zoom-out.png">
+      <Link>www\leaflet\images\zoom-out.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\leaflet-src.js">
+      <Link>www\leaflet\leaflet-src.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\leaflet.css">
+      <Link>www\leaflet\leaflet.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\leaflet.ie.css">
+      <Link>www\leaflet\leaflet.ie.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\leaflet\leaflet.js">
+      <Link>www\leaflet\leaflet.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\beta_common.css">
+      <Link>www\MobileFrontend\stylesheets\beta_common.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\hacks.css">
+      <Link>www\MobileFrontend\stylesheets\hacks.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\images\hide.png">
+      <Link>www\MobileFrontend\stylesheets\images\hide.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\images\show.png">
+      <Link>www\MobileFrontend\stylesheets\images\show.png</Link>
+    </Content>
+    <Content Include="..\..\assets\www\MobileFrontend\stylesheets\sections.css">
+      <Link>www\MobileFrontend\stylesheets\sections.css</Link>
+    </Content>
+    <Content Include="..\..\assets\www\winphone\cordova-1.6.1.js">
+      <Link>www\winphone\cordova-1.6.1.js</Link>
+    </Content>
+    <Content Include="..\..\assets\www\winphone\platform.js">
+      <Link>www\winphone\platform.js</Link>
+    </Content>
+    <Content Include="CordovaSourceDictionary.xml" />
+    <Content Include="..\..\assets\www\AUTHORS">
+      <Link>www\AUTHORS</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ady-cyrl.properties">
+      <Link>www\messages\messages-ady-cyrl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-aeb.properties">
+      <Link>www\messages\messages-aeb.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-af.properties">
+      <Link>www\messages\messages-af.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ar.properties">
+      <Link>www\messages\messages-ar.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-arc.properties">
+      <Link>www\messages\messages-arc.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-arn.properties">
+      <Link>www\messages\messages-arn.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-as.properties">
+      <Link>www\messages\messages-as.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ast.properties">
+      <Link>www\messages\messages-ast.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-avk.properties">
+      <Link>www\messages\messages-avk.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ba.properties">
+      <Link>www\messages\messages-ba.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bar.properties">
+      <Link>www\messages\messages-bar.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-be-tarask.properties">
+      <Link>www\messages\messages-be-tarask.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bg.properties">
+      <Link>www\messages\messages-bg.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bjn.properties">
+      <Link>www\messages\messages-bjn.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bn.properties">
+      <Link>www\messages\messages-bn.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-br.properties">
+      <Link>www\messages\messages-br.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-bs.properties">
+      <Link>www\messages\messages-bs.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ca.properties">
+      <Link>www\messages\messages-ca.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ckb.properties">
+      <Link>www\messages\messages-ckb.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-cs.properties">
+      <Link>www\messages\messages-cs.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-cy.properties">
+      <Link>www\messages\messages-cy.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-da.properties">
+      <Link>www\messages\messages-da.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-de.properties">
+      <Link>www\messages\messages-de.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-diq.properties">
+      <Link>www\messages\messages-diq.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-dsb.properties">
+      <Link>www\messages\messages-dsb.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-el.properties">
+      <Link>www\messages\messages-el.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-en.properties">
+      <Link>www\messages\messages-en.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-eo.properties">
+      <Link>www\messages\messages-eo.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-es-formal.properties">
+      <Link>www\messages\messages-es-formal.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-es.properties">
+      <Link>www\messages\messages-es.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-et.properties">
+      <Link>www\messages\messages-et.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-eu.properties">
+      <Link>www\messages\messages-eu.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fa.properties">
+      <Link>www\messages\messages-fa.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fi.properties">
+      <Link>www\messages\messages-fi.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fo.properties">
+      <Link>www\messages\messages-fo.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fr.properties">
+      <Link>www\messages\messages-fr.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-frp.properties">
+      <Link>www\messages\messages-frp.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-fur.properties">
+      <Link>www\messages\messages-fur.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-gd.properties">
+      <Link>www\messages\messages-gd.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-gl.properties">
+      <Link>www\messages\messages-gl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-gu.properties">
+      <Link>www\messages\messages-gu.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-he.properties">
+      <Link>www\messages\messages-he.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-hi.properties">
+      <Link>www\messages\messages-hi.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-hr.properties">
+      <Link>www\messages\messages-hr.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-hsb.properties">
+      <Link>www\messages\messages-hsb.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-hu.properties">
+      <Link>www\messages\messages-hu.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ia.properties">
+      <Link>www\messages\messages-ia.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-id.properties">
+      <Link>www\messages\messages-id.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ilo.properties">
+      <Link>www\messages\messages-ilo.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-is.properties">
+      <Link>www\messages\messages-is.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-it.properties">
+      <Link>www\messages\messages-it.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ja.properties">
+      <Link>www\messages\messages-ja.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ka.properties">
+      <Link>www\messages\messages-ka.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-khw.properties">
+      <Link>www\messages\messages-khw.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-kk-cyrl.properties">
+      <Link>www\messages\messages-kk-cyrl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-km.properties">
+      <Link>www\messages\messages-km.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-kn.properties">
+      <Link>www\messages\messages-kn.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ko.properties">
+      <Link>www\messages\messages-ko.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ksh.properties">
+      <Link>www\messages\messages-ksh.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ky.properties">
+      <Link>www\messages\messages-ky.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lad.properties">
+      <Link>www\messages\messages-lad.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lb.properties">
+      <Link>www\messages\messages-lb.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-li.properties">
+      <Link>www\messages\messages-li.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ln.properties">
+      <Link>www\messages\messages-ln.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lt.properties">
+      <Link>www\messages\messages-lt.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lus.properties">
+      <Link>www\messages\messages-lus.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-lv.properties">
+      <Link>www\messages\messages-lv.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-map-bms.properties">
+      <Link>www\messages\messages-map-bms.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-mk.properties">
+      <Link>www\messages\messages-mk.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ml.properties">
+      <Link>www\messages\messages-ml.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-mr.properties">
+      <Link>www\messages\messages-mr.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ms.properties">
+      <Link>www\messages\messages-ms.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-mt.properties">
+      <Link>www\messages\messages-mt.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-nan.properties">
+      <Link>www\messages\messages-nan.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-nds-nl.properties">
+      <Link>www\messages\messages-nds-nl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ne.properties">
+      <Link>www\messages\messages-ne.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-nl.properties">
+      <Link>www\messages\messages-nl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-nn.properties">
+      <Link>www\messages\messages-nn.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-no.properties">
+      <Link>www\messages\messages-no.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-or.properties">
+      <Link>www\messages\messages-or.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-os.properties">
+      <Link>www\messages\messages-os.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pa.properties">
+      <Link>www\messages\messages-pa.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pl.properties">
+      <Link>www\messages\messages-pl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pms.properties">
+      <Link>www\messages\messages-pms.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ps.properties">
+      <Link>www\messages\messages-ps.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pt-br.properties">
+      <Link>www\messages\messages-pt-br.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-pt.properties">
+      <Link>www\messages\messages-pt.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-qqq.properties">
+      <Link>www\messages\messages-qqq.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-qu.properties">
+      <Link>www\messages\messages-qu.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-rm.properties">
+      <Link>www\messages\messages-rm.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ro.properties">
+      <Link>www\messages\messages-ro.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ru.properties">
+      <Link>www\messages\messages-ru.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-rue.properties">
+      <Link>www\messages\messages-rue.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sa.properties">
+      <Link>www\messages\messages-sa.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sah.properties">
+      <Link>www\messages\messages-sah.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sat.properties">
+      <Link>www\messages\messages-sat.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-scn.properties">
+      <Link>www\messages\messages-scn.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-si.properties">
+      <Link>www\messages\messages-si.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sk.properties">
+      <Link>www\messages\messages-sk.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sl.properties">
+      <Link>www\messages\messages-sl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sq.properties">
+      <Link>www\messages\messages-sq.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sr-ec.properties">
+      <Link>www\messages\messages-sr-ec.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sr-el.properties">
+      <Link>www\messages\messages-sr-el.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sv.properties">
+      <Link>www\messages\messages-sv.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-sw.properties">
+      <Link>www\messages\messages-sw.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-ta.properties">
+      <Link>www\messages\messages-ta.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-te.properties">
+      <Link>www\messages\messages-te.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-th.properties">
+      <Link>www\messages\messages-th.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-tl.properties">
+      <Link>www\messages\messages-tl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-tly.properties">
+      <Link>www\messages\messages-tly.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-tr.properties">
+      <Link>www\messages\messages-tr.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-tt-cyrl.properties">
+      <Link>www\messages\messages-tt-cyrl.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-uk.properties">
+      <Link>www\messages\messages-uk.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-uz.properties">
+      <Link>www\messages\messages-uz.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-vec.properties">
+      <Link>www\messages\messages-vec.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-vep.properties">
+      <Link>www\messages\messages-vep.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-vi.properties">
+      <Link>www\messages\messages-vi.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-yi.properties">
+      <Link>www\messages\messages-yi.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-yo.properties">
+      <Link>www\messages\messages-yo.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-zh-hans.properties">
+      <Link>www\messages\messages-zh-hans.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-zh-hant.properties">
+      <Link>www\messages\messages-zh-hant.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-zh-hk.properties">
+      <Link>www\messages\messages-zh-hk.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\messages\messages-zh-tw.properties">
+      <Link>www\messages\messages-zh-tw.properties</Link>
+    </Content>
+    <Content Include="..\..\assets\www\sitematrix.json">
+      <Link>www\sitematrix.json</Link>
+    </Content>
+    <None Include="BuildManifestProcessor.js" />
+    <Content Include="GapLib\WP7CordovaClassLib.dll" />
+    <Content Include="www\cordova-1.6.1.js" />
+    <None Include="Properties\AppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Plugins\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+  <PropertyGroup>
+    <PreBuildEvent>CScript "$(ProjectDir)/BuildManifestProcessor.js" "$(ProjectPath)"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

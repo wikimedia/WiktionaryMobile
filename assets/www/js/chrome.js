@@ -35,32 +35,31 @@ window.chrome = function() {
 		$('base').attr('href', page.getCanonicalUrl());
 
 		if(l10n.isLangRTL(page.lang)) {
-			$("#main").attr('dir', 'rtl');
+			$("#content").attr('dir', 'rtl');
+		} else {
+			$("#content").attr('dir', 'ltr');
 		}
 		$("#main").html(page.toHtml());
-		//languageLinks.parseAvailableLanguages($div);
-		audioPlayer.getMediaList();
 
+		MobileFrontend.references.init($("#main")[0], false, {animation: 'none'});
+		audioPlayer.getMediaList();
 		handleSectionExpansion();
+	}
+
+	function populateSection(sectionID) {
+		var $contentBlock = $("#content_" + sectionID);
+		if(!$contentBlock.data('populated')) {
+			var sectionHtml = app.curPage.getSectionHtml(sectionID);
+			$contentBlock.append($(sectionHtml)).data('populated', true);
+			MobileFrontend.references.init($contentBlock[0], false, {animation: 'none'});
+		} 
 	}
 
 	function handleSectionExpansion() {
 		$(".section_heading").click(function() {
 			var sectionID = $(this).data('section-id');
-			var $contentBlock = $("#content_" + sectionID);
-			if(!$contentBlock.data('populated')) {
-				var sectionHtml = app.curPage.getSectionHtml(sectionID);
-				$contentBlock.append($(sectionHtml)).data('populated', true);
-			} 
-
-			// TODO: this should use the same code as MFE
-			if($contentBlock.hasClass('openSection')) {
-				$contentBlock.removeClass('openSection');
-				$contentBlock.prev('.section_heading').removeClass('openSection');
-			} else {
-				$contentBlock.addClass('openSection');
-				$contentBlock.prev('.section_heading').addClass('openSection');
-			}
+			chrome.populateSection(sectionID);
+			MobileFrontend.toggle.wm_toggle_section(sectionID);
 			chrome.setupScrolling("#content");
 		});
 	}
@@ -90,16 +89,30 @@ window.chrome = function() {
 		var lastSearchTimeout = null; // Handle for timeout last time a key was pressed
 
 		preferencesDB.initializeDefaults(function() {
-			app.baseURL = app.baseUrlForLanguage(preferencesDB.get('language'));
 			/* Split language string about '-' */
 			console.log('language is ' + preferencesDB.get('uiLanguage'));
 			if(l10n.isLangRTL(preferencesDB.get('uiLanguage'))) {
 				$("body").attr('dir', 'rtl');
 			}
 
+			app.setContentLanguage(preferencesDB.get('language'));
+
 			// Do localization of the initial interface
 			$(document).bind("mw-messages-ready", function() {
 				$('#mainHeader, #menu').localize();
+				updateMenuState();
+				$("#page-footer-contributors").html(mw.message('page-contributors').plain());
+				$("#page-footer-license").html(mw.message('page-license').plain());
+				$("#show-page-history").click(function() {
+					if(app.curPage) {
+						chrome.openExternalLink(app.curPage.getHistoryUrl());
+					}
+					return false;
+				});
+				$("#show-license-page").click(function() {
+					app.navigateTo(window.LICENSEPAGE, "en");
+					return false;
+				});
 			});
 			l10n.initLanguages();
 			
@@ -107,8 +120,8 @@ window.chrome = function() {
 			updateMenuState();
 			toggleMoveActions();
 
-			$(".titlebarIcon").bind('touchstart', function() {
-				homePage();
+			$(".titlebarIcon").bind('click', function() {
+				app.loadMainPage();
 				return false;
 			});
 			$("#searchForm").bind('submit', function() {
@@ -126,48 +139,32 @@ window.chrome = function() {
 					}, 300);
 				}
 			});
+			$("#searchParam").click(function() {
+				$(this).focus(); // Seems to be needed to actually focus on the search bar
+				// Caused by the FastClick implementation
+			});
 			$("#clearSearch").bind('touchstart', function() {
 				clearSearch();
 				return false;
 			});
 
 			$(".closeButton").bind('click', showContent);
+			// Initialize Reference reveal with empty content
+			MobileFrontend.references.init($("#content")[0], true);
 
 			initContentLinkHandlers();
 			chrome.loadFirstPage();
-			doFocusHack();
+			chrome.setupFastClick(".titlebar");
 		});
 
 	}
 
     function loadWordoftheDay() {
-        loadFirstPage(true);
+        loadFirstPage();
     }
 
-	function loadFirstPage(disableReloadHist) {
-		chrome.showSpinner();
-
-		// Need to guard against an NPE when we call this from outside of Android
-		// TODO: Make this extensible to other platforms. We may need a plugin
-		if (startingWordAccessor && startingWordAccessor.getStartingWord) {
-			var startingWord = startingWordAccessor.getStartingWord();
-			if (startingWord) {
-				app.navigateToPage(app.urlForTitle(startingWord));
-				return;
-			}
-		}
-		
-		// restore browsing to last visited page
-		var historyDB = new Lawnchair({name:"historyDB"}, function() {
-			this.all(function(history){
-				if(history.length==0 || window.history.length > 1 || disableReloadHist) {
-					app.navigateToPage(app.baseURL);
-				} else {
-					app.navigateToPage(history[history.length-1].value);
-				}
-			});
-		});
-
+	function loadFirstPage() {
+		app.loadMainPage();
 	}
 
 	function isTwoColumnView() {
@@ -204,8 +201,12 @@ window.chrome = function() {
 		}
 	}
 
-	function showNoConnectionMessage() {
-		alert(mw.message('error-offline-prompt'));
+	function popupErrorMessage(xhr) {
+		if(xhr === "error") {
+			navigator.notification.alert(mw.message('error-offline-prompt').plain());
+		} else {
+			navigator.notification.alert(mw.message('error-server-issue-prompt').plain());
+		}
 	}
 
 	function toggleMoveActions() {
@@ -255,52 +256,15 @@ window.chrome = function() {
 		}
 	}
 
-	// Hack to make sure that things in focus actually look like things in focus
-	function doFocusHack() {
-		var scrollEnd = false;
-		var applicableClasses = [
-			'.deleteButton',
-			'.listItem',
-			'#search',
-			'.closeButton',
-			'.cleanButton',
-			'.titlebarIcon'
-		];
-
-		for (var key in applicableClasses) {
-			applicableClasses[key] += ':not(.activeEnabled)';
-		}
-		console.log(applicableClasses);
-
-		function onTouchMove() {
-			scrollEnd = true;
-		}
-
-		function onTouchEnd() {
-			if(!scrollEnd) {
-				$(this).addClass('active');
-				setTimeout(function() {
-					$('.active').removeClass('active');
-				} , 150 );
+	function setupFastClick(selector) {
+		$(selector).each(function(i, el) {
+			var $el = $(el);
+			if($el.data('fastclick')) {
+				return;
+			} else {
+				$el.data('fastclick', new NoClickDelay($el[0]));
 			}
-			$('body').unbind('touchend', onTouchEnd);
-			$('body').unbind('touchmove', onTouchMove);
-		}
-
-		function onTouchStart() {
-			$('body').bind('touchend', onTouchEnd);
-			$('body').bind('touchmove', onTouchMove);
-			scrollEnd = false;
-		}			
-
-		setTimeout(function() {
-			$(applicableClasses.join(',')).each(function(i) {
-				$(this).bind('touchstart', onTouchStart);
-				$(this).bind('touchmove', onTouchMove);
-				$(this).bind('touchend', onTouchEnd);
-				$(this).addClass('activeEnabled');
-			});
-		}, 5);
+		});
 	}
 
 	function initContentLinkHandlers() {
@@ -311,10 +275,6 @@ window.chrome = function() {
 				href = $(target).attr('href'); // unexpanded, may be relative
 
 			event.preventDefault();
-
-			if (href.substr(0, 1) == '#') {
-				// FIXME: Replace with Reference reveal
-			}
 
 			if (url.match(new RegExp("^https?://([^/]+)\." + PROJECTNAME + "\.org/wiki/"))) {
 				// ...and load it through our intermediate cache layer.
@@ -358,14 +318,15 @@ window.chrome = function() {
 		showContent: showContent,
 		hideContent: hideContent,
 		addPlatformInitializer: addPlatformInitializer,
-		showNoConnectionMessage: showNoConnectionMessage,
-		doFocusHack: doFocusHack,
+		popupErrorMessage: popupErrorMessage,
+		setupFastClick: setupFastClick,
 		isTwoColumnView: isTwoColumnView,
 		openExternalLink: openExternalLink,
 		toggleMoveActions: toggleMoveActions,
 		confirm: confirm,
         loadWordoftheDay: loadWordoftheDay,
 		setupScrolling: setupScrolling,
-		scrollTo: scrollTo
+		scrollTo: scrollTo,
+		populateSection: populateSection
 	};
 }();

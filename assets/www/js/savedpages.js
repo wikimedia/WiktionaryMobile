@@ -1,30 +1,7 @@
 window.savedPages = function() {
 
 	function doSave() {
-		var page = app.curPage;
-		var d = $.Deferred();
-		var replaceRes = function() {
-			// images
-			$('#main img').each(function() {
-				var em = $(this);
-				var gotLinkPath = function(linkPath) {
-					em.attr('src', 'file://' + linkPath.file);
-				}
-				var target = this.src.replace('file:', 'https:');
-				window.plugins.urlCache.getCachedPathForURI(target, gotLinkPath, gotError);
-			});
-		};
-		var gotPath = function(cachedPage) {
-				replaceRes();
-				d.resolve();
-		}
-		var gotError = function(error) {
-			console.log('Error: ' + error);
-			chrome.hideSpinner();
-		}
-		app.track('mobile.app.wikipedia.save-page');
-		window.plugins.urlCache.getCachedPathForURI(page.getAPIUrl(), gotPath, gotError);
-		return d;
+		// Overriden in appropriate platform files
 	}
 
 	function saveCurrentPage() {
@@ -103,9 +80,7 @@ window.savedPages = function() {
 				chrome.hideOverlays();
 				$('#savedPages').localize().show();
 				chrome.hideContent();
-				chrome.doFocusHack();
 				chrome.setupScrolling('#savedPages .scroller');
-				chrome.scrollTo('#savedPages .scroller', 0);
 			});
 		});
 

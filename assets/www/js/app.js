@@ -1,5 +1,36 @@
 window.app = function() {
 
+	var wikis = [];
+
+	function getWikiMetadata() {
+		var d = $.Deferred();
+		if(wikis.length === 0) {
+			$.get(ROOT_URL + 'wikis.json').done(function(data) {
+				wikis = JSON.parse(data);
+				d.resolve(wikis);
+			});
+		} else {
+			d.resolve(wikis);
+		}
+		return d;
+	}
+
+	function loadMainPage(lang) {
+		var d = $.Deferred();
+		if(typeof lang === "undefined") {
+			lang = preferencesDB.get("language");
+		}
+
+		app.getWikiMetadata().done(function(wikis) {
+			var mainPage = wikis[lang].mainPage;
+			app.navigateTo(mainPage, lang).done(function(data) {
+				d.resolve(data);
+			}).fail(function(err) {
+				d.reject(err);
+			});
+		});
+	}
+
 	function loadCachedPage (url, title, lang) {
 		chrome.showSpinner();
 		var d = $.Deferred();
@@ -38,11 +69,12 @@ window.app = function() {
 
 		setPageActionsState(true);
 		setMenuItemState('read-in', true);
-		MobileFrontend.init();
 		chrome.setupScrolling("#content");
 		chrome.scrollTo("#content", 0);
 		appHistory.addCurrentPage();
 		chrome.toggleMoveActions();
+
+		$("#page-footer").show();
 		chrome.showContent();
 		chrome.hideSpinner();
 
@@ -60,28 +92,27 @@ window.app = function() {
 		} else {
 			loadLocalPage('error.html');
 		}
-		languageLinks.clearLanguages();
-		audioPlayer.clearMenuArray();
 		setMenuItemState('read-in', false);
 		setMenuItemState('listen-sound', false);
 		setPageActionsState(false);
+		chrome.hideSpinner();
+		$("#page-footer").hide();
 		app.curPage = null;
 	}
 
-	function loadPage(url, origUrl) {
+	function loadPage(title, language) {
 		var d = $.Deferred();
-		origUrl = origUrl || url;
 
-		var title = app.titleForUrl(url);
-		if(title === "") {
-			title = "Main_Page"; // FIXME
-		}
 		function doRequest() {
-			Page.requestFromTitle(title, preferencesDB.get("language")).done(function(page) {
+			Page.requestFromTitle(title, language).done(function(page) {
+				if(page === null) {
+					setErrorPage(404);
+				}
 				setCurrentPage(page);
 				d.resolve(page);
 			}).fail(function(xhr) {
 				setErrorPage(xhr.status);	
+				d.reject(xhr);
 			});
 		}
 
@@ -107,8 +138,11 @@ window.app = function() {
 		return d;
 	}
 
-	function urlForTitle(title) {
-		return app.baseURL + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
+	function urlForTitle(title, lang) {
+		if(typeof lang === 'undefined') {
+			lang = preferencesDB.get("language");
+		}
+		return app.baseUrlForLanguage(lang) + "/wiki/" + encodeURIComponent(title.replace(/ /g, '_'));
 	}
 
 	function baseUrlForLanguage(lang) {
@@ -141,16 +175,20 @@ window.app = function() {
 		$('#main').css('font-size', size);
 	}
 
-
 	function setCaching(enabled, success) {
 		// Do nothing by default
 		success();
 	}
 
-
-	function navigateToPage(url, options) {
+	function navigateTo(title, lang, options) {
 		var d = $.Deferred();
-		var options = $.extend({cache: false, updateHistory: true, noScroll: false}, options || {});
+		var options = $.extend({cache: false, updateHistory: true}, options || {});
+		var url = app.urlForTitle(title, lang);
+
+		if(title === "") {
+			return app.loadMainPage(lang);
+		}
+
 		$('#searchParam').val('');
 		chrome.showContent();
 		if(options.hideCurrent) {
@@ -165,20 +203,23 @@ window.app = function() {
 			currentHistoryIndex += 1;
 			pageHistory[currentHistoryIndex] = url;
 		}
-		if (options.cache) {
-			d = app.loadCachedPage(url, options.noScroll);
-		} else {
-			d = app.loadPage(url, "", options.noScroll);
+		if(title === "") {
+			title = "Main_Page"; // FIXME
 		}
+		d = app.loadPage(title, lang);
 		d.done(function() {
-			console.log("navigating to " + url);
-			// Enable change language - might've been disabled in a prior error page
-			console.log('enabling language');
+			console.log("Navigating to " + title);
 			if(options.hideCurrent) {
 				$("#content").show();
 			}			
 		});
 		return d;
+	}
+
+	function navigateToPage(url, options) {
+		var title = app.titleForUrl(url);
+		var lang = app.languageForUrl(url);
+		return app.navigateTo(title, lang, options);
 	}
 
 	function getCurrentUrl() {
@@ -187,6 +228,12 @@ window.app = function() {
 		} else {
 			return null;
 		}
+	}
+
+	function languageForUrl(url) {
+		// Use the least significant part of the hostname as language
+		// So en.wikipedia.org would be 'en', and so would en.wiktionary.org
+		return url.match(/^https?:\/\/([^.]+)./)[1];	
 	}
 
 	function titleForUrl(url) {
@@ -232,6 +279,7 @@ window.app = function() {
 		getCurrentTitle: getCurrentTitle,
 		urlForTitle: urlForTitle,
 		titleForUrl:titleForUrl,
+		languageForUrl: languageForUrl,
 		baseUrlForLanguage: baseUrlForLanguage,
 		setCaching: setCaching,
 		loadPage: loadPage,
@@ -240,7 +288,10 @@ window.app = function() {
 		makeAPIRequest: makeAPIRequest,
 		setCurrentPage: setCurrentPage,
 		track: track,
-		curPage: null
+		curPage: null,
+		navigateTo: navigateTo,
+		getWikiMetadata: getWikiMetadata,
+		loadMainPage: loadMainPage
 	};
 
 	return exports;

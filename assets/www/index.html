@@ -1,17 +1,31 @@
-<!DOCTYPE HTML>
-<html class="goodscroll">
+<!DOCTYPE html>
+<html class="goodscroll noTransitions">
 
 <head>
 	<meta name="viewport" content="width=100%; initial-scale=1; user-scalable=no" />
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<base><!-- used to process relative links in content -->
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<base /><!-- used to process relative links in content -->
 	<title>Wiktionary</title>
 
+  <script type="text/javascript">
+    if (typeof window.console == "undefined") {
+      // for Windows Phone 7.x
+      window.console = { log: function (str) { window.external.Notify(str); } };
+
+      // output any errors to console log, created above.
+      window.onerror = function (msg,url,linenumber) {
+        console.log("Error ::" + msg + " in " + url + " at line " + linenumber);
+      };
+    }
+    console.log('Testing console output');
+  </script>
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/Lawnchair.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/webkit-sqlite.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/lawnchair/adapters/memory.js"></script>
 
-	<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/hogan.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/noclickdelay.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/mediawiki.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/2.5.3-crypto-md5.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/urlcache.js"></script>
@@ -39,13 +53,15 @@
 
 	<!-- MobileFrontend -->
 	<script type="text/javascript" charset="utf-8" src="js/mobilefrontend.js"></script>
+	<script type="text/javascript" charset="utf-8" src="MobileFrontend/javascripts/toggle.js"></script>
+	<script type="text/javascript" charset="utf-8" src="MobileFrontend/javascripts/references.js"></script>
 
 	<!-- platform-specific setup and overrides -->
-	<script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/platform-stub.js"></script>
 
-	<link rel="stylesheet" href="MobileFrontend/stylesheets/beta_common.css" />
-	<link rel="stylesheet" href="MobileFrontend/stylesheets/hacks.css" />
+	<link rel="stylesheet" href="MobileFrontend/stylesheets/common.css" />
 	<link rel="stylesheet" href="MobileFrontend/stylesheets/sections.css" />
+	<link rel="stylesheet" href="MobileFrontend/stylesheets/references.css" />
 	<link rel="stylesheet" href="app.css" />
   <link rel="stylesheet" href="wiktionary.css" />
 </head>
@@ -58,7 +74,7 @@
 				<label for="contentLanguageSelector"><msg key="settings-language-label"></msg></label>
 				<select id='contentLanguageSelector'>
 					{{#languages}}
-					<option value="{{code}}">{{name}}</option>
+						<option value="{{code}}">{{name}} {{#localName}}({{localName}}){{/localName}}</option>
 					{{/languages}}
 				</select>
 			</div>
@@ -74,6 +90,10 @@
 
 			<div id="aboutPageLabel" class="item">
 				<label><msg key="about-page-label"></msg></label>
+			</div>
+
+			<div id="contactPageLabel" class="item externallink" data-link="/w/index.php?title=Special:MobileFeedback"> 
+				<label><msg key="contact-page-label"></msg></label>
 			</div>
 		</script>
 		<script type="text/html" id="saved-pages-template">
@@ -126,8 +146,12 @@
             </div>
 			{{#sections}}
 			<div class="section">
-				<h{{level}} class="section_heading" data-section-id="{{id}}">{{{line}}} <button class='show'></button><button class="hide"></button></h{{level}}>
-				<div class="content_block" id="content_{{id}}"> </div>
+				<h{{level}} class="section_heading" id="section_{{id}}" data-section-id="{{id}}">{{{line}}} <button></button></h{{level}}>
+				<div class="content_block" id="content_{{id}}">
+					{{#references}}
+						{{{text}}}
+					{{/references}}
+				</div>
 			</div>
 			{{/sections}}
 		</script>
@@ -157,14 +181,14 @@
 
 		<script type="text/html" id="language-links-template">
 			{{#langLinks}}
-			<div class="listItemContainer" data-title="{{title}}" data-lang="{{lang}}">
+			<div class="listItemContainer" data-title="{{title}}" data-lang="{{lang}}" dir="{{dir}}">
 				<a class="listItem languageLink" lang="{{lang}}">
-					<span class="text">{{title}} ({{lang}})</span>
+					<span class="text">{{langName}}</span>
 				</a>
 			</div>
 			{{/langLinks}}
 		</script>
-		
+
 		<script type="text/html" id="audio-list-template">
 			{{#listen}}
 			<div class="listItemContainer" data-page-url="{{url}}">
@@ -173,7 +197,7 @@
 				</a>
 			</div>
 			{{/listen}}
-		</script>
+    </script>
 
 	</div>
 
@@ -268,6 +292,14 @@
 		</header>
 		<div class="scroller">
 			<div id="langList"></div>
+		</div>
+	</div>
+
+	<div id="content" class="scroller">
+		<div id="main"></div>
+		<div id="page-footer">
+			<span id="page-footer-contributors"></span>
+			<span id="page-footer-license"></span>
 		</div>
 	</div>
 

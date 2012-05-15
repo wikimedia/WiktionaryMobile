@@ -29,3 +29,13 @@ CSS code should follow the guidelines set out in http://www.mediawiki.org/wiki/M
 == HTML ==
 
 HTML should validate via http://validator.w3.org/
+
+== COMMITS ==
+* Commits are important as they give the reviewer more information to successfully review your code and find errors or potential problems you might not have thought of
+* Commits are also useful when troubleshooting issues and refactoring. If it's not clear why a line of code is in the repository important bug fixes could be lost.
+* Commits should be as minor as possible. Please avoid removing unrelated console.log statements, fixing unrelated whitespace etc.. do that in a separate commit which mentions the word cleanup.
+* First line commit should summarise the commit with bug it fixes if applicable. e.g. Fix problem with toggling see bug x
+* Second line should be blank
+* Third line should go into detail where necessary providing links to blog posts/other bugs to provide more background. Mention the platforms/browsers the change is for where necessary
+** e.g. 'this is a problem on android but not osx see http://<url> which explains problem in detail'
+** e.g. 'this is a workaround for a known bug in opera mobile see http://<url>'
